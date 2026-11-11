@@ -312,7 +312,16 @@ for highlighting a term as it is said.
 
 ## 11. Open decisions
 
-- [ ] Narrator voice: **Narrator** or **Memo - english** (or a new one).
+- [x] Narrator voice: **Memo - english**, profile `narrator` in `videos/voices.json`
+      (first used in `u00-l01`).
 - [ ] Where final MP4s are published.
-- [ ] Scripts that automate §6–§7 (`tools/plan_audio.py`, `tools/assemble_audio.py`),
-      written with the first video.
+
+## 12. Commands
+
+```
+python3 tools/plan_audio.py videos/<video>                    # writes job.json, prints the gh command
+# run the printed gh command, wait for it to finish, then:
+git -C ../api-access fetch --depth 1 origin audio-temp
+python3 tools/plan_audio.py videos/<video> --fetch ../api-access
+python3 tools/assemble_audio.py videos/<video>                # narration.mp3 + timeline.json
+```

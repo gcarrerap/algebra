@@ -1,0 +1,16 @@
+{
+  "_description": "Voice profiles for video narration. One profile = one Fish Audio voice + its parameters. Voice ids come from config/fish-audio/voices.json in gcarrerap/api-access. See docs/audio-production.md.",
+  "narrator": {
+    "platform": "fish-audio",
+    "name": "Memo - english",
+    "voice_id": "cf519c71edd94b079a6dd2072546a2e7",
+    "params": {
+      "model": "s2.1-pro",
+      "temperature": "0.5",
+      "top_p": "0.7",
+      "speed": "0.95",
+      "language": "en",
+      "mp3_bitrate": "128"
+    }
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l01-order-of-operations",
+  "title": "Order of Operations",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The puzzle",
+      "blocks": [
+        {"id": "b01", "text": "Here's a quick one. What is two plus three times four?",
+         "display": "2 + 3 × 4", "cue": "show-problem", "pause_after_s": 1.5},
+        {"id": "b02", "text": "If you said twenty, you're not alone. Two plus three is five, and five times four is twenty.",
+         "display": "(2 + 3) × 4 = 20", "cue": "wrong-path"},
+        {"id": "b03", "text": "But the correct answer is fourteen.", "display": "2 + 3 × 4 = 14",
+         "cue": "right-answer", "tone": "excited"},
+        {"id": "b04", "text": "Math has an agreed order for doing operations, so that everyone gets the same answer.",
+         "cue": "why-order"}
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "The order",
+      "blocks": [
+        {"id": "b05", "text": "The order is often remembered as PEMDAS.", "display": "PEMDAS", "cue": "pemdas-title"},
+        {"id": "b06", "text": "First, parentheses, and anything else that groups numbers together.", "display": "P", "cue": "step-p"},
+        {"id": "b07", "text": "Second, exponents.", "display": "E", "cue": "step-e"},
+        {"id": "b08", "text": "Third, multiplication and division, together, from left to right.", "display": "MD", "cue": "step-md"},
+        {"id": "b09", "text": "Last, addition and subtraction, together, also from left to right.", "display": "AS", "cue": "step-as",
+         "pause_after_s": 0.8}
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "Left to right",
+      "blocks": [
+        {"id": "b10", "text": "That left to right part is where most mistakes happen. Try twelve divided by three, times two.",
+         "display": "12 ÷ 3 × 2", "cue": "lr-problem", "pause_after_s": 1.5},
+        {"id": "b11", "text": "Multiplication does not go first. Division comes first here, because it is on the left. Twelve divided by three is four.",
+         "display": "4 × 2", "cue": "lr-step1"},
+        {"id": "b12", "text": "Then four times two is eight.", "display": "8", "cue": "lr-step2", "pause_after_s": 0.8}
+      ]
+    },
+    {
+      "id": "s04",
+      "title": "A full example",
+      "blocks": [
+        {"id": "b13", "text": "Now everything at once. Three plus two times the quantity eight minus five, squared.",
+         "display": "3 + 2 × (8 − 5)²", "cue": "ex-problem", "pause_after_s": 1.0},
+        {"id": "b14", "text": "Parentheses first. Eight minus five is three.", "display": "3 + 2 × 3²", "cue": "ex-step1"},
+        {"id": "b15", "text": "Then the exponent. Three squared is nine.", "display": "3 + 2 × 9", "cue": "ex-step2"},
+        {"id": "b16", "text": "Then multiply. Two times nine is eighteen.", "display": "3 + 18", "cue": "ex-step3"},
+        {"id": "b17", "text": "And finally add. Three plus eighteen is twenty-one.", "display": "21", "cue": "ex-step4",
+         "pause_after_s": 0.8}
+      ]
+    },
+    {
+      "id": "s05",
+      "title": "Watch the negative sign",
+      "blocks": [
+        {"id": "b18", "text": "One more trap, with negative numbers. Look at these two.",
+         "display": "−3²   vs   (−3)²", "cue": "neg-compare"},
+        {"id": "b19", "text": "In the quantity negative three, squared, the parentheses say the negative sign belongs to the three. Negative three times negative three is positive nine.",
+         "display": "(−3)² = 9", "cue": "neg-paren"},
+        {"id": "b20", "text": "But without parentheses, the exponent goes first. Three squared is nine, and then the negative sign makes it negative nine.",
+         "display": "−3² = −9", "cue": "neg-no-paren", "pause_after_s": 0.8}
+      ]
+    },
+    {
+      "id": "s06",
+      "title": "Your turn",
+      "blocks": [
+        {"id": "b21", "text": "Your turn. What is ten minus four, plus two times three? Pause the video and try it.",
+         "display": "10 − 4 + 2 × 3", "cue": "challenge", "pause_after_s": 2.5},
+        {"id": "b22", "text": "Multiply first. Two times three is six. Then, left to right, ten minus four is six, and six plus six is twelve.",
+         "display": "10 − 4 + 6 = 12", "cue": "challenge-answer"},
+        {"id": "b23", "text": "Remember: groups, exponents, multiply and divide, then add and subtract. See you in the next lesson.",
+         "display": "P · E · MD · AS", "cue": "recap"},
+        {"id": "b24", "text": "This video uses an AI-generated voice.", "cue": "disclosure", "tone": "calm"}
+      ]
+    }
+  ]
+}
