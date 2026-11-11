@@ -1,0 +1,118 @@
+/* Shared look for all algebra videos. Every animated element gets --p (0..1, eased in/out)
+   and --q (0..1, linear over its at→out span) from player.js; the effects below read them. */
+:root {
+  --bg: #101a2e;
+  --grid: rgba(255, 255, 255, 0.045);
+  --ink: #f5f1e8;
+  --muted: #9aa6bd;
+  --card: #18243d;
+  --line: #2a3a5c;
+  --yellow: #ffcc4d;
+  --green: #4ade80;
+  --red: #f87171;
+  --blue: #60a5fa;
+  --purple: #c084fc;
+  --c: var(--yellow);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: #000; height: 100%; overflow: hidden; }
+
+#stage {
+  position: absolute; left: 0; top: 0;
+  width: 1920px; height: 1080px;
+  transform-origin: 0 0;
+  background:
+    linear-gradient(var(--grid) 1px, transparent 1px) 0 0 / 60px 60px,
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px) 0 0 / 60px 60px,
+    radial-gradient(ellipse at 50% 40%, #16244a 0%, var(--bg) 70%);
+  color: var(--ink);
+  font-family: Inter, "DejaVu Sans", sans-serif;
+  overflow: hidden;
+}
+
+/* ---------- chrome ---------- */
+.header { position: absolute; left: 80px; top: 52px; display: flex; align-items: baseline; gap: 22px; z-index: 5; }
+.header .unit { font: 600 22px Inter, sans-serif; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+.header .title { font: 600 34px Poppins, sans-serif; color: var(--ink); }
+.caption {
+  position: absolute; left: 50%; bottom: 58px; transform: translateX(-50%);
+  max-width: 1500px; text-align: center; z-index: 5;
+  font: 500 34px/1.35 Inter, sans-serif; color: var(--muted);
+  padding: 12px 28px; border-radius: 14px; background: rgba(8, 13, 26, 0.55);
+}
+.caption:empty { display: none; }
+.caption .w { color: rgba(245, 241, 232, 0.45); }
+.caption .w.said { color: var(--ink); }
+.caption .w.now { color: var(--yellow); }
+.progress { position: absolute; left: 0; bottom: 0; height: 8px; background: var(--yellow); z-index: 5; }
+
+/* ---------- scenes ---------- */
+.scene {
+  position: absolute; inset: 140px 80px 170px 80px;
+  opacity: var(--p, 0);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 36px;
+}
+.stack { display: grid; place-items: center; }
+.stack > * { grid-area: 1 / 1; }
+.layer { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 36px; }
+
+/* ---------- type ---------- */
+.math { font: 600 132px/1.1 Poppins, sans-serif; letter-spacing: 0.02em; white-space: nowrap; }
+.math.md { font-size: 96px; }
+.math.sm { font-size: 72px; }
+.math.xs { font-size: 56px; }
+.say { font: 500 48px/1.3 Inter, sans-serif; text-align: center; max-width: 1400px; }
+.label { font: 700 26px Inter, sans-serif; letter-spacing: 0.14em; text-transform: uppercase; }
+.row { display: flex; align-items: center; justify-content: center; gap: 64px; }
+.col { display: flex; flex-direction: column; align-items: center; gap: 24px; }
+.green { color: var(--green); } .red { color: var(--red); } .yellow { color: var(--yellow); }
+.blue { color: var(--blue); } .purple { color: var(--purple); } .muted { color: var(--muted); }
+.c-yellow { --c: var(--yellow); } .c-green { --c: var(--green); } .c-red { --c: var(--red); }
+.c-blue { --c: var(--blue); } .c-purple { --c: var(--purple); }
+
+.card {
+  background: var(--card); border: 2px solid var(--line); border-radius: 28px;
+  padding: 40px 56px; display: flex; flex-direction: column; align-items: center; gap: 22px;
+}
+.chip {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 84px; height: 84px; padding: 0 18px; border-radius: 22px;
+  font: 700 46px Poppins, sans-serif; color: #101a2e; background: var(--c);
+}
+
+/* ---------- effects (driven by --p / --q) ---------- */
+.fade { opacity: var(--p); transform: translateY(calc((1 - var(--p)) * 28px)); }
+.pop { opacity: var(--p); transform: scale(calc(0.8 + 0.2 * var(--p))); }
+.slide { opacity: var(--p); transform: translateX(calc((1 - var(--p)) * -60px)); }
+.hl {
+  border-radius: 16px; padding: 0 8px; margin: 0 4px;
+  background: color-mix(in srgb, var(--c) calc(var(--p) * 26%), transparent);
+  box-shadow: 0 0 0 calc(var(--p) * 5px) color-mix(in srgb, var(--c) calc(var(--p) * 100%), transparent);
+}
+.tint { color: color-mix(in srgb, var(--c) calc(var(--p) * 100%), var(--ink)); }
+.dim { opacity: calc(1 - 0.65 * var(--p)); }
+.strike { position: relative; }
+.strike::after {
+  content: ""; position: absolute; left: -2%; top: 52%; height: 8px; border-radius: 4px;
+  width: calc(var(--p) * 104%); background: var(--red);
+}
+.glow { box-shadow: 0 0 0 calc(var(--p) * 4px) var(--c), 0 0 calc(var(--p) * 60px) color-mix(in srgb, var(--c) 45%, transparent); }
+.timer {
+  width: 150px; height: 150px; border-radius: 50%; opacity: var(--p);
+  background: conic-gradient(var(--yellow) calc(var(--q) * 360deg), rgba(255, 255, 255, 0.12) 0);
+  -webkit-mask: radial-gradient(circle, transparent 54%, #000 56%);
+          mask: radial-gradient(circle, transparent 54%, #000 56%);
+}
+
+/* an effect at rest draws nothing (no hairlines from zero-width shadows) */
+.hl[data-off], .glow[data-off] { background: none; box-shadow: none; }
+.strike[data-off]::after { display: none; }
+
+/* ---------- live playback ---------- */
+#play {
+  position: absolute; inset: 0; z-index: 20; display: flex; align-items: center; justify-content: center;
+  background: rgba(8, 13, 26, 0.6); cursor: pointer;
+  font: 700 64px Poppins, sans-serif; color: var(--yellow);
+}
+.render #play { display: none; }

@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Order of Operations</title>
+<link rel="stylesheet" href="../_engine/player.css">
+<style>
+  .pemdas { font: 700 150px Poppins, sans-serif; letter-spacing: 0.16em; }
+  .pemdas span { --c: var(--ink); }
+  .steps { display: grid; grid-template-columns: 1fr 1fr; gap: 28px 40px; width: 1500px; }
+  .step { flex-direction: row; justify-content: flex-start; gap: 32px; padding: 28px 40px; }
+  .step .name { font: 700 40px Poppins, sans-serif; }
+  .step .what { font: 500 30px Inter, sans-serif; color: var(--muted); margin-top: 6px; }
+  .deriv { display: grid; grid-template-columns: 110px auto; align-items: center; gap: 10px 28px; }
+  .deriv .chip { min-width: 84px; height: 72px; font-size: 38px; }
+  .vs { font: 600 56px Poppins, sans-serif; color: var(--muted); }
+  .recap { display: flex; gap: 28px; }
+  .recap .card { padding: 34px 36px; gap: 16px; width: 330px; }
+  .recap .name { font: 700 34px Poppins, sans-serif; text-align: center; }
+  .recap .what { font: 500 26px Inter, sans-serif; color: var(--muted); text-align: center; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="header"><span class="unit">Unit 0 · Lesson 1</span><span class="title">Order of Operations</span></div>
+
+  <!-- s01: the puzzle -->
+  <section class="scene" data-scene="s01">
+    <div class="math pop" data-at="b01">2 + <span class="hl c-yellow" data-at="b03">3 × 4</span><span class="fade yellow" data-at="b01.end-0.3" data-out="b02"> = ?</span></div>
+    <div class="row" style="align-items: stretch">
+      <div class="dim" data-at="b03">
+        <div class="card fade" data-at="b02" style="height: 100%">
+          <div class="label red">Add first?</div>
+          <div class="math sm fade" data-at="b02@five">2 + 3 = 5</div>
+          <div class="math sm fade" data-at="b02@twenty#2">5 × 4 = <span class="strike" data-at="b03" data-dur="0.6">20</span></div>
+        </div>
+      </div>
+      <div class="card fade c-green glow" data-at="b03">
+        <div class="label green">Multiply first</div>
+        <div class="math sm fade" data-at="b03+0.2">3 × 4 = 12</div>
+        <div class="math sm fade" data-at="b03@fourteen">2 + 12 = <span class="green">14</span></div>
+      </div>
+    </div>
+    <div class="say fade" data-at="b04">One agreed order → <span class="yellow">the same answer</span> for everyone.</div>
+  </section>
+
+  <!-- s02: the order -->
+  <section class="scene" data-scene="s02">
+    <div class="pemdas pop" data-at="b05"><span class="tint c-blue" data-at="b06">P</span><span class="tint c-purple" data-at="b07">E</span><span class="tint c-yellow" data-at="b08">M</span><span class="tint c-yellow" data-at="b08">D</span><span class="tint c-green" data-at="b09">A</span><span class="tint c-green" data-at="b09">S</span></div>
+    <div class="steps">
+      <div class="card step fade c-blue" data-at="b06"><span class="chip">P</span>
+        <div><div class="name blue">1 · Parentheses</div><div class="what">( ) [ ] and anything that groups</div></div></div>
+      <div class="card step fade c-purple" data-at="b07"><span class="chip">E</span>
+        <div><div class="name purple">2 · Exponents</div><div class="what">3² &nbsp; 2³ &nbsp; x²</div></div></div>
+      <div class="card step fade c-yellow" data-at="b08"><span class="chip">MD</span>
+        <div><div class="name yellow">3 · Multiply &amp; Divide</div><div class="what">together, left → right</div></div></div>
+      <div class="card step fade c-green" data-at="b09"><span class="chip">AS</span>
+        <div><div class="name green">4 · Add &amp; Subtract</div><div class="what">together, left → right</div></div></div>
+    </div>
+  </section>
+
+  <!-- s03: left to right -->
+  <section class="scene" data-scene="s03">
+    <div class="col" style="gap: 40px">
+      <div class="math pop" data-at="b10"><span class="hl c-yellow" data-at="b11@division">12 ÷ 3</span> × 2</div>
+      <div class="label muted fade" data-at="b10@left" style="font-size: 32px">left ───────────▶ right</div>
+    </div>
+    <div class="stack">
+      <div class="say fade red" data-at="b11" data-out="b11@division">Multiplication does <b>not</b> automatically go first.</div>
+      <div class="col" style="gap: 10px">
+        <div class="math md fade" data-at="b11@four">= 4 × 2</div>
+        <div class="math md pop green" data-at="b12@eight">= 8</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- s04: a full example -->
+  <section class="scene" data-scene="s04">
+    <div class="deriv">
+      <span></span>
+      <div class="math md pop" data-at="b13">3 + 2 × <span class="hl c-blue" data-at="b14" data-out="b15">(8 − 5)²</span></div>
+      <span class="chip c-blue pop" data-at="b14@three">P</span>
+      <div class="math md fade" data-at="b14@three">= 3 + 2 × <span class="hl c-purple" data-at="b15" data-out="b16">3²</span></div>
+      <span class="chip c-purple pop" data-at="b15@nine">E</span>
+      <div class="math md fade" data-at="b15@nine">= 3 + <span class="hl c-yellow" data-at="b16" data-out="b17">2 × 9</span></div>
+      <span class="chip c-yellow pop" data-at="b16@eighteen">MD</span>
+      <div class="math md fade" data-at="b16@eighteen">= <span class="hl c-green" data-at="b17" data-out="b17@twenty-one">3 + 18</span></div>
+      <span class="chip c-green pop" data-at="b17@twenty-one">AS</span>
+      <div class="math md pop green" data-at="b17@twenty-one">= 21</div>
+    </div>
+  </section>
+
+  <!-- s05: watch the negative sign -->
+  <section class="scene" data-scene="s05">
+    <div class="row">
+      <div class="card pop c-blue" data-at="b18@look" style="width: 640px">
+        <div class="label blue">With parentheses</div>
+        <div class="math md"><span class="hl c-blue" data-at="b19@parentheses" data-out="b19@times">(−3)²</span></div>
+        <div class="math sm fade" data-at="b19@times">= (−3) × (−3)</div>
+        <div class="math md pop green" data-at="b19@nine">= 9</div>
+      </div>
+      <div class="vs pop" data-at="b18@look">vs</div>
+      <div class="card pop c-purple" data-at="b18@two" style="width: 640px">
+        <div class="label purple">No parentheses</div>
+        <div class="math md">−<span class="hl c-purple" data-at="b20@exponent" data-out="b20@negative#2">3²</span></div>
+        <div class="math sm fade" data-at="b20@nine">= −(9)</div>
+        <div class="math md pop yellow" data-at="b20@negative#2">= −9</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- s06: your turn + recap -->
+  <section class="scene" data-scene="s06">
+    <div class="layer fade" data-at="b21-0.5" data-out="b23">
+      <div class="label yellow pop" data-at="b21" style="font-size: 34px">★ Your turn</div>
+      <div class="row" style="gap: 48px">
+        <div class="math md pop" data-at="b21">10 − 4 + <span class="hl c-yellow" data-at="b22" data-out="b22@then">2 × 3</span><span class="fade yellow" data-at="b21.end" data-out="b22"> = ?</span></div>
+        <div class="timer" data-at="b21.end" data-out="b22"></div>
+      </div>
+      <div class="say fade muted" data-at="b21@pause" data-out="b22">⏸ Pause the video and try it</div>
+      <div class="col" style="gap: 8px">
+        <div class="math sm fade" data-at="b22@six">= <span class="hl c-green" data-at="b22@ten" data-out="b22@six#2">10 − 4</span> + 6</div>
+        <div class="math sm fade" data-at="b22@six#2">= 6 + 6</div>
+        <div class="math md pop green" data-at="b22@twelve">= 12</div>
+      </div>
+    </div>
+    <div class="layer fade" data-at="b23">
+      <div class="recap">
+        <div class="card pop c-blue glow" data-at="b23@groups"><span class="chip">P</span><div class="name blue">Groups</div><div class="what">parentheses first</div></div>
+        <div class="card pop c-purple glow" data-at="b23@exponents"><span class="chip">E</span><div class="name purple">Exponents</div><div class="what">powers next</div></div>
+        <div class="card pop c-yellow glow" data-at="b23@multiply"><span class="chip">MD</span><div class="name yellow">Multiply &amp; Divide</div><div class="what">left → right</div></div>
+        <div class="card pop c-green glow" data-at="b23@add"><span class="chip">AS</span><div class="name green">Add &amp; Subtract</div><div class="what">left → right</div></div>
+      </div>
+      <div class="say fade muted" data-at="b23@next" style="font-size: 38px">Next: <span style="color: var(--ink)">Properties of Operations</span></div>
+      <div class="label fade muted" data-at="b24" style="font-size: 22px; font-weight: 500">This video uses an AI-generated voice.</div>
+    </div>
+  </section>
+
+  <div class="caption"></div>
+  <div class="progress"></div>
+  <div id="play">▶ Play</div>
+</div>
+<script src="../_engine/player.js"></script>
+</body>
+</html>
