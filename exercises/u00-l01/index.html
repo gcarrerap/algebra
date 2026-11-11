@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Practice 0.1 · Order of Operations and Signed Numbers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap">
+<style>
+  /* Same world as the videos and the home page: navy graph paper, one yellow accent. */
+  :root {
+    --bg: #101a2e; --card: #18243d; --line: #2a3a5c; --ink: #f5f1e8; --muted: #9aa6bd;
+    --yellow: #ffcc4d; --green: #4ade80; --red: #f87171; --blue: #60a5fa; --purple: #c084fc;
+    --display: Poppins, "DejaVu Sans", sans-serif; --text: Inter, "DejaVu Sans", sans-serif;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; color: var(--ink); font: 400 17px/1.55 var(--text); min-height: 100vh;
+    background:
+      linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px) 0 0 / 32px 32px,
+      linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px) 0 0 / 32px 32px,
+      var(--bg);
+  }
+  main { max-width: 820px; margin: 0 auto; padding: 28px max(16px, env(safe-area-inset-right, 0px)) 80px max(16px, env(safe-area-inset-left, 0px)); }
+  a { color: var(--yellow); }
+  .back { font-size: 14px; text-decoration: none; color: var(--muted); }
+  .back:hover, .back:focus-visible { color: var(--yellow); }
+  .eyebrow { margin-top: 22px; font: 600 13px var(--text); letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+  h1 { font: 700 clamp(28px, 6vw, 42px)/1.15 var(--display); margin: 8px 0 18px; text-wrap: balance; }
+  h1 .y { color: var(--yellow); }
+
+  /* progress dots */
+  .dots { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 18px; padding: 0; list-style: none; }
+  .dots button {
+    width: 28px; height: 28px; border-radius: 9px; border: 1px solid var(--line); background: var(--card);
+    color: var(--muted); font: 600 12px var(--display); cursor: pointer; padding: 0;
+  }
+  .dots button[data-s="first"] { background: var(--green); border-color: var(--green); color: var(--bg); }
+  .dots button[data-s="retry"] { background: var(--yellow); border-color: var(--yellow); color: var(--bg); }
+  .dots button[aria-current="step"] { outline: 2px solid var(--ink); outline-offset: 2px; }
+  .dots button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 22px clamp(16px, 4vw, 28px); }
+  .meta { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline; color: var(--muted); font-size: 14px; }
+  .meta b { color: var(--ink); font-weight: 600; }
+  .level { font: 600 12px var(--text); letter-spacing: .1em; text-transform: uppercase; padding: 5px 10px; border-radius: 999px; border: 1px solid var(--line); }
+  .level[data-l="1"] { color: var(--green); } .level[data-l="2"] { color: var(--blue); }
+  .level[data-l="3"] { color: var(--purple); } .level[data-l="4"] { color: var(--yellow); border-color: var(--yellow); }
+  .prompt { margin: 18px 0 0; color: var(--muted); }
+  .q {
+    font: 600 clamp(26px, 6.2vw, 44px)/1.3 var(--display); margin: 14px 0 22px; text-align: center;
+    overflow-x: auto; padding: 4px 0; letter-spacing: .02em; white-space: nowrap;
+  }
+  .q:focus { outline: none; }
+  sup { font-size: .6em; vertical-align: .55em; line-height: 0; }
+  .frac { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; margin: 0 .12em; }
+  .frac .top { padding: .04em .25em .2em; border-bottom: .07em solid currentColor; }
+  .frac .bot { padding: .2em .25em .04em; }
+
+  .options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 520px) { .options { grid-template-columns: 1fr; } }
+  .opt {
+    display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 14px; cursor: pointer; text-align: left;
+    background: #101a2e; border: 2px solid var(--line); color: var(--ink); font: 600 24px var(--display);
+    font-variant-numeric: tabular-nums; min-height: 64px;
+  }
+  .opt .k { font: 600 13px var(--text); width: 28px; height: 28px; border-radius: 8px; display: grid; place-items: center; background: var(--line); color: var(--ink); flex: none; }
+  .opt:hover:not(:disabled), .opt:focus-visible { border-color: var(--yellow); outline: none; }
+  .opt[data-r="wrong"] { border-color: var(--red); background: rgba(248,113,113,.12); color: var(--red); cursor: default; }
+  .opt[data-r="wrong"] .k { background: var(--red); color: var(--bg); }
+  .opt[data-r="right"] { border-color: var(--green); background: rgba(74,222,128,.14); color: var(--green); cursor: default; }
+  .opt[data-r="right"] .k { background: var(--green); color: var(--bg); }
+  .opt:disabled:not([data-r]) { opacity: .45; cursor: default; }
+
+  .fb { margin-top: 18px; }
+  .note { border-radius: 14px; padding: 14px 16px; margin: 0 0 14px; border: 1px solid var(--line); background: #101a2e; }
+  .note.bad { border-color: var(--red); } .note.good { border-color: var(--green); }
+  .note strong { display: block; margin-bottom: 2px; }
+  .note.bad strong { color: var(--red); } .note.good strong { color: var(--green); }
+  .vid { position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 16px; overflow: hidden; background: #000; border: 1px solid var(--line); }
+  .vid iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .hint { color: var(--muted); font-size: 14px; margin: 10px 0 0; }
+  .btn {
+    font: 600 16px var(--text); border-radius: 12px; padding: 12px 18px; cursor: pointer; border: 2px solid var(--yellow);
+    background: var(--yellow); color: var(--bg);
+  }
+  .btn.ghost { background: transparent; color: var(--yellow); }
+  .btn:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+  .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+  .link { background: none; border: 0; color: var(--yellow); font: 500 15px var(--text); cursor: pointer; padding: 6px 0; text-decoration: underline; }
+
+  .score { font: 700 clamp(44px, 12vw, 76px)/1 var(--display); color: var(--yellow); margin: 10px 0 4px; }
+  .score small { font-size: .4em; color: var(--muted); font-weight: 600; }
+  .bylevel { list-style: none; padding: 0; margin: 18px 0; display: grid; gap: 8px; }
+  .bylevel li { display: flex; justify-content: space-between; gap: 12px; padding: 10px 14px; border-radius: 12px; background: #101a2e; border: 1px solid var(--line); }
+  footer { margin-top: 28px; color: var(--muted); font-size: 14px; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+</style>
+</head>
+<body>
+<main>
+  <a class="back" href="../../">← All lessons</a>
+  <div class="eyebrow" id="eyebrow"></div>
+  <h1>Order of operations, <span class="y">with signs</span></h1>
+  <ol class="dots" id="dots" aria-label="Exercises"></ol>
+  <div id="app"></div>
+  <footer>Pick the answer you think is right. A wrong answer shows you the mistake and plays a step-by-step video. Solution videos use an AI-generated voice.</footer>
+</main>
+
+<script>
+const DATA = {"unit":"0.1","title":"Order of Operations and Signed Numbers","setId":"u00-l01","levels":{"1":"Warm-up","2":"Tricky","3":"Challenging","4":"Boss level"},"exercises":[{"id":"ex01","n":1,"level":1,"prompt":"","q":"8 + 6 ÷ 2 × 3","aria":"8 + 6 ÷ 2 × 3","options":[{"v":"17","ok":true,"why":""},{"v":"21","ok":false,"why":"You added 8 + 6 first, but addition comes last."},{"v":"9","ok":false,"why":"You multiplied 2 × 3 before dividing. Same level means left to right."},{"v":"33","ok":false,"why":"You added 8 + 3 before the last multiplication."}]},{"id":"ex02","n":2,"level":1,"prompt":"","q":"20 − 4 × 3 + 2","aria":"20 − 4 × 3 + 2","options":[{"v":"10","ok":true,"why":""},{"v":"50","ok":false,"why":"You worked straight left to right and ignored that multiplication comes first."},{"v":"6","ok":false,"why":"You turned the + 2 into − 2."},{"v":"0","ok":false,"why":"You added 3 + 2 first, but there are no parentheses."}]},{"id":"ex03","n":3,"level":1,"prompt":"","q":"3 × 2<sup>3</sup> − 4<sup>2</sup>","aria":"3 × 2 to the power of 3 − 4 to the power of 2","options":[{"v":"8","ok":true,"why":""},{"v":"200","ok":false,"why":"You multiplied 3 × 2 before applying the exponent."},{"v":"10","ok":false,"why":"You multiplied by the exponent instead of using it as a power."},{"v":"400","ok":false,"why":"You squared the whole expression instead of only the 4."}]},{"id":"ex04","n":4,"level":2,"prompt":"","q":"(−3)<sup>2</sup> − 3<sup>2</sup>","aria":"(−3) to the power of 2 − 3 to the power of 2","options":[{"v":"0","ok":true,"why":""},{"v":"−18","ok":false,"why":"You read (−3)² as −3², which is −9."},{"v":"18","ok":false,"why":"You turned the minus between the terms into a plus."},{"v":"36","ok":false,"why":"You subtracted first, then squared."}]},{"id":"ex05","n":5,"level":2,"prompt":"","q":"−5 − (−2) × 4","aria":"−5 − (−2) × 4","options":[{"v":"3","ok":true,"why":""},{"v":"−12","ok":false,"why":"You subtracted before multiplying."},{"v":"−13","ok":false,"why":"You dropped the negative sign on the −2."},{"v":"1","ok":false,"why":"You added the 4 instead of multiplying by it."}]},{"id":"ex06","n":6,"level":2,"prompt":"","q":"12 ÷ (−3) + 6 × (−2)","aria":"12 ÷ (−3) + 6 × (−2)","options":[{"v":"−16","ok":true,"why":""},{"v":"8","ok":false,"why":"You dropped the negative sign on the −2."},{"v":"−4","ok":false,"why":"You added before multiplying."},{"v":"−8","ok":false,"why":"You added −3 + 6 first, as if it were in parentheses."}]},{"id":"ex07","n":7,"level":2,"prompt":"","q":"3 + 4 × (2 − 5)<sup>2</sup>","aria":"3 + 4 × (2 − 5) to the power of 2","options":[{"v":"39","ok":true,"why":""},{"v":"63","ok":false,"why":"You added 3 + 4 first."},{"v":"−89","ok":false,"why":"You squared only the 5."},{"v":"−21","ok":false,"why":"You doubled instead of squaring."}]},{"id":"ex08","n":8,"level":2,"prompt":"","q":"−2<sup>4</sup> + (−2)<sup>4</sup>","aria":"−2 to the power of 4 + (−2) to the power of 4","options":[{"v":"0","ok":true,"why":""},{"v":"32","ok":false,"why":"You read −2⁴ as (−2)⁴."},{"v":"−32","ok":false,"why":"You turned the plus into a minus."},{"v":"8","ok":false,"why":"You multiplied 2 × 4 instead of raising 2 to the fourth power."}]},{"id":"ex09","n":9,"level":3,"prompt":"","q":"18 − 2 × 3<sup>2</sup> ÷ 6","aria":"18 − 2 × 3 to the power of 2 ÷ 6","options":[{"v":"15","ok":true,"why":""},{"v":"24","ok":false,"why":"You subtracted 18 − 2 first."},{"v":"16","ok":false,"why":"You doubled the 3 instead of squaring it."},{"v":"12","ok":false,"why":"You multiplied 2 × 3 before squaring."}]},{"id":"ex10","n":10,"level":3,"prompt":"","q":"(6 + 2 × 5) ÷ 2<sup>2</sup> − 1","aria":"(6 + 2 × 5) ÷ 2 to the power of 2 − 1","options":[{"v":"3","ok":true,"why":""},{"v":"9","ok":false,"why":"You added inside the parentheses before multiplying."},{"v":"15","ok":false,"why":"You doubled instead of squaring."},{"v":"8","ok":false,"why":"You pulled the −1 into the exponent."}]},{"id":"ex11","n":11,"level":3,"prompt":"","q":"<span class=\"frac\"><span class=\"top\">18 − 3 × 4</span><span class=\"bot\">2 + 1</span></span>","aria":"(18 − 3 × 4) over (2 + 1)","options":[{"v":"2","ok":true,"why":""},{"v":"13","ok":false,"why":"You ignored the fraction bar, so nothing was grouped."},{"v":"20","ok":false,"why":"You subtracted before multiplying on top."},{"v":"14","ok":false,"why":"You divided only the 12 by the bottom and left the 18 outside."}]},{"id":"ex12","n":12,"level":3,"prompt":"Evaluate the expression when x = −4.","q":"x<sup>2</sup> − 3x + 2","aria":"x to the power of 2 − 3x + 2","options":[{"v":"30","ok":true,"why":""},{"v":"−2","ok":false,"why":"You wrote −4² and got −16 instead of (−4)² = 16."},{"v":"6","ok":false,"why":"You lost the negative sign on x in the 3x term."},{"v":"11","ok":false,"why":"You read 3x as 3 − 4."}]},{"id":"ex13","n":13,"level":3,"prompt":"","q":"−3(−2 + 5) − 4(1 − 3)","aria":"−3(−2 + 5) − 4(1 − 3)","options":[{"v":"−1","ok":true,"why":""},{"v":"19","ok":false,"why":"You multiplied −3 by only the first term inside."},{"v":"−17","ok":false,"why":"You changed the minus before the 4 into a plus."},{"v":"−16","ok":false,"why":"You multiplied 4 by only the first term inside."}]},{"id":"ex14","n":14,"level":3,"prompt":"","q":"6 − 2|3 − 8|","aria":"6 − 2|3 − 8|","options":[{"v":"−4","ok":true,"why":""},{"v":"20","ok":false,"why":"You subtracted 6 − 2 first."},{"v":"16","ok":false,"why":"You ignored the absolute value bars."},{"v":"−8","ok":false,"why":"You put the bars around only the 3."}]},{"id":"ex15","n":15,"level":4,"prompt":"","q":"−4<sup>2</sup> ÷ (−2)<sup>2</sup> + 6 × (−1)<sup>3</sup>","aria":"−4 to the power of 2 ÷ (−2) to the power of 2 + 6 × (−1) to the power of 3","options":[{"v":"−10","ok":true,"why":""},{"v":"−2","ok":false,"why":"You read −4² as (−4)²."},{"v":"−22","ok":false,"why":"You multiplied by 3 instead of cubing."},{"v":"2","ok":false,"why":"You subtracted instead of adding."}]},{"id":"ex16","n":16,"level":4,"prompt":"","q":"3[2 + 4(5 − 3<sup>2</sup>)] − 7","aria":"3[2 + 4(5 − 3 to the power of 2)] − 7","options":[{"v":"−49","ok":true,"why":""},{"v":"47","ok":false,"why":"You squared (5 − 3) instead of only the 3."},{"v":"−79","ok":false,"why":"You split the bracket into separate pieces."},{"v":"−17","ok":false,"why":"You multiplied the 3 by only the 2."}]},{"id":"ex17","n":17,"level":4,"prompt":"","q":"(−6)<sup>2</sup> − 4(2)(−3)","aria":"(−6) to the power of 2 − 4(2)(−3)","options":[{"v":"60","ok":true,"why":""},{"v":"−12","ok":false,"why":"You read (−6)² as −6², which is −36."},{"v":"12","ok":false,"why":"You lost the negative sign on the −3."},{"v":"−192","ok":false,"why":"You subtracted 36 − 4 before multiplying."}]},{"id":"ex18","n":18,"level":4,"prompt":"","q":"<span class=\"frac\"><span class=\"top\">−8 − 4 × (−1)</span><span class=\"bot\">2 − 6</span></span>","aria":"(−8 − 4 × (−1)) over (2 − 6)","options":[{"v":"1","ok":true,"why":""},{"v":"−3","ok":false,"why":"You subtracted before multiplying on top."},{"v":"−12","ok":false,"why":"You ignored the fraction bar, so nothing was grouped."},{"v":"3","ok":false,"why":"You dropped the negative sign on the −1."}]},{"id":"ex19","n":19,"level":4,"prompt":"Evaluate the expression when x = −3.","q":"5 − 2x<sup>2</sup> + 3x","aria":"5 − 2x to the power of 2 + 3x","options":[{"v":"−22","ok":true,"why":""},{"v":"−40","ok":false,"why":"You squared 2x instead of only x."},{"v":"−4","ok":false,"why":"You changed +3x into −3x."},{"v":"14","ok":false,"why":"You changed −2x² into +2x²."}]},{"id":"ex20","n":20,"level":4,"prompt":"","q":"{4 − [2 − (−3)<sup>2</sup>]} × 2 − (−1)<sup>3</sup> × 6 ÷ 3","aria":"{4 − [2 − (−3) to the power of 2]} × 2 − (−1) to the power of 3 × 6 ÷ 3","options":[{"v":"24","ok":true,"why":""},{"v":"−40","ok":false,"why":"You squared the whole bracket instead of only −3."},{"v":"−12","ok":false,"why":"You removed the brackets without changing the signs."},{"v":"20","ok":false,"why":"You turned the last minus into a plus."}]}]};
+const KEY = "algebra." + DATA.setId + ".v1";
+const N = DATA.exercises.length;
+const $ = (s) => document.querySelector(s);
+const el = (tag, attrs = {}, ...kids) => {
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (k === "class") e.className = v; else if (k === "html") e.innerHTML = v;
+    else if (k.startsWith("on")) e.addEventListener(k.slice(2), v); else e.setAttribute(k, v);
+  }
+  kids.flat().forEach((c) => e.append(c));
+  return e;
+};
+
+// ---- state: results[i] = null | "first" | "retry"; order[i] = shuffled option indexes
+let state = { i: 0, results: Array(N).fill(null), done: false };
+let order = [];
+let wrongPicks = [];      // option indexes already tried on the current exercise
+let solved = false;
+let videoOpen = false;
+
+function load() {
+  try {
+    const s = JSON.parse(localStorage.getItem(KEY));
+    if (s && Array.isArray(s.results) && s.results.length === N) state = s;
+  } catch (e) {}
+}
+function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
+
+function shuffled(n) {
+  const a = [...Array(n).keys()];
+  for (let i = n - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+  return a;
+}
+
+function renderDots() {
+  const ul = $("#dots"); ul.innerHTML = "";
+  DATA.exercises.forEach((ex, i) => {
+    const b = el("button", {
+      type: "button", "data-s": state.results[i] || "", "aria-label": `Exercise ${i + 1}` + (state.results[i] === "first" ? ", right on the first try" : state.results[i] === "retry" ? ", needed another try" : ""),
+      onclick: () => go(i),
+    }, String(i + 1));
+    if (!state.done && i === state.i) b.setAttribute("aria-current", "step");
+    ul.append(el("li", {}, b));
+  });
+}
+
+function go(i) { state.i = i; state.done = false; save(); show(); }
+
+function show() {
+  renderDots();
+  const app = $("#app"); app.innerHTML = "";
+  $("#eyebrow").textContent = `Unit ${DATA.unit.split(".")[0]} · Lesson ${DATA.unit.split(".")[1]} · Practice`;
+  if (state.done) return showResults(app);
+  const ex = DATA.exercises[state.i];
+  order = shuffled(ex.options.length);
+  wrongPicks = []; solved = false; videoOpen = false;
+
+  const card = el("section", { class: "card", "aria-labelledby": "qtitle" });
+  card.append(el("div", { class: "meta" },
+    el("span", {}, "Exercise ", el("b", {}, String(ex.n)), ` of ${N}`),
+    el("span", { class: "level", "data-l": ex.level }, DATA.levels[ex.level])));
+  if (ex.prompt) card.append(el("p", { class: "prompt" }, ex.prompt));
+  else card.append(el("p", { class: "prompt" }, "What is the value of this expression?"));
+  const q = el("div", { class: "q", id: "qtitle", role: "img", "aria-label": ex.aria, tabindex: "-1", html: ex.q });
+  card.append(q);
+
+  const opts = el("div", { class: "options", role: "group", "aria-label": "Answer choices" });
+  order.forEach((oi, pos) => {
+    const o = ex.options[oi];
+    opts.append(el("button", { type: "button", class: "opt", "data-oi": oi, onclick: () => pick(oi) },
+      el("span", { class: "k", "aria-hidden": "true" }, "ABCD"[pos]), el("span", {}, o.v)));
+  });
+  card.append(opts);
+  card.append(el("div", { class: "fb", id: "fb", "aria-live": "polite" }));
+  app.append(card);
+  q.focus({ preventScroll: true });
+}
+
+function pick(oi) {
+  if (solved || wrongPicks.includes(oi)) return;
+  const ex = DATA.exercises[state.i];
+  const o = ex.options[oi];
+  const btn = document.querySelector(`.opt[data-oi="${oi}"]`);
+  const fb = $("#fb");
+  if (o.ok) {
+    solved = true;
+    btn.dataset.r = "right";
+    document.querySelectorAll(".opt").forEach((b) => { b.disabled = true; });
+    if (!state.results[state.i]) state.results[state.i] = wrongPicks.length ? "retry" : "first";
+    save(); renderDots();
+    fb.innerHTML = "";
+    fb.append(el("div", { class: "note good" },
+      el("strong", {}, wrongPicks.length ? "Right — and now you know why." : "Right on the first try!"),
+      state.i < N - 1 ? "Ready for the next one?" : "That was the last one."));
+    if (!videoOpen) fb.append(el("button", { type: "button", class: "link", onclick: (e) => { e.target.remove(); showVideo(false); } }, "Watch the step-by-step solution"));
+    fb.append(el("div", { class: "actions" },
+      el("button", { type: "button", class: "btn", id: "next", onclick: next }, state.i < N - 1 ? "Next exercise →" : "See my results")));
+    $("#next").focus({ preventScroll: false });
+  } else {
+    wrongPicks.push(oi);
+    btn.dataset.r = "wrong"; btn.disabled = true;
+    if (!state.results[state.i]) { state.results[state.i] = "retry"; save(); renderDots(); }
+    fb.innerHTML = "";
+    fb.append(el("div", { class: "note bad", role: "status" }, el("strong", {}, "Not quite."), o.why));
+    showVideo(true);
+    fb.append(el("p", { class: "hint" }, "Watch how it is solved, then pick again."));
+    fb.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }
+}
+
+function showVideo(autoplay) {
+  if (videoOpen) return;
+  videoOpen = true;
+  const ex = DATA.exercises[state.i];
+  const src = `../../videos/${DATA.setId}-${ex.id}/video.html` + (autoplay ? "?autoplay=1" : "");
+  const box = el("div", { class: "vid" }, el("iframe", { src, title: `Step-by-step solution to exercise ${ex.n}`, allow: "autoplay; fullscreen", allowfullscreen: "", referrerpolicy: "no-referrer" }));
+  const fb = $("#fb");
+  const note = fb.querySelector(".note");
+  note ? note.after(box) : fb.prepend(box);
+}
+
+function next() {
+  if (state.i < N - 1) { state.i++; save(); show(); window.scrollTo({ top: 0, behavior: "smooth" }); }
+  else { state.done = true; save(); show(); window.scrollTo({ top: 0 }); }
+}
+
+function showResults(app) {
+  const first = state.results.filter((r) => r === "first").length;
+  const answered = state.results.filter(Boolean).length;
+  const card = el("section", { class: "card" });
+  card.append(el("div", { class: "meta" }, el("span", {}, "Results")));
+  card.append(el("div", { class: "score" }, String(first), el("small", {}, ` / ${N} on the first try`)));
+  if (answered < N) card.append(el("p", {}, `${N - answered} exercise${N - answered === 1 ? "" : "s"} not tried yet.`));
+  const ul = el("ul", { class: "bylevel" });
+  Object.entries(DATA.levels).forEach(([l, name]) => {
+    const idx = DATA.exercises.map((e, i) => (String(e.level) === l ? i : -1)).filter((i) => i >= 0);
+    const ok = idx.filter((i) => state.results[i] === "first").length;
+    ul.append(el("li", {}, el("span", {}, name), el("b", {}, `${ok} / ${idx.length}`)));
+  });
+  card.append(ul);
+  const missed = state.results.map((r, i) => (r !== "first" ? i : -1)).filter((i) => i >= 0);
+  const actions = el("div", { class: "actions" });
+  if (missed.length) actions.append(el("button", { type: "button", class: "btn", onclick: () => { state.results = state.results.map((r) => (r === "first" ? r : null)); go(missed[0]); } },
+    `Try the ${missed.length} I missed again`));
+  actions.append(el("button", { type: "button", class: missed.length ? "btn ghost" : "btn", onclick: () => { state = { i: 0, results: Array(N).fill(null), done: false }; save(); show(); } }, "Start over"));
+  card.append(actions);
+  app.append(card);
+}
+
+document.addEventListener("keydown", (e) => {
+  if (state.done || solved || e.ctrlKey || e.metaKey || e.altKey) return;
+  const k = "abcd1234".indexOf(e.key.toLowerCase());
+  if (k < 0 || e.target.closest && e.target.closest("iframe")) return;
+  const oi = order[k % 4];
+  if (oi !== undefined) pick(oi);
+});
+
+load();
+if (state.results.every(Boolean) && !state.done) { state.done = true; }
+show();
+</script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l01-ex16",
+  "title": "Exercise 16",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Three times the bracket two plus four times the quantity five minus three squared, close bracket, minus seven.",
+          "display": "3[2 + 4(5 − 3^2)] − 7",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Work from the inside out. In the innermost group, the exponent comes first. Three squared is nine.",
+          "display": "3[2 + 4(5 − 9)] − 7",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Then five minus nine is negative four.",
+          "display": "3[2 + 4(−4)] − 7",
+          "cue": "step-2"
+        },
+        {
+          "id": "b04",
+          "text": "Next, inside the brackets, multiplication comes before addition. Four times negative four is negative sixteen.",
+          "display": "3[2 + (−16)] − 7",
+          "cue": "step-3"
+        },
+        {
+          "id": "b05",
+          "text": "Now add inside the brackets. Two plus negative sixteen is negative fourteen.",
+          "display": "3(−14) − 7",
+          "cue": "step-4"
+        },
+        {
+          "id": "b06",
+          "text": "The bracket is done, so multiply. Three times negative fourteen is negative forty-two.",
+          "display": "−42 − 7",
+          "cue": "step-5"
+        },
+        {
+          "id": "b07",
+          "text": "Finally, negative forty-two minus seven is negative forty-nine.",
+          "display": "−49",
+          "cue": "step-6"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b08",
+          "text": "So the answer is negative forty-nine.",
+          "display": "= −49",
+          "cue": "answer"
+        },
+        {
+          "id": "b09",
+          "text": "Watch out for these traps. If you square the whole five minus three, you get forty-seven. If you break the bracket into pieces, you get negative seventy-nine.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

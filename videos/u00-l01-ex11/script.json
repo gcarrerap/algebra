@@ -1,0 +1,63 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l01-ex11",
+  "title": "Exercise 11",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. The quantity eighteen minus three times four, over the quantity two plus one.",
+          "display": "(18 − 3 × 4) over (2 + 1)",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "A fraction bar works like parentheses: the top and the bottom are each worked out first. On top, multiplication comes first. Three times four is twelve.",
+          "display": "(18 − 12) over (2 + 1)",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Now the subtractions and additions. Eighteen minus twelve is six, and two plus one is three.",
+          "display": "(6) over (3)",
+          "cue": "step-2"
+        },
+        {
+          "id": "b04",
+          "text": "Finally, divide. Six divided by three is two.",
+          "display": "2",
+          "cue": "step-3"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b05",
+          "text": "So the answer is two.",
+          "display": "= 2",
+          "cue": "answer"
+        },
+        {
+          "id": "b06",
+          "text": "Watch out for these traps. If you ignore the fraction bar, you get thirteen. If you subtract before multiplying on top, you get twenty.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

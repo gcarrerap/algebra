@@ -1,0 +1,63 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l01-ex01",
+  "title": "Exercise 1",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Eight plus six divided by two times three.",
+          "display": "8 + 6 ÷ 2 × 3",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "There are no parentheses and no exponents. Multiplication and division share a level, so we go left to right. Six divided by two comes first, and that is three.",
+          "display": "8 + 3 × 3",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Next, three times three is nine.",
+          "display": "8 + 9",
+          "cue": "step-2"
+        },
+        {
+          "id": "b04",
+          "text": "Last, eight plus nine is seventeen.",
+          "display": "17",
+          "cue": "step-3"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b05",
+          "text": "So the answer is seventeen.",
+          "display": "= 17",
+          "cue": "answer"
+        },
+        {
+          "id": "b06",
+          "text": "Watch out for these traps. If you add first, you get twenty-one. If you multiply before dividing, you get nine.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

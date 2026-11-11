@@ -1,0 +1,69 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l01-ex14",
+  "title": "Exercise 14",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Six minus two times the absolute value of three minus eight.",
+          "display": "6 − 2|3 − 8|",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Absolute value bars group like parentheses, so work inside first. Three minus eight is negative five.",
+          "display": "6 − 2|−5|",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Absolute value is the distance from zero, so the absolute value of negative five is five.",
+          "display": "6 − 2 × 5",
+          "cue": "step-2"
+        },
+        {
+          "id": "b04",
+          "text": "Multiplication next. Two times five is ten.",
+          "display": "6 − 10",
+          "cue": "step-3"
+        },
+        {
+          "id": "b05",
+          "text": "Then six minus ten is negative four.",
+          "display": "−4",
+          "cue": "step-4"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b06",
+          "text": "So the answer is negative four.",
+          "display": "= −4",
+          "cue": "answer"
+        },
+        {
+          "id": "b07",
+          "text": "Watch out for these traps. If you subtract six minus two first, you get twenty. If you ignore the absolute value bars, you get sixteen.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

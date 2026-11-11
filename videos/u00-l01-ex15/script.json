@@ -1,0 +1,63 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l01-ex15",
+  "title": "Exercise 15",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Negative four squared, divided by the quantity negative two, squared, plus six times the quantity negative one, cubed.",
+          "display": "−4^2 ÷ (−2)^2 + 6 × (−1)^3",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Exponents first, and watch the signs. Minus four squared has no parentheses, so only the four is squared: that is negative sixteen. Negative two squared is four. Negative one cubed is negative one.",
+          "display": "−16 ÷ 4 + 6 × (−1)",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Now division and multiplication. Negative sixteen divided by four is negative four. Six times negative one is negative six.",
+          "display": "−4 + (−6)",
+          "cue": "step-2"
+        },
+        {
+          "id": "b04",
+          "text": "Negative four plus negative six is negative ten.",
+          "display": "−10",
+          "cue": "step-3"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b05",
+          "text": "So the answer is negative ten.",
+          "display": "= −10",
+          "cue": "answer"
+        },
+        {
+          "id": "b06",
+          "text": "Watch out for these traps. If you square the negative four, sign and all, you get negative two. If you multiply by three instead of cubing, you get negative twenty-two.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

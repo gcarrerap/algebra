@@ -1,0 +1,63 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l01-ex17",
+  "title": "Exercise 17",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. The quantity negative six, squared, minus four times two times negative three.",
+          "display": "(−6)^2 − 4(2)(−3)",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Exponent first. Negative six squared is thirty-six, because the parentheses include the negative sign.",
+          "display": "36 − 4(2)(−3)",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Now multiply left to right. Four times two is eight, and eight times negative three is negative twenty-four.",
+          "display": "36 − (−24)",
+          "cue": "step-2"
+        },
+        {
+          "id": "b04",
+          "text": "Subtracting negative twenty-four is the same as adding twenty-four. Thirty-six plus twenty-four is sixty.",
+          "display": "60",
+          "cue": "step-3"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b05",
+          "text": "So the answer is sixty.",
+          "display": "= 60",
+          "cue": "answer"
+        },
+        {
+          "id": "b06",
+          "text": "Watch out for these traps. If you forget the parentheses on negative six, you get negative twelve. If you lose the negative sign on the three, you get twelve.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

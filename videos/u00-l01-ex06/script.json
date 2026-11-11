@@ -1,0 +1,57 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l01-ex06",
+  "title": "Exercise 6",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Twelve divided by negative three, plus six times negative two.",
+          "display": "12 ÷ (−3) + 6 × (−2)",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Division and multiplication come before addition. Twelve divided by negative three is negative four. Six times negative two is negative twelve.",
+          "display": "−4 + (−12)",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Adding two negatives gives a bigger negative. Negative four plus negative twelve is negative sixteen.",
+          "display": "−16",
+          "cue": "step-2"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b04",
+          "text": "So the answer is negative sixteen.",
+          "display": "= −16",
+          "cue": "answer"
+        },
+        {
+          "id": "b05",
+          "text": "Watch out for these traps. If you drop the negative on the two, you get eight. If you add before multiplying, you get negative four.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

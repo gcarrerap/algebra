@@ -1,0 +1,63 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l01-ex02",
+  "title": "Exercise 2",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Twenty minus four times three, plus two.",
+          "display": "20 − 4 × 3 + 2",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Multiplication comes before addition and subtraction. Four times three is twelve.",
+          "display": "20 − 12 + 2",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Now only subtraction and addition are left, so we go left to right. Twenty minus twelve is eight.",
+          "display": "8 + 2",
+          "cue": "step-2"
+        },
+        {
+          "id": "b04",
+          "text": "Then eight plus two is ten.",
+          "display": "10",
+          "cue": "step-3"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b05",
+          "text": "So the answer is ten.",
+          "display": "= 10",
+          "cue": "answer"
+        },
+        {
+          "id": "b06",
+          "text": "Watch out for these traps. If you go straight left to right, you get fifty. If you change the plus into a minus, you get six.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

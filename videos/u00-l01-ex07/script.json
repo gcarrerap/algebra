@@ -1,0 +1,69 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l01-ex07",
+  "title": "Exercise 7",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Three plus four times the quantity two minus five, squared.",
+          "display": "3 + 4 × (2 − 5)^2",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Parentheses first. Two minus five is negative three.",
+          "display": "3 + 4 × (−3)^2",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Now the exponent. Negative three squared is nine.",
+          "display": "3 + 4 × 9",
+          "cue": "step-2"
+        },
+        {
+          "id": "b04",
+          "text": "Then multiplication. Four times nine is thirty-six.",
+          "display": "3 + 36",
+          "cue": "step-3"
+        },
+        {
+          "id": "b05",
+          "text": "Last, three plus thirty-six is thirty-nine.",
+          "display": "39",
+          "cue": "step-4"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b06",
+          "text": "So the answer is thirty-nine.",
+          "display": "= 39",
+          "cue": "answer"
+        },
+        {
+          "id": "b07",
+          "text": "Watch out for these traps. If you add three plus four first, you get sixty-three. If you square only the five, you get negative eighty-nine.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

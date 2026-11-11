@@ -1,0 +1,75 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l01-ex12",
+  "title": "Exercise 12",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Evaluate x squared minus three x plus two, when x equals negative four.",
+          "display": "x^2 − 3x + 2",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Replace every x with negative four, using parentheses so the sign stays attached.",
+          "display": "(−4)^2 − 3(−4) + 2",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Exponent first. Negative four squared is sixteen.",
+          "display": "16 − 3(−4) + 2",
+          "cue": "step-2"
+        },
+        {
+          "id": "b04",
+          "text": "Then multiplication. Three times negative four is negative twelve.",
+          "display": "16 − (−12) + 2",
+          "cue": "step-3"
+        },
+        {
+          "id": "b05",
+          "text": "Subtracting negative twelve is the same as adding twelve. Sixteen plus twelve is twenty-eight.",
+          "display": "28 + 2",
+          "cue": "step-4"
+        },
+        {
+          "id": "b06",
+          "text": "Finally, twenty-eight plus two is thirty.",
+          "display": "30",
+          "cue": "step-5"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b07",
+          "text": "So the answer is thirty.",
+          "display": "= 30",
+          "cue": "answer"
+        },
+        {
+          "id": "b08",
+          "text": "Watch out for these traps. If you square only the four and keep the minus outside, you get negative two. If you lose the negative sign in the three x term, you get six.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

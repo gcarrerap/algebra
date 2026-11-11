@@ -1,0 +1,81 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l01-ex20",
+  "title": "Exercise 20",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Braces four minus the bracket two minus the quantity negative three, squared, close bracket, close brace, times two, minus the quantity negative one, cubed, times six, divided by three.",
+          "display": "{4 − [2 − (−3)^2]} × 2 − (−1)^3 × 6 ÷ 3",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Exponents first, inside the groups. Negative three squared is nine, and negative one cubed is negative one.",
+          "display": "{4 − [2 − 9]} × 2 − (−1) × 6 ÷ 3",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Now the innermost bracket. Two minus nine is negative seven.",
+          "display": "{4 − (−7)} × 2 − (−1) × 6 ÷ 3",
+          "cue": "step-2"
+        },
+        {
+          "id": "b04",
+          "text": "Next, the braces. Four minus negative seven is four plus seven, which is eleven.",
+          "display": "11 × 2 − (−1) × 6 ÷ 3",
+          "cue": "step-3"
+        },
+        {
+          "id": "b05",
+          "text": "Multiplications and divisions, left to right. Eleven times two is twenty-two, and negative one times six is negative six.",
+          "display": "22 − (−6) ÷ 3",
+          "cue": "step-4"
+        },
+        {
+          "id": "b06",
+          "text": "Negative six divided by three is negative two.",
+          "display": "22 − (−2)",
+          "cue": "step-5"
+        },
+        {
+          "id": "b07",
+          "text": "Finally, twenty-two minus negative two is twenty-two plus two, which is twenty-four.",
+          "display": "24",
+          "cue": "step-6"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b08",
+          "text": "So the answer is twenty-four.",
+          "display": "= 24",
+          "cue": "answer"
+        },
+        {
+          "id": "b09",
+          "text": "Watch out for these traps. If you square the whole bracket, you get negative forty. If you drop the brackets without changing the signs, you get negative twelve.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

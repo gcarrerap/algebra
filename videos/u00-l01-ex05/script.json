@@ -1,0 +1,63 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l01-ex05",
+  "title": "Exercise 5",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Negative five, minus negative two, times four.",
+          "display": "−5 − (−2) × 4",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Multiplication first. Negative two times four is negative eight.",
+          "display": "−5 − (−8)",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Subtracting a negative is the same as adding its opposite, so minus negative eight becomes plus eight.",
+          "display": "−5 + 8",
+          "cue": "step-2"
+        },
+        {
+          "id": "b04",
+          "text": "Negative five plus eight is three.",
+          "display": "3",
+          "cue": "step-3"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b05",
+          "text": "So the answer is three.",
+          "display": "= 3",
+          "cue": "answer"
+        },
+        {
+          "id": "b06",
+          "text": "Watch out for these traps. If you subtract first, you get negative twelve. If you drop the negative sign on the two, you get negative thirteen.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,398 @@
+{
+  "unit": "0.1",
+  "title": "Order of Operations and Signed Numbers",
+  "levels": {
+    "1": "Warm-up",
+    "2": "Tricky",
+    "3": "Challenging",
+    "4": "Boss level"
+  },
+  "_notes": "Source of truth for the 0.1 practice set. Symbols: × ÷ − ^ ( ) [ ] { } |x| and fractions as [[top | bottom]]. A ⟨…⟩ in a line marks what the NEXT step computes. lines[i+1] is the result of step i; chips[i], say[i], at[i] describe that step (at = the word of the narration when the new line appears, optional #n for the n-th occurrence). Each wrong option is an expression that really evaluates to its wrong answer (tools/build_exercises.py computes and checks every value).",
+  "exercises": [
+    {
+      "id": "ex01", "level": 1,
+      "q": "8 + 6 ÷ 2 × 3",
+      "read": "Eight plus six divided by two times three.",
+      "lines": ["8 + ⟨6 ÷ 2⟩ × 3", "8 + ⟨3 × 3⟩", "⟨8 + 9⟩", "17"],
+      "chips": ["MD", "MD", "AS"],
+      "say": [
+        "There are no parentheses and no exponents. Multiplication and division share a level, so we go left to right. Six divided by two comes first, and that is three.",
+        "Next, three times three is nine.",
+        "Last, eight plus nine is seventeen."
+      ],
+      "at": ["three", "nine", "seventeen"],
+      "wrong": [
+        {"e": "(8 + 6) ÷ 2 × 3", "why": "You added 8 + 6 first, but addition comes last.", "say": "add first"},
+        {"e": "8 + 6 ÷ (2 × 3)", "why": "You multiplied 2 × 3 before dividing. Same level means left to right.", "say": "multiply before dividing"},
+        {"e": "(8 + 6 ÷ 2) × 3", "why": "You added 8 + 3 before the last multiplication.", "say": "add before the last multiplication"}
+      ]
+    },
+    {
+      "id": "ex02", "level": 1,
+      "q": "20 − 4 × 3 + 2",
+      "read": "Twenty minus four times three, plus two.",
+      "lines": ["20 − ⟨4 × 3⟩ + 2", "⟨20 − 12⟩ + 2", "⟨8 + 2⟩", "10"],
+      "chips": ["MD", "AS", "AS"],
+      "say": [
+        "Multiplication comes before addition and subtraction. Four times three is twelve.",
+        "Now only subtraction and addition are left, so we go left to right. Twenty minus twelve is eight.",
+        "Then eight plus two is ten."
+      ],
+      "at": ["twelve", "eight", "ten"],
+      "wrong": [
+        {"e": "(20 − 4) × 3 + 2", "why": "You worked straight left to right and ignored that multiplication comes first.", "say": "go straight left to right"},
+        {"e": "20 − 4 × 3 − 2", "why": "You turned the + 2 into − 2.", "say": "change the plus into a minus"},
+        {"e": "20 − 4 × (3 + 2)", "why": "You added 3 + 2 first, but there are no parentheses.", "say": "add three plus two first"}
+      ]
+    },
+    {
+      "id": "ex03", "level": 1,
+      "q": "3 × 2^3 − 4^2",
+      "read": "Three times two cubed, minus four squared.",
+      "lines": ["3 × ⟨2^3⟩ − ⟨4^2⟩", "⟨3 × 8⟩ − 16", "⟨24 − 16⟩", "8"],
+      "chips": ["E", "MD", "AS"],
+      "say": [
+        "Exponents first. Two cubed is eight, and four squared is sixteen.",
+        "Then multiplication. Three times eight is twenty-four.",
+        "Finally, twenty-four minus sixteen is eight."
+      ],
+      "at": ["sixteen", "twenty-four", "eight"],
+      "wrong": [
+        {"e": "(3 × 2)^3 − 4^2", "why": "You multiplied 3 × 2 before applying the exponent.", "say": "multiply before the exponent"},
+        {"e": "3 × 2 × 3 − 4 × 2", "why": "You multiplied by the exponent instead of using it as a power.", "say": "multiply by the exponents"},
+        {"e": "(3 × 2^3 − 4)^2", "why": "You squared the whole expression instead of only the 4.", "say": "square the whole expression"}
+      ]
+    },
+    {
+      "id": "ex04", "level": 2,
+      "q": "(−3)^2 − 3^2",
+      "read": "The quantity negative three, squared, minus three squared.",
+      "lines": ["⟨(−3)^2⟩ − ⟨3^2⟩", "⟨9 − 9⟩", "0"],
+      "chips": ["E", "AS"],
+      "say": [
+        "Exponents first. Negative three in parentheses, squared, is nine, because a negative times a negative is positive. And three squared is nine.",
+        "Nine minus nine is zero."
+      ],
+      "at": ["nine#2", "zero"],
+      "wrong": [
+        {"e": "−3^2 − 3^2", "why": "You read (−3)² as −3², which is −9.", "say": "forget the parentheses on the first term"},
+        {"e": "(−3)^2 + 3^2", "why": "You turned the minus between the terms into a plus.", "say": "add instead of subtract"},
+        {"e": "(−3 − 3)^2", "why": "You subtracted first, then squared.", "say": "subtract before squaring"}
+      ]
+    },
+    {
+      "id": "ex05", "level": 2,
+      "q": "−5 − (−2) × 4",
+      "read": "Negative five, minus negative two, times four.",
+      "lines": ["−5 − ⟨(−2) × 4⟩", "⟨−5 − (−8)⟩", "⟨−5 + 8⟩", "3"],
+      "chips": ["MD", "AS", "AS"],
+      "say": [
+        "Multiplication first. Negative two times four is negative eight.",
+        "Subtracting a negative is the same as adding its opposite, so minus negative eight becomes plus eight.",
+        "Negative five plus eight is three."
+      ],
+      "at": ["eight", "eight#2", "three"],
+      "wrong": [
+        {"e": "(−5 − (−2)) × 4", "why": "You subtracted before multiplying.", "say": "subtract first"},
+        {"e": "−5 − 2 × 4", "why": "You dropped the negative sign on the −2.", "say": "drop the negative sign on the two"},
+        {"e": "−5 − (−2) + 4", "why": "You added the 4 instead of multiplying by it.", "say": "add the four instead of multiplying"}
+      ]
+    },
+    {
+      "id": "ex06", "level": 2,
+      "q": "12 ÷ (−3) + 6 × (−2)",
+      "read": "Twelve divided by negative three, plus six times negative two.",
+      "lines": ["⟨12 ÷ (−3)⟩ + ⟨6 × (−2)⟩", "⟨−4 + (−12)⟩", "−16"],
+      "chips": ["MD", "AS"],
+      "say": [
+        "Division and multiplication come before addition. Twelve divided by negative three is negative four. Six times negative two is negative twelve.",
+        "Adding two negatives gives a bigger negative. Negative four plus negative twelve is negative sixteen."
+      ],
+      "at": ["twelve#2", "sixteen"],
+      "wrong": [
+        {"e": "12 ÷ (−3) + 6 × 2", "why": "You dropped the negative sign on the −2.", "say": "drop the negative on the two"},
+        {"e": "(12 ÷ (−3) + 6) × (−2)", "why": "You added before multiplying.", "say": "add before multiplying"},
+        {"e": "12 ÷ (−3 + 6) × (−2)", "why": "You added −3 + 6 first, as if it were in parentheses.", "say": "add negative three plus six first"}
+      ]
+    },
+    {
+      "id": "ex07", "level": 2,
+      "q": "3 + 4 × (2 − 5)^2",
+      "read": "Three plus four times the quantity two minus five, squared.",
+      "lines": ["3 + 4 × ⟨(2 − 5)⟩^2", "3 + 4 × ⟨(−3)^2⟩", "3 + ⟨4 × 9⟩", "⟨3 + 36⟩", "39"],
+      "chips": ["P", "E", "MD", "AS"],
+      "say": [
+        "Parentheses first. Two minus five is negative three.",
+        "Now the exponent. Negative three squared is nine.",
+        "Then multiplication. Four times nine is thirty-six.",
+        "Last, three plus thirty-six is thirty-nine."
+      ],
+      "at": ["three", "nine", "thirty-six", "thirty-nine"],
+      "wrong": [
+        {"e": "(3 + 4) × (2 − 5)^2", "why": "You added 3 + 4 first.", "say": "add three plus four first"},
+        {"e": "3 + 4 × (2 − 5^2)", "why": "You squared only the 5.", "say": "square only the five"},
+        {"e": "3 + 4 × (2 − 5) × 2", "why": "You doubled instead of squaring.", "say": "double instead of squaring"}
+      ]
+    },
+    {
+      "id": "ex08", "level": 2,
+      "q": "−2^4 + (−2)^4",
+      "read": "Negative two to the fourth power, plus the quantity negative two, to the fourth power.",
+      "lines": ["⟨−2^4⟩ + ⟨(−2)^4⟩", "⟨−16 + 16⟩", "0"],
+      "chips": ["E", "AS"],
+      "say": [
+        "Exponents first. With no parentheses, the exponent touches only the two, so minus two to the fourth power is negative sixteen. With parentheses, negative two to the fourth power is positive sixteen.",
+        "Negative sixteen plus sixteen is zero."
+      ],
+      "at": ["sixteen#2", "zero"],
+      "wrong": [
+        {"e": "(−2)^4 + (−2)^4", "why": "You read −2⁴ as (−2)⁴.", "say": "put parentheses on both terms"},
+        {"e": "−2^4 − (−2)^4", "why": "You turned the plus into a minus.", "say": "subtract instead of add"},
+        {"e": "−(2 × 4) + (−2)^4", "why": "You multiplied 2 × 4 instead of raising 2 to the fourth power.", "say": "multiply two by four"}
+      ]
+    },
+    {
+      "id": "ex09", "level": 3,
+      "q": "18 − 2 × 3^2 ÷ 6",
+      "read": "Eighteen minus two times three squared, divided by six.",
+      "lines": ["18 − 2 × ⟨3^2⟩ ÷ 6", "18 − ⟨2 × 9⟩ ÷ 6", "18 − ⟨18 ÷ 6⟩", "⟨18 − 3⟩", "15"],
+      "chips": ["E", "MD", "MD", "AS"],
+      "say": [
+        "Exponent first. Three squared is nine.",
+        "Multiplication and division share a level, so left to right. Two times nine is eighteen.",
+        "Eighteen divided by six is three.",
+        "Finally, eighteen minus three is fifteen."
+      ],
+      "at": ["nine", "eighteen", "three", "fifteen"],
+      "wrong": [
+        {"e": "(18 − 2) × 3^2 ÷ 6", "why": "You subtracted 18 − 2 first.", "say": "subtract first"},
+        {"e": "18 − 2 × 3 × 2 ÷ 6", "why": "You doubled the 3 instead of squaring it.", "say": "double the three instead of squaring"},
+        {"e": "18 − (2 × 3)^2 ÷ 6", "why": "You multiplied 2 × 3 before squaring.", "say": "multiply two times three before squaring"}
+      ]
+    },
+    {
+      "id": "ex10", "level": 3,
+      "q": "(6 + 2 × 5) ÷ 2^2 − 1",
+      "read": "The quantity six plus two times five, divided by two squared, minus one.",
+      "lines": ["(6 + ⟨2 × 5⟩) ÷ 2^2 − 1", "⟨(6 + 10)⟩ ÷ 2^2 − 1", "16 ÷ ⟨2^2⟩ − 1", "⟨16 ÷ 4⟩ − 1", "⟨4 − 1⟩", "3"],
+      "chips": ["P", "P", "E", "MD", "AS"],
+      "say": [
+        "Start inside the parentheses. The order still applies in there: multiplication before addition, so two times five is ten.",
+        "Now add. Six plus ten is sixteen.",
+        "Exponent next. Two squared is four.",
+        "Then division. Sixteen divided by four is four.",
+        "Last, four minus one is three."
+      ],
+      "at": ["ten", "sixteen", "four", "four#2", "three"],
+      "wrong": [
+        {"e": "(6 + 2) × 5 ÷ 2^2 − 1", "why": "You added inside the parentheses before multiplying.", "say": "add before multiplying inside the parentheses"},
+        {"e": "(6 + 2 × 5) ÷ 2 × 2 − 1", "why": "You doubled instead of squaring.", "say": "double instead of squaring"},
+        {"e": "(6 + 2 × 5) ÷ 2^(2 − 1)", "why": "You pulled the −1 into the exponent.", "say": "pull the minus one into the exponent"}
+      ]
+    },
+    {
+      "id": "ex11", "level": 3,
+      "q": "[[18 − 3 × 4 | 2 + 1]]",
+      "read": "The quantity eighteen minus three times four, over the quantity two plus one.",
+      "lines": ["[[18 − ⟨3 × 4⟩ | 2 + 1]]", "[[⟨18 − 12⟩ | ⟨2 + 1⟩]]", "⟨[[6 | 3]]⟩", "2"],
+      "chips": ["MD", "AS", "MD"],
+      "say": [
+        "A fraction bar works like parentheses: the top and the bottom are each worked out first. On top, multiplication comes first. Three times four is twelve.",
+        "Now the subtractions and additions. Eighteen minus twelve is six, and two plus one is three.",
+        "Finally, divide. Six divided by three is two."
+      ],
+      "at": ["twelve", "three", "two"],
+      "wrong": [
+        {"e": "18 − 3 × 4 ÷ 2 + 1", "why": "You ignored the fraction bar, so nothing was grouped.", "say": "ignore the fraction bar"},
+        {"e": "(18 − 3) × 4 ÷ (2 + 1)", "why": "You subtracted before multiplying on top.", "say": "subtract before multiplying on top"},
+        {"e": "18 − 3 × 4 ÷ (2 + 1)", "why": "You divided only the 12 by the bottom and left the 18 outside.", "say": "divide only the twelve by the bottom"}
+      ]
+    },
+    {
+      "id": "ex12", "level": 3,
+      "prompt": "Evaluate the expression when x = −4.",
+      "q": "x^2 − 3x + 2",
+      "sub": {"x": "(−4)"},
+      "read": "Evaluate x squared minus three x plus two, when x equals negative four.",
+      "lines": ["⟨x⟩^2 − 3⟨x⟩ + 2", "⟨(−4)^2⟩ − 3(−4) + 2", "16 − ⟨3(−4)⟩ + 2", "⟨16 − (−12)⟩ + 2", "⟨28 + 2⟩", "30"],
+      "chips": ["SUB", "E", "MD", "AS", "AS"],
+      "say": [
+        "Replace every x with negative four, using parentheses so the sign stays attached.",
+        "Exponent first. Negative four squared is sixteen.",
+        "Then multiplication. Three times negative four is negative twelve.",
+        "Subtracting negative twelve is the same as adding twelve. Sixteen plus twelve is twenty-eight.",
+        "Finally, twenty-eight plus two is thirty."
+      ],
+      "at": ["four", "sixteen", "twelve", "twenty-eight", "thirty"],
+      "wrong": [
+        {"e": "−4^2 − 3 × (−4) + 2", "why": "You wrote −4² and got −16 instead of (−4)² = 16.", "say": "square only the four and keep the minus outside"},
+        {"e": "(−4)^2 − 3 × 4 + 2", "why": "You lost the negative sign on x in the 3x term.", "say": "lose the negative sign in the three x term"},
+        {"e": "(−4)^2 − 3 − 4 + 2", "why": "You read 3x as 3 − 4.", "say": "read three x as three minus four"}
+      ]
+    },
+    {
+      "id": "ex13", "level": 3,
+      "q": "−3(−2 + 5) − 4(1 − 3)",
+      "read": "Negative three times the quantity negative two plus five, minus four times the quantity one minus three.",
+      "lines": ["−3⟨(−2 + 5)⟩ − 4⟨(1 − 3)⟩", "⟨−3(3)⟩ − ⟨4(−2)⟩", "⟨−9 − (−8)⟩", "⟨−9 + 8⟩", "−1"],
+      "chips": ["P", "MD", "AS", "AS"],
+      "say": [
+        "Parentheses first. Negative two plus five is three. One minus three is negative two.",
+        "Now the multiplications. Negative three times three is negative nine. Four times negative two is negative eight.",
+        "Subtracting negative eight is the same as adding eight.",
+        "Negative nine plus eight is negative one."
+      ],
+      "at": ["two#2", "eight", "eight#2", "one"],
+      "wrong": [
+        {"e": "(−3 × (−2) + 5) − 4 × (1 − 3)", "why": "You multiplied −3 by only the first term inside.", "say": "multiply negative three by only the first term"},
+        {"e": "−3 × 3 + 4 × (−2)", "why": "You changed the minus before the 4 into a plus.", "say": "change the minus before the four into a plus"},
+        {"e": "−3 × 3 − 4 × 1 − 3", "why": "You multiplied 4 by only the first term inside.", "say": "multiply four by only the one"}
+      ]
+    },
+    {
+      "id": "ex14", "level": 3,
+      "q": "6 − 2|3 − 8|",
+      "read": "Six minus two times the absolute value of three minus eight.",
+      "lines": ["6 − 2|⟨3 − 8⟩|", "6 − 2⟨|−5|⟩", "6 − ⟨2 × 5⟩", "⟨6 − 10⟩", "−4"],
+      "chips": ["P", "P", "MD", "AS"],
+      "say": [
+        "Absolute value bars group like parentheses, so work inside first. Three minus eight is negative five.",
+        "Absolute value is the distance from zero, so the absolute value of negative five is five.",
+        "Multiplication next. Two times five is ten.",
+        "Then six minus ten is negative four."
+      ],
+      "at": ["five", "five#2", "ten", "four"],
+      "wrong": [
+        {"e": "(6 − 2) × |3 − 8|", "why": "You subtracted 6 − 2 first.", "say": "subtract six minus two first"},
+        {"e": "6 − 2 × (3 − 8)", "why": "You ignored the absolute value bars.", "say": "ignore the absolute value bars"},
+        {"e": "6 − 2 × |3| − 8", "why": "You put the bars around only the 3.", "say": "put the bars around only the three"}
+      ]
+    },
+    {
+      "id": "ex15", "level": 4,
+      "q": "−4^2 ÷ (−2)^2 + 6 × (−1)^3",
+      "read": "Negative four squared, divided by the quantity negative two, squared, plus six times the quantity negative one, cubed.",
+      "lines": ["⟨−4^2⟩ ÷ ⟨(−2)^2⟩ + 6 × ⟨(−1)^3⟩", "⟨−16 ÷ 4⟩ + ⟨6 × (−1)⟩", "⟨−4 + (−6)⟩", "−10"],
+      "chips": ["E", "MD", "AS"],
+      "say": [
+        "Exponents first, and watch the signs. Minus four squared has no parentheses, so only the four is squared: that is negative sixteen. Negative two squared is four. Negative one cubed is negative one.",
+        "Now division and multiplication. Negative sixteen divided by four is negative four. Six times negative one is negative six.",
+        "Negative four plus negative six is negative ten."
+      ],
+      "at": ["one#2", "six#2", "ten"],
+      "wrong": [
+        {"e": "(−4)^2 ÷ (−2)^2 + 6 × (−1)^3", "why": "You read −4² as (−4)².", "say": "square the negative four, sign and all"},
+        {"e": "−4^2 ÷ (−2)^2 + 6 × (−1) × 3", "why": "You multiplied by 3 instead of cubing.", "say": "multiply by three instead of cubing"},
+        {"e": "−4^2 ÷ (−2)^2 − 6 × (−1)^3", "why": "You subtracted instead of adding.", "say": "subtract instead of add"}
+      ]
+    },
+    {
+      "id": "ex16", "level": 4,
+      "q": "3[2 + 4(5 − 3^2)] − 7",
+      "read": "Three times the bracket two plus four times the quantity five minus three squared, close bracket, minus seven.",
+      "lines": ["3[2 + 4(5 − ⟨3^2⟩)] − 7", "3[2 + 4⟨(5 − 9)⟩] − 7", "3[2 + ⟨4(−4)⟩] − 7", "3⟨[2 + (−16)]⟩ − 7", "⟨3(−14)⟩ − 7", "⟨−42 − 7⟩", "−49"],
+      "chips": ["E", "P", "MD", "P", "MD", "AS"],
+      "say": [
+        "Work from the inside out. In the innermost group, the exponent comes first. Three squared is nine.",
+        "Then five minus nine is negative four.",
+        "Next, inside the brackets, multiplication comes before addition. Four times negative four is negative sixteen.",
+        "Now add inside the brackets. Two plus negative sixteen is negative fourteen.",
+        "The bracket is done, so multiply. Three times negative fourteen is negative forty-two.",
+        "Finally, negative forty-two minus seven is negative forty-nine."
+      ],
+      "at": ["nine", "four", "sixteen", "fourteen", "forty-two", "forty-nine"],
+      "wrong": [
+        {"e": "3 × (2 + 4 × (5 − 3)^2) − 7", "why": "You squared (5 − 3) instead of only the 3.", "say": "square the whole five minus three"},
+        {"e": "3 × (2 + 4) × (5 − 9) − 7", "why": "You split the bracket into separate pieces.", "say": "break the bracket into pieces"},
+        {"e": "3 × 2 + 4 × (5 − 9) − 7", "why": "You multiplied the 3 by only the 2.", "say": "multiply the three by only the two"}
+      ]
+    },
+    {
+      "id": "ex17", "level": 4,
+      "q": "(−6)^2 − 4(2)(−3)",
+      "read": "The quantity negative six, squared, minus four times two times negative three.",
+      "lines": ["⟨(−6)^2⟩ − 4(2)(−3)", "36 − ⟨4(2)(−3)⟩", "⟨36 − (−24)⟩", "60"],
+      "chips": ["E", "MD", "AS"],
+      "say": [
+        "Exponent first. Negative six squared is thirty-six, because the parentheses include the negative sign.",
+        "Now multiply left to right. Four times two is eight, and eight times negative three is negative twenty-four.",
+        "Subtracting negative twenty-four is the same as adding twenty-four. Thirty-six plus twenty-four is sixty."
+      ],
+      "at": ["thirty-six", "twenty-four", "sixty"],
+      "wrong": [
+        {"e": "−6^2 − 4 × 2 × (−3)", "why": "You read (−6)² as −6², which is −36.", "say": "forget the parentheses on negative six"},
+        {"e": "(−6)^2 − 4 × 2 × 3", "why": "You lost the negative sign on the −3.", "say": "lose the negative sign on the three"},
+        {"e": "((−6)^2 − 4) × 2 × (−3)", "why": "You subtracted 36 − 4 before multiplying.", "say": "subtract before multiplying"}
+      ]
+    },
+    {
+      "id": "ex18", "level": 4,
+      "q": "[[−8 − 4 × (−1) | 2 − 6]]",
+      "read": "Negative eight minus four times negative one, all over two minus six.",
+      "lines": ["[[−8 − ⟨4 × (−1)⟩ | 2 − 6]]", "[[⟨−8 − (−4)⟩ | ⟨2 − 6⟩]]", "⟨[[−4 | −4]]⟩", "1"],
+      "chips": ["MD", "AS", "MD"],
+      "say": [
+        "The top and the bottom each work like parentheses. On top, multiplication first. Four times negative one is negative four.",
+        "Now subtract. On top, negative eight minus negative four is negative four. On the bottom, two minus six is negative four.",
+        "Finally, divide. Negative four divided by negative four is one, since a negative divided by a negative is positive."
+      ],
+      "at": ["four#2", "four#3", "one"],
+      "wrong": [
+        {"e": "(−8 − 4) × (−1) ÷ (2 − 6)", "why": "You subtracted before multiplying on top.", "say": "subtract before multiplying on top"},
+        {"e": "−8 − 4 × (−1) ÷ 2 − 6", "why": "You ignored the fraction bar, so nothing was grouped.", "say": "ignore the fraction bar"},
+        {"e": "(−8 − 4 × 1) ÷ (2 − 6)", "why": "You dropped the negative sign on the −1.", "say": "lose the negative sign on the one"}
+      ]
+    },
+    {
+      "id": "ex19", "level": 4,
+      "prompt": "Evaluate the expression when x = −3.",
+      "q": "5 − 2x^2 + 3x",
+      "sub": {"x": "(−3)"},
+      "read": "Evaluate five minus two x squared plus three x, when x equals negative three.",
+      "lines": ["5 − 2⟨x⟩^2 + 3⟨x⟩", "5 − 2⟨(−3)^2⟩ + 3(−3)", "5 − ⟨2(9)⟩ + ⟨3(−3)⟩", "⟨5 − 18⟩ + (−9)", "⟨−13 + (−9)⟩", "−22"],
+      "chips": ["SUB", "E", "MD", "AS", "AS"],
+      "say": [
+        "Replace each x with negative three, in parentheses.",
+        "Exponent first, before any multiplication. Negative three squared is nine.",
+        "Now the multiplications. Two times nine is eighteen, and three times negative three is negative nine.",
+        "Left to right: five minus eighteen is negative thirteen.",
+        "Negative thirteen plus negative nine is negative twenty-two."
+      ],
+      "at": ["three", "nine", "nine#2", "thirteen", "twenty-two"],
+      "wrong": [
+        {"e": "5 − (2 × (−3))^2 + 3 × (−3)", "why": "You squared 2x instead of only x.", "say": "square two x together"},
+        {"e": "5 − 2 × (−3)^2 − 3 × (−3)", "why": "You changed +3x into −3x.", "say": "turn plus three x into minus three x"},
+        {"e": "5 + 2 × (−3)^2 + 3 × (−3)", "why": "You changed −2x² into +2x².", "say": "turn minus two x squared into plus"}
+      ]
+    },
+    {
+      "id": "ex20", "level": 4,
+      "q": "{4 − [2 − (−3)^2]} × 2 − (−1)^3 × 6 ÷ 3",
+      "read": "Braces four minus the bracket two minus the quantity negative three, squared, close bracket, close brace, times two, minus the quantity negative one, cubed, times six, divided by three.",
+      "lines": [
+        "{4 − [2 − ⟨(−3)^2⟩]} × 2 − ⟨(−1)^3⟩ × 6 ÷ 3",
+        "{4 − ⟨[2 − 9]⟩} × 2 − (−1) × 6 ÷ 3",
+        "⟨{4 − (−7)}⟩ × 2 − (−1) × 6 ÷ 3",
+        "⟨11 × 2⟩ − ⟨(−1) × 6⟩ ÷ 3",
+        "22 − ⟨(−6) ÷ 3⟩",
+        "⟨22 − (−2)⟩",
+        "24"
+      ],
+      "chips": ["E", "P", "P", "MD", "MD", "AS"],
+      "say": [
+        "Exponents first, inside the groups. Negative three squared is nine, and negative one cubed is negative one.",
+        "Now the innermost bracket. Two minus nine is negative seven.",
+        "Next, the braces. Four minus negative seven is four plus seven, which is eleven.",
+        "Multiplications and divisions, left to right. Eleven times two is twenty-two, and negative one times six is negative six.",
+        "Negative six divided by three is negative two.",
+        "Finally, twenty-two minus negative two is twenty-two plus two, which is twenty-four."
+      ],
+      "at": ["one#2", "seven", "eleven", "six#2", "two", "twenty-four"],
+      "wrong": [
+        {"e": "{4 − [2 − (−3)]^2} × 2 − (−1)^3 × 6 ÷ 3", "why": "You squared the whole bracket instead of only −3.", "say": "square the whole bracket"},
+        {"e": "(4 − 2 − 9) × 2 − (−1)^3 × 6 ÷ 3", "why": "You removed the brackets without changing the signs.", "say": "drop the brackets without changing the signs"},
+        {"e": "{4 − [2 − (−3)^2]} × 2 + (−1)^3 × 6 ÷ 3", "why": "You turned the last minus into a plus.", "say": "turn the last minus into a plus"}
+      ]
+    }
+  ]
+}

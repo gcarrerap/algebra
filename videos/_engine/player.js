@@ -118,6 +118,9 @@
       if (e.code === "ArrowLeft") audio.currentTime = Math.max(0, audio.currentTime - 5);
     });
     audio.onended = () => { label.textContent = "↻ Watch again"; play.hidden = false; };
+    // ?autoplay=1 (used when a page embeds the video): start right away; if the browser refuses
+    // sound without a tap, the big play button stays.
+    if (location.search.includes("autoplay")) audio.play().then(() => { play.hidden = true; }).catch(() => {});
     (function loop() { render(audio.currentTime); requestAnimationFrame(loop); })();
   }
 

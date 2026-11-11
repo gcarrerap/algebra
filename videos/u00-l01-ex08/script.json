@@ -1,0 +1,57 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l01-ex08",
+  "title": "Exercise 8",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Negative two to the fourth power, plus the quantity negative two, to the fourth power.",
+          "display": "−2^4 + (−2)^4",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Exponents first. With no parentheses, the exponent touches only the two, so minus two to the fourth power is negative sixteen. With parentheses, negative two to the fourth power is positive sixteen.",
+          "display": "−16 + 16",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Negative sixteen plus sixteen is zero.",
+          "display": "0",
+          "cue": "step-2"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b04",
+          "text": "So the answer is zero.",
+          "display": "= 0",
+          "cue": "answer"
+        },
+        {
+          "id": "b05",
+          "text": "Watch out for these traps. If you put parentheses on both terms, you get thirty-two. If you subtract instead of add, you get negative thirty-two.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

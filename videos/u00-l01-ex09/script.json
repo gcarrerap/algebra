@@ -1,0 +1,69 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l01-ex09",
+  "title": "Exercise 9",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Eighteen minus two times three squared, divided by six.",
+          "display": "18 − 2 × 3^2 ÷ 6",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Exponent first. Three squared is nine.",
+          "display": "18 − 2 × 9 ÷ 6",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Multiplication and division share a level, so left to right. Two times nine is eighteen.",
+          "display": "18 − 18 ÷ 6",
+          "cue": "step-2"
+        },
+        {
+          "id": "b04",
+          "text": "Eighteen divided by six is three.",
+          "display": "18 − 3",
+          "cue": "step-3"
+        },
+        {
+          "id": "b05",
+          "text": "Finally, eighteen minus three is fifteen.",
+          "display": "15",
+          "cue": "step-4"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b06",
+          "text": "So the answer is fifteen.",
+          "display": "= 15",
+          "cue": "answer"
+        },
+        {
+          "id": "b07",
+          "text": "Watch out for these traps. If you subtract first, you get twenty-four. If you double the three instead of squaring, you get sixteen.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

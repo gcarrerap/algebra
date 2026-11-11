@@ -1,0 +1,75 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l01-ex10",
+  "title": "Exercise 10",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. The quantity six plus two times five, divided by two squared, minus one.",
+          "display": "(6 + 2 × 5) ÷ 2^2 − 1",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Start inside the parentheses. The order still applies in there: multiplication before addition, so two times five is ten.",
+          "display": "(6 + 10) ÷ 2^2 − 1",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Now add. Six plus ten is sixteen.",
+          "display": "16 ÷ 2^2 − 1",
+          "cue": "step-2"
+        },
+        {
+          "id": "b04",
+          "text": "Exponent next. Two squared is four.",
+          "display": "16 ÷ 4 − 1",
+          "cue": "step-3"
+        },
+        {
+          "id": "b05",
+          "text": "Then division. Sixteen divided by four is four.",
+          "display": "4 − 1",
+          "cue": "step-4"
+        },
+        {
+          "id": "b06",
+          "text": "Last, four minus one is three.",
+          "display": "3",
+          "cue": "step-5"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b07",
+          "text": "So the answer is three.",
+          "display": "= 3",
+          "cue": "answer"
+        },
+        {
+          "id": "b08",
+          "text": "Watch out for these traps. If you add before multiplying inside the parentheses, you get nine. If you double instead of squaring, you get fifteen.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

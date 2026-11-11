@@ -1,0 +1,75 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l01-ex19",
+  "title": "Exercise 19",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Evaluate five minus two x squared plus three x, when x equals negative three.",
+          "display": "5 − 2x^2 + 3x",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Replace each x with negative three, in parentheses.",
+          "display": "5 − 2(−3)^2 + 3(−3)",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Exponent first, before any multiplication. Negative three squared is nine.",
+          "display": "5 − 2(9) + 3(−3)",
+          "cue": "step-2"
+        },
+        {
+          "id": "b04",
+          "text": "Now the multiplications. Two times nine is eighteen, and three times negative three is negative nine.",
+          "display": "5 − 18 + (−9)",
+          "cue": "step-3"
+        },
+        {
+          "id": "b05",
+          "text": "Left to right: five minus eighteen is negative thirteen.",
+          "display": "−13 + (−9)",
+          "cue": "step-4"
+        },
+        {
+          "id": "b06",
+          "text": "Negative thirteen plus negative nine is negative twenty-two.",
+          "display": "−22",
+          "cue": "step-5"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b07",
+          "text": "So the answer is negative twenty-two.",
+          "display": "= −22",
+          "cue": "answer"
+        },
+        {
+          "id": "b08",
+          "text": "Watch out for these traps. If you square two x together, you get negative forty. If you turn plus three x into minus three x, you get negative four.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

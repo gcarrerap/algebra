@@ -1,0 +1,63 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l01-ex03",
+  "title": "Exercise 3",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Three times two cubed, minus four squared.",
+          "display": "3 × 2^3 − 4^2",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Exponents first. Two cubed is eight, and four squared is sixteen.",
+          "display": "3 × 8 − 16",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Then multiplication. Three times eight is twenty-four.",
+          "display": "24 − 16",
+          "cue": "step-2"
+        },
+        {
+          "id": "b04",
+          "text": "Finally, twenty-four minus sixteen is eight.",
+          "display": "8",
+          "cue": "step-3"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b05",
+          "text": "So the answer is eight.",
+          "display": "= 8",
+          "cue": "answer"
+        },
+        {
+          "id": "b06",
+          "text": "Watch out for these traps. If you multiply before the exponent, you get two hundred. If you multiply by the exponents, you get ten.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

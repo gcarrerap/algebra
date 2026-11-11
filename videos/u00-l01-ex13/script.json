@@ -1,0 +1,69 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l01-ex13",
+  "title": "Exercise 13",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Negative three times the quantity negative two plus five, minus four times the quantity one minus three.",
+          "display": "−3(−2 + 5) − 4(1 − 3)",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Parentheses first. Negative two plus five is three. One minus three is negative two.",
+          "display": "−3(3) − 4(−2)",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Now the multiplications. Negative three times three is negative nine. Four times negative two is negative eight.",
+          "display": "−9 − (−8)",
+          "cue": "step-2"
+        },
+        {
+          "id": "b04",
+          "text": "Subtracting negative eight is the same as adding eight.",
+          "display": "−9 + 8",
+          "cue": "step-3"
+        },
+        {
+          "id": "b05",
+          "text": "Negative nine plus eight is negative one.",
+          "display": "−1",
+          "cue": "step-4"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b06",
+          "text": "So the answer is negative one.",
+          "display": "= −1",
+          "cue": "answer"
+        },
+        {
+          "id": "b07",
+          "text": "Watch out for these traps. If you multiply negative three by only the first term, you get nineteen. If you change the minus before the four into a plus, you get negative seventeen.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}
