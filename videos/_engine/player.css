@@ -16,7 +16,9 @@
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { background: #000; height: 100%; overflow: hidden; }
+html, body { background: #000; height: 100%; overflow: hidden; color-scheme: dark; }
+body { position: relative; }
+[hidden] { display: none !important; }
 
 #stage {
   position: absolute; left: 0; top: 0;
@@ -111,8 +113,16 @@ html, body { background: #000; height: 100%; overflow: hidden; }
 
 /* ---------- live playback ---------- */
 #play {
-  position: absolute; inset: 0; z-index: 20; display: flex; align-items: center; justify-content: center;
-  background: rgba(8, 13, 26, 0.6); cursor: pointer;
-  font: 700 64px Poppins, sans-serif; color: var(--yellow);
+  position: absolute; inset: 0; z-index: 20; display: flex; flex-direction: column; gap: 28px;
+  align-items: center; justify-content: center;
+  background: rgba(8, 13, 26, 0.72); cursor: pointer; border: 0; color: var(--ink);
 }
-.render #play { display: none; }
+#play .play-btn {
+  width: 180px; height: 180px; border-radius: 50%; background: var(--yellow);
+  display: flex; align-items: center; justify-content: center;
+  font: 700 72px Poppins, sans-serif; color: #101a2e; padding-left: 14px;
+}
+#play .play-label { font: 600 40px Poppins, sans-serif; color: var(--yellow); }
+#play:focus-visible .play-btn { outline: 6px solid var(--ink); outline-offset: 8px; }
+#seek { position: absolute; left: 0; right: 0; bottom: 0; height: 44px; z-index: 6; cursor: pointer; }
+.render #play, .render #seek { display: none; }

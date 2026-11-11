@@ -79,8 +79,9 @@
 
   function fit() {
     const stage = document.getElementById("stage");
-    const k = Math.min(innerWidth / 1920, innerHeight / 1080);
-    stage.style.transform = `translate(${(innerWidth - 1920 * k) / 2}px, ${(innerHeight - 1080 * k) / 2}px) scale(${k})`;
+    const box = stage.parentElement.getBoundingClientRect();
+    const k = Math.min(box.width / 1920, box.height / 1080);
+    stage.style.transform = `translate(${(box.width - 1920 * k) / 2}px, ${(box.height - 1080 * k) / 2}px) scale(${k})`;
   }
 
   async function start() {
@@ -95,9 +96,28 @@
     if (rendering) { window.videoReady = true; return; }
     fit(); addEventListener("resize", fit);
     const audio = new Audio("narration.mp3");
+    audio.preload = "auto";
     const play = document.getElementById("play");
-    play.onclick = () => { play.style.display = "none"; audio.play(); };
-    audio.onended = () => { play.textContent = "↻ Replay"; play.style.display = "flex"; };
+    const label = play.querySelector(".play-label") || play;
+    const seek = document.getElementById("seek");
+    const toggle = () => {
+      if (audio.paused) { audio.play(); play.hidden = true; }
+      else { audio.pause(); label.textContent = "❚❚ Paused · tap to continue"; play.hidden = false; }
+    };
+    play.onclick = toggle;
+    document.getElementById("stage").addEventListener("click", (e) => {
+      if (!e.target.closest("#play, #seek")) toggle();
+    });
+    if (seek) seek.addEventListener("click", (e) => {
+      const r = seek.getBoundingClientRect();
+      audio.currentTime = clamp((e.clientX - r.left) / r.width) * TL.duration;
+    });
+    addEventListener("keydown", (e) => {
+      if (e.code === "Space") { e.preventDefault(); toggle(); }
+      if (e.code === "ArrowRight") audio.currentTime = Math.min(TL.duration, audio.currentTime + 5);
+      if (e.code === "ArrowLeft") audio.currentTime = Math.max(0, audio.currentTime - 5);
+    });
+    audio.onended = () => { label.textContent = "↻ Watch again"; play.hidden = false; };
     (function loop() { render(audio.currentTime); requestAnimationFrame(loop); })();
   }
 

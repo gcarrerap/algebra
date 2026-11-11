@@ -2,3 +2,4 @@ videos/_segments/
 *.mp4
 __pycache__/
 videos/*/job.json
+dist/

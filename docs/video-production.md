@@ -16,8 +16,19 @@ script.json ─► narration.mp3 + timeline.json ─► video.html ─► stills
 | `videos/<video>/video.html` | The scenes of one video, with timing anchors. |
 | `tools/render_video.py` | Takes stills or films the full MP4. |
 
-The same `video.html` plays live in a browser with its narration (it shows a ▶ Play
-button), which is handy for previewing: serve `videos/` with any static server and open it.
+The same `video.html` plays live in a browser with its narration: no MP4 needed. Tap the
+screen to pause, tap the bar at the bottom to jump, or use Space and the arrow keys. It loads
+`timeline.json` and `narration.mp3` next to it, so it must be served over http (any static
+server on `videos/`); opening the file directly from disk or from GitHub's file view won't run it.
+
+## Web version (no MP4)
+
+```
+python3 tools/build_web.py videos/<video>      # -> dist/<video>/ (git-ignored)
+```
+
+`dist/<video>/` holds `index.html` plus `player.css`, `player.js`, `timeline.json` and
+`narration.mp3`, ready to publish as a page (a claude.ai artifact, or any static host).
 
 ## Writing a video page
 
