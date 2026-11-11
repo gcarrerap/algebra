@@ -1,0 +1,3 @@
+videos/_segments/
+*.mp4
+__pycache__/
