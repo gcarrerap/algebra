@@ -22,8 +22,8 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import plan_audio as P  # noqa: E402
 
 SR = 44100
-LEAD_S = 0.5
-GAP = {"block": 0.35, "scene": 0.8}
+LEAD_S = 0.8
+GAP = {"block": 0.6, "scene": 1.4}
 SILENCE_DB = -38      # below the segment's peak
 EDGE_KEEP_S = 0.03
 MIN_PAUSE_S = 0.12

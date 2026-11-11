@@ -133,7 +133,7 @@ Rules:
 ### 4.2 Teaching voice
 
 - Second person, short sentences, one idea per block.
-- Ask, pause, answer: put a question in its own block with `pause_after_s` of 1–1.5 s so Ana can think.
+- Ask, pause, answer: put a question in its own block with `pause_after_s` of 2.5 s (4 s for a "pause the video" challenge) so Ana can think.
 - Name the common mistake before the rule ("If you said twenty…").
 - English throughout, at a Grade 9 level; vocabulary from the syllabus.
 
@@ -249,10 +249,10 @@ Same steps as the book's `voces.py armar` and the podcast's `unir_audios.py`:
 
    | Between | Gap |
    |---|---|
-   | blocks in the same scene | 0.35 s |
-   | scenes | 0.8 s |
+   | blocks in the same scene | 0.6 s |
+   | scenes | 1.4 s |
    | after a block with `pause_after_s` | that value |
-   | before the first block | 0.5 s |
+   | before the first block | 0.8 s |
 
 5. **Finish**: whole file to −16 LUFS, true peak −1.5 dBTP, MP3 mono 96 kbps →
    `narration.mp3`.
