@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Algebra 1 Lessons</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap">
+<style>
+  /* Same world as the videos: navy graph paper, one yellow accent, step colors P/E/MD/AS. */
+  :root {
+    --bg: #101a2e; --card: #18243d; --line: #2a3a5c; --ink: #f5f1e8; --muted: #9aa6bd;
+    --yellow: #ffcc4d; --blue: #60a5fa; --purple: #c084fc; --green: #4ade80;
+    --display: Poppins, "DejaVu Sans", sans-serif; --text: Inter, "DejaVu Sans", sans-serif;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; color: var(--ink); font: 400 17px/1.55 var(--text);
+    background:
+      linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px) 0 0 / 32px 32px,
+      linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px) 0 0 / 32px 32px,
+      var(--bg);
+    min-height: 100vh;
+  }
+  main { max-width: 860px; margin: 0 auto; padding: 56px max(16px, env(safe-area-inset-right, 0px)) 80px max(16px, env(safe-area-inset-left, 0px)); }
+  .eyebrow { font: 600 13px var(--text); letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+  h1 { font: 700 clamp(36px, 7vw, 56px)/1.1 var(--display); margin: 10px 0 14px; text-wrap: balance; }
+  h1 .y { color: var(--yellow); }
+  .lede { color: var(--muted); max-width: 60ch; margin: 0 0 44px; }
+  .unit { margin-top: 36px; }
+  .unit h2 { font: 600 20px var(--display); margin: 0 0 14px; display: flex; gap: 12px; align-items: baseline; }
+  .unit h2 .n { font: 600 13px var(--text); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  .lesson {
+    display: flex; align-items: center; gap: 16px; padding: 16px 20px; border-radius: 16px;
+    background: var(--card); border: 1px solid var(--line); color: inherit; text-decoration: none;
+  }
+  a.lesson:hover, a.lesson:focus-visible { border-color: var(--yellow); outline: none; }
+  .lesson .num { font: 600 15px var(--display); color: var(--muted); min-width: 2.2em; font-variant-numeric: tabular-nums; }
+  .lesson .name { flex: 1; min-width: 0; font-weight: 500; }
+  .lesson .tag { font: 600 12px var(--text); letter-spacing: .1em; text-transform: uppercase; padding: 6px 10px; border-radius: 999px; }
+  a.lesson .tag { background: var(--yellow); color: var(--bg); }
+  .lesson.soon { opacity: .5; }
+  .lesson.soon .tag { border: 1px solid var(--line); color: var(--muted); }
+  .key { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 52px; color: var(--muted); font-size: 14px; align-items: center; }
+  .chip { font: 700 13px var(--display); color: var(--bg); padding: 4px 9px; border-radius: 8px; }
+  footer { margin-top: 28px; color: var(--muted); font-size: 14px; }
+</style>
+</head>
+<body>
+<main>
+  <div class="eyebrow">Grade 9 · Kentucky Academic Standards</div>
+  <h1>Algebra 1, <span class="y">one idea at a time</span></h1>
+  <p class="lede">Short animated lessons with narration. Tap a lesson to watch it; tap the screen to pause, and the bar at the bottom to jump back.</p>
+
+  <section class="unit">
+    <h2><span class="n">Unit 0</span>Foundations and Expressions</h2>
+    <ol>
+      <li><a class="lesson" href="videos/u00-l01-order-of-operations/video.html"><span class="num">0.1</span><span class="name">Order of Operations</span><span class="tag">Watch</span></a></li>
+      <li><div class="lesson soon"><span class="num">0.2</span><span class="name">Properties of Operations</span><span class="tag">Soon</span></div></li>
+      <li><div class="lesson soon"><span class="num">0.3</span><span class="name">Parts of an Expression</span><span class="tag">Soon</span></div></li>
+      <li><div class="lesson soon"><span class="num">0.4</span><span class="name">Combining Like Terms</span><span class="tag">Soon</span></div></li>
+      <li><div class="lesson soon"><span class="num">0.5</span><span class="name">Words into Expressions</span><span class="tag">Soon</span></div></li>
+    </ol>
+  </section>
+
+  <div class="key">Colors in every lesson:
+    <span class="chip" style="background: var(--blue)">P</span>
+    <span class="chip" style="background: var(--purple)">E</span>
+    <span class="chip" style="background: var(--yellow)">MD</span>
+    <span class="chip" style="background: var(--green)">AS</span>
+  </div>
+  <footer>Lessons use an AI-generated voice.</footer>
+</main>
+</body>
+</html>
