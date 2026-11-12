@@ -1,0 +1,51 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l04-ex02",
+  "title": "Exercise 2",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Seven x plus four x.",
+          "display": "7x + 4x",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Both terms have x, so they are like terms. Add the coefficients: seven plus four is eleven, so eleven x.",
+          "display": "11x",
+          "cue": "step-1"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b03",
+          "text": "So the answer is eleven x.",
+          "display": "= 11x",
+          "cue": "answer"
+        },
+        {
+          "id": "b04",
+          "text": "Watch out for these traps. If you turn the x into x squared, you get eleven x squared. If you multiply the coefficients, you get twenty-eight x.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l04-ex06",
+  "title": "Exercise 6",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Three x squared plus five x minus x squared plus two x.",
+          "display": "3x^2 + 5x − x^2 + 2x",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "The x squared terms are three x squared and negative x squared, which has a coefficient of negative one. Three minus one is two, so two x squared.",
+          "display": "2x^2 + 5x + 2x",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "The x terms are five x and two x. Five plus two is seven, so seven x. x squared and x are not like terms, so we stop here.",
+          "display": "2x^2 + 7x",
+          "cue": "step-2"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b04",
+          "text": "So the answer is two x squared plus seven x.",
+          "display": "= 2x^2 + 7x",
+          "cue": "answer"
+        },
+        {
+          "id": "b05",
+          "text": "Watch out for these traps. If you combine the x squared terms with the x terms, you get nine x squared. If you forget the minus in front of x squared, you get four x squared plus seven x.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

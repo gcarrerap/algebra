@@ -1,0 +1,51 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l04-ex03",
+  "title": "Exercise 3",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Nine y minus twelve y.",
+          "display": "9y − 12y",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "These are like terms. Nine minus twelve is negative three, so negative three y.",
+          "display": "−3y",
+          "cue": "step-1"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b03",
+          "text": "So the answer is negative three y.",
+          "display": "= −3y",
+          "cue": "answer"
+        },
+        {
+          "id": "b04",
+          "text": "Watch out for these traps. If you lose the minus sign, you get three y. If you add the twelve instead of subtracting it, you get twenty-one y.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

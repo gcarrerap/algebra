@@ -27,12 +27,14 @@ CHIP_COLOR = {"P": "blue", "E": "purple", "MD": "yellow", "AS": "green", "SUB": 
               # lesson 0.2: one color per property (commutative = order, associative = grouping)
               "COMM": "blue", "ASSOC": "purple", "DIST": "yellow", "CALC": "green", "REWRITE": "ink",
               # lesson 0.3: the parts of an expression
-              "TERM": "blue", "FACTOR": "purple", "COEF": "yellow", "CONST": "green"}
+              "TERM": "blue", "FACTOR": "purple", "COEF": "yellow", "CONST": "green",
+              # lesson 0.4: collecting like terms (DIST stays yellow, as in 0.2)
+              "COMBINE": "green"}
 CHIP_NAME = {"P": "parentheses and groups", "E": "exponents", "MD": "multiply and divide",
              "AS": "add and subtract", "SUB": "substitute", "COMM": "commutative property",
              "ASSOC": "associative property", "DIST": "distributive property", "CALC": "calculate",
              "REWRITE": "rewrite", "TERM": "terms", "FACTOR": "factors", "COEF": "coefficient",
-             "CONST": "constant"}
+             "CONST": "constant", "COMBINE": "combine like terms"}
 PROPERTIES = {"Commutative": "blue", "Associative": "purple", "Distributive": "yellow"}
 # exact test points for expressions with variables: two expressions are treated as equal when they
 # agree at every point (all exercises are low-degree polynomials, so this cannot be fooled)
@@ -260,6 +262,18 @@ def factor_count(body):
     return n + sum(int(e or 1) for _, e in re.findall(r"([a-z])(?:\^(\d+))?", rest))
 
 
+def var_part(t):
+    """The variable part of one term as sorted (letter, power) pairs: 5xy and 2yx give the same one,
+    x and x^2 do not, a constant gives (). A term containing a group has no single variable part."""
+    body = _norm(t).lstrip("+-")
+    if re.search(GROUP, body):
+        raise ValueError(f"{t!r} contains a group")
+    powers = {}
+    for v, e in re.findall(r"([a-z])(?:\^(\d+))?", body):
+        powers[v] = powers.get(v, 0) + int(e or 1)
+    return tuple(sorted(powers.items()))
+
+
 def derive(q, spec):
     """The answer of a structural question, computed from the expression: terms · constant ·
     coef:<term> · factors:<term>."""
@@ -357,7 +371,8 @@ def check_claim(ex, item_text, claim, problems, what):
     claim "equals:<expr>"   → item equals <expr> for every value of the variables;
     claim "term-of:<expr>"  → item is one of the terms of <expr> (sign included);
     claim "terms:<n>"       → item has exactly <n> terms;
-    claim "coefficient:<n>" → item is one term whose coefficient is <n>."""
+    claim "coefficient:<n>" → item is one term whose coefficient is <n>;
+    claim "like:<term>"     → item is one term with the same variable part as <term> (a like term)."""
     i = ex["id"]
     kind, _, arg = claim.partition(":")
     try:
@@ -379,6 +394,12 @@ def check_claim(ex, item_text, claim, problems, what):
                 problems.append(f"{i}: {what} {item_text!r} is not a single term")
                 return None
             return term_parts(ts[0])["coef"] == int(_norm(arg))
+        if kind == "like":
+            ts = split_terms(item_text)
+            if len(ts) != 1:
+                problems.append(f"{i}: {what} {item_text!r} is not a single term")
+                return None
+            return var_part(ts[0]) == var_part(arg)
     except Exception as e:  # noqa: BLE001
         problems.append(f"{i}: {what} {item_text!r} cannot be evaluated: {e}")
         return None

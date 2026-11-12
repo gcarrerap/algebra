@@ -1,0 +1,75 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l04-ex11",
+  "title": "Exercise 11",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's look at this one. Which of these are equal to three x plus two? Choose all that apply.",
+          "display": "Select all the expressions equal to 3x + 2.",
+          "cue": "show-problem",
+          "pause_after_s": 1.5
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "One by one",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "x plus two x plus two. x plus two x is three x, so this is three x plus two. Equal.",
+          "display": "x + 2x + 2",
+          "cue": "option-1"
+        },
+        {
+          "id": "b03",
+          "text": "Two plus three x. The same terms in another order. Equal.",
+          "display": "2 + 3x",
+          "cue": "option-2"
+        },
+        {
+          "id": "b04",
+          "text": "Four x minus x plus one plus one. Four x minus x is three x, and one plus one is two. Equal.",
+          "display": "4x − x + 1 + 1",
+          "cue": "option-3"
+        },
+        {
+          "id": "b05",
+          "text": "Five x. This adds the two to the x term, but a constant is not like an x term. Not equal.",
+          "display": "5x",
+          "cue": "option-4"
+        },
+        {
+          "id": "b06",
+          "text": "Three times the quantity x plus two. That is three x plus six. Not equal.",
+          "display": "3(x + 2)",
+          "cue": "option-5"
+        },
+        {
+          "id": "b07",
+          "text": "Three x squared plus two. x squared is not x. Not equal.",
+          "display": "3x^2 + 2",
+          "cue": "option-6"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b08",
+          "text": "Three of them are equal to three x plus two: x plus two x plus two, two plus three x, and four x minus x plus one plus one. Combine like terms in each one and compare.",
+          "cue": "answer"
+        }
+      ]
+    }
+  ]
+}

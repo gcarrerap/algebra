@@ -1,0 +1,57 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l04-ex09",
+  "title": "Exercise 9",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Five times the quantity two a minus one, minus three times the quantity a minus two.",
+          "display": "5(2a − 1) − 3(a − 2)",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Distribute both parts. Five times the quantity two a minus one is ten a minus five. Negative three times the quantity a minus two is negative three a plus six.",
+          "display": "10a − 5 − 3a + 6",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Combine like terms. Ten a minus three a is seven a. Negative five plus six is one.",
+          "display": "7a + 1",
+          "cue": "step-2"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b04",
+          "text": "So the answer is seven a plus one.",
+          "display": "= 7a + 1",
+          "cue": "answer"
+        },
+        {
+          "id": "b05",
+          "text": "Watch out for these traps. If you make negative three times negative two negative six, you get seven a minus eleven. If you multiply only the a by negative three, you get seven a minus seven.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l04-ex08",
+  "title": "Exercise 8",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's look at this one. Match each expression with its simplified form.",
+          "display": "Match each expression with its simplified form.",
+          "cue": "show-problem",
+          "pause_after_s": 1.5
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Pair by pair",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Two x plus three x minus x. Two plus three minus one is four, so four x.",
+          "display": "2x + 3x − x → 4x",
+          "cue": "pair-1"
+        },
+        {
+          "id": "b03",
+          "text": "x plus x. One plus one is two, so two x.",
+          "display": "x + x → 2x",
+          "cue": "pair-2"
+        },
+        {
+          "id": "b04",
+          "text": "x times x. This is multiplication, not addition, so it is x squared.",
+          "display": "x · x → x^2",
+          "cue": "pair-3"
+        },
+        {
+          "id": "b05",
+          "text": "Five y minus five y plus y. Five minus five plus one is one, so just y.",
+          "display": "5y − 5y + y → y",
+          "cue": "pair-4"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b06",
+          "text": "Every expression now has its simplified form. Adding like terms adds coefficients; multiplying x by x makes x squared.",
+          "cue": "answer"
+        }
+      ]
+    }
+  ]
+}

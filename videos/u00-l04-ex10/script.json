@@ -1,0 +1,57 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l04-ex10",
+  "title": "Exercise 10",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. The opposite of the quantity four x minus seven, plus six x minus nine.",
+          "display": "−(4x − 7) + 6x − 9",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "The minus in front means negative one times the quantity. It changes both signs: negative four x plus seven.",
+          "display": "−4x + 7 + 6x − 9",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Now combine. Negative four x plus six x is two x. Seven minus nine is negative two.",
+          "display": "2x − 2",
+          "cue": "step-2"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b04",
+          "text": "So the answer is two x minus two.",
+          "display": "= 2x − 2",
+          "cue": "answer"
+        },
+        {
+          "id": "b05",
+          "text": "Watch out for these traps. If you change only the sign of four x, you get two x minus sixteen. If you ignore the minus in front, you get ten x minus sixteen.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

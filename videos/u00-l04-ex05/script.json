@@ -1,0 +1,69 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l04-ex05",
+  "title": "Exercise 5",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's look at this one. Which of these are like terms of four x y? Choose all that apply.",
+          "display": "Select all the like terms of 4xy.",
+          "cue": "show-problem",
+          "pause_after_s": 1.5
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "One by one",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Negative two x y. Same variable part, x y. A like term.",
+          "display": "−2xy",
+          "cue": "option-1"
+        },
+        {
+          "id": "b03",
+          "text": "y x. Multiplication is commutative, so y x is x y. A like term, with coefficient one.",
+          "display": "yx",
+          "cue": "option-2"
+        },
+        {
+          "id": "b04",
+          "text": "Four x. It has x, but no y. Not a like term.",
+          "display": "4x",
+          "cue": "option-3"
+        },
+        {
+          "id": "b05",
+          "text": "Four x squared y. The x is squared here, so the variable part is different. Not a like term.",
+          "display": "4x^2y",
+          "cue": "option-4"
+        },
+        {
+          "id": "b06",
+          "text": "Nine y. It has y, but no x. Not a like term.",
+          "display": "9y",
+          "cue": "option-5"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b07",
+          "text": "Two of them are like terms of four x y: negative two x y, and y x. Each has one x and one y, and the order of a product doesn't matter.",
+          "cue": "answer"
+        }
+      ]
+    }
+  ]
+}

@@ -20,7 +20,7 @@ Mathematics. Each unit lists the standards it covers.
    - **0.2.1** Commutative and associative properties — *video ≈ 4:18* (produced)
    - **0.2.2** Distributive property — *video ≈ 3:30* (produced)
 3. Parts of an expression: terms, factors, coefficients, constants — *video 3:20* (produced)
-4. Combining like terms and simplifying — *video ≈ 3:36*
+4. Combining like terms and simplifying — *video 3:22* (produced)
 5. Translating words into algebraic expressions — *video ≈ 3:15*
 
 ## Unit 1 — Linear Equations and Inequalities

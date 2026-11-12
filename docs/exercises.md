@@ -5,6 +5,7 @@ Each lesson can have a practice set. The first one is
 20 exercises in four levels (Warm-up, Tricky, Challenging, Boss level).
 
 Topic 0.3 (parts of an expression) has [`exercises/u00-l03/`](../exercises/u00-l03/) (14 exercises).
+Topic 0.4 (combining like terms) has [`exercises/u00-l04/`](../exercises/u00-l04/) (14 exercises).
 
 Topic 0.2 (properties of operations) has two subtopics, each with its own set:
 [`exercises/u00-l02-s1/`](../exercises/u00-l02-s1/) (0.2.1, commutative and associative, 10 exercises) and
@@ -17,10 +18,11 @@ Topic 0.2 (properties of operations) has two subtopics, each with its own set:
 | `num` + `derive` | Name a part of an expression: how many terms, the coefficient of a term, the constant, how many factors in a term (0.3). The answer is a typed number. | The answer is computed from `q` (`derive`: `terms` · `constant` · `coef:<term>` · `factors:<term>`); each wrong value names its mistake in `m` (`one`, `pieces`, `tokens`, `flat`, `variable-terms`, `distinct-vars`, `drop-sign`, `hidden-zero`, `constant`, `coef-of:<term>`, `sum-numbers`) and the build recomputes it. Steps, chips and `at` work as in 0.1; chips `TERM` blue, `FACTOR` purple, `COEF` yellow, `CONST` green. |
 | `expr` | Expand an expression, e.g. `−3(x + 4)`. | Every line, the answer and every wrong option are evaluated at six sets of values of the variables (`x`, `y`…); lines must match the question at all of them, wrong options must not match the answer or each other. |
 | `name` | Which property does an identity show? | Both sides must be equal, and the stated property must match the identity's shape (same order and same numbers = associative; same numbers in another order = commutative; otherwise distributive). The two other properties are the wrong options. |
-| `multi` | Select **all** that apply (4–6 options, at least one right and one wrong). | With `"check": "property:<Name>"`, `"equals:<expr>"`, `"term-of:<expr>"` (option is a term of `<expr>`, sign included), `"terms:<n>"` (option has exactly `<n>` terms) or `"coefficient:<n>"` (option is one term with coefficient `<n>`), every option's `ok` is verified with code. Each option has `t` (shown), `ok`, `why` (shown when it is picked wrongly) and `say` (narration in the video); the exercise has `prompt`, `read` and `say_answer`. |
+| `multi` | Select **all** that apply (4–6 options, at least one right and one wrong). | With `"check": "property:<Name>"`, `"equals:<expr>"`, `"term-of:<expr>"` (option is a term of `<expr>`, sign included), `"terms:<n>"` (option has exactly `<n>` terms) or `"coefficient:<n>"` (option is one term with coefficient `<n>`) or `"like:<term>"` (option is one term with the same variable part as `<term>`: `2yx` is like `5xy`, `x` is not like `x²`; 0.4), every option's `ok` is verified with code. Each option has `t` (shown), `ok`, `why` (shown when it is picked wrongly) and `say` (narration in the video); the exercise has `prompt`, `read` and `say_answer`. |
 | `match` | Match every left item with a right item (3–6 pairs; right items may repeat, to sort items into groups). | With `"check": "property"` (left = identity, right = its property), `"equal"` (left equals right, and equals no other right item) or `"coefficient"` (left = a term, right = its coefficient), every pair is verified with code. Each pair has `l`, `r`, `why`, `say`; the exercise has `prompt`, `read` and `say_answer`. |
 
 Property chips: **COMM blue · ASSOC purple · DIST yellow · CALC green · REWRITE white**.
+Like-terms chip (0.4): **COMBINE green**, next to DIST yellow.
 
 How it behaves:
 

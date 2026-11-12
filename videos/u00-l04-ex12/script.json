@@ -1,0 +1,57 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l04-ex12",
+  "title": "Exercise 12",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Two x squared plus three x minus five x squared plus x minus four.",
+          "display": "2x^2 + 3x − 5x^2 + x − 4",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Start with the x squared terms: two x squared and negative five x squared. Two minus five is negative three.",
+          "display": "−3x^2 + 3x + x − 4",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Next the x terms: three x and x, which is one x. Three plus one is four. Negative four has no like term, so it stays.",
+          "display": "−3x^2 + 4x − 4",
+          "cue": "step-2"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b04",
+          "text": "So the answer is negative three x squared plus four x minus four.",
+          "display": "= −3x^2 + 4x − 4",
+          "cue": "answer"
+        },
+        {
+          "id": "b05",
+          "text": "Watch out for these traps. If you forget the minus on five x squared, you get seven x squared plus four x minus four. If you skip the hidden one in front of x, you get negative three x squared plus three x minus four.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

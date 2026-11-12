@@ -1,0 +1,63 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l04-ex14",
+  "title": "Exercise 14",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Two times the quantity x squared minus three x, minus x times the quantity x minus four, plus five.",
+          "display": "2(x^2 − 3x) − x(x − 4) + 5",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Distribute. Two times the quantity x squared minus three x is two x squared minus six x. Negative x times the quantity x minus four is negative x squared plus four x.",
+          "display": "2x^2 − 6x − x^2 + 4x + 5",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "The x squared terms: two x squared minus x squared is x squared.",
+          "display": "x^2 − 6x + 4x + 5",
+          "cue": "step-2"
+        },
+        {
+          "id": "b04",
+          "text": "The x terms: negative six x plus four x is negative two x. Five stays as it is.",
+          "display": "x^2 − 2x + 5",
+          "cue": "step-3"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b05",
+          "text": "So the answer is x squared minus two x plus five.",
+          "display": "= x^2 − 2x + 5",
+          "cue": "answer"
+        },
+        {
+          "id": "b06",
+          "text": "Watch out for these traps. If you make negative x times negative four negative, you get x squared minus ten x plus five. If you ignore the minus in front of x times the quantity, you get three x squared minus ten x plus five.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

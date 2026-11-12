@@ -1,0 +1,131 @@
+{
+ "format": "algebra-video-script",
+ "version": 1,
+ "video": "u00-l04-like-terms",
+ "title": "Combining like terms",
+ "voice": "narrator",
+ "source": "video-scripts/u00.md#0.4",
+ "scenes": [
+  {
+   "id": "s01",
+   "title": "Apples and apples",
+   "blocks": [
+    {
+     "id": "b01",
+     "text": "Three apples plus two apples is five apples. But three apples plus two bananas is not five of anything. It just stays three apples plus two bananas."
+    },
+    {
+     "id": "b02",
+     "text": "Algebra works the same way. Three x plus two x is five x. But three x plus two y can't be combined.",
+     "display": "3x + 2x = 5x"
+    },
+    {
+     "id": "b03",
+     "text": "Terms that can be combined are called like terms. They have exactly the same variable part."
+    }
+   ]
+  },
+  {
+   "id": "s02",
+   "title": "What makes terms alike",
+   "blocks": [
+    {
+     "id": "b04",
+     "text": "Let's sort some pairs. Four a and negative seven a are like terms. Six and negative one are like terms too: they are both constants.",
+     "display": "4a, −7a"
+    },
+    {
+     "id": "b05",
+     "text": "Now x and x squared. They both have x. Are they like terms?",
+     "pause_after_s": 10.0
+    },
+    {
+     "id": "b06",
+     "text": "No. The exponents are different. If x is a length, x squared is an area. You can't add lengths and areas into one number of anything.",
+     "display": "x²"
+    },
+    {
+     "id": "b07",
+     "text": "And five x y and two y x are like terms, because multiplication is commutative: y x is the same as x y.",
+     "display": "5xy"
+    }
+   ]
+  },
+  {
+   "id": "s03",
+   "title": "Why adding coefficients works",
+   "blocks": [
+    {
+     "id": "b08",
+     "text": "Why can we just add the coefficients? It's the distributive property, read backwards. Three x plus two x equals the quantity three plus two, times x. That's five x.",
+     "display": "3x + 2x = (3 + 2)x = 5x"
+    },
+    {
+     "id": "b09",
+     "text": "It works with subtraction too. Seven y minus nine y is negative two y.",
+     "display": "7y − 9y = −2y"
+    }
+   ]
+  },
+  {
+   "id": "s04",
+   "title": "Simplifying step by step",
+   "blocks": [
+    {
+     "id": "b10",
+     "text": "Now a full simplification. Four times the quantity x minus two, minus three x, plus ten.",
+     "display": "4(x − 2) − 3x + 10"
+    },
+    {
+     "id": "b11",
+     "text": "Before you start, what must happen first, and why?",
+     "pause_after_s": 10.0
+    },
+    {
+     "id": "b12",
+     "text": "First distribute. Four times x is four x, and four times negative two is negative eight.",
+     "display": "4x − 8 − 3x + 10"
+    },
+    {
+     "id": "b13",
+     "text": "Now collect like terms, each with its sign. Four x minus three x is x. Negative eight plus ten is two. The simplified expression is x plus two.",
+     "display": "x + 2"
+    },
+    {
+     "id": "b14",
+     "text": "You can check by picking a number for x. If x is five, the original is seven, and x plus two is also seven.",
+     "display": "4(3) − 15 + 10 = 7"
+    }
+   ]
+  },
+  {
+   "id": "s05",
+   "title": "Your turn",
+   "blocks": [
+    {
+     "id": "b15",
+     "text": "Your turn. Simplify two times the quantity three a plus one, minus the quantity a minus four. Careful with the minus sign in front of the second parentheses. Pause the video and try it.",
+     "display": "2(3a + 1) − (a − 4)",
+     "pause_after_s": 15.0
+    },
+    {
+     "id": "b16",
+     "text": "Two times the quantity three a plus one is six a plus two. The minus in front means negative one times the quantity a minus four, which is negative a plus four. Six a minus a is five a, and two plus four is six. The answer is five a plus six.",
+     "display": "6a + 2 − a + 4"
+    },
+    {
+     "id": "b17",
+     "text": "Remember: like terms have the same variables with the same exponents, you combine them by adding their coefficients, and you distribute before you combine."
+    },
+    {
+     "id": "b18",
+     "text": "Next, translating words into expressions."
+    },
+    {
+     "id": "b19",
+     "text": "This video uses an AI-generated voice."
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,648 @@
+{
+ "unit": "0.4",
+ "title": "Combining Like Terms",
+ "h1": "Like terms, <span class=\"y\">combined</span>",
+ "levels": {
+  "1": "Warm-up",
+  "2": "Tricky",
+  "3": "Challenging",
+  "4": "Boss level"
+ },
+ "_notes": "Source of truth for the 0.4 practice set. \"expr\" answers are checked at several values of the variables, and the page also requires a finished form (no parentheses, no two like terms). \"multi\" uses check like:<term> (option is one term with the same variable part) and equals:<expr>; \"match\" uses check \"equal\". Chips: DIST yellow, COMBINE green. See docs/exercises.md.",
+ "exercises": [
+  {
+   "id": "ex01",
+   "level": 1,
+   "kind": "multi",
+   "prompt": "Select all the like terms of 5x.",
+   "read": "Which of these are like terms of five x? Choose all that apply.",
+   "check": "like:5x",
+   "say_answer": "Two of them are like terms of five x: negative three x and x. Like terms have exactly the same variable part. The number in front does not matter.",
+   "options": [
+    {
+     "t": "−3x",
+     "ok": true,
+     "why": "Same variable part, x. The coefficient doesn't matter.",
+     "say": "Negative three x. The variable part is x, the same as in five x. A like term."
+    },
+    {
+     "t": "x",
+     "ok": true,
+     "why": "x is 1x: same variable part as 5x.",
+     "say": "x. That is one x, with the same variable part. A like term."
+    },
+    {
+     "t": "5x^2",
+     "ok": false,
+     "why": "x² is not x: the exponents are different.",
+     "say": "Five x squared. Same number, but x squared is not x. The exponents are different, so it is not a like term."
+    },
+    {
+     "t": "5y",
+     "ok": false,
+     "why": "Different variable. The same coefficient doesn't make terms alike.",
+     "say": "Five y. It has the same number, but a different variable. Not a like term."
+    },
+    {
+     "t": "5",
+     "ok": false,
+     "why": "5 is a constant; it has no x at all.",
+     "say": "Five. This is a constant with no variable, so it is not like five x."
+    }
+   ]
+  },
+  {
+   "id": "ex02",
+   "level": 1,
+   "kind": "expr",
+   "prompt": "Simplify by combining like terms.",
+   "q": "7x + 4x",
+   "read": "Seven x plus four x.",
+   "a": "11x",
+   "a_read": "eleven x",
+   "lines": [
+    "⟨7x + 4x⟩",
+    "11x"
+   ],
+   "chips": [
+    "COMBINE"
+   ],
+   "say": [
+    "Both terms have x, so they are like terms. Add the coefficients: seven plus four is eleven, so eleven x."
+   ],
+   "at": [
+    "eleven#2"
+   ],
+   "wrong": [
+    {
+     "e": "11x^2",
+     "why": "Adding like terms keeps the variable part: x stays x; it does not become x².",
+     "say": "turn the x into x squared",
+     "read": "eleven x squared"
+    },
+    {
+     "e": "28x",
+     "why": "Combining adds the coefficients; it doesn't multiply them.",
+     "say": "multiply the coefficients",
+     "read": "twenty-eight x"
+    },
+    {
+     "e": "11",
+     "why": "The x is still there: 7 x's and 4 x's make 11 x's.",
+     "say": "drop the variable",
+     "read": "eleven"
+    }
+   ]
+  },
+  {
+   "id": "ex03",
+   "level": 1,
+   "kind": "expr",
+   "prompt": "Simplify by combining like terms.",
+   "q": "9y − 12y",
+   "read": "Nine y minus twelve y.",
+   "a": "−3y",
+   "a_read": "negative three y",
+   "lines": [
+    "⟨9y − 12y⟩",
+    "−3y"
+   ],
+   "chips": [
+    "COMBINE"
+   ],
+   "say": [
+    "These are like terms. Nine minus twelve is negative three, so negative three y."
+   ],
+   "at": [
+    "three"
+   ],
+   "wrong": [
+    {
+     "e": "3y",
+     "why": "9 − 12 is negative: you lost the sign.",
+     "say": "lose the minus sign",
+     "read": "three y"
+    },
+    {
+     "e": "21y",
+     "why": "The minus sign means subtract 12y, not add it.",
+     "say": "add the twelve instead of subtracting it",
+     "read": "twenty-one y"
+    },
+    {
+     "e": "−3",
+     "why": "The answer still has y: it is −3 y's.",
+     "say": "drop the variable",
+     "read": "negative three"
+    }
+   ]
+  },
+  {
+   "id": "ex04",
+   "level": 1,
+   "kind": "expr",
+   "prompt": "Simplify by combining like terms.",
+   "q": "6a + 5 − 2a + 3",
+   "read": "Six a plus five minus two a plus three.",
+   "a": "4a + 8",
+   "a_read": "four a plus eight",
+   "lines": [
+    "⟨6a⟩ + 5 ⟨− 2a⟩ + 3",
+    "4a + ⟨5 + 3⟩",
+    "4a + 8"
+   ],
+   "chips": [
+    "COMBINE",
+    "COMBINE"
+   ],
+   "say": [
+    "The a terms are six a and negative two a. Six minus two is four, so four a.",
+    "The constants are five and three. Five plus three is eight. A terms and constants are not alike, so we stop."
+   ],
+   "at": [
+    "four",
+    "eight"
+   ],
+   "wrong": [
+    {
+     "e": "12a",
+     "why": "Constants have no a, so they can't join the a terms.",
+     "say": "add every number into one a term",
+     "read": "twelve a"
+    },
+    {
+     "e": "8a + 8",
+     "why": "The minus sign belongs to 2a: 6a − 2a = 4a.",
+     "say": "forget the minus in front of two a",
+     "read": "eight a plus eight"
+    },
+    {
+     "e": "4a + 2",
+     "why": "5 and 3 are both added: 5 + 3 = 8.",
+     "say": "subtract the three instead of adding it",
+     "read": "four a plus two"
+    }
+   ]
+  },
+  {
+   "id": "ex05",
+   "level": 2,
+   "kind": "multi",
+   "prompt": "Select all the like terms of 4xy.",
+   "read": "Which of these are like terms of four x y? Choose all that apply.",
+   "check": "like:4xy",
+   "say_answer": "Two of them are like terms of four x y: negative two x y, and y x. Each has one x and one y, and the order of a product doesn't matter.",
+   "options": [
+    {
+     "t": "−2xy",
+     "ok": true,
+     "why": "Same variable part, xy.",
+     "say": "Negative two x y. Same variable part, x y. A like term."
+    },
+    {
+     "t": "yx",
+     "ok": true,
+     "why": "yx = xy, because multiplication is commutative.",
+     "say": "y x. Multiplication is commutative, so y x is x y. A like term, with coefficient one."
+    },
+    {
+     "t": "4x",
+     "ok": false,
+     "why": "It has x but no y. The whole variable part must match.",
+     "say": "Four x. It has x, but no y. Not a like term."
+    },
+    {
+     "t": "4x^2y",
+     "ok": false,
+     "why": "x² y is not x y: the power of x is different.",
+     "say": "Four x squared y. The x is squared here, so the variable part is different. Not a like term."
+    },
+    {
+     "t": "9y",
+     "ok": false,
+     "why": "It has y but no x.",
+     "say": "Nine y. It has y, but no x. Not a like term."
+    }
+   ]
+  },
+  {
+   "id": "ex06",
+   "level": 2,
+   "kind": "expr",
+   "prompt": "Simplify by combining like terms.",
+   "q": "3x^2 + 5x − x^2 + 2x",
+   "read": "Three x squared plus five x minus x squared plus two x.",
+   "a": "2x^2 + 7x",
+   "a_read": "two x squared plus seven x",
+   "lines": [
+    "⟨3x^2⟩ + 5x ⟨− x^2⟩ + 2x",
+    "2x^2 + ⟨5x + 2x⟩",
+    "2x^2 + 7x"
+   ],
+   "chips": [
+    "COMBINE",
+    "COMBINE"
+   ],
+   "say": [
+    "The x squared terms are three x squared and negative x squared, which has a coefficient of negative one. Three minus one is two, so two x squared.",
+    "The x terms are five x and two x. Five plus two is seven, so seven x. x squared and x are not like terms, so we stop here."
+   ],
+   "at": [
+    "two#2",
+    "seven"
+   ],
+   "wrong": [
+    {
+     "e": "9x^2",
+     "why": "x² and x are not like terms; they stay separate.",
+     "say": "combine the x squared terms with the x terms",
+     "read": "nine x squared"
+    },
+    {
+     "e": "4x^2 + 7x",
+     "why": "The minus sign belongs to x²: 3x² − x² = 2x².",
+     "say": "forget the minus in front of x squared",
+     "read": "four x squared plus seven x"
+    },
+    {
+     "e": "3x^2 + 6x",
+     "why": "−x² is an x² term; it can't be combined with the x terms.",
+     "say": "treat negative x squared as negative x",
+     "read": "three x squared plus six x"
+    }
+   ]
+  },
+  {
+   "id": "ex07",
+   "level": 2,
+   "kind": "expr",
+   "prompt": "Simplify by combining like terms.",
+   "q": "3(x + 4) + 2x",
+   "read": "Three times the quantity x plus four, plus two x.",
+   "a": "5x + 12",
+   "a_read": "five x plus twelve",
+   "lines": [
+    "⟨3(x + 4)⟩ + 2x",
+    "⟨3x⟩ + 12 ⟨+ 2x⟩",
+    "5x + 12"
+   ],
+   "chips": [
+    "DIST",
+    "COMBINE"
+   ],
+   "say": [
+    "Distribute first. Three times x is three x, and three times four is twelve.",
+    "Now combine the x terms. Three x plus two x is five x. Twelve has no like term, so it stays."
+   ],
+   "at": [
+    "twelve",
+    "five"
+   ],
+   "wrong": [
+    {
+     "e": "5x + 4",
+     "why": "The 3 multiplies both terms inside: 3 · 4 = 12.",
+     "say": "multiply only the x by three",
+     "read": "five x plus four"
+    },
+    {
+     "e": "5x + 7",
+     "why": "3(x + 4) means multiply by 3, not add 3.",
+     "say": "add three and four instead of multiplying",
+     "read": "five x plus seven"
+    },
+    {
+     "e": "17x",
+     "why": "12 is a constant; it can't join the x terms.",
+     "say": "combine the twelve with the x terms",
+     "read": "seventeen x"
+    }
+   ]
+  },
+  {
+   "id": "ex08",
+   "level": 2,
+   "kind": "match",
+   "prompt": "Match each expression with its simplified form.",
+   "read": "Match each expression with its simplified form.",
+   "check": "equal",
+   "say_answer": "Every expression now has its simplified form. Adding like terms adds coefficients; multiplying x by x makes x squared.",
+   "pairs": [
+    {
+     "l": "2x + 3x − x",
+     "r": "4x",
+     "why": "2 + 3 − 1 = 4.",
+     "say": "Two x plus three x minus x. Two plus three minus one is four, so four x."
+    },
+    {
+     "l": "x + x",
+     "r": "2x",
+     "why": "One x plus one x is two x.",
+     "say": "x plus x. One plus one is two, so two x."
+    },
+    {
+     "l": "x · x",
+     "r": "x^2",
+     "why": "Multiplying x by x gives x², not 2x.",
+     "say": "x times x. This is multiplication, not addition, so it is x squared."
+    },
+    {
+     "l": "5y − 5y + y",
+     "r": "y",
+     "why": "5 − 5 + 1 = 1, and 1y is y.",
+     "say": "Five y minus five y plus y. Five minus five plus one is one, so just y."
+    }
+   ]
+  },
+  {
+   "id": "ex09",
+   "level": 3,
+   "kind": "expr",
+   "prompt": "Simplify by combining like terms.",
+   "q": "5(2a − 1) − 3(a − 2)",
+   "read": "Five times the quantity two a minus one, minus three times the quantity a minus two.",
+   "a": "7a + 1",
+   "a_read": "seven a plus one",
+   "lines": [
+    "⟨5(2a − 1)⟩ ⟨− 3(a − 2)⟩",
+    "⟨10a − 5 − 3a + 6⟩",
+    "7a + 1"
+   ],
+   "chips": [
+    "DIST",
+    "COMBINE"
+   ],
+   "say": [
+    "Distribute both parts. Five times the quantity two a minus one is ten a minus five. Negative three times the quantity a minus two is negative three a plus six.",
+    "Combine like terms. Ten a minus three a is seven a. Negative five plus six is one."
+   ],
+   "at": [
+    "six",
+    "one"
+   ],
+   "wrong": [
+    {
+     "e": "7a − 11",
+     "why": "(−3) · (−2) is +6: negative times negative is positive.",
+     "say": "make negative three times negative two negative six",
+     "read": "seven a minus eleven"
+    },
+    {
+     "e": "7a − 7",
+     "why": "−3 must multiply the −2 as well, not just the a.",
+     "say": "multiply only the a by negative three",
+     "read": "seven a minus seven"
+    },
+    {
+     "e": "13a + 1",
+     "why": "The minus belongs to 3a: 10a − 3a = 7a.",
+     "say": "drop the minus in front of three a",
+     "read": "thirteen a plus one"
+    }
+   ]
+  },
+  {
+   "id": "ex10",
+   "level": 3,
+   "kind": "expr",
+   "prompt": "Simplify by combining like terms.",
+   "q": "−(4x − 7) + 6x − 9",
+   "read": "The opposite of the quantity four x minus seven, plus six x minus nine.",
+   "a": "2x − 2",
+   "a_read": "two x minus two",
+   "lines": [
+    "⟨−(4x − 7)⟩ + 6x − 9",
+    "⟨−4x + 7 + 6x − 9⟩",
+    "2x − 2"
+   ],
+   "chips": [
+    "DIST",
+    "COMBINE"
+   ],
+   "say": [
+    "The minus in front means negative one times the quantity. It changes both signs: negative four x plus seven.",
+    "Now combine. Negative four x plus six x is two x. Seven minus nine is negative two."
+   ],
+   "at": [
+    "seven",
+    "two#2"
+   ],
+   "wrong": [
+    {
+     "e": "2x − 16",
+     "why": "The minus in front changes the sign of −7 too: it becomes +7.",
+     "say": "change only the sign of four x",
+     "read": "two x minus sixteen"
+    },
+    {
+     "e": "10x − 16",
+     "why": "The minus in front changes both signs inside.",
+     "say": "ignore the minus in front",
+     "read": "ten x minus sixteen"
+    },
+    {
+     "e": "10x − 2",
+     "why": "The minus in front changes the sign of 4x too: it becomes −4x.",
+     "say": "change only the sign of the seven",
+     "read": "ten x minus two"
+    }
+   ]
+  },
+  {
+   "id": "ex11",
+   "level": 3,
+   "kind": "multi",
+   "prompt": "Select all the expressions equal to 3x + 2.",
+   "read": "Which of these are equal to three x plus two? Choose all that apply.",
+   "check": "equals:3x + 2",
+   "say_answer": "Three of them are equal to three x plus two: x plus two x plus two, two plus three x, and four x minus x plus one plus one. Combine like terms in each one and compare.",
+   "options": [
+    {
+     "t": "x + 2x + 2",
+     "ok": true,
+     "why": "x + 2x = 3x.",
+     "say": "x plus two x plus two. x plus two x is three x, so this is three x plus two. Equal."
+    },
+    {
+     "t": "2 + 3x",
+     "ok": true,
+     "why": "Same terms in another order: addition is commutative.",
+     "say": "Two plus three x. The same terms in another order. Equal."
+    },
+    {
+     "t": "4x − x + 1 + 1",
+     "ok": true,
+     "why": "4x − x = 3x and 1 + 1 = 2.",
+     "say": "Four x minus x plus one plus one. Four x minus x is three x, and one plus one is two. Equal."
+    },
+    {
+     "t": "5x",
+     "ok": false,
+     "why": "3x and 2 are not like terms; they can't become 5x.",
+     "say": "Five x. This adds the two to the x term, but a constant is not like an x term. Not equal."
+    },
+    {
+     "t": "3(x + 2)",
+     "ok": false,
+     "why": "3(x + 2) = 3x + 6, not 3x + 2.",
+     "say": "Three times the quantity x plus two. That is three x plus six. Not equal."
+    },
+    {
+     "t": "3x^2 + 2",
+     "ok": false,
+     "why": "x² is not x.",
+     "say": "Three x squared plus two. x squared is not x. Not equal."
+    }
+   ]
+  },
+  {
+   "id": "ex12",
+   "level": 3,
+   "kind": "expr",
+   "prompt": "Simplify by combining like terms.",
+   "q": "2x^2 + 3x − 5x^2 + x − 4",
+   "read": "Two x squared plus three x minus five x squared plus x minus four.",
+   "a": "−3x^2 + 4x − 4",
+   "a_read": "negative three x squared plus four x minus four",
+   "lines": [
+    "⟨2x^2⟩ + 3x ⟨− 5x^2⟩ + x − 4",
+    "−3x^2 + ⟨3x + x⟩ − 4",
+    "−3x^2 + 4x − 4"
+   ],
+   "chips": [
+    "COMBINE",
+    "COMBINE"
+   ],
+   "say": [
+    "Start with the x squared terms: two x squared and negative five x squared. Two minus five is negative three.",
+    "Next the x terms: three x and x, which is one x. Three plus one is four. Negative four has no like term, so it stays."
+   ],
+   "at": [
+    "three",
+    "four"
+   ],
+   "wrong": [
+    {
+     "e": "7x^2 + 4x − 4",
+     "why": "The minus belongs to 5x²: 2x² − 5x² = −3x².",
+     "say": "forget the minus on five x squared",
+     "read": "seven x squared plus four x minus four"
+    },
+    {
+     "e": "−3x^2 + 3x − 4",
+     "why": "x has a hidden coefficient of 1: 3x + x = 4x.",
+     "say": "skip the hidden one in front of x",
+     "read": "negative three x squared plus three x minus four"
+    },
+    {
+     "e": "x^2 − 4",
+     "why": "x² terms and x terms are not alike; keep them apart.",
+     "say": "combine the x squared terms with the x terms",
+     "read": "x squared minus four"
+    }
+   ]
+  },
+  {
+   "id": "ex13",
+   "level": 4,
+   "kind": "expr",
+   "prompt": "Simplify by combining like terms.",
+   "q": "3(2y − 1) − (y + 5) + 4(y − 2)",
+   "read": "Three times the quantity two y minus one, minus the quantity y plus five, plus four times the quantity y minus two.",
+   "a": "9y − 16",
+   "a_read": "nine y minus sixteen",
+   "lines": [
+    "⟨3(2y − 1) − (y + 5) + 4(y − 2)⟩",
+    "⟨6y⟩ − 3 ⟨− y⟩ − 5 ⟨+ 4y⟩ − 8",
+    "9y ⟨− 3 − 5 − 8⟩",
+    "9y − 16"
+   ],
+   "chips": [
+    "DIST",
+    "COMBINE",
+    "COMBINE"
+   ],
+   "say": [
+    "Distribute all three parts. Three times the quantity two y minus one is six y minus three. The minus sign changes both signs: negative y minus five. And four times the quantity y minus two is four y minus eight.",
+    "Collect the y terms: six y minus y plus four y. Six minus one plus four is nine, so nine y.",
+    "Now the constants: negative three, minus five, minus eight. Together that is negative sixteen."
+   ],
+   "at": [
+    "eight",
+    "nine",
+    "sixteen"
+   ],
+   "wrong": [
+    {
+     "e": "9y − 6",
+     "why": "The minus in front of (y + 5) changes the 5 too: it is −5.",
+     "say": "keep the five positive after the minus sign",
+     "read": "nine y minus six"
+    },
+    {
+     "e": "11y − 16",
+     "why": "The minus in front of (y + 5) changes the y too: it is −y.",
+     "say": "change only the sign of the five",
+     "read": "eleven y minus sixteen"
+    },
+    {
+     "e": "9y − 10",
+     "why": "4 multiplies both terms in (y − 2): 4 · (−2) = −8.",
+     "say": "multiply only the y by four",
+     "read": "nine y minus ten"
+    }
+   ]
+  },
+  {
+   "id": "ex14",
+   "level": 4,
+   "kind": "expr",
+   "prompt": "Simplify by combining like terms.",
+   "q": "2(x^2 − 3x) − x(x − 4) + 5",
+   "read": "Two times the quantity x squared minus three x, minus x times the quantity x minus four, plus five.",
+   "a": "x^2 − 2x + 5",
+   "a_read": "x squared minus two x plus five",
+   "lines": [
+    "⟨2(x^2 − 3x)⟩ ⟨− x(x − 4)⟩ + 5",
+    "⟨2x^2⟩ − 6x ⟨− x^2⟩ + 4x + 5",
+    "x^2 ⟨− 6x + 4x⟩ + 5",
+    "x^2 − 2x + 5"
+   ],
+   "chips": [
+    "DIST",
+    "COMBINE",
+    "COMBINE"
+   ],
+   "say": [
+    "Distribute. Two times the quantity x squared minus three x is two x squared minus six x. Negative x times the quantity x minus four is negative x squared plus four x.",
+    "The x squared terms: two x squared minus x squared is x squared.",
+    "The x terms: negative six x plus four x is negative two x. Five stays as it is."
+   ],
+   "at": [
+    "four#2",
+    "squared#4",
+    "two"
+   ],
+   "wrong": [
+    {
+     "e": "x^2 − 10x + 5",
+     "why": "(−x) · (−4) is +4x: negative times negative is positive.",
+     "say": "make negative x times negative four negative",
+     "read": "x squared minus ten x plus five"
+    },
+    {
+     "e": "3x^2 − 10x + 5",
+     "why": "The minus in front of x(x − 4) changes both of its terms.",
+     "say": "ignore the minus in front of x times the quantity",
+     "read": "three x squared minus ten x plus five"
+    },
+    {
+     "e": "3x^2 − 2x + 5",
+     "why": "(−x) · x is −x², so 2x² − x² = x².",
+     "say": "lose the sign of negative x times x",
+     "read": "three x squared minus two x plus five"
+    }
+   ]
+  }
+ ]
+}

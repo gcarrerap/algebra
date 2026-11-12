@@ -1,0 +1,57 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l04-ex04",
+  "title": "Exercise 4",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Six a plus five minus two a plus three.",
+          "display": "6a + 5 − 2a + 3",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "The a terms are six a and negative two a. Six minus two is four, so four a.",
+          "display": "4a + 5 + 3",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "The constants are five and three. Five plus three is eight. A terms and constants are not alike, so we stop.",
+          "display": "4a + 8",
+          "cue": "step-2"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b04",
+          "text": "So the answer is four a plus eight.",
+          "display": "= 4a + 8",
+          "cue": "answer"
+        },
+        {
+          "id": "b05",
+          "text": "Watch out for these traps. If you add every number into one a term, you get twelve a. If you forget the minus in front of two a, you get eight a plus eight.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

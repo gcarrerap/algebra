@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Combining Like Terms</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="../_engine/player.css">
+<style>
+  /* Lesson 0.4 colors: variable terms blue · constants green · distribute yellow · "not like" red. */
+  .tag { font: 700 30px Inter, sans-serif; letter-spacing: 0.1em; text-transform: uppercase; }
+  .fruit { font: 400 76px/1 "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", sans-serif; letter-spacing: -0.04em; }
+  .op { font: 600 64px Poppins, sans-serif; color: var(--muted); margin: 0 14px; }
+  .pairs { display: grid; grid-template-columns: 820px 640px; gap: 70px 90px; align-items: center; }
+  .pairs .cellr { display: flex; align-items: center; }
+  .sortboard { display: grid; grid-template-columns: 500px 700px 500px; gap: 40px; align-items: start; height: 700px; padding-top: 30px; }
+  .bin { border: 3px dashed var(--line); border-radius: 28px; padding: 26px 20px; min-height: 560px; display: flex; flex-direction: column; align-items: center; gap: 30px; }
+  .bin .head { font: 700 32px Inter, sans-serif; letter-spacing: 0.12em; text-transform: uppercase; }
+  .center { display: grid; place-items: center; height: 600px; }
+  .center > * { grid-area: 1 / 1; }
+  .seg { width: 180px; height: 12px; background: var(--blue); border-radius: 6px; }
+  .sq { width: 180px; height: 180px; background: color-mix(in srgb, var(--purple) 30%, transparent); border: 5px solid var(--purple); border-radius: 6px; }
+  .shape { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+  .shape .lbl { font: 600 44px Poppins, sans-serif; }
+  .steps { display: flex; flex-direction: column; align-items: flex-start; gap: 34px; }
+  .stepline { display: flex; align-items: center; gap: 30px; }
+  .check .card { padding: 30px 40px; gap: 18px; align-items: flex-start; }
+  .recap .card { width: 1300px; padding: 36px 56px; gap: 18px; align-items: stretch; }
+  .recap .line { display: grid; grid-template-columns: 330px 1fr; gap: 28px; align-items: baseline; }
+  .recap .name { font: 700 44px Poppins, sans-serif; }
+  .recap .what { font: 500 34px Inter, sans-serif; color: var(--ink); }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="header"><span class="unit">Unit 0 · Lesson 4</span><span class="title">Combining Like Terms</span></div>
+
+  <!-- s01: apples and apples -->
+  <section class="scene" data-scene="s01">
+    <div class="col" style="gap: 70px">
+      <div class="pairs">
+        <div class="row fade" data-at="b01" style="gap: 0; justify-content: flex-start">
+          <span class="fruit">🍎🍎🍎</span><span class="op">+</span><span class="fruit">🍎🍎</span>
+          <span class="op fade" data-at="b01@five">=</span><span class="math sm green fade" data-at="b01@five">5 🍎</span>
+        </div>
+        <div class="cellr">
+          <div class="math sm fade" data-at="b02@algebra">
+            <span class="tint c-blue" data-at="b02@algebra">3x</span> + <span class="tint c-blue" data-at="b02@algebra">2x</span>
+            <span class="fade" data-at="b02@five">= <span class="green">5x</span></span>
+          </div>
+        </div>
+        <div class="row fade" data-at="b01@bananas" style="gap: 0; justify-content: flex-start">
+          <span class="fruit">🍎🍎🍎</span><span class="op">+</span><span class="fruit">🍌🍌</span>
+          <span class="op red fade" data-at="b01@anything">≠</span><span class="math sm red fade" data-at="b01@anything">5 ?</span>
+        </div>
+        <div class="cellr">
+          <div class="math sm fade" data-at="b02@but">
+            <span class="tint c-blue" data-at="b02@but">3x</span> + <span class="tint c-purple" data-at="b02@but">2y</span>
+            <span class="tag red fade" data-at="b02@combined" style="margin-left: 30px">can't combine</span>
+          </div>
+        </div>
+      </div>
+      <div class="say fade" data-at="b03@like"><span class="yellow">Like terms</span> have exactly the same variable part.</div>
+    </div>
+  </section>
+
+  <!-- s02: what makes terms alike -->
+  <section class="scene" data-scene="s02">
+    <div class="sortboard">
+      <div class="bin fade" data-at="b04" style="border-color: color-mix(in srgb, var(--green) 55%, transparent)">
+        <div class="head green">like</div>
+        <div class="math xs pop" data-at="b04@four">4a, −7a</div>
+        <div class="math xs pop" data-at="b04@six">6, −1</div>
+        <div class="math xs pop" data-at="b07@like">5xy, 2yx</div>
+      </div>
+      <div class="center">
+        <div class="col fade" data-at="b05" data-out="b06@exponents">
+          <div class="math md">x <span class="muted">and</span> x²</div>
+          <div class="math yellow fade" data-at="b05@like">?</div>
+          <div class="row" style="gap: 40px">
+            <div class="say fade yellow" data-at="b05.end" data-out="b06">Like terms?</div>
+            <div class="timer" data-at="b05.end" data-out="b06"></div>
+          </div>
+        </div>
+        <div class="col fade" data-at="b06@length" data-out="b07">
+          <div class="row" style="gap: 120px; align-items: flex-end">
+            <div class="shape fade" data-at="b06@length"><div class="seg"></div><div class="lbl blue">x · a length</div></div>
+            <div class="shape fade" data-at="b06@area"><div class="sq"></div><div class="lbl purple">x² · an area</div></div>
+          </div>
+          <div class="say fade muted" data-at="b06@can't" style="font-size: 40px">Lengths and areas don't add into one kind of thing.</div>
+        </div>
+        <div class="col fade" data-at="b07">
+          <div class="math md">5xy <span class="muted">and</span> 2yx</div>
+          <div class="math sm fade" data-at="b07@commutative">yx = xy</div>
+          <div class="tag blue fade" data-at="b07@commutative">multiplication is commutative</div>
+        </div>
+      </div>
+      <div class="bin fade" data-at="b04" style="border-color: color-mix(in srgb, var(--red) 55%, transparent)">
+        <div class="head red">not like</div>
+        <div class="math xs pop" data-at="b06@exponents">x, x²</div>
+        <div class="say fade red" data-at="b06@exponents" style="font-size: 30px">different exponents</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- s03: why adding coefficients works -->
+  <section class="scene" data-scene="s03">
+    <div class="col" style="gap: 70px">
+      <div class="math md fade" data-at="b08">
+        <span class="tint c-yellow" data-at="b08@coefficients">3</span>x + <span class="tint c-yellow" data-at="b08@coefficients">2</span>x
+        <span class="fade" data-at="b08@quantity">= (<span class="yellow">3 + 2</span>)<span class="hl c-blue" data-at="b08@times">x</span></span>
+        <span class="fade" data-at="b08@five">= <span class="green">5x</span></span>
+      </div>
+      <div class="tag yellow fade" data-at="b08@backwards">the distributive property, read backwards</div>
+      <div class="math md fade" data-at="b09">
+        <span class="tint c-yellow" data-at="b09@nine">7</span>y − <span class="tint c-yellow" data-at="b09@nine">9</span>y
+        <span class="fade" data-at="b09@nine">= (<span class="yellow">7 − 9</span>)y</span>
+        <span class="fade" data-at="b09@negative">= <span class="green">−2y</span></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- s04: simplifying step by step -->
+  <section class="scene" data-scene="s04">
+    <div class="row" style="gap: 110px; align-items: center">
+      <div class="steps">
+        <div class="stepline fade" data-at="b10">
+          <div class="math sm"><span class="hl c-blue" data-at="b11.end">4(x − 2)</span> − 3x + 10</div>
+        </div>
+        <div class="stack" style="justify-items: start">
+        <div class="row fade" data-at="b11.end" data-out="b12" style="gap: 36px">
+          <div class="say yellow" style="font-size: 40px">What must happen first, and why?</div>
+          <div class="timer" data-at="b11.end" data-out="b12"></div>
+        </div>
+        <div class="stepline fade" data-at="b12@distribute">
+          <span class="chip c-yellow">DIST</span>
+          <div class="math sm">
+            <span class="fade" data-at="b12@four#2"><span class="tint c-blue" data-at="b13@collect">4x</span></span>
+            <span class="fade" data-at="b12@eight"><span class="tint c-green" data-at="b13@collect">− 8</span></span>
+            <span class="tint c-blue" data-at="b13@collect">− 3x</span>
+            <span class="tint c-green" data-at="b13@collect">+ 10</span>
+          </div>
+        </div>
+        </div>
+        <div class="stepline fade" data-at="b13@x#3">
+          <span class="chip c-green">COMBINE</span>
+          <div class="math sm"><span class="blue">x</span> <span class="fade" data-at="b13@two"><span class="green">+ 2</span></span></div>
+          <span class="tag yellow fade" data-at="b13@simplified">simplified</span>
+        </div>
+      </div>
+      <div class="check fade" data-at="b14">
+        <div class="card c-green glow" data-at="b14@seven#2">
+          <div class="label muted">Check with <span class="yellow">x = 5</span></div>
+          <div class="math xs fade" data-at="b14@five">4(5 − 2) − 15 + 10</div>
+          <div class="math xs fade" data-at="b14@seven">= 4(3) − 15 + 10 = <span class="green">7</span></div>
+          <div class="math xs fade" data-at="b14@seven#2">x + 2 = 5 + 2 = <span class="green">7</span> ✓</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- s05: your turn + recap -->
+  <section class="scene" data-scene="s05">
+    <div class="layer fade" data-at="b15-0.5" data-out="b17" style="gap: 34px">
+      <div class="label yellow pop" data-at="b15" style="font-size: 34px">★ Your turn · simplify</div>
+      <div class="row" style="gap: 48px">
+        <div class="math md pop" data-at="b15">2(3a + 1) <span class="hl c-red" data-at="b15@careful">−</span> (a − 4)</div>
+        <div class="timer" data-at="b15.end" data-out="b16"></div>
+      </div>
+      <div class="steps" style="align-items: center">
+        <div class="stack">
+          <div class="say fade muted" data-at="b15@pause" data-out="b16">⏸ Pause the video and try it</div>
+          <div class="math xs fade" data-at="b16@one#2"><span class="red">−</span>(a − 4) = <span class="red">−1</span>(a − 4) <span class="fade" data-at="b16@four#2">= −a + 4</span></div>
+        </div>
+        <div class="math sm fade" data-at="b16@two#2">
+          6a + 2 <span class="fade" data-at="b16@four#2">− a + 4</span>
+          <span class="fade" data-at="b16@answer">= <span class="blue">5a</span> <span class="green">+ 6</span></span>
+        </div>
+      </div>
+    </div>
+    <div class="layer fade recap" data-at="b17">
+      <div class="card pop c-blue glow" data-at="b17">
+        <div class="line"><div class="name blue">Like terms</div><div class="what">same variables with the same exponents</div></div>
+        <div class="line"><div class="name green">Combine</div><div class="what">add their coefficients; the variable part stays</div></div>
+        <div class="line"><div class="name yellow">Order</div><div class="what">distribute first, then combine, keeping each sign</div></div>
+      </div>
+      <div class="say fade muted" data-at="b18" style="font-size: 38px">Next: <span style="color: var(--ink)">Translating Words into Expressions</span></div>
+      <div class="label fade muted" data-at="b19" style="font-size: 22px; font-weight: 500">This video uses an AI-generated voice.</div>
+    </div>
+  </section>
+
+  <div class="caption"></div>
+  <div class="progress"></div>
+  <div id="seek" title="Jump to a moment"></div>
+  <button id="play" type="button" aria-label="Play"><span class="play-btn">▶</span><span class="play-label">Watch the lesson</span></button>
+</div>
+<script src="../_engine/player.js"></script>
+</body>
+</html>

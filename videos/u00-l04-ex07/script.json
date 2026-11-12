@@ -1,0 +1,57 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l04-ex07",
+  "title": "Exercise 7",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Three times the quantity x plus four, plus two x.",
+          "display": "3(x + 4) + 2x",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Distribute first. Three times x is three x, and three times four is twelve.",
+          "display": "3x + 12 + 2x",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Now combine the x terms. Three x plus two x is five x. Twelve has no like term, so it stays.",
+          "display": "5x + 12",
+          "cue": "step-2"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b04",
+          "text": "So the answer is five x plus twelve.",
+          "display": "= 5x + 12",
+          "cue": "answer"
+        },
+        {
+          "id": "b05",
+          "text": "Watch out for these traps. If you multiply only the x by three, you get five x plus four. If you add three and four instead of multiplying, you get five x plus seven.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

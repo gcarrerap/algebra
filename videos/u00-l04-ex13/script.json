@@ -1,0 +1,63 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l04-ex13",
+  "title": "Exercise 13",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Three times the quantity two y minus one, minus the quantity y plus five, plus four times the quantity y minus two.",
+          "display": "3(2y − 1) − (y + 5) + 4(y − 2)",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Distribute all three parts. Three times the quantity two y minus one is six y minus three. The minus sign changes both signs: negative y minus five. And four times the quantity y minus two is four y minus eight.",
+          "display": "6y − 3 − y − 5 + 4y − 8",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Collect the y terms: six y minus y plus four y. Six minus one plus four is nine, so nine y.",
+          "display": "9y − 3 − 5 − 8",
+          "cue": "step-2"
+        },
+        {
+          "id": "b04",
+          "text": "Now the constants: negative three, minus five, minus eight. Together that is negative sixteen.",
+          "display": "9y − 16",
+          "cue": "step-3"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b05",
+          "text": "So the answer is nine y minus sixteen.",
+          "display": "= 9y − 16",
+          "cue": "answer"
+        },
+        {
+          "id": "b06",
+          "text": "Watch out for these traps. If you keep the five positive after the minus sign, you get nine y minus six. If you change only the sign of the five, you get eleven y minus sixteen.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}
