@@ -1,0 +1,69 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l02-s1-ex03",
+  "title": "Exercise 3",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Twenty-five times thirteen times four.",
+          "display": "25 × 13 × 4",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Twenty-five and four make one hundred, so let's put them together. The commutative property lets us swap the thirteen and the four.",
+          "display": "25 × 4 × 13",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "The associative property lets us group the twenty-five with the four.",
+          "display": "(25 × 4) × 13",
+          "cue": "step-2"
+        },
+        {
+          "id": "b04",
+          "text": "Twenty-five times four is one hundred.",
+          "display": "100 × 13",
+          "cue": "step-3"
+        },
+        {
+          "id": "b05",
+          "text": "One hundred times thirteen is one thousand three hundred.",
+          "display": "1300",
+          "cue": "step-4"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b06",
+          "text": "So the answer is one thousand three hundred.",
+          "display": "= 1300",
+          "cue": "answer"
+        },
+        {
+          "id": "b07",
+          "text": "Watch out for these traps. If you add twenty-five and four, you get three hundred seventy-seven. If you add the thirteen at the end, you get one hundred thirteen.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

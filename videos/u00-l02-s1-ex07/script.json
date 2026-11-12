@@ -1,0 +1,57 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l02-s1-ex07",
+  "title": "Exercise 7",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's look at this one. Five times the quantity two times x equals the quantity five times two, times x. Which property does it show?",
+          "display": "5(2 · x) = (5 · 2)x",
+          "cue": "show-problem",
+          "pause_after_s": 1.5
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "What changed",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "There are parentheses next to a number, but look inside. There is no sum, only multiplication.",
+          "display": "5(2 · x) = (5 · 2)x",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "The factors keep their order: five, two, x. Only the grouping changed. That's the associative property, and both sides are ten x.",
+          "display": "10x = 10x",
+          "cue": "step-2"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b04",
+          "text": "So the answer is the associative property.",
+          "display": "Associative",
+          "cue": "answer"
+        },
+        {
+          "id": "b05",
+          "text": "Watch out for these traps. It isn't the distributive property, because there is no sum inside the parentheses. It isn't the commutative property, because the factors stay in the same order.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

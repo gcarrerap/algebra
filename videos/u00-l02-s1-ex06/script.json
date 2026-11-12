@@ -1,0 +1,69 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l02-s1-ex06",
+  "title": "Exercise 6",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's look at this one. Which of these show the associative property? Choose all that apply.",
+          "display": "Select all the identities that show the associative property.",
+          "cue": "show-problem",
+          "pause_after_s": 1.5
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "One by one",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Four plus seven, then plus three, equals four plus the quantity seven plus three. The order stays the same. Only the parentheses moved. That is associative.",
+          "display": "(4 + 7) + 3 = 4 + (7 + 3)",
+          "cue": "option-1"
+        },
+        {
+          "id": "b03",
+          "text": "Six plus y equals y plus six. The terms swap places. That is commutative, not associative.",
+          "display": "6 + y = y + 6",
+          "cue": "option-2"
+        },
+        {
+          "id": "b04",
+          "text": "Two times the quantity five times x equals the quantity two times five, times x. Same order, new grouping. Associative.",
+          "display": "2 · (5 · x) = (2 · 5) · x",
+          "cue": "option-3"
+        },
+        {
+          "id": "b05",
+          "text": "Careful with this one. The parentheses did not move. Inside them, x and two swapped places. That is commutative.",
+          "display": "(x + 2) + 9 = (2 + x) + 9",
+          "cue": "option-4"
+        },
+        {
+          "id": "b06",
+          "text": "Three times the quantity x plus one equals three x plus three. That multiplies across a sum. It is distributive.",
+          "display": "3(x + 1) = 3x + 3",
+          "cue": "option-5"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b07",
+          "text": "So two of them show the associative property: the numbers stay in the same order, and only the grouping changes.",
+          "cue": "answer"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,646 @@
+{
+  "unit": "0.2.2",
+  "title": "The Distributive Property",
+  "h1": "The distributive property, <span class=\"y\">put to work</span>",
+  "levels": {
+    "1": "Warm-up",
+    "2": "Tricky",
+    "3": "Challenging",
+    "4": "Boss level"
+  },
+  "_notes": "Source of truth for the 0.2.2 practice set. Kinds: \"num\" (default; same as 0.1, the answer is a number), \"expr\" (the answer is an expression: a = answer, a_read = how it is said; every line and option is checked at several values of the variables; each wrong option has read = how it is said) and \"name\" (which property an identity shows: show/say/notes are one block each, ⟨…⟩ in show is highlighted; wrong = the other two properties). Implied multiplication (3x, 2(x + 1), x(x + 5)) and · are allowed. Chips: COMM blue, ASSOC purple, DIST yellow, CALC green, REWRITE white. Also \"multi\" (select all that apply) and \"match\" (match pairs): see docs/exercises.md.",
+  "exercises": [
+    {
+      "id": "ex01",
+      "level": 1,
+      "kind": "name",
+      "prompt": "Which property is shown?",
+      "q": "4(x + 3) = 4x + 12",
+      "read": "Four times the quantity x plus three equals four x plus twelve.",
+      "a": "Distributive",
+      "show": [
+        "⟨4⟩(x + 3) = ⟨4⟩x + ⟨4⟩ · 3",
+        "4(x + 3) = 4x + 12"
+      ],
+      "say": [
+        "The four outside is multiplied by each term inside: four times x, and four times three.",
+        "Four times three is twelve. Multiplying across a sum is the distributive property."
+      ],
+      "notes": [
+        "The 4 reaches <b>every term</b>",
+        "4 · 3 = 12"
+      ],
+      "wrong": [
+        {
+          "a": "Commutative",
+          "why": "Nothing just traded places: the 4 multiplied each term of a sum.",
+          "say": "no two terms just trade places"
+        },
+        {
+          "a": "Associative",
+          "why": "Associative only moves parentheses. Here they disappear because the 4 multiplied each term.",
+          "say": "the parentheses don't just move"
+        }
+      ]
+    },
+    {
+      "id": "ex02",
+      "level": 1,
+      "kind": "expr",
+      "prompt": "Use the distributive property to expand.",
+      "q": "5(x + 2)",
+      "read": "Five times the quantity x plus two.",
+      "a": "5x + 10",
+      "a_read": "five x plus ten",
+      "lines": [
+        "⟨5(x + 2)⟩",
+        "⟨5 · x + 5 · 2⟩",
+        "5x + 10"
+      ],
+      "chips": [
+        "DIST",
+        "CALC"
+      ],
+      "say": [
+        "The five outside multiplies every term inside. Five times x, plus five times two.",
+        "Five times x is five x, and five times two is ten."
+      ],
+      "at": [
+        "two",
+        "ten"
+      ],
+      "wrong": [
+        {
+          "e": "5x + 2",
+          "why": "You multiplied only the x by 5. The 2 needs it too.",
+          "say": "multiply only the x",
+          "read": "five x plus two"
+        },
+        {
+          "e": "5x + 7",
+          "why": "You added 5 + 2 instead of multiplying.",
+          "say": "add five and two",
+          "read": "five x plus seven"
+        },
+        {
+          "e": "x + 10",
+          "why": "You multiplied only the 2 by 5.",
+          "say": "multiply only the two",
+          "read": "x plus ten"
+        }
+      ]
+    },
+    {
+      "id": "ex03",
+      "level": 2,
+      "kind": "expr",
+      "prompt": "Use the distributive property to expand.",
+      "q": "−3(x + 4)",
+      "read": "Negative three times the quantity x plus four.",
+      "a": "−3x − 12",
+      "a_read": "negative three x minus twelve",
+      "lines": [
+        "⟨−3(x + 4)⟩",
+        "⟨(−3) · x + (−3) · 4⟩",
+        "−3x − 12"
+      ],
+      "chips": [
+        "DIST",
+        "CALC"
+      ],
+      "say": [
+        "Distribute the negative three to both terms, sign included. Negative three times x, plus negative three times four.",
+        "Negative three times x is negative three x. Negative three times four is negative twelve, so we subtract twelve."
+      ],
+      "at": [
+        "four",
+        "twelve"
+      ],
+      "wrong": [
+        {
+          "e": "−3x + 12",
+          "why": "−3 · 4 is −12, not +12. The negative sign goes along.",
+          "say": "lose the sign on the twelve",
+          "read": "negative three x plus twelve"
+        },
+        {
+          "e": "−3x + 4",
+          "why": "You multiplied only the x by −3.",
+          "say": "multiply only the x",
+          "read": "negative three x plus four"
+        },
+        {
+          "e": "3x + 12",
+          "why": "You dropped the negative sign completely.",
+          "say": "drop the negative sign",
+          "read": "three x plus twelve"
+        }
+      ]
+    },
+    {
+      "id": "ex04",
+      "level": 2,
+      "kind": "expr",
+      "prompt": "Use the distributive property to expand.",
+      "q": "7(2x − 1)",
+      "read": "Seven times the quantity two x minus one.",
+      "a": "14x − 7",
+      "a_read": "fourteen x minus seven",
+      "lines": [
+        "⟨7(2x − 1)⟩",
+        "⟨7 · 2x − 7 · 1⟩",
+        "14x − 7"
+      ],
+      "chips": [
+        "DIST",
+        "CALC"
+      ],
+      "say": [
+        "Seven multiplies both terms: seven times two x, minus seven times one.",
+        "Seven times two x is fourteen x. Seven times one is seven."
+      ],
+      "at": [
+        "one",
+        "seven#3"
+      ],
+      "wrong": [
+        {
+          "e": "14x − 1",
+          "why": "You multiplied only the 2x by 7.",
+          "say": "multiply only the two x",
+          "read": "fourteen x minus one"
+        },
+        {
+          "e": "9x − 7",
+          "why": "You added 7 + 2 instead of multiplying 7 · 2x.",
+          "say": "add seven and two",
+          "read": "nine x minus seven"
+        },
+        {
+          "e": "14x + 7",
+          "why": "7 · (−1) is −7. The minus sign stays.",
+          "say": "turn the minus into a plus",
+          "read": "fourteen x plus seven"
+        }
+      ]
+    },
+    {
+      "id": "ex05",
+      "level": 2,
+      "prompt": "Use the distributive property to find the value.",
+      "q": "8 × 102",
+      "read": "Eight times one hundred two.",
+      "lines": [
+        "8 × ⟨102⟩",
+        "⟨8 × (100 + 2)⟩",
+        "⟨8 × 100 + 8 × 2⟩",
+        "⟨800 + 16⟩",
+        "816"
+      ],
+      "chips": [
+        "REWRITE",
+        "DIST",
+        "CALC",
+        "CALC"
+      ],
+      "say": [
+        "One hundred two is one hundred plus two.",
+        "Eight multiplies both parts: eight times one hundred, plus eight times two.",
+        "Eight times one hundred is eight hundred. Eight times two is sixteen.",
+        "Eight hundred plus sixteen is eight hundred sixteen."
+      ],
+      "at": [
+        "two#2",
+        "two",
+        "sixteen",
+        "sixteen#2"
+      ],
+      "wrong": [
+        {
+          "e": "8 × 100 + 2",
+          "why": "You multiplied only the 100 by 8.",
+          "say": "multiply only the hundred"
+        },
+        {
+          "e": "8 × 100 × 2",
+          "why": "You multiplied 100 by 2 instead of adding the parts.",
+          "say": "multiply the parts instead of adding them"
+        },
+        {
+          "e": "8 × 10 + 8 × 2",
+          "why": "102 is 100 + 2, not 10 + 2.",
+          "say": "split one hundred two into ten and two"
+        }
+      ]
+    },
+    {
+      "id": "ex06",
+      "kind": "multi",
+      "level": 2,
+      "prompt": "Select all the expressions that equal 4(x − 3).",
+      "read": "Which of these are equal to four times the quantity x minus three? Choose all that apply.",
+      "check": "equals:4(x − 3)",
+      "say_answer": "So three of them are equal. Four times x is four x, and four times negative three is negative twelve, in any order.",
+      "options": [
+        {
+          "t": "4x − 12",
+          "ok": true,
+          "why": "4 · x = 4x and 4 · (−3) = −12.",
+          "say": "Four x minus twelve. Four times x is four x, and four times negative three is negative twelve. Equal."
+        },
+        {
+          "t": "4x − 3",
+          "ok": false,
+          "why": "Only the x was multiplied by 4; the 3 needs it too.",
+          "say": "Four x minus three. Here only the x was multiplied by four. The three needs it too. Not equal."
+        },
+        {
+          "t": "−12 + 4x",
+          "ok": true,
+          "why": "The same two terms in another order.",
+          "say": "Negative twelve plus four x. The same two terms in another order. Equal."
+        },
+        {
+          "t": "4x + 12",
+          "ok": false,
+          "why": "The sign: 4 times −3 is −12, not +12.",
+          "say": "Four x plus twelve. The sign is wrong. Four times negative three is negative twelve. Not equal."
+        },
+        {
+          "t": "x · 4 − 3 · 4",
+          "ok": true,
+          "why": "Each term times 4, before calculating.",
+          "say": "x times four, minus three times four. Each term is multiplied by four, just not calculated yet. Equal."
+        }
+      ]
+    },
+    {
+      "id": "ex07",
+      "level": 3,
+      "kind": "expr",
+      "prompt": "Use the distributive property to expand.",
+      "q": "−(x − 6)",
+      "read": "Negative the quantity x minus six.",
+      "a": "−x + 6",
+      "a_read": "negative x plus six",
+      "lines": [
+        "⟨−(x − 6)⟩",
+        "⟨−1 · (x − 6)⟩",
+        "⟨(−1) · x + (−1) · (−6)⟩",
+        "−x + 6"
+      ],
+      "chips": [
+        "REWRITE",
+        "DIST",
+        "CALC"
+      ],
+      "say": [
+        "A negative sign in front of parentheses means negative one times them.",
+        "Distribute the negative one. Negative one times x, plus negative one times negative six.",
+        "Negative one times x is negative x. Negative one times negative six is positive six."
+      ],
+      "at": [
+        "them",
+        "six",
+        "six#2"
+      ],
+      "wrong": [
+        {
+          "e": "−x − 6",
+          "why": "(−1) · (−6) is +6. The negative flips both signs.",
+          "say": "flip only the first sign",
+          "read": "negative x minus six"
+        },
+        {
+          "e": "x − 6",
+          "why": "You ignored the negative sign in front.",
+          "say": "ignore the negative in front",
+          "read": "x minus six"
+        },
+        {
+          "e": "x + 6",
+          "why": "You flipped the 6 but not the x.",
+          "say": "flip only the six",
+          "read": "x plus six"
+        }
+      ]
+    },
+    {
+      "id": "ex08",
+      "level": 3,
+      "kind": "expr",
+      "prompt": "Use the distributive property to expand.",
+      "q": "2(3x + 4y − 5)",
+      "read": "Two times the quantity three x plus four y minus five.",
+      "a": "6x + 8y − 10",
+      "a_read": "six x plus eight y minus ten",
+      "lines": [
+        "⟨2(3x + 4y − 5)⟩",
+        "⟨2 · 3x + 2 · 4y − 2 · 5⟩",
+        "6x + 8y − 10"
+      ],
+      "chips": [
+        "DIST",
+        "CALC"
+      ],
+      "say": [
+        "There are three terms inside, so the two multiplies all three of them.",
+        "Two times three x is six x. Two times four y is eight y. Two times five is ten, and the minus sign stays."
+      ],
+      "at": [
+        "three#2",
+        "ten"
+      ],
+      "wrong": [
+        {
+          "e": "6x + 4y − 5",
+          "why": "You multiplied only the first term by 2.",
+          "say": "multiply only the first term",
+          "read": "six x plus four y minus five"
+        },
+        {
+          "e": "6x + 8y − 5",
+          "why": "The 2 must reach the last term too: 2 · 5 = 10.",
+          "say": "skip the last term",
+          "read": "six x plus eight y minus five"
+        },
+        {
+          "e": "6x + 8y + 10",
+          "why": "2 · (−5) is −10. The minus sign stays.",
+          "say": "turn the last minus into a plus",
+          "read": "six x plus eight y plus ten"
+        }
+      ]
+    },
+    {
+      "id": "ex09",
+      "level": 3,
+      "prompt": "Use the distributive property backwards to find the value.",
+      "q": "17 × 6 + 17 × 4",
+      "read": "Seventeen times six, plus seventeen times four.",
+      "lines": [
+        "⟨17 × 6 + 17 × 4⟩",
+        "17 × ⟨(6 + 4)⟩",
+        "⟨17 × 10⟩",
+        "170"
+      ],
+      "chips": [
+        "DIST",
+        "CALC",
+        "CALC"
+      ],
+      "say": [
+        "Both products have a seventeen. The distributive property works backwards too: seventeen times the quantity six plus four.",
+        "Six plus four is ten.",
+        "Seventeen times ten is one hundred seventy."
+      ],
+      "at": [
+        "four",
+        "ten",
+        "seventy"
+      ],
+      "wrong": [
+        {
+          "e": "17 × 6 + 4",
+          "why": "You dropped the second 17.",
+          "say": "drop the second seventeen"
+        },
+        {
+          "e": "(17 × 6 + 17) × 4",
+          "why": "You went straight left to right, so the 4 multiplied everything.",
+          "say": "work straight left to right"
+        },
+        {
+          "e": "17 + 6 + 17 + 4",
+          "why": "You added instead of multiplying.",
+          "say": "add instead of multiplying"
+        }
+      ]
+    },
+    {
+      "id": "ex10",
+      "level": 3,
+      "kind": "expr",
+      "prompt": "Use the distributive property to expand.",
+      "q": "−4(−2x + 3)",
+      "read": "Negative four times the quantity negative two x plus three.",
+      "a": "8x − 12",
+      "a_read": "eight x minus twelve",
+      "lines": [
+        "⟨−4(−2x + 3)⟩",
+        "⟨(−4)(−2x) + (−4)(3)⟩",
+        "8x − 12"
+      ],
+      "chips": [
+        "DIST",
+        "CALC"
+      ],
+      "say": [
+        "Negative four multiplies both terms: negative four times negative two x, plus negative four times three.",
+        "A negative times a negative is positive, so the first part is eight x. Negative four times three is negative twelve."
+      ],
+      "at": [
+        "three",
+        "twelve"
+      ],
+      "wrong": [
+        {
+          "e": "−8x − 12",
+          "why": "(−4) · (−2x) is +8x: negative times negative is positive.",
+          "say": "keep the first term negative",
+          "read": "negative eight x minus twelve"
+        },
+        {
+          "e": "8x + 12",
+          "why": "(−4) · 3 is −12, not +12.",
+          "say": "make both terms positive",
+          "read": "eight x plus twelve"
+        },
+        {
+          "e": "8x + 3",
+          "why": "You multiplied only the first term by −4.",
+          "say": "multiply only the first term",
+          "read": "eight x plus three"
+        }
+      ]
+    },
+    {
+      "id": "ex11",
+      "kind": "match",
+      "level": 3,
+      "prompt": "Match each expression with its expanded form.",
+      "read": "Match each expression with its expanded form.",
+      "check": "equal",
+      "say_answer": "Every expression now has its expanded form. Multiply every term inside, and watch the signs.",
+      "pairs": [
+        {
+          "l": "6(x + 2)",
+          "r": "6x + 12",
+          "why": "6 · x = 6x and 6 · 2 = 12.",
+          "say": "Six times x is six x. Six times two is twelve. So six x plus twelve."
+        },
+        {
+          "l": "−(x − 5)",
+          "r": "−x + 5",
+          "why": "The minus sign changes the sign of both terms.",
+          "say": "The minus sign in front means times negative one. It changes the sign of both terms: negative x plus five."
+        },
+        {
+          "l": "−3(2x − 1)",
+          "r": "−6x + 3",
+          "why": "−3 · 2x = −6x and −3 · (−1) = +3.",
+          "say": "Negative three times two x is negative six x. Negative three times negative one is positive three."
+        },
+        {
+          "l": "x(x − 4)",
+          "r": "x^2 − 4x",
+          "why": "x · x = x² and x · (−4) = −4x.",
+          "say": "x times x is x squared. x times negative four is negative four x."
+        }
+      ]
+    },
+    {
+      "id": "ex12",
+      "level": 4,
+      "prompt": "Use the distributive property to find the value.",
+      "q": "9 × 99 + 9",
+      "read": "Nine times ninety-nine, plus nine.",
+      "lines": [
+        "9 × 99 + ⟨9⟩",
+        "⟨9 × 99 + 9 × 1⟩",
+        "9 × ⟨(99 + 1)⟩",
+        "⟨9 × 100⟩",
+        "900"
+      ],
+      "chips": [
+        "REWRITE",
+        "DIST",
+        "CALC",
+        "CALC"
+      ],
+      "say": [
+        "The last nine is nine times one.",
+        "Now both parts have a nine, so we can pull it out: nine times the quantity ninety-nine plus one.",
+        "Ninety-nine plus one is one hundred.",
+        "Nine times one hundred is nine hundred."
+      ],
+      "at": [
+        "one",
+        "one",
+        "hundred",
+        "hundred#2"
+      ],
+      "wrong": [
+        {
+          "e": "9 × (99 + 9)",
+          "why": "You added 99 + 9 first, but multiplication comes before addition.",
+          "say": "add ninety-nine and nine first"
+        },
+        {
+          "e": "9 × 99",
+          "why": "You left out the + 9 at the end.",
+          "say": "leave out the last nine"
+        },
+        {
+          "e": "9 × 100 + 9",
+          "why": "Once the last 9 helps make 9 × 100, it is already counted.",
+          "say": "count the last nine twice"
+        }
+      ]
+    },
+    {
+      "id": "ex13",
+      "level": 4,
+      "kind": "expr",
+      "prompt": "Use the distributive property to expand.",
+      "q": "x(x + 5)",
+      "read": "x times the quantity x plus five.",
+      "a": "x^2 + 5x",
+      "a_read": "x squared plus five x",
+      "lines": [
+        "⟨x(x + 5)⟩",
+        "⟨x · x + x · 5⟩",
+        "x^2 + 5x"
+      ],
+      "chips": [
+        "DIST",
+        "CALC"
+      ],
+      "say": [
+        "The number outside can be a variable too. x multiplies both terms: x times x, plus x times five.",
+        "x times x is x squared. x times five is five x, with the number written first."
+      ],
+      "at": [
+        "five",
+        "first"
+      ],
+      "wrong": [
+        {
+          "e": "x^2 + 5",
+          "why": "You multiplied only the first term by x.",
+          "say": "multiply only the first term",
+          "read": "x squared plus five"
+        },
+        {
+          "e": "2x + 5x",
+          "why": "x · x is x², not 2x. 2x means x + x.",
+          "say": "write x times x as two x",
+          "read": "two x plus five x"
+        },
+        {
+          "e": "2x + 5",
+          "why": "x · x is x², and the 5 must be multiplied by x too.",
+          "say": "make both mistakes",
+          "read": "two x plus five"
+        }
+      ]
+    },
+    {
+      "id": "ex14",
+      "level": 4,
+      "kind": "expr",
+      "prompt": "Use the distributive property to expand.",
+      "q": "−5(2x − 3y + 1)",
+      "read": "Negative five times the quantity two x minus three y plus one.",
+      "a": "−10x + 15y − 5",
+      "a_read": "negative ten x plus fifteen y minus five",
+      "lines": [
+        "⟨−5(2x − 3y + 1)⟩",
+        "⟨(−5)(2x) + (−5)(−3y) + (−5)(1)⟩",
+        "−10x + 15y − 5"
+      ],
+      "chips": [
+        "DIST",
+        "CALC"
+      ],
+      "say": [
+        "Negative five multiplies all three terms, and each sign goes along.",
+        "Negative five times two x is negative ten x. Negative five times negative three y is positive fifteen y. And negative five times one is negative five."
+      ],
+      "at": [
+        "along",
+        "five#4"
+      ],
+      "wrong": [
+        {
+          "e": "−10x − 15y − 5",
+          "why": "(−5) · (−3y) is +15y: negative times negative is positive.",
+          "say": "keep the middle term negative",
+          "read": "negative ten x minus fifteen y minus five"
+        },
+        {
+          "e": "−10x − 3y + 1",
+          "why": "You multiplied only the first term by −5.",
+          "say": "multiply only the first term",
+          "read": "negative ten x minus three y plus one"
+        },
+        {
+          "e": "−10x + 15y + 1",
+          "why": "−5 must reach the last term too: (−5) · 1 = −5.",
+          "say": "skip the last term",
+          "read": "negative ten x plus fifteen y plus one"
+        }
+      ]
+    }
+  ]
+}

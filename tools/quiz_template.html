@@ -224,7 +224,7 @@ function go(i) { state.i = i; state.done = false; save(); show(); }
 function show() {
   renderDots();
   const app = $("#app"); app.innerHTML = "";
-  $("#eyebrow").textContent = `Unit ${DATA.unit.split(".")[0]} · Lesson ${DATA.unit.split(".")[1]} · Practice`;
+  $("#eyebrow").textContent = `Unit ${DATA.unit.split(".")[0]} · ${DATA.unit.split(".").length > 2 ? "Subtopic" : "Topic"} ${DATA.unit} · Practice`;
   if (state.done) return showResults(app);
   const ex = DATA.exercises[state.i];
   order = ex.options ? shuffled(ex.options.length) : [];

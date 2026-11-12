@@ -1,0 +1,386 @@
+{
+  "unit": "0.2.1",
+  "title": "Commutative and Associative Properties",
+  "h1": "Order and grouping, <span class=\"y\">put to work</span>",
+  "levels": {
+    "1": "Warm-up",
+    "2": "Tricky",
+    "3": "Challenging",
+    "4": "Boss level"
+  },
+  "_notes": "Source of truth for the 0.2.1 practice set. Kinds: \"num\" (default; same as 0.1, the answer is a number), \"expr\" (the answer is an expression: a = answer, a_read = how it is said; every line and option is checked at several values of the variables; each wrong option has read = how it is said) and \"name\" (which property an identity shows: show/say/notes are one block each, ⟨…⟩ in show is highlighted; wrong = the other two properties). Implied multiplication (3x, 2(x + 1), x(x + 5)) and · are allowed. Chips: COMM blue, ASSOC purple, DIST yellow, CALC green, REWRITE white. Also \"multi\" (select all that apply) and \"match\" (match pairs): see docs/exercises.md.",
+  "exercises": [
+    {
+      "id": "ex01",
+      "level": 1,
+      "kind": "name",
+      "prompt": "Which property is shown?",
+      "q": "7 + 9 = 9 + 7",
+      "read": "Seven plus nine equals nine plus seven.",
+      "a": "Commutative",
+      "show": [
+        "⟨7⟩ + ⟨9⟩ = ⟨9⟩ + ⟨7⟩",
+        "16 = 16"
+      ],
+      "say": [
+        "The same two numbers are on both sides. Only their order changed: the seven and the nine traded places.",
+        "Both sides equal sixteen. Changing the order is the commutative property."
+      ],
+      "notes": [
+        "Same numbers, <b>new order</b>",
+        "Both sides are 16"
+      ],
+      "wrong": [
+        {
+          "a": "Associative",
+          "why": "Associative is about grouping with parentheses. There are no parentheses here.",
+          "say": "there are no parentheses being moved"
+        },
+        {
+          "a": "Distributive",
+          "why": "Distributive needs a number multiplied by a sum, like 3(x + 2).",
+          "say": "nothing multiplies a sum"
+        }
+      ]
+    },
+    {
+      "id": "ex02",
+      "level": 1,
+      "kind": "name",
+      "prompt": "Which property is shown?",
+      "q": "(6 × 5) × 2 = 6 × (5 × 2)",
+      "read": "The quantity six times five, times two, equals six times the quantity five times two.",
+      "a": "Associative",
+      "show": [
+        "⟨(6 × 5)⟩ × 2 = 6 × ⟨(5 × 2)⟩",
+        "30 × 2 = 6 × 10"
+      ],
+      "say": [
+        "The numbers are in the same order on both sides: six, five, two. What moved are the parentheses.",
+        "Thirty times two is sixty, and six times ten is also sixty. Regrouping is the associative property."
+      ],
+      "notes": [
+        "Same order, <b>new grouping</b>",
+        "Both sides are 60"
+      ],
+      "wrong": [
+        {
+          "a": "Commutative",
+          "why": "The numbers did not trade places: 6, 5, 2 is the same order on both sides.",
+          "say": "the numbers stay in the same order"
+        },
+        {
+          "a": "Distributive",
+          "why": "Distributive spreads a multiplication over a sum. Here everything is multiplication.",
+          "say": "there is no sum inside the parentheses"
+        }
+      ]
+    },
+    {
+      "id": "ex03",
+      "level": 1,
+      "prompt": "Use the properties to find the value.",
+      "q": "25 × 13 × 4",
+      "read": "Twenty-five times thirteen times four.",
+      "lines": [
+        "25 × ⟨13 × 4⟩",
+        "⟨25 × 4⟩ × 13",
+        "⟨(25 × 4)⟩ × 13",
+        "⟨100 × 13⟩",
+        "1300"
+      ],
+      "chips": [
+        "COMM",
+        "ASSOC",
+        "CALC",
+        "CALC"
+      ],
+      "say": [
+        "Twenty-five and four make one hundred, so let's put them together. The commutative property lets us swap the thirteen and the four.",
+        "The associative property lets us group the twenty-five with the four.",
+        "Twenty-five times four is one hundred.",
+        "One hundred times thirteen is one thousand three hundred."
+      ],
+      "at": [
+        "four#2",
+        "four",
+        "hundred",
+        "hundred#2"
+      ],
+      "wrong": [
+        {
+          "e": "(25 + 4) × 13",
+          "why": "You added 25 and 4 instead of multiplying them.",
+          "say": "add twenty-five and four"
+        },
+        {
+          "e": "25 × 4 + 13",
+          "why": "You added the 13 instead of multiplying by it.",
+          "say": "add the thirteen at the end"
+        },
+        {
+          "e": "25 × 13",
+          "why": "You forgot to multiply by 4.",
+          "say": "forget the four"
+        }
+      ]
+    },
+    {
+      "id": "ex04",
+      "level": 2,
+      "kind": "name",
+      "prompt": "Which property is shown?",
+      "q": "x · 8 = 8x",
+      "read": "x times eight equals eight x.",
+      "a": "Commutative",
+      "show": [
+        "⟨x⟩ · ⟨8⟩ = ⟨8⟩⟨x⟩",
+        "x · 8 = 8 · x"
+      ],
+      "say": [
+        "Eight x means eight times x. So both sides multiply the same two things, in a different order.",
+        "Swapping the order of a multiplication is the commutative property. That's why we can always write the number first."
+      ],
+      "notes": [
+        "8x means 8 · x",
+        "Same factors, <b>new order</b>"
+      ],
+      "wrong": [
+        {
+          "a": "Associative",
+          "why": "There is only one multiplication, so there is nothing to regroup.",
+          "say": "there is nothing to regroup"
+        },
+        {
+          "a": "Distributive",
+          "why": "There is no sum for the 8 to be spread over.",
+          "say": "there is no sum to spread over"
+        }
+      ]
+    },
+    {
+      "id": "ex05",
+      "level": 2,
+      "kind": "name",
+      "prompt": "Which property is shown?",
+      "q": "3 + (x + 7) = (3 + x) + 7",
+      "read": "Three plus the quantity x plus seven equals the quantity three plus x, plus seven.",
+      "a": "Associative",
+      "show": [
+        "3 + ⟨(x + 7)⟩ = ⟨(3 + x)⟩ + 7",
+        "3 + (x + 7) = (3 + x) + 7"
+      ],
+      "say": [
+        "Read each side from left to right: three, x, seven. The order didn't change.",
+        "Only the parentheses moved. Changing the grouping is the associative property."
+      ],
+      "notes": [
+        "Same order: 3, x, 7",
+        "Only the <b>grouping</b> changed"
+      ],
+      "wrong": [
+        {
+          "a": "Commutative",
+          "why": "It looks like something moved, but the order is the same: 3, x, 7. Only the parentheses moved.",
+          "say": "the terms stay in the same order"
+        },
+        {
+          "a": "Distributive",
+          "why": "Nothing multiplies the parentheses; it's all addition.",
+          "say": "everything here is addition"
+        }
+      ]
+    },
+    {
+      "id": "ex06",
+      "kind": "multi",
+      "level": 2,
+      "prompt": "Select all the identities that show the associative property.",
+      "read": "Which of these show the associative property? Choose all that apply.",
+      "check": "property:Associative",
+      "say_answer": "So two of them show the associative property: the numbers stay in the same order, and only the grouping changes.",
+      "options": [
+        {
+          "t": "(4 + 7) + 3 = 4 + (7 + 3)",
+          "ok": true,
+          "why": "Same order, the parentheses moved: associative.",
+          "say": "Four plus seven, then plus three, equals four plus the quantity seven plus three. The order stays the same. Only the parentheses moved. That is associative."
+        },
+        {
+          "t": "6 + y = y + 6",
+          "ok": false,
+          "why": "The terms swapped places: that is commutative.",
+          "say": "Six plus y equals y plus six. The terms swap places. That is commutative, not associative."
+        },
+        {
+          "t": "2 · (5 · x) = (2 · 5) · x",
+          "ok": true,
+          "why": "Same order of factors, new grouping: associative.",
+          "say": "Two times the quantity five times x equals the quantity two times five, times x. Same order, new grouping. Associative."
+        },
+        {
+          "t": "(x + 2) + 9 = (2 + x) + 9",
+          "ok": false,
+          "why": "The parentheses stayed put; x and 2 swapped inside them: commutative.",
+          "say": "Careful with this one. The parentheses did not move. Inside them, x and two swapped places. That is commutative."
+        },
+        {
+          "t": "3(x + 1) = 3x + 3",
+          "ok": false,
+          "why": "Multiplying across a sum: distributive.",
+          "say": "Three times the quantity x plus one equals three x plus three. That multiplies across a sum. It is distributive."
+        }
+      ]
+    },
+    {
+      "id": "ex07",
+      "level": 3,
+      "kind": "name",
+      "prompt": "Which property is shown?",
+      "q": "5(2 · x) = (5 · 2)x",
+      "read": "Five times the quantity two times x equals the quantity five times two, times x.",
+      "a": "Associative",
+      "show": [
+        "5⟨(2 · x)⟩ = ⟨(5 · 2)⟩x",
+        "10x = 10x"
+      ],
+      "say": [
+        "There are parentheses next to a number, but look inside. There is no sum, only multiplication.",
+        "The factors keep their order: five, two, x. Only the grouping changed. That's the associative property, and both sides are ten x."
+      ],
+      "notes": [
+        "No sum inside: only ×",
+        "Same order, <b>new grouping</b>"
+      ],
+      "wrong": [
+        {
+          "a": "Distributive",
+          "why": "Distributive needs a sum inside, like 5(2 + x). Here it's 2 · x, a product.",
+          "say": "there is no sum inside the parentheses"
+        },
+        {
+          "a": "Commutative",
+          "why": "The order is the same on both sides: 5, 2, x.",
+          "say": "the factors stay in the same order"
+        }
+      ]
+    },
+    {
+      "id": "ex08",
+      "kind": "match",
+      "level": 3,
+      "prompt": "Match each identity with the property it shows.",
+      "read": "Match each identity with the property it shows.",
+      "check": "property",
+      "say_answer": "Order changes mean commutative. Grouping changes mean associative.",
+      "pairs": [
+        {
+          "l": "8 × 5 = 5 × 8",
+          "r": "Commutative",
+          "why": "The factors swapped places.",
+          "say": "Eight times five equals five times eight. The factors swap places, so it is commutative."
+        },
+        {
+          "l": "(a + b) + 4 = a + (b + 4)",
+          "r": "Associative",
+          "why": "Same order; the parentheses moved.",
+          "say": "The quantity a plus b, plus four, equals a plus the quantity b plus four. Same order, the parentheses moved. Associative."
+        },
+        {
+          "l": "7 + (y + 1) = 7 + (1 + y)",
+          "r": "Commutative",
+          "why": "The parentheses stayed; y and 1 swapped inside.",
+          "say": "Seven plus the quantity y plus one equals seven plus the quantity one plus y. The parentheses stay where they are. Inside, y and one swap. Commutative."
+        },
+        {
+          "l": "x · (3 · 2) = (x · 3) · 2",
+          "r": "Associative",
+          "why": "Same order of factors, new grouping.",
+          "say": "x times the quantity three times two equals the quantity x times three, times two. Same order, new grouping. Associative."
+        }
+      ]
+    },
+    {
+      "id": "ex09",
+      "level": 4,
+      "prompt": "Use the properties to find the value.",
+      "q": "4 × 37 × 25",
+      "read": "Four times thirty-seven times twenty-five.",
+      "lines": [
+        "4 × ⟨37 × 25⟩",
+        "⟨4 × 25⟩ × 37",
+        "⟨(4 × 25)⟩ × 37",
+        "⟨100 × 37⟩",
+        "3700"
+      ],
+      "chips": [
+        "COMM",
+        "ASSOC",
+        "CALC",
+        "CALC"
+      ],
+      "say": [
+        "Four and twenty-five make one hundred, but they're far apart. Swap the thirty-seven and the twenty-five.",
+        "Now group the four with the twenty-five.",
+        "Four times twenty-five is one hundred.",
+        "One hundred times thirty-seven is three thousand seven hundred."
+      ],
+      "at": [
+        "twenty-five#2",
+        "twenty-five",
+        "hundred",
+        "hundred#2"
+      ],
+      "wrong": [
+        {
+          "e": "(4 + 25) × 37",
+          "why": "You added 4 and 25 instead of multiplying them.",
+          "say": "add four and twenty-five"
+        },
+        {
+          "e": "4 × 25 + 37",
+          "why": "You added the 37 instead of multiplying by it.",
+          "say": "add the thirty-seven"
+        },
+        {
+          "e": "4 × 37",
+          "why": "You forgot to multiply by 25.",
+          "say": "forget the twenty-five"
+        }
+      ]
+    },
+    {
+      "id": "ex10",
+      "level": 4,
+      "kind": "name",
+      "prompt": "Which property is shown?",
+      "q": "(x + 3) · 2 = 2 · (x + 3)",
+      "read": "The quantity x plus three, times two, equals two times the quantity x plus three.",
+      "a": "Commutative",
+      "show": [
+        "⟨(x + 3)⟩ · ⟨2⟩ = ⟨2⟩ · ⟨(x + 3)⟩",
+        "(x + 3) · 2 = 2 · (x + 3)"
+      ],
+      "say": [
+        "There is a sum in parentheses, so distributive is tempting. But the two is not multiplied into the terms.",
+        "Two factors, the quantity and the two, just traded places. That's the commutative property."
+      ],
+      "notes": [
+        "Nothing was distributed",
+        "Two factors <b>traded places</b>"
+      ],
+      "wrong": [
+        {
+          "a": "Distributive",
+          "why": "Distributing would give 2x + 6. Here the parentheses stay; the 2 just moved to the front.",
+          "say": "the two is not multiplied into the parentheses"
+        },
+        {
+          "a": "Associative",
+          "why": "Associative regroups three or more things. Here two factors just swapped.",
+          "say": "two factors just trade places"
+        }
+      ]
+    }
+  ]
+}

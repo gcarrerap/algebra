@@ -4,8 +4,10 @@ Each lesson can have a practice set. The first one is
 [`exercises/u00-l01/`](../exercises/u00-l01/) (lesson 0.1, order of operations and signed numbers):
 20 exercises in four levels (Warm-up, Tricky, Challenging, Boss level).
 
-The second is [`exercises/u00-l02/`](../exercises/u00-l02/) (lesson 0.2, properties of operations), which
-adds two kinds of exercise besides "find the value" (see the `_notes` in its `exercises.json`):
+Topic 0.2 (properties of operations) has two subtopics, each with its own set:
+[`exercises/u00-l02-s1/`](../exercises/u00-l02-s1/) (0.2.1, commutative and associative, 10 exercises) and
+[`exercises/u00-l02-s2/`](../exercises/u00-l02-s2/) (0.2.2, distributive, 14 exercises). A set's folder is
+`u<unit>-l<topic>` for a topic and `u<unit>-l<topic>-s<subtopic>` for a subtopic. Kinds of exercise:
 
 | `kind` | The question | How it is checked |
 |---|---|---|

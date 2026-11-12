@@ -140,7 +140,6 @@
 /* The whole course (mirrors SYLLABUS.md and docs/course-design.md).
    Chapter > unit > topic > subtopic. A learning block is a topic, or each of its subtopics.
    To publish something, add its link to the block:  video: "path"  ·  practice: "path".
-   A subtopic without its own practice uses its topic's (legacy: 0.2 shares one set).
    A unit's exam:  exam: "path"  on the unit.                                              */
 const CHAPTERS = [
   { n: 1, title: "Foundations", units: [0, 1] },
@@ -154,9 +153,9 @@ const COURSE = [
   { n: 0, title: "Foundations and Expressions", kas: "KY.HS.A.1, A.2", topics: [
     { name: "Order of operations and signed numbers",
       video: "videos/u00-l01-order-of-operations/video.html", practice: "exercises/u00-l01/" },
-    { name: "Properties: commutative, associative, distributive", practice: "exercises/u00-l02/", subtopics: [
-      { name: "Commutative and associative properties", video: "videos/u00-l02-commutative-associative/video.html" },
-      { name: "Distributive property", video: "videos/u00-l02-distributive/video.html" } ] },
+    { name: "Properties: commutative, associative, distributive", subtopics: [
+      { name: "Commutative and associative properties", video: "videos/u00-l02-commutative-associative/video.html", practice: "exercises/u00-l02-s1/" },
+      { name: "Distributive property", video: "videos/u00-l02-distributive/video.html", practice: "exercises/u00-l02-s2/" } ] },
     { name: "Parts of an expression: terms, factors, coefficients, constants" },
     { name: "Combining like terms and simplifying" },
     { name: "Translating words into algebraic expressions" } ] },

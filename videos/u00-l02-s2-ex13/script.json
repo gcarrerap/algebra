@@ -1,0 +1,57 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l02-s2-ex13",
+  "title": "Exercise 13",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. x times the quantity x plus five.",
+          "display": "x(x + 5)",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "The number outside can be a variable too. x multiplies both terms: x times x, plus x times five.",
+          "display": "x · x + x · 5",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "x times x is x squared. x times five is five x, with the number written first.",
+          "display": "x^2 + 5x",
+          "cue": "step-2"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b04",
+          "text": "So the answer is x squared plus five x.",
+          "display": "= x^2 + 5x",
+          "cue": "answer"
+        },
+        {
+          "id": "b05",
+          "text": "Watch out for these traps. If you multiply only the first term, you get x squared plus five. If you write x times x as two x, you get two x plus five x.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

@@ -146,6 +146,4 @@ What already exists and does not follow these rules yet:
 
 | Rule | Today |
 |---|---|
-| Unit exam with question bank, ≥90% to unlock | No exams, no question banks, no locking. |
-| Own exercise set per learning block | 0.2's two subtopics share one practice set. |
-| Work area on every find-the-value exercise | Present in 0.1; missing in 0.2. |
+| Unit exam with question bank, ≥90% to unlock | No exam pages or question banks yet. The home page already locks units and reads exam results (`algebra.exams.v1`). |
