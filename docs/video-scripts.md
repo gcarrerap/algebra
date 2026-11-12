@@ -101,11 +101,17 @@ python3 tools/estimate_scripts.py --check   # only check the rules
 
 ## From script to `script.json`
 
-1. Copy the transcript lines in order: one `> ` line = one block (`b01`, `b02`…), one
-   `#### S` heading = one scene.
-2. Put each pause's seconds in the `pause_after_s` of the block before it.
-3. Take `display` (the math on screen) and `cue` from the `*Screen:*` notes.
-4. Read the transcript aloud once; then follow [audio-production.md](audio-production.md).
+```
+python3 tools/script_from_md.py 0.1.2      # -> videos/u00-l01-signed-numbers/script.json
+```
+
+The tool makes one block (`b01`, `b02`…) per `> ` line and one scene per `#### S` heading, puts
+each pause's seconds in the `pause_after_s` of the block before it, and takes `display` from the
+first math in backticks on the `*Screen:*` line before each block. Read the transcript aloud
+once; then follow [audio-production.md](audio-production.md), and write `video.html` from the
+`*Screen:*` notes, anchoring each change to the word that says it.
+
+First video made this way: `u00-l01-signed-numbers` — estimated 4:28, real narration 4:20.
 
 ## Solution videos
 

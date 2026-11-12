@@ -156,4 +156,3 @@ What already exists and does not follow these rules yet:
 | Unit exam with question bank, ≥90% to unlock | No exam pages or question banks yet. The home page already locks units and reads exam results (`algebra.exams.v1`). |
 | Own exercise set per learning block | 0.1's two subtopics share one practice set. |
 | Reflection pauses (2 × 10–15 s, 1 × 15–30 s) | The produced lesson videos (0.1.1, 0.2.1, 0.2.2) pause 1.5–4 s and lack the reflection lines marked *(new)* in their scripts; solution videos pause 1.2–1.5 s. |
-| Every practice exercise taught in a video | 0.1's set needs signed numbers and evaluating at a negative value; their video (0.1.2) is scripted, not produced. |

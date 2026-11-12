@@ -1,0 +1,170 @@
+{
+ "format": "algebra-video-script",
+ "version": 1,
+ "video": "u00-l01-signed-numbers",
+ "title": "Signed numbers",
+ "voice": "narrator",
+ "source": "video-scripts/u00.md#0.1.2",
+ "scenes": [
+  {
+   "id": "s01",
+   "title": "Below zero",
+   "blocks": [
+    {
+     "id": "b01",
+     "text": "It's three degrees outside, and the temperature drops eight degrees. What's the temperature now?",
+     "pause_after_s": 5.0
+    },
+    {
+     "id": "b02",
+     "text": "Negative five. Numbers below zero are negative numbers, and the number line holds all of them."
+    },
+    {
+     "id": "b03",
+     "text": "Every number has an opposite, the same distance from zero on the other side. The opposite of five is negative five."
+    },
+    {
+     "id": "b04",
+     "text": "That distance from zero is called the absolute value. The absolute value of negative five is five, and so is the absolute value of five."
+    },
+    {
+     "id": "b05",
+     "text": "Here's something to think about. Can an absolute value ever be negative?",
+     "display": "|−5| = 5",
+     "pause_after_s": 10.0
+    },
+    {
+     "id": "b06",
+     "text": "No. A distance can't be negative. The smallest absolute value is zero."
+    }
+   ]
+  },
+  {
+   "id": "s02",
+   "title": "Adding is moving",
+   "blocks": [
+    {
+     "id": "b07",
+     "text": "Adding is moving along the line. Adding a positive number moves right. Adding a negative number moves left.",
+     "display": "−4 + 6"
+    },
+    {
+     "id": "b08",
+     "text": "Negative four plus six: start at negative four and move six to the right. You land on two."
+    },
+    {
+     "id": "b09",
+     "text": "Negative three plus negative five: start at negative three and move five more to the left. Negative eight.",
+     "display": "−3 + (−5)"
+    },
+    {
+     "id": "b10",
+     "text": "So with the same signs, add the distances and keep the sign. With different signs, subtract the distances and keep the sign of the number farther from zero."
+    }
+   ]
+  },
+  {
+   "id": "s03",
+   "title": "Subtracting is adding the opposite",
+   "blocks": [
+    {
+     "id": "b11",
+     "text": "Five minus two is three. Five plus negative two is also three. Subtracting a number is the same as adding its opposite.",
+     "display": "5 − 2"
+    },
+    {
+     "id": "b12",
+     "text": "Now the strange one. Five minus negative two. Pause and decide which way to move.",
+     "display": "5 − (−2)",
+     "pause_after_s": 10.0
+    },
+    {
+     "id": "b13",
+     "text": "Subtracting negative two means adding its opposite, positive two. Five plus two is seven. Taking away a debt leaves you richer.",
+     "display": "5 − (−2) = 5 + 2 = 7"
+    }
+   ]
+  },
+  {
+   "id": "s04",
+   "title": "Multiplying and dividing",
+   "blocks": [
+    {
+     "id": "b14",
+     "text": "Three times negative four is three jumps of negative four. That's negative twelve.",
+     "display": "3 × (−4)"
+    },
+    {
+     "id": "b15",
+     "text": "Now watch the pattern as the first number goes down by one. Each answer goes up by four.",
+     "display": "3 × (−4) = −12"
+    },
+    {
+     "id": "b16",
+     "text": "What has to come next, if the pattern keeps going?",
+     "pause_after_s": 10.0
+    },
+    {
+     "id": "b17",
+     "text": "Four, then eight. A negative times a negative is positive. It isn't a rule someone invented; the pattern forces it.",
+     "display": "−1 × (−4) = 4"
+    },
+    {
+     "id": "b18",
+     "text": "So same signs give a positive answer, different signs give a negative one. Division follows the same rules, because division undoes multiplication. Negative twelve divided by negative three is positive four.",
+     "display": "+·+ = +"
+    }
+   ]
+  },
+  {
+   "id": "s05",
+   "title": "Plugging in a negative",
+   "blocks": [
+    {
+     "id": "b19",
+     "text": "Signs matter most when you put a negative number into an expression. Evaluate x squared plus two x minus one, when x equals negative three.",
+     "display": "x² + 2x − 1"
+    },
+    {
+     "id": "b20",
+     "text": "Replace every x with negative three, inside parentheses. That keeps the sign attached to the number.",
+     "display": "(−3)² + 2(−3) − 1"
+    },
+    {
+     "id": "b21",
+     "text": "Negative three, squared, is nine. Two times negative three is negative six. Nine minus six minus one is two. Without the parentheses, you'd square only the three and get the sign wrong.",
+     "display": "9 − 6 − 1 = 2"
+    }
+   ]
+  },
+  {
+   "id": "s06",
+   "title": "Your turn",
+   "blocks": [
+    {
+     "id": "b22",
+     "text": "Your turn. Negative five minus negative two times four. Use the order of operations, and watch every sign. Pause the video and try it.",
+     "display": "−5 − (−2) × 4",
+     "pause_after_s": 15.0
+    },
+    {
+     "id": "b23",
+     "text": "Multiply first. Negative two times four is negative eight. Then negative five minus negative eight is negative five plus eight, which is three.",
+     "display": "−5 − (−8)"
+    },
+    {
+     "id": "b24",
+     "text": "Remember: adding moves along the line, subtracting adds the opposite, and for multiplying and dividing, same signs are positive and different signs are negative."
+    },
+    {
+     "id": "b25",
+     "text": "Next, the properties of operations."
+    },
+    {
+     "id": "b26",
+     "text": "This video uses an AI-generated voice."
+    }
+   ]
+  }
+ ]
+}

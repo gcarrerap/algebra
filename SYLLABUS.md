@@ -15,7 +15,7 @@ Mathematics. Each unit lists the standards it covers.
 
 1. Order of operations and signed numbers
    - **0.1.1** Order of operations — *video ≈ 3:21* (produced)
-   - **0.1.2** Signed numbers — *video ≈ 4:28*
+   - **0.1.2** Signed numbers — *video 4:20* (produced)
 2. Properties: commutative, associative, distributive
    - **0.2.1** Commutative and associative properties — *video ≈ 4:18* (produced)
    - **0.2.2** Distributive property — *video ≈ 3:30* (produced)
