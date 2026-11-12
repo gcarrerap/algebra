@@ -2,9 +2,11 @@
 
 Each algebra video is an HTML/CSS page driven by its narration's `timeline.json`
 (see [audio-production.md](audio-production.md)), filmed frame by frame into an MP4.
+It starts from the video's written script in `video-scripts/` ([video-scripts.md](video-scripts.md)),
+whose `*Screen:*` notes say what each scene shows and on which words.
 
 ```
-script.json ─► narration.mp3 + timeline.json ─► video.html ─► stills ─► video.mp4
+video-scripts/uNN.md ─► script.json ─► narration.mp3 + timeline.json ─► video.html ─► stills ─► video.mp4
 ```
 
 ## Files
@@ -61,6 +63,12 @@ The class decides what the element does when it appears:
 
 Layout helpers: `math` (`md`, `sm`, `xs`), `say`, `label`, `card`, `chip`, `row`, `col`,
 `stack` (children share one spot, for swapping content in place), `layer`.
+
+### Reflection pauses
+
+A pause from the script (`[REFLECT 10s]`, `[TRY IT 15s]`) is the `pause_after_s` of the block
+before it. Keep the question on screen and show a countdown ring for the whole silence:
+`<div class="timer" data-at="b07.end" data-out="b07.end+10"></div>`.
 
 ### Visual conventions
 

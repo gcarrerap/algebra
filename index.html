@@ -151,8 +151,9 @@ const CHAPTERS = [
 ];
 const COURSE = [
   { n: 0, title: "Foundations and Expressions", kas: "KY.HS.A.1, A.2", topics: [
-    { name: "Order of operations and signed numbers",
-      video: "videos/u00-l01-order-of-operations/video.html", practice: "exercises/u00-l01/" },
+    { name: "Order of operations and signed numbers", practice: "exercises/u00-l01/", subtopics: [
+      { name: "Order of operations", video: "videos/u00-l01-order-of-operations/video.html" },
+      { name: "Signed numbers" } ] },
     { name: "Properties: commutative, associative, distributive", subtopics: [
       { name: "Commutative and associative properties", video: "videos/u00-l02-commutative-associative/video.html", practice: "exercises/u00-l02-s1/" },
       { name: "Distributive property", video: "videos/u00-l02-distributive/video.html", practice: "exercises/u00-l02-s2/" } ] },

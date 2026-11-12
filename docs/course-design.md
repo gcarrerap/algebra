@@ -22,8 +22,15 @@ Chapter
 ## Videos
 
 - One video per learning block.
-- Expected length **3–6 minutes**; **10 minutes at most**. A topic that needs more than 10 minutes
-  must be split into subtopics.
+- Every video is **written as a script first** ([video-scripts.md](video-scripts.md)): objective,
+  topics, the full transcript, reflection pauses and notes on what the screen shows. The script
+  gives the video's length before anything is produced.
+- Videos are watched slowly: every question is followed by real silence with the question on
+  screen. Each video has at least **two reflection pauses (10–15 s)** and **one "pause and try
+  it" (15–30 s)**.
+- Expected length **3–7 minutes, pauses included**; **10 minutes at most**. When a topic's script
+  runs over 7 minutes, look for a split into subtopics; over 10 minutes it must be split. Two
+  short subtopics that fit together in 7 minutes are one video.
 - Built and narrated as described in [video-production.md](video-production.md) and
   [audio-production.md](audio-production.md).
 
@@ -147,3 +154,6 @@ What already exists and does not follow these rules yet:
 | Rule | Today |
 |---|---|
 | Unit exam with question bank, ≥90% to unlock | No exam pages or question banks yet. The home page already locks units and reads exam results (`algebra.exams.v1`). |
+| Own exercise set per learning block | 0.1's two subtopics share one practice set. |
+| Reflection pauses (2 × 10–15 s, 1 × 15–30 s) | The produced lesson videos (0.1.1, 0.2.1, 0.2.2) pause 1.5–4 s and lack the reflection lines marked *(new)* in their scripts; solution videos pause 1.2–1.5 s. |
+| Every practice exercise taught in a video | 0.1's set needs signed numbers and evaluating at a negative value; their video (0.1.2) is scripted, not produced. |

@@ -26,8 +26,9 @@ script.json ──► batch job ──► FishBatchTextToSpeech ──► audio-
 video (HTML/CSS) ◄── timeline.json + narration.mp3 ◄── assemble (trim, level, gaps)
 ```
 
-1. **Write** the video script (`script.json`): scenes, narration blocks, and the
-   visual cue each block triggers.
+1. **Write** the video script (`script.json`) from the video's written script in
+   `video-scripts/` ([video-scripts.md](video-scripts.md)): one transcript line = one block,
+   one scene heading = one scene, each pause = the `pause_after_s` of the block before it.
 2. **Plan**: turn every block into a batch line with a hash-based file name; skip
    blocks whose file already exists.
 3. **Generate**: one run of `FishBatchTextToSpeech` per video.
@@ -133,7 +134,9 @@ Rules:
 ### 4.2 Teaching voice
 
 - Second person, short sentences, one idea per block.
-- Ask, pause, answer: put a question in its own block with `pause_after_s` of 2.5 s (4 s for a "pause the video" challenge) so Ana can think.
+- Ask, pause, answer: put a question in its own block followed by real silence, as the written
+  script marks it: 5 s for a quick question, 10–15 s to reflect, 15–30 s for a "pause the video"
+  challenge ([video-scripts.md](video-scripts.md#pauses-for-reflection)).
 - Name the common mistake before the rule ("If you said twenty…").
 - English throughout, at a Grade 9 level; vocabulary from the syllabus.
 

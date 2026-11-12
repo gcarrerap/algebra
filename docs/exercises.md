@@ -49,6 +49,7 @@ How it behaves:
 | `videos/<set>-exNN/` | One solution video per exercise (`script.json`, `video.html` generated; `narration.mp3`, `timeline.json` from the audio pipeline). |
 | `tools/build_exercises.py` | Checks every number, then generates the pages. |
 | `tools/quiz_template.html` | Template of the practice page. |
+| `video-scripts/<set>-solutions.md` | The solution videos' scripts, for review (`python3 tools/solution_scripts.py exercises/<set>`). |
 
 ## Why the numbers can be trusted
 
