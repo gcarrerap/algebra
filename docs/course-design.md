@@ -31,6 +31,13 @@ Chapter
 - Expected length **3–7 minutes, pauses included**; **10 minutes at most**. When a topic's script
   runs over 7 minutes, look for a split into subtopics; over 10 minutes it must be split. Two
   short subtopics that fit together in 7 minutes are one video.
+- **Player controls.** Every video shows its **total duration** and the current time, and has a
+  **full-screen** button.
+- **No skipping on the first viewing.** The first time a student watches a video, they cannot
+  jump ahead or scrub: there is no seeking, only play and pause. Once the video has been watched
+  to the end, the student can **seek freely** on every later viewing (progress bar, tap to jump,
+  arrow keys). "Watched" is remembered per video in the browser, like the rest of the progress
+  (see [video-production.md](video-production.md#player-controls)).
 - Built and narrated as described in [video-production.md](video-production.md) and
   [audio-production.md](audio-production.md).
 
@@ -155,4 +162,5 @@ What already exists and does not follow these rules yet:
 |---|---|
 | Unit exam with question bank, ≥90% to unlock | No exam pages or question banks yet. The home page already locks units and reads exam results (`algebra.exams.v1`). |
 | Own exercise set per learning block | 0.1's two subtopics share one practice set. |
+| Player controls: visible total duration, full screen, no seeking on the first viewing, free seeking afterwards | The player shows no duration and no full-screen button. Seeking is an invisible strip at the bottom of the stage (tap or arrow keys) that works from the first viewing, and nothing remembers that a video was watched. |
 | Reflection pauses (2 × 10–15 s, 1 × 15–30 s) | The produced lesson videos (0.1.1, 0.2.1, 0.2.2) pause 1.5–4 s and lack the reflection lines marked *(new)* in their scripts; solution videos pause 1.2–1.5 s. |
