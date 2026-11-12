@@ -102,4 +102,4 @@ What already exists and does not follow these rules yet:
 | Single choice, multiple select, matching | Only single choice exists. |
 | Unit exam with question bank, ≥90% to unlock | No exams, no question banks, no locking. |
 | Collapsible chapters / units / topics / subtopics | Home page lists units and lessons; no chapters or subtopics, not collapsible. |
-| Work area on every find-the-value exercise | Present in 0.1; check 0.2 when it is rebuilt. |
+| Work area on every find-the-value exercise | Present in 0.1; missing in 0.2. |
