@@ -12,8 +12,9 @@ document and `docs/course-design.md` before starting, and follow the linked docs
    in `SYLLABUS.md` order whose status in `video-scripts/uNN.md` is not `produced`. Say which one
    in your first sentence.
 2. **Check prerequisites.** The script exists and `python3 tools/estimate_scripts.py --check`
-   passes; `gh workflow list --repo gcarrerap/api-access` works. If `gh` fails, ask the person to
-   attach `gcarrerap/api-access` to the session, and stop until it works.
+   passes; `gh workflow list --repo gcarrerap/api-access` works. If `gh` is refused (403), attach
+   `gcarrerap/api-access` yourself as the runbook's "Access" bullet says; only if that fails, ask
+   the person to attach it, and stop until it works.
 3. **Make a task list** with the nine steps of the runbook; tick them off as you go.
 4. **Script → `script.json` → audio** (runbook steps 2–3). Compare the real length with the
    estimate; investigate a gap over ~5%.
