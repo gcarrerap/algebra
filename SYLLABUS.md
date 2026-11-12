@@ -14,11 +14,11 @@ Mathematics. Each unit lists the standards it covers.
 *KY.HS.A.1, A.2* · [scripts](video-scripts/u00.md)
 
 1. Order of operations and signed numbers
-   - **a.** Order of operations — *video ≈ 3:21* (produced)
-   - **b.** Signed numbers — *video ≈ 4:28*
+   - **0.1.1** Order of operations — *video ≈ 3:21* (produced)
+   - **0.1.2** Signed numbers — *video ≈ 4:28*
 2. Properties: commutative, associative, distributive
-   - **a.** Commutative and associative properties — *video ≈ 4:18* (produced)
-   - **b.** Distributive property — *video ≈ 3:30* (produced)
+   - **0.2.1** Commutative and associative properties — *video ≈ 4:18* (produced)
+   - **0.2.2** Distributive property — *video ≈ 3:30* (produced)
 3. Parts of an expression: terms, factors, coefficients, constants — *video ≈ 3:28*
 4. Combining like terms and simplifying — *video ≈ 3:36*
 5. Translating words into algebraic expressions — *video ≈ 3:15*
@@ -158,7 +158,7 @@ See [docs/course-design.md](docs/course-design.md): topics and subtopics, one vi
 set per learning block, and an exam at the end of every unit.
 
 Every video is written as a script first ([video-scripts/](video-scripts/README.md)); the lengths
-above are estimated from those scripts, reflection pauses included. A topic with lettered
+above are estimated from those scripts, reflection pauses included. A topic with numbered
 subtopics (0.1, 0.2) is split because one video would run over 7 minutes; each subtopic has its own
 video and exercise set. In total: 72 lesson videos, about 4 hours.
 

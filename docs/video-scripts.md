@@ -17,13 +17,13 @@ video-scripts/uNN.md ─► script.json ─► narration.mp3 + timeline.json ─
 |---|---|
 | `video-scripts/README.md` | Index of every video with its estimated length (table generated). |
 | `video-scripts/uNN.md` | Scripts of every lesson video of unit NN, in syllabus order. |
-| `video-scripts/uNN-lLL-solutions.md` | Scripts of the solution videos of a practice set (generated from their `script.json`). |
+| `video-scripts/<set>-solutions.md` | Scripts of the solution videos of a practice set (generated from their `script.json`). |
 | `tools/estimate_scripts.py` | Checks the rules below and writes each video's estimated length. |
 
 ## Format of a lesson video script
 
 ```markdown
-## 3.1a · Rate of change
+## 3.1 · Rate of change
 - **Video:** `u03-l01-rate-of-change`
 - **Status:** script
 - **Estimated length:** 5:40 (…)
@@ -41,8 +41,8 @@ video-scripts/uNN.md ─► script.json ─► narration.mp3 + timeline.json ─
 [REFLECT 10s] *Screen:* the question stays; a countdown ring fills.
 ```
 
-- `## <number> · <title>`: the number is the learning block (`3.1` for a topic, `3.1a`,
-  `3.1b` for its subtopics).
+- `## <number> · <title>`: the number is the learning block (`3.1` for a topic, `3.1.1`,
+  `3.1.2` for its subtopics, as in the syllabus).
 - Lines starting with `> ` are the **transcript**. Each one becomes one block of
   `script.json`, so it follows the rules of [audio-production.md §4](audio-production.md):
   no math symbols, numbers spelled out, "the quantity" for a parenthesized sum.
@@ -111,7 +111,7 @@ python3 tools/estimate_scripts.py --check   # only check the rules
 
 Solution videos of practice sets are built from `exercises/<set>/exercises.json`
 ([exercises.md](exercises.md)), which is their source of truth. Their scripts
-(`video-scripts/uNN-lLL-solutions.md`) are generated from the produced `script.json` files
+(`video-scripts/<set>-solutions.md`) are generated from the produced `script.json` files
 so they can be reviewed with the lesson scripts:
 
 ```

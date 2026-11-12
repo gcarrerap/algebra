@@ -6,7 +6,7 @@
 
 Format of a script (see docs/video-scripts.md):
 
-    ## 3.1a · Rate of change                    one section per video
+    ## 3.1 · Rate of change                     one section per video
     - **Video:** `u03-l01-rate-of-change`
     - **Estimated length:** …                    rewritten by this tool
     #### S1 · Title                              one heading per scene
