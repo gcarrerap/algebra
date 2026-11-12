@@ -1,0 +1,69 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l05-ex10",
+  "title": "Exercise 10",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Tickets cost twelve dollars each and popcorn costs six. A three dollar coupon is taken off. Write an expression for the cost of x tickets and one popcorn.",
+          "display": "Tickets cost 12 dollars each and popcorn costs 6. A 3 dollar coupon is taken off. Write an expression for the cost of x tickets and one popcorn.",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Tickets cost twelve each, so x tickets cost twelve x.",
+          "display": "12x, popcorn 6, coupon 3 off",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "The popcorn adds six.",
+          "display": "12x + 6, coupon 3 off",
+          "cue": "step-2"
+        },
+        {
+          "id": "b04",
+          "text": "The coupon takes off three.",
+          "display": "12x + 6 − 3",
+          "cue": "step-3"
+        },
+        {
+          "id": "b05",
+          "text": "Now combine the constants: six minus three is three, so twelve x plus three.",
+          "display": "12x + 3",
+          "cue": "step-4"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b06",
+          "text": "So the answer is twelve x plus three. Test it. If x is five, the expression gives sixty-three.",
+          "display": "= 12x + 3",
+          "cue": "answer"
+        },
+        {
+          "id": "b07",
+          "text": "Watch out for these traps. If you add the coupon, you get twelve x plus nine. If you multiply the popcorn by twelve too, you get twelve times the quantity x plus six, minus three.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

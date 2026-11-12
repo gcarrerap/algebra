@@ -1,0 +1,69 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l05-ex01",
+  "title": "Exercise 1",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's look at this one. Match each phrase with the operation it means.",
+          "display": "Match each phrase with the operation it means.",
+          "cue": "show-problem",
+          "pause_after_s": 1.5
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Pair by pair",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Increased by means more, so it is addition.",
+          "display": "increased by → addition",
+          "cue": "pair-1"
+        },
+        {
+          "id": "b03",
+          "text": "The difference of two numbers comes from subtracting them.",
+          "display": "the difference of → subtraction",
+          "cue": "pair-2"
+        },
+        {
+          "id": "b04",
+          "text": "Twice means two times, so it is multiplication.",
+          "display": "twice → multiplication",
+          "cue": "pair-3"
+        },
+        {
+          "id": "b05",
+          "text": "Per means for each, which is division.",
+          "display": "per → division",
+          "cue": "pair-4"
+        },
+        {
+          "id": "b06",
+          "text": "Less than means take away, so it is subtraction.",
+          "display": "less than → subtraction",
+          "cue": "pair-5"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b07",
+          "text": "Every phrase now has its operation. Increased by adds, less than and difference subtract, twice multiplies, and per divides.",
+          "cue": "answer"
+        }
+      ]
+    }
+  ]
+}

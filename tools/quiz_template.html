@@ -310,6 +310,7 @@ function makeAnswer(ex) {
   ed.setAttribute("label", "Your answer");
   ed.addEventListener("equation-enter", check);
   const hint = ex.input === "num" ? "One number: 17, −5, a fraction like 3/4, or a decimal like 0.75."
+    : ex.anyForm ? "Type the expression, e.g. 3x − 12 or 2(x + 5). Any form that means the same is fine. Use ^ for powers: x^2."
     : "Write it with no parentheses and like terms combined, e.g. 3x − 12. Use ^ for powers: x^2.";
   return el("div", { class: "answer", id: "answer" },
     el("label", { for: "ans" }, "Your answer"), ed,
@@ -325,7 +326,8 @@ function check() {
   const r = ex.input === "num" ? AnswerCheck.number(typed, ex.answer) : AnswerCheck.expression(typed, ex.answer);
   fb.innerHTML = ""; videoOpen = false;
   if (r.error) { fb.append(el("div", { class: "note warn", role: "status" }, el("strong", {}, "I can't check that yet."), r.error)); return; }
-  if (ex.input === "expr" && r.equal && !r.expanded) {
+  if (ex.anyForm && r.equal) r.ok = true;     // translating words: any equal form is right (docs/exercises.md)
+  if (ex.input === "expr" && !ex.anyForm && r.equal && !r.expanded) {
     fb.append(el("div", { class: "note warn", role: "status" }, el("strong", {}, "Equal — but not finished."),
       "Write it with no parentheses and combine like terms."));
     return;

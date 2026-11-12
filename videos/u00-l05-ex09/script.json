@@ -1,0 +1,69 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l05-ex09",
+  "title": "Exercise 9",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's look at this one. Which of these mean twice the sum of x and three? Choose all that apply.",
+          "display": "Select all that mean “twice the sum of x and three”.",
+          "cue": "show-problem",
+          "pause_after_s": 1.5
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "One by one",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Two times the quantity x plus three. Add first, then double. Right.",
+          "display": "2(x + 3)",
+          "cue": "option-1"
+        },
+        {
+          "id": "b03",
+          "text": "Two x plus six is two times the quantity x plus three, with the two distributed. Right.",
+          "display": "2x + 6",
+          "cue": "option-2"
+        },
+        {
+          "id": "b04",
+          "text": "Two x plus three doubles only the x. Not a match.",
+          "display": "2x + 3",
+          "cue": "option-3"
+        },
+        {
+          "id": "b05",
+          "text": "x plus six does not double the x. Not a match.",
+          "display": "x + 6",
+          "cue": "option-4"
+        },
+        {
+          "id": "b06",
+          "text": "Two plus the quantity x plus three adds two. Twice means multiply.",
+          "display": "2 + (x + 3)",
+          "cue": "option-5"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b07",
+          "text": "Two of them are right: two times the quantity x plus three, and two x plus six. The second is the first with the two distributed.",
+          "cue": "answer"
+        }
+      ]
+    }
+  ]
+}

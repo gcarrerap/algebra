@@ -29,12 +29,20 @@ CHIP_COLOR = {"P": "blue", "E": "purple", "MD": "yellow", "AS": "green", "SUB": 
               # lesson 0.3: the parts of an expression
               "TERM": "blue", "FACTOR": "purple", "COEF": "yellow", "CONST": "green",
               # lesson 0.4: collecting like terms (DIST stays yellow, as in 0.2)
-              "COMBINE": "green"}
+              "COMBINE": "green",
+              # lesson 0.5: words into algebra
+              "VAR": "blue", "WORDS": "yellow", "ORDER": "purple", "GROUP": "green", "TEST": "ink"}
 CHIP_NAME = {"P": "parentheses and groups", "E": "exponents", "MD": "multiply and divide",
              "AS": "add and subtract", "SUB": "substitute", "COMM": "commutative property",
              "ASSOC": "associative property", "DIST": "distributive property", "CALC": "calculate",
              "REWRITE": "rewrite", "TERM": "terms", "FACTOR": "factors", "COEF": "coefficient",
-             "CONST": "constant", "COMBINE": "combine like terms"}
+             "CONST": "constant", "COMBINE": "combine like terms", "VAR": "define the variable",
+             "WORDS": "match the words", "ORDER": "order", "GROUP": "grouping", "TEST": "test it"}
+# lesson 0.5: the words each operation goes by (check "operation" on multi / match)
+OPERATION_WORDS = {"addition": ["sum", "more than", "increased by", "plus", "total of", "added to"],
+                   "subtraction": ["difference", "less than", "decreased by", "minus", "subtract", "fewer than", "take away"],
+                   "multiplication": ["product", "times", "twice", "triple", "double"],
+                   "division": ["quotient", "per", "divided by", "split", "shared equally"]}
 PROPERTIES = {"Commutative": "blue", "Associative": "purple", "Distributive": "yellow"}
 # exact test points for expressions with variables: two expressions are treated as equal when they
 # agree at every point (all exercises are low-degree polynomials, so this cannot be fooled)
@@ -168,6 +176,49 @@ def validate_expr(ex, problems):
         if any(same(w["e"], o) for o in seen):
             problems.append(f"{i}: wrong option {w['e']!r} equals the answer or another option")
         seen.append(w["e"])
+        for f in ("why", "say", "read"):
+            if not w.get(f):
+                problems.append(f"{i}: wrong option {w['e']!r} has no {f!r}")
+
+
+def validate_words(ex, problems):
+    """kind "words" (lesson 0.5): the learner types an expression for a sentence. The sentence's meaning is
+    pinned by a test: with "var" = "value", the words say the result is "means" (an arithmetic
+    expression written from the sentence). The answer must give that result, every wrong option a
+    different one, and every on-screen line is only text, so lines are not compared."""
+    i = ex["id"]
+    for f in ("prompt", "read", "a", "a_read", "test"):
+        if not ex.get(f):
+            problems.append(f"{i}: needs {f!r}")
+    if not ex.get("test"):
+        return
+    t = ex["test"]
+    try:
+        ex["_test_value"] = ev(t["means"])
+        got = ev(ex["a"], {t["var"]: f"({t['value']})"})
+        if got != ex["_test_value"]:
+            problems.append(f"{i}: at {t['var']} = {t['value']} the answer gives {got}, but the words give {ex['_test_value']}")
+        if ex["_test_value"].denominator != 1:
+            problems.append(f"{i}: the test result {ex['_test_value']} is not an integer")
+    except Exception as e:  # noqa: BLE001
+        problems.append(f"{i}: cannot evaluate: {e}")
+        return
+    if not check_steps(ex, problems):
+        return
+    if ex["lines"][-1] != ex["a"]:
+        problems.append(f"{i}: the last line must be the answer {ex['a']!r}")
+    if len(ex["wrong"]) != 3:
+        problems.append(f"{i}: needs exactly 3 wrong options")
+    seen = [ex["a"]]
+    for w in ex["wrong"]:
+        if any(same(w["e"], o) for o in seen):
+            problems.append(f"{i}: wrong option {w['e']!r} equals the answer or another option")
+        seen.append(w["e"])
+        try:
+            if ev(w["e"], {t["var"]: f"({t['value']})"}) == ex["_test_value"]:
+                problems.append(f"{i}: wrong option {w['e']!r} passes the test at {t['var']} = {t['value']}")
+        except Exception as e:  # noqa: BLE001
+            problems.append(f"{i}: wrong option {w['e']!r} cannot be evaluated: {e}")
         for f in ("why", "say", "read"):
             if not w.get(f):
                 problems.append(f"{i}: wrong option {w['e']!r} has no {f!r}")
@@ -372,7 +423,8 @@ def check_claim(ex, item_text, claim, problems, what):
     claim "term-of:<expr>"  → item is one of the terms of <expr> (sign included);
     claim "terms:<n>"       → item has exactly <n> terms;
     claim "coefficient:<n>" → item is one term whose coefficient is <n>;
-    claim "like:<term>"     → item is one term with the same variable part as <term> (a like term)."""
+    claim "like:<term>"     → item is one term with the same variable part as <term> (a like term);
+    claim "operation:<name>"→ the phrase contains a key word of exactly that operation (OPERATION_WORDS)."""
     i = ex["id"]
     kind, _, arg = claim.partition(":")
     try:
@@ -400,6 +452,16 @@ def check_claim(ex, item_text, claim, problems, what):
                 problems.append(f"{i}: {what} {item_text!r} is not a single term")
                 return None
             return var_part(ts[0]) == var_part(arg)
+        if kind == "operation":
+            low = item_text.lower() + " "
+            hits = {op for op, ws in OPERATION_WORDS.items() if any(re.search(rf"(?<![a-z]){re.escape(w)}", low) for w in ws)}
+            if arg not in OPERATION_WORDS:
+                problems.append(f"{i}: unknown operation {arg!r}")
+                return None
+            if len(hits) != 1:
+                problems.append(f"{i}: {what} {item_text!r} matches operations {sorted(hits)}; it must match exactly one")
+                return None
+            return arg in hits
     except Exception as e:  # noqa: BLE001
         problems.append(f"{i}: {what} {item_text!r} cannot be evaluated: {e}")
         return None
@@ -448,7 +510,8 @@ def validate_match(ex, problems):
         chk = ex.get("check")
         if chk and p.get("l") and p.get("r"):
             claim = f"property:{p['r']}" if chk == "property" else f"equals:{p['r']}" if chk == "equal" \
-                else f"coefficient:{p['r']}" if chk == "coefficient" else chk
+                else f"coefficient:{p['r']}" if chk == "coefficient" \
+                else f"operation:{p['r']}" if chk == "operation" else chk
             if check_claim(ex, p["l"], claim, problems, "pair") is False:
                 problems.append(f"{i}: pair {p['l']!r} → {p['r']!r} is not right")
     if chk := ex.get("check"):
@@ -477,6 +540,9 @@ def validate(data):
             continue
         if kind == "name":
             validate_name(ex, problems)
+            continue
+        if kind == "words":
+            validate_words(ex, problems)
             continue
         if ex.get("derive"):
             validate_derive(ex, problems)
@@ -576,6 +642,8 @@ def video_files(data, ex, num, set_id):
     vid = f"{set_id}-{ex['id']}"
     n, lv = len(ex["chips"]), data["levels"][str(ex["level"])]
     wrong = ex["wrong"]
+    isw = ex["kind"] == "words"
+    q_plain = plain(ex["prompt"]) if isw else plain(ex["q"])
     if ex["kind"] == "num":
         ans = ex["_answer"]
         ans_say, ans_html, ans_plain = words(ans), money(ans), money(ans)
@@ -588,6 +656,13 @@ def video_files(data, ex, num, set_id):
         trap_html = [markup(w["e"]) for w in wrong]
         trap_size = "xs"
     last_word = spoken_last(ans_say)
+    if isw:      # the answer block also tests the expression with a real number, computed here
+        t = ex["test"]
+        val = int(ex["_test_value"])
+        test_say = f" Test it. If {t['var']} is {words(t['value'])}, the expression gives {words(val)}."
+        test_html = f"{t['var']} = {t['value']}: {markup(ex['a'])} → <span class=\"green\">{money(val)}</span>"
+    else:
+        test_say = test_html = ""
     trap_text = ("Watch out for these traps. "
                  + " ".join(f"If you {w['say']}, you get {ts}." for w, ts in zip(wrong[:2], trap_say)))
 
@@ -601,17 +676,19 @@ def video_files(data, ex, num, set_id):
         "title": f"Exercise {num}", "voice": "narrator",
         "scenes": [
             {"id": "s01", "title": "The problem", "blocks": [
-                {"id": "b01", "text": "Let's solve this one step by step. " + ex["read"], "display": plain(ex["q"]),
+                {"id": "b01", "text": "Let's solve this one step by step. " + ex["read"], "display": q_plain,
                  "cue": "show-problem", "pause_after_s": 1.2}]},
             {"id": "s02", "title": "Step by step", "blocks": blocks_s2},
             {"id": "s03", "title": "The answer", "blocks": [
-                {"id": b_ans, "text": f"So the answer is {ans_say}.", "display": ans_plain if ex.get("derive") else f"= {ans_plain}", "cue": "answer"},
+                {"id": b_ans, "text": f"So the answer is {ans_say}.{test_say}", "display": ans_plain if ex.get("derive") else f"= {ans_plain}", "cue": "answer"},
                 {"id": b_trap, "text": trap_text, "cue": "traps"}]},
         ],
     }
 
     # --- page
-    prob_size = pick_size([ex["q"]], [(132, ""), (96, "md"), (72, "sm"), (56, "xs")], 400, 1700)
+    prob_size = "" if isw else pick_size([ex["q"]], [(132, ""), (96, "md"), (72, "sm"), (56, "xs")], 400, 1700)
+    problem_div = (f'<div class="say pop" style="font-size: 60px; max-width: 1500px" data-at="b01">{ex["prompt"]}</div>' if isw
+                   else f'<div class="math {prob_size} pop" data-at="b01">{markup(ex["q"])}</div>')
     row_size = pick_size(ex["lines"], [(96, "md"), (72, "sm"), (56, "xs")], 730)
     rows = []
     for j, line in enumerate(ex["lines"]):
@@ -637,14 +714,17 @@ def video_files(data, ex, num, set_id):
             f'        <div class="card trap fade c-red" data-at="{b_trap}+{0.15 + 0.25 * k:.2f}">'
             f'<div class="math {trap_size} red"><span class="strike" data-at="{b_trap}+{0.9 + 0.25 * k:.2f}" data-dur="0.5">{trap_html[k]}</span></div>'
             f'<div class="why">{w["why"]}</div></div>')
-    if ex.get("derive"):    # a question about the parts, not an equation: show the question, then the answer
+    if isw:
+        answer_line = (f'<div class="math sm green pop" data-at="{b_ans}@{last_word}">{ans_html}</div>'
+                       f'<div class="math xs fade" data-at="{b_ans}@test">{test_html}</div>')
+    elif ex.get("derive"):    # a question about the parts, not an equation: show the question, then the answer
         answer_line = (f'<div class="col" style="gap: 14px"><div class="math sm fade" data-at="{b_ans}-0.5">{markup(ex["q"])}</div>'
                        f'<div class="say fade muted" style="font-size: 40px" data-at="{b_ans}-0.5">{ex["prompt"]}</div>'
                        f'<div class="math sm green pop" data-at="{b_ans}@{last_word}">{ans_html}</div></div>')
     else:
         answer_line = (f'<div class="math sm fade" data-at="{b_ans}-0.5">{markup(ex["q"])} '
                        f'<span class="green pop" data-at="{b_ans}@{last_word}">= {ans_html}</span></div>')
-    prompt = f'\n    <div class="say fade muted" data-at="b01+0.4" style="font-size: 40px">{ex["prompt"]}</div>' if ex.get("prompt") else ""
+    prompt = f'\n    <div class="say fade muted" data-at="b01+0.4" style="font-size: 40px">{ex["prompt"]}</div>' if ex.get("prompt") and not isw else ""
     html = f"""<!doctype html>
 <html lang="en">
 <head>
@@ -679,7 +759,7 @@ def video_files(data, ex, num, set_id):
   <!-- s01: the problem -->
   <section class="scene" data-scene="s01">
     <div class="label yellow fade" data-at="b01">Exercise {num} · {lv}</div>
-    <div class="math {prob_size} pop" data-at="b01">{markup(ex["q"])}</div>{prompt}
+    {problem_div}{prompt}
   </section>
 
   <!-- s02: step by step -->
@@ -696,7 +776,7 @@ def video_files(data, ex, num, set_id):
     <div class="row" style="align-items: stretch; gap: 36px">
 {chr(10).join(cards)}
     </div>
-    <div class="label muted fade" data-at="{b_trap}+1.5" style="font-size: 22px; font-weight: 500">This video uses an AI-generated voice.</div>
+    <div class="label muted fade" data-at="{b_trap}+1.5" style="font-size: 22px; font-weight: 500; position: absolute; right: 0; top: -72px">This video uses an AI-generated voice.</div>
   </section>
 
   <div class="caption"></div>
@@ -999,6 +1079,10 @@ def quiz_data(data):
             out.append({**base, "input": "num", "answer": str(ex["_answer"]), "aHtml": money(ex["_answer"]),
                         "mistakes": [{"v": str(w["_value"]), "why": w["why"]} for w in ex["wrong"]]})
             continue
+        if ex["kind"] == "words":
+            out.append({**base, "q": "", "input": "expr", "anyForm": True, "answer": plain_math(ex["a"]), "aHtml": markup(ex["a"]),
+                        "mistakes": [{"e": plain_math(w["e"]), "why": w["why"]} for w in ex["wrong"]]})
+            continue
         if ex["kind"] == "expr":
             out.append({**base, "input": "expr", "answer": plain_math(ex["a"]), "aHtml": markup(ex["a"]),
                         "mistakes": [{"e": plain_math(w["e"]), "why": w["why"]} for w in ex["wrong"]]})
@@ -1042,11 +1126,11 @@ def build(set_dir, check_only):
             continue
         if ex["kind"] == "num":
             ans, wr = ex["_answer"], [w["_value"] for w in ex["wrong"]]
-        elif ex["kind"] == "expr":
+        elif ex["kind"] in ("expr", "words"):
             ans, wr = ex["a"], [w["e"] for w in ex["wrong"]]
         else:
             ans, wr = ex["a"], [w["a"] for w in ex["wrong"]]
-        print(f"  {ex['id']}  {ex['q']:<34} → {str(ans):<16} wrong: " + ", ".join(str(w) for w in wr))
+        print(f"  {ex['id']}  {ex.get('q') or ex['prompt'][:34]:<34} → {str(ans):<16} wrong: " + ", ".join(str(w) for w in wr))
     if check_only:
         return
     set_id = set_dir.name                                    # e.g. u00-l01

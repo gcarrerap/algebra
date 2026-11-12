@@ -1,0 +1,604 @@
+{
+ "unit": "0.5",
+ "title": "Translating Words into Expressions",
+ "h1": "Words into <span class=\"y\">algebra</span>",
+ "levels": {
+  "1": "Warm-up",
+  "2": "Tricky",
+  "3": "Challenging",
+  "4": "Boss level"
+ },
+ "_notes": "Source of truth for the 0.5 practice set. Kind \"words\": the learner types an expression for a sentence; any equal form is right (anyForm). Each answer is pinned by a test, \"means\" computed from the sentence at a real value of the variable; the answer must give that value and every wrong option a different one. Variables: only x, y, z, a, b, c can be checked. \"multi\" uses check equals:<expr>; \"match\" uses check \"operation\" (key words in OPERATION_WORDS). Chips: VAR blue, WORDS yellow, ORDER purple, GROUP green, TEST ink. See docs/exercises.md.",
+ "exercises": [
+  {
+   "id": "ex01",
+   "level": 1,
+   "kind": "match",
+   "prompt": "Match each phrase with the operation it means.",
+   "read": "Match each phrase with the operation it means.",
+   "check": "operation",
+   "say_answer": "Every phrase now has its operation. Increased by adds, less than and difference subtract, twice multiplies, and per divides.",
+   "pairs": [
+    {
+     "l": "increased by",
+     "r": "addition",
+     "why": "Increased by means more: add.",
+     "say": "Increased by means more, so it is addition."
+    },
+    {
+     "l": "the difference of",
+     "r": "subtraction",
+     "why": "Difference means subtract.",
+     "say": "The difference of two numbers comes from subtracting them."
+    },
+    {
+     "l": "twice",
+     "r": "multiplication",
+     "why": "Twice means times two.",
+     "say": "Twice means two times, so it is multiplication."
+    },
+    {
+     "l": "per",
+     "r": "division",
+     "why": "Per means for each, which is dividing.",
+     "say": "Per means for each, which is division."
+    },
+    {
+     "l": "less than",
+     "r": "subtraction",
+     "why": "Less than means take away.",
+     "say": "Less than means take away, so it is subtraction."
+    }
+   ]
+  },
+  {
+   "id": "ex02",
+   "level": 1,
+   "kind": "words",
+   "prompt": "Write an expression for “a number increased by seven”. Use x for the number.",
+   "read": "Write an expression for: a number increased by seven. Use x for the number.",
+   "a": "x + 7",
+   "a_read": "x plus seven",
+   "test": {
+    "var": "x",
+    "value": 20,
+    "means": "20 + 7"
+   },
+   "lines": [
+    "⟨A number⟩ increased by seven",
+    "x ⟨increased by⟩ seven",
+    "x + 7"
+   ],
+   "chips": [
+    "VAR",
+    "WORDS"
+   ],
+   "say": [
+    "Let x be the number.",
+    "Increased by means add, so x plus seven."
+   ],
+   "at": [
+    "x",
+    "plus"
+   ],
+   "wrong": [
+    {
+     "e": "7x",
+     "why": "Increased by means add, not multiply.",
+     "say": "multiply",
+     "read": "seven x"
+    },
+    {
+     "e": "x − 7",
+     "why": "Increased means more, so you add. Subtracting makes it smaller.",
+     "say": "subtract",
+     "read": "x minus seven"
+    },
+    {
+     "e": "7 − x",
+     "why": "Increased by means add, and the number comes first.",
+     "say": "subtract in the other order",
+     "read": "seven minus x"
+    }
+   ]
+  },
+  {
+   "id": "ex03",
+   "level": 1,
+   "kind": "words",
+   "prompt": "Write an expression for “the product of three and a number”. Use x for the number.",
+   "read": "Write an expression for: the product of three and a number. Use x for the number.",
+   "a": "3x",
+   "a_read": "three x",
+   "test": {
+    "var": "x",
+    "value": 10,
+    "means": "3 × 10"
+   },
+   "lines": [
+    "The product of three and ⟨a number⟩",
+    "⟨The product of⟩ three and x",
+    "3x"
+   ],
+   "chips": [
+    "VAR",
+    "WORDS"
+   ],
+   "say": [
+    "Let x be the number.",
+    "Product means multiply, and three times x is written three x."
+   ],
+   "at": [
+    "x",
+    "written"
+   ],
+   "wrong": [
+    {
+     "e": "x + 3",
+     "why": "Product means multiply, not add.",
+     "say": "add",
+     "read": "x plus three"
+    },
+    {
+     "e": "x − 3",
+     "why": "Product means multiply, not subtract.",
+     "say": "subtract",
+     "read": "x minus three"
+    },
+    {
+     "e": "[[x | 3]]",
+     "why": "Product means multiply, not divide.",
+     "say": "divide",
+     "read": "x over three"
+    }
+   ]
+  },
+  {
+   "id": "ex04",
+   "level": 2,
+   "kind": "words",
+   "prompt": "Write an expression for “five less than a number”. Use x for the number.",
+   "read": "Write an expression for: five less than a number. Use x for the number.",
+   "a": "x − 5",
+   "a_read": "x minus five",
+   "test": {
+    "var": "x",
+    "value": 20,
+    "means": "20 − 5"
+   },
+   "lines": [
+    "Five less than ⟨a number⟩",
+    "⟨Five less than⟩ x",
+    "x − 5"
+   ],
+   "chips": [
+    "VAR",
+    "ORDER"
+   ],
+   "say": [
+    "Call the number x.",
+    "Less than reverses the order: start from x and take away five, so x minus five."
+   ],
+   "at": [
+    "x",
+    "minus"
+   ],
+   "wrong": [
+    {
+     "e": "5 − x",
+     "why": "The words come in the opposite order from the symbols: start from x.",
+     "say": "write the numbers in the order you hear them",
+     "read": "five minus x"
+    },
+    {
+     "e": "5x",
+     "why": "Less than means subtract, not multiply.",
+     "say": "multiply",
+     "read": "five x"
+    },
+    {
+     "e": "x + 5",
+     "why": "Less than means take away, not add.",
+     "say": "add",
+     "read": "x plus five"
+    }
+   ]
+  },
+  {
+   "id": "ex05",
+   "level": 2,
+   "kind": "multi",
+   "prompt": "Select all that mean “seven less than a number x”.",
+   "read": "Which of these mean seven less than a number x? Choose all that apply.",
+   "check": "equals:x − 7",
+   "say_answer": "Two of them mean seven less than x: x minus seven, and negative seven plus x. Less than starts from the number and takes seven away.",
+   "options": [
+    {
+     "t": "x − 7",
+     "ok": true,
+     "why": "Start from x and take away seven.",
+     "say": "x minus seven. Start from x and take away seven. Right."
+    },
+    {
+     "t": "−7 + x",
+     "ok": true,
+     "why": "Same value as x − 7, written in a different order.",
+     "say": "Negative seven plus x. Adding in a different order gives the same value as x minus seven."
+    },
+    {
+     "t": "7 − x",
+     "ok": false,
+     "why": "This starts from 7, not from x.",
+     "say": "Seven minus x starts from seven, so it is the opposite order. Not a match."
+    },
+    {
+     "t": "x + 7",
+     "ok": false,
+     "why": "Less than subtracts; this adds.",
+     "say": "x plus seven adds. Less than means subtract."
+    },
+    {
+     "t": "7x",
+     "ok": false,
+     "why": "This multiplies.",
+     "say": "Seven x multiplies. Not a match."
+    }
+   ]
+  },
+  {
+   "id": "ex06",
+   "level": 2,
+   "kind": "words",
+   "prompt": "Write an expression for “the quotient of a number and six”. Use x for the number.",
+   "read": "Write an expression for: the quotient of a number and six. Use x for the number.",
+   "a": "[[x | 6]]",
+   "a_read": "x over six",
+   "test": {
+    "var": "x",
+    "value": 30,
+    "means": "30 ÷ 6"
+   },
+   "lines": [
+    "The quotient of ⟨a number⟩ and six",
+    "⟨The quotient of⟩ x and six",
+    "[[x | 6]]"
+   ],
+   "chips": [
+    "VAR",
+    "WORDS"
+   ],
+   "say": [
+    "Let x be the number.",
+    "Quotient means divide, with x on top and six on the bottom."
+   ],
+   "at": [
+    "x",
+    "bottom"
+   ],
+   "wrong": [
+    {
+     "e": "[[6 | x]]",
+     "why": "The quotient of a and b is a divided by b: the first number goes on top.",
+     "say": "put the six on top",
+     "read": "six over x"
+    },
+    {
+     "e": "x − 6",
+     "why": "Quotient means divide, not subtract.",
+     "say": "subtract",
+     "read": "x minus six"
+    },
+    {
+     "e": "6x",
+     "why": "Quotient means divide, not multiply.",
+     "say": "multiply",
+     "read": "six x"
+    }
+   ]
+  },
+  {
+   "id": "ex07",
+   "level": 3,
+   "kind": "words",
+   "prompt": "Write an expression for “twice the sum of a number and three”. Use x for the number.",
+   "read": "Write an expression for: twice the sum of a number and three. Use x for the number.",
+   "a": "2(x + 3)",
+   "a_read": "two times the quantity x plus three",
+   "test": {
+    "var": "x",
+    "value": 4,
+    "means": "2 × (4 + 3)"
+   },
+   "lines": [
+    "Twice ⟨the sum of a number and three⟩",
+    "⟨Twice⟩ (x + 3)",
+    "2(x + 3)"
+   ],
+   "chips": [
+    "GROUP",
+    "WORDS"
+   ],
+   "say": [
+    "With x as the number, the sum of a number and three is a group: x plus three, in parentheses.",
+    "Twice means times two, so two times the whole group."
+   ],
+   "at": [
+    "parentheses",
+    "group"
+   ],
+   "wrong": [
+    {
+     "e": "2x + 3",
+     "why": "Twice applies to the whole sum, so the sum needs parentheses.",
+     "say": "double only the number",
+     "read": "two x plus three"
+    },
+    {
+     "e": "x + 3",
+     "why": "You still have to double the sum.",
+     "say": "forget the twice",
+     "read": "x plus three"
+    },
+    {
+     "e": "2(x − 3)",
+     "why": "Sum means add, not subtract.",
+     "say": "subtract instead of add",
+     "read": "two times the quantity x minus three"
+    }
+   ]
+  },
+  {
+   "id": "ex08",
+   "level": 3,
+   "kind": "words",
+   "prompt": "Write an expression for “three more than twice a number”. Use x for the number.",
+   "read": "Write an expression for: three more than twice a number. Use x for the number.",
+   "a": "2x + 3",
+   "a_read": "two x plus three",
+   "test": {
+    "var": "x",
+    "value": 5,
+    "means": "2 × 5 + 3"
+   },
+   "lines": [
+    "Three more than ⟨twice a number⟩",
+    "⟨Three more than⟩ 2x",
+    "2x + 3"
+   ],
+   "chips": [
+    "WORDS",
+    "ORDER"
+   ],
+   "say": [
+    "With x as the number, twice a number is two x.",
+    "Three more than two x means start from two x and add three."
+   ],
+   "at": [
+    "two",
+    "add"
+   ],
+   "wrong": [
+    {
+     "e": "3x + 2",
+     "why": "The three is added after the doubling; only the number is doubled.",
+     "say": "swap the two numbers",
+     "read": "three x plus two"
+    },
+    {
+     "e": "2(x + 3)",
+     "why": "Twice a number is just 2x; the three is added after, with no parentheses.",
+     "say": "double the sum",
+     "read": "two times the quantity x plus three"
+    },
+    {
+     "e": "2x − 3",
+     "why": "More than means add, not subtract.",
+     "say": "subtract",
+     "read": "two x minus three"
+    }
+   ]
+  },
+  {
+   "id": "ex09",
+   "level": 3,
+   "kind": "multi",
+   "prompt": "Select all that mean “twice the sum of x and three”.",
+   "read": "Which of these mean twice the sum of x and three? Choose all that apply.",
+   "check": "equals:2(x + 3)",
+   "say_answer": "Two of them are right: two times the quantity x plus three, and two x plus six. The second is the first with the two distributed.",
+   "options": [
+    {
+     "t": "2(x + 3)",
+     "ok": true,
+     "why": "Add first, then double.",
+     "say": "Two times the quantity x plus three. Add first, then double. Right."
+    },
+    {
+     "t": "2x + 6",
+     "ok": true,
+     "why": "The same as 2(x + 3) after distributing.",
+     "say": "Two x plus six is two times the quantity x plus three, with the two distributed. Right."
+    },
+    {
+     "t": "2x + 3",
+     "ok": false,
+     "why": "Only the x is doubled here.",
+     "say": "Two x plus three doubles only the x. Not a match."
+    },
+    {
+     "t": "x + 6",
+     "ok": false,
+     "why": "This adds six to x without doubling it.",
+     "say": "x plus six does not double the x. Not a match."
+    },
+    {
+     "t": "2 + (x + 3)",
+     "ok": false,
+     "why": "This adds two instead of multiplying.",
+     "say": "Two plus the quantity x plus three adds two. Twice means multiply."
+    }
+   ]
+  },
+  {
+   "id": "ex10",
+   "level": 4,
+   "kind": "words",
+   "prompt": "Tickets cost 12 dollars each and popcorn costs 6. A 3 dollar coupon is taken off. Write an expression for the cost of x tickets and one popcorn.",
+   "read": "Tickets cost twelve dollars each and popcorn costs six. A three dollar coupon is taken off. Write an expression for the cost of x tickets and one popcorn.",
+   "a": "12x + 3",
+   "a_read": "twelve x plus three",
+   "test": {
+    "var": "x",
+    "value": 5,
+    "means": "12 × 5 + 6 − 3"
+   },
+   "lines": [
+    "⟨x tickets at 12 each⟩, popcorn 6, coupon 3 off",
+    "12x, ⟨popcorn 6⟩, coupon 3 off",
+    "12x + 6, ⟨coupon 3 off⟩",
+    "⟨12x + 6 − 3⟩",
+    "12x + 3"
+   ],
+   "chips": [
+    "WORDS",
+    "WORDS",
+    "WORDS",
+    "COMBINE"
+   ],
+   "say": [
+    "Tickets cost twelve each, so x tickets cost twelve x.",
+    "The popcorn adds six.",
+    "The coupon takes off three.",
+    "Now combine the constants: six minus three is three, so twelve x plus three."
+   ],
+   "at": [
+    "twelve",
+    "adds",
+    "takes",
+    "three#3"
+   ],
+   "wrong": [
+    {
+     "e": "12x + 9",
+     "why": "A coupon takes money off: subtract it, don't add it.",
+     "say": "add the coupon",
+     "read": "twelve x plus nine"
+    },
+    {
+     "e": "12(x + 6) − 3",
+     "why": "Only the tickets get the 12.",
+     "say": "multiply the popcorn by twelve too",
+     "read": "twelve times the quantity x plus six, minus three"
+    },
+    {
+     "e": "12x + 6",
+     "why": "You still have to take off the coupon.",
+     "say": "forget the coupon",
+     "read": "twelve x plus six"
+    }
+   ]
+  },
+  {
+   "id": "ex11",
+   "level": 4,
+   "kind": "words",
+   "prompt": "Write an expression for “seven less than the product of three and a number”. Use x for the number.",
+   "read": "Write an expression for: seven less than the product of three and a number. Use x for the number.",
+   "a": "3x − 7",
+   "a_read": "three x minus seven",
+   "test": {
+    "var": "x",
+    "value": 10,
+    "means": "3 × 10 − 7"
+   },
+   "lines": [
+    "Seven less than ⟨the product of three and a number⟩",
+    "⟨Seven less than⟩ 3x",
+    "3x − 7"
+   ],
+   "chips": [
+    "WORDS",
+    "ORDER"
+   ],
+   "say": [
+    "With x as the number, the product of three and a number is three x.",
+    "Seven less than three x means start from three x and take away seven."
+   ],
+   "at": [
+    "three",
+    "take"
+   ],
+   "wrong": [
+    {
+     "e": "7 − 3x",
+     "why": "Less than starts from the other quantity: three x comes first.",
+     "say": "write the numbers in the order you hear them",
+     "read": "seven minus three x"
+    },
+    {
+     "e": "3(x − 7)",
+     "why": "The seven comes off the product, not off the number first.",
+     "say": "subtract seven from x first",
+     "read": "three times the quantity x minus seven"
+    },
+    {
+     "e": "3x + 7",
+     "why": "Less than means subtract, not add.",
+     "say": "add",
+     "read": "three x plus seven"
+    }
+   ]
+  },
+  {
+   "id": "ex12",
+   "level": 4,
+   "kind": "words",
+   "prompt": "Write an expression for “four times the difference of a number and nine”. Use x for the number.",
+   "read": "Write an expression for: four times the difference of a number and nine. Use x for the number.",
+   "a": "4(x − 9)",
+   "a_read": "four times the quantity x minus nine",
+   "test": {
+    "var": "x",
+    "value": 12,
+    "means": "4 × (12 − 9)"
+   },
+   "lines": [
+    "Four times ⟨the difference of a number and nine⟩",
+    "⟨Four times⟩ (x − 9)",
+    "4(x − 9)"
+   ],
+   "chips": [
+    "GROUP",
+    "WORDS"
+   ],
+   "say": [
+    "With x as the number, the difference of a number and nine is a group: x minus nine, in parentheses.",
+    "Four times means multiply the whole group by four."
+   ],
+   "at": [
+    "parentheses",
+    "group"
+   ],
+   "wrong": [
+    {
+     "e": "4x − 9",
+     "why": "The four multiplies the whole difference, so it needs parentheses.",
+     "say": "multiply only the x",
+     "read": "four x minus nine"
+    },
+    {
+     "e": "4(9 − x)",
+     "why": "Difference of a number and nine starts with the number: x − 9.",
+     "say": "reverse the subtraction",
+     "read": "four times the quantity nine minus x"
+    },
+    {
+     "e": "[[x − 9 | 4]]",
+     "why": "Times means multiply, not divide.",
+     "say": "divide",
+     "read": "x minus nine over four"
+    }
+   ]
+  }
+ ]
+}

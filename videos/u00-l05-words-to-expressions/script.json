@@ -1,0 +1,114 @@
+{
+ "format": "algebra-video-script",
+ "version": 1,
+ "video": "u00-l05-words-to-expressions",
+ "title": "Translating words into expressions",
+ "voice": "narrator",
+ "source": "video-scripts/u00.md#0.5",
+ "scenes": [
+  {
+   "id": "s01",
+   "title": "A phone plan",
+   "blocks": [
+    {
+     "id": "b01",
+     "text": "A phone plan costs twenty-five dollars a month, plus four dollars for each gigabyte of data. How could we write the cost for any month?",
+     "pause_after_s": 5.0
+    },
+    {
+     "id": "b02",
+     "text": "First, choose a variable and say what it means. Let g be the number of gigabytes. Then the cost is twenty-five plus four g.",
+     "display": "25 + 4g"
+    },
+    {
+     "id": "b03",
+     "text": "Algebra lets us write one expression for every possible month. That's what translating words into algebra gives us."
+    }
+   ]
+  },
+  {
+   "id": "s02",
+   "title": "Words for operations",
+   "blocks": [
+    {
+     "id": "b04",
+     "text": "Each operation has its own words. Sum, more than, and increased by mean add. Difference, less than, and decreased by mean subtract. Product, times, and twice mean multiply. Quotient and per mean divide."
+    },
+    {
+     "id": "b05",
+     "text": "A number increased by seven is n plus seven. The product of three and a number is three n.",
+     "display": "a number increased by 7"
+    }
+   ]
+  },
+  {
+   "id": "s03",
+   "title": "The order trap",
+   "blocks": [
+    {
+     "id": "b06",
+     "text": "Now a careful one. Five less than a number. Write it before I do.",
+     "pause_after_s": 10.0
+    },
+    {
+     "id": "b07",
+     "text": "It's n minus five, not five minus n. Test it with a real number: five less than twenty is fifteen, which is twenty minus five. The words come in the opposite order from the symbols.",
+     "display": "5 − n"
+    },
+    {
+     "id": "b08",
+     "text": "Subtract four from x works the same way: x minus four.",
+     "display": "x − 4"
+    }
+   ]
+  },
+  {
+   "id": "s04",
+   "title": "The quantity",
+   "blocks": [
+    {
+     "id": "b09",
+     "text": "Grouping matters too. Compare twice the sum of a number and three, with twice a number, plus three."
+    },
+    {
+     "id": "b10",
+     "text": "Do these two mean the same thing? Pick a number and test it.",
+     "pause_after_s": 10.0
+    },
+    {
+     "id": "b11",
+     "text": "They don't. Twice the sum means add first, then double: two times the quantity n plus three. Twice a number plus three doubles first. With n equal to four, one gives fourteen and the other gives eleven.",
+     "display": "2(n + 3)"
+    }
+   ]
+  },
+  {
+   "id": "s05",
+   "title": "Your turn",
+   "blocks": [
+    {
+     "id": "b12",
+     "text": "Your turn. A movie ticket costs twelve dollars and popcorn costs six. Write the cost of t tickets and one popcorn, after taking off a three dollar coupon. Pause the video and try it.",
+     "pause_after_s": 15.0
+    },
+    {
+     "id": "b13",
+     "text": "Twelve t for the tickets, plus six for the popcorn, minus three for the coupon. That simplifies to twelve t plus three.",
+     "display": "12t + 6 − 3"
+    },
+    {
+     "id": "b14",
+     "text": "Remember: define your variable, match each word to its operation, test the order with a real number, and use parentheses when the words say \"the sum\" or \"the difference\" of something."
+    },
+    {
+     "id": "b15",
+     "text": "That completes the foundations. Next unit, we'll solve equations."
+    },
+    {
+     "id": "b16",
+     "text": "This video uses an AI-generated voice."
+    }
+   ]
+  }
+ ]
+}

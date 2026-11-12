@@ -21,7 +21,7 @@ Mathematics. Each unit lists the standards it covers.
    - **0.2.2** Distributive property — *video ≈ 3:30* (produced)
 3. Parts of an expression: terms, factors, coefficients, constants — *video 3:20* (produced)
 4. Combining like terms and simplifying — *video 3:22* (produced)
-5. Translating words into algebraic expressions — *video ≈ 3:15*
+5. Translating words into algebraic expressions — *video 3:03* (produced)
 
 ## Unit 1 — Linear Equations and Inequalities
 *KY.HS.A.12, A.15, A.16, A.18, N.4–N.6* · [scripts](video-scripts/u01.md)

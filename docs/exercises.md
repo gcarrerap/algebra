@@ -6,6 +6,7 @@ Each lesson can have a practice set. The first one is
 
 Topic 0.3 (parts of an expression) has [`exercises/u00-l03/`](../exercises/u00-l03/) (14 exercises).
 Topic 0.4 (combining like terms) has [`exercises/u00-l04/`](../exercises/u00-l04/) (14 exercises).
+Topic 0.5 (translating words into expressions) has [`exercises/u00-l05/`](../exercises/u00-l05/) (12 exercises).
 
 Topic 0.2 (properties of operations) has [`exercises/u00-l02/`](../exercises/u00-l02/) (24 exercises),
 shared by its two subtopics 0.2.1 (commutative and associative) and 0.2.2 (distributive): within each
@@ -20,6 +21,9 @@ subtopics has one set for all of them. Kinds of exercise:
 | `name` | Which property does an identity show? | Both sides must be equal, and the stated property must match the identity's shape (same order and same numbers = associative; same numbers in another order = commutative; otherwise distributive). The two other properties are the wrong options. |
 | `multi` | Select **all** that apply (4–6 options, at least one right and one wrong). | With `"check": "property:<Name>"`, `"equals:<expr>"`, `"term-of:<expr>"` (option is a term of `<expr>`, sign included), `"terms:<n>"` (option has exactly `<n>` terms) or `"coefficient:<n>"` (option is one term with coefficient `<n>`) or `"like:<term>"` (option is one term with the same variable part as `<term>`: `2yx` is like `5xy`, `x` is not like `x²`; 0.4), every option's `ok` is verified with code. Each option has `t` (shown), `ok`, `why` (shown when it is picked wrongly) and `say` (narration in the video); the exercise has `prompt`, `read` and `say_answer`. |
 | `match` | Match every left item with a right item (3–6 pairs; right items may repeat, to sort items into groups). | With `"check": "property"` (left = identity, right = its property), `"equal"` (left equals right, and equals no other right item) or `"coefficient"` (left = a term, right = its coefficient), every pair is verified with code. Each pair has `l`, `r`, `why`, `say`; the exercise has `prompt`, `read` and `say_answer`. |
+| `words` | Write an expression for a sentence (0.5), e.g. “five less than a number”. The sentence is in `prompt` (no `q`); the page hides the math line. | The answer is pinned by a `test`: `{"var": "x", "value": 20, "means": "20 − 5"}`, where `means` is arithmetic written from the sentence. The answer must give that value at that number, every wrong option a different one. Any equal form is accepted on the page (`anyForm`: `2x + 6` is right for `2(x + 3)`). Only the letters `x y z a b c` can be checked. Chips: VAR blue, WORDS yellow, ORDER purple, GROUP green, TEST ink. |
+
+`match` and `multi` also take `"check": "operation"` (`match` only: left = phrase such as “less than”, right = `addition`, `subtraction`, `multiplication` or `division`; the key words are `OPERATION_WORDS` in `tools/build_exercises.py`, and each phrase must match exactly one operation).
 
 Property chips: **COMM blue · ASSOC purple · DIST yellow · CALC green · REWRITE white**.
 Like-terms chip (0.4): **COMBINE green**, next to DIST yellow.

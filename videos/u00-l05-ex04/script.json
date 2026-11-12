@@ -1,0 +1,57 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l05-ex04",
+  "title": "Exercise 4",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Write an expression for: five less than a number. Use x for the number.",
+          "display": "Write an expression for “five less than a number”. Use x for the number.",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Call the number x.",
+          "display": "Five less than x",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Less than reverses the order: start from x and take away five, so x minus five.",
+          "display": "x − 5",
+          "cue": "step-2"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b04",
+          "text": "So the answer is x minus five. Test it. If x is twenty, the expression gives fifteen.",
+          "display": "= x − 5",
+          "cue": "answer"
+        },
+        {
+          "id": "b05",
+          "text": "Watch out for these traps. If you write the numbers in the order you hear them, you get five minus x. If you multiply, you get five x.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

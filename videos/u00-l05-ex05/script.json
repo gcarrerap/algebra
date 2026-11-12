@@ -1,0 +1,69 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l05-ex05",
+  "title": "Exercise 5",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's look at this one. Which of these mean seven less than a number x? Choose all that apply.",
+          "display": "Select all that mean “seven less than a number x”.",
+          "cue": "show-problem",
+          "pause_after_s": 1.5
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "One by one",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "x minus seven. Start from x and take away seven. Right.",
+          "display": "x − 7",
+          "cue": "option-1"
+        },
+        {
+          "id": "b03",
+          "text": "Negative seven plus x. Adding in a different order gives the same value as x minus seven.",
+          "display": "−7 + x",
+          "cue": "option-2"
+        },
+        {
+          "id": "b04",
+          "text": "Seven minus x starts from seven, so it is the opposite order. Not a match.",
+          "display": "7 − x",
+          "cue": "option-3"
+        },
+        {
+          "id": "b05",
+          "text": "x plus seven adds. Less than means subtract.",
+          "display": "x + 7",
+          "cue": "option-4"
+        },
+        {
+          "id": "b06",
+          "text": "Seven x multiplies. Not a match.",
+          "display": "7x",
+          "cue": "option-5"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b07",
+          "text": "Two of them mean seven less than x: x minus seven, and negative seven plus x. Less than starts from the number and takes seven away.",
+          "cue": "answer"
+        }
+      ]
+    }
+  ]
+}

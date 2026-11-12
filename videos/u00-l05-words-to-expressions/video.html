@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Translating Words into Expressions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="../_engine/player.css">
+<style>
+  /* Lesson 0.5 colors: operation columns + (blue) − (purple) × (yellow) ÷ (green);
+     variable terms blue · constants green · the right translation green · the trap red. */
+  .tag { font: 700 30px Inter, sans-serif; letter-spacing: 0.1em; text-transform: uppercase; }
+  .op { font: 600 64px Poppins, sans-serif; color: var(--muted); margin: 0 14px; }
+  .opcols { display: grid; grid-template-columns: repeat(4, 400px); gap: 40px; }
+  .opcard { padding: 26px 24px; gap: 14px; justify-content: flex-start; }
+  .opcard .label { font-size: 30px; }
+  .opcard .words { display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: 6px; }
+  .opcard .w { font: 500 40px/1.25 Inter, sans-serif; }
+  .trans { display: grid; grid-template-columns: 760px 90px 380px; row-gap: 12px; align-items: center; }
+  .trans .from { font: 500 40px Inter, sans-serif; color: var(--muted); text-align: right; }
+  .trans .arrow { font: 600 56px Poppins, sans-serif; color: var(--muted); text-align: center; }
+  .trans .to { justify-self: start; }
+  .compare .card { width: 740px; padding: 30px 36px; gap: 34px; }
+  .compare .phrase { font: 500 42px/1.25 Inter, sans-serif; text-align: center; max-width: 660px; }
+  /* a crossed-out expression that contains a minus sign: a slanted line keeps the minus readable */
+  .strike.slash::after { top: 66%; height: 7px; transform-origin: 0 50%; transform: rotate(-12deg); }
+  .recap .card { width: 1400px; padding: 36px 56px; gap: 18px; align-items: stretch; }
+  .recap .line { display: grid; grid-template-columns: 330px 1fr; gap: 28px; align-items: baseline; }
+  .recap .name { font: 700 44px Poppins, sans-serif; }
+  .recap .what { font: 500 32px Inter, sans-serif; color: var(--ink); }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="header"><span class="unit">Unit 0 · Lesson 5</span><span class="title">Translating Words into Expressions</span></div>
+
+  <!-- s01: a phone plan -->
+  <section class="scene" data-scene="s01">
+    <div class="row" style="gap: 90px; align-items: center">
+      <div class="card fade" data-at="b01" style="align-items: flex-start; gap: 26px">
+        <div class="label muted">Phone plan</div>
+        <div class="math xs fade" data-at="b01@twenty-five"><span class="green">$25</span> a month</div>
+        <div class="math xs fade" data-at="b01@plus"><span class="blue">+ $4</span> for each gigabyte</div>
+      </div>
+      <div class="stack" style="min-width: 700px; justify-items: start">
+        <div class="col fade" data-at="b01@how" data-out="b02" style="gap: 30px; align-items: flex-start">
+          <div class="say yellow" style="font-size: 46px; max-width: 640px; text-align: left">How could we write the cost for any month?</div>
+          <div class="timer" data-at="b01.end" data-out="b02"></div>
+        </div>
+        <div class="col fade" data-at="b02" style="align-items: flex-start; gap: 22px">
+          <div class="label muted">1 · choose a variable</div>
+          <div class="say fade" data-at="b02@let" style="font-size: 46px; text-align: left">Let <span class="blue">g</span> = number of gigabytes</div>
+          <div class="math md fade" data-at="b02@then"><span class="green fade" data-at="b02@twenty-five">25</span><span class="blue fade" data-at="b02@four"> + 4g</span></div>
+          <div class="say yellow fade" data-at="b03@one" style="font-size: 40px; text-align: left">One expression for every month</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- s02: words for operations -->
+  <section class="scene" data-scene="s02">
+    <div class="col" style="gap: 44px">
+      <div class="opcols">
+        <div class="card opcard fade" data-at="b04@operation">
+          <span class="chip c-blue">+</span><div class="label blue">add</div>
+          <div class="words">
+            <div class="w fade" data-at="b04@sum">sum</div>
+            <div class="w fade" data-at="b04@more">more than</div>
+            <div class="w fade" data-at="b04@increased">increased by</div>
+          </div>
+        </div>
+        <div class="card opcard fade" data-at="b04@operation">
+          <span class="chip c-purple">−</span><div class="label purple">subtract</div>
+          <div class="words">
+            <div class="w fade" data-at="b04@difference">difference</div>
+            <div class="w fade" data-at="b04@less">less than</div>
+            <div class="w fade" data-at="b04@decreased">decreased by</div>
+          </div>
+        </div>
+        <div class="card opcard fade" data-at="b04@operation">
+          <span class="chip c-yellow">×</span><div class="label yellow">multiply</div>
+          <div class="words">
+            <div class="w fade" data-at="b04@product">product</div>
+            <div class="w fade" data-at="b04@times">times</div>
+            <div class="w fade" data-at="b04@twice">twice</div>
+            <div class="w fade" data-at="b04@multiply">of</div>
+          </div>
+        </div>
+        <div class="card opcard fade" data-at="b04@operation">
+          <span class="chip c-green">÷</span><div class="label green">divide</div>
+          <div class="words">
+            <div class="w fade" data-at="b04@quotient">quotient</div>
+            <div class="w fade" data-at="b04@per">per</div>
+            <div class="w fade" data-at="b04@divide">divided by</div>
+            <div class="w fade" data-at="b04@divide">ratio</div>
+          </div>
+        </div>
+      </div>
+      <div class="trans">
+        <div class="from fade" data-at="b05">a number increased by 7</div>
+        <div class="arrow fade" data-at="b05@n">→</div>
+        <div class="math sm to fade" data-at="b05@n">n <span class="blue fade" data-at="b05@plus">+ 7</span></div>
+        <div class="from fade" data-at="b05@product">the product of 3 and a number</div>
+        <div class="arrow fade" data-at="b05@three#2">→</div>
+        <div class="math sm to yellow fade" data-at="b05@three#2">3n</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- s03: the order trap -->
+  <section class="scene" data-scene="s03">
+    <div class="col" style="gap: 30px">
+      <div class="row" style="gap: 50px">
+        <div class="math sm fade" data-at="b06@five">five <span class="yellow">less than</span> a number</div>
+        <div class="timer" data-at="b06.end" data-out="b07" style="width: 120px; height: 120px"></div>
+      </div>
+      <div class="stack">
+        <div class="say yellow fade" data-at="b06@write" data-out="b07" style="font-size: 44px">Write it in symbols</div>
+        <div class="row" style="gap: 70px; align-items: stretch">
+          <div class="col" style="gap: 20px; justify-content: center">
+            <div class="math md green fade" data-at="b07@n">n − 5</div>
+            <div class="math md red fade" data-at="b07@not"><span class="strike slash" data-at="b07@n#2">5 − n</span></div>
+          </div>
+          <div class="card c-green fade" data-at="b07@test" style="align-items: flex-start; gap: 14px; padding: 28px 40px">
+            <div class="label muted">Test with a real number</div>
+            <div class="math xs fade" data-at="b07@five#3">5 less than 20 <span class="green fade" data-at="b07@fifteen">is 15</span></div>
+            <div class="math xs fade" data-at="b07@twenty#2"><span class="green">20 − 5</span> = 15 ✓</div>
+          </div>
+        </div>
+      </div>
+      <div class="tag yellow fade" data-at="b07@opposite">the words come in the opposite order from the symbols</div>
+      <div class="row fade" data-at="b08" style="gap: 30px">
+        <div class="say muted" style="font-size: 44px">subtract 4 from x</div>
+        <span class="op">→</span>
+        <div class="math sm fade" data-at="b08@x#2"><span class="green">x − 4</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- s04: the quantity -->
+  <section class="scene" data-scene="s04">
+    <div class="col compare" style="gap: 36px">
+      <div class="row" style="gap: 40px; align-items: stretch">
+        <div class="card c-blue fade" data-at="b09@twice">
+          <div class="phrase">twice <span class="blue">the sum</span> of a number and 3</div>
+          <div class="stack">
+            <div class="math md muted fade" data-at="b10" data-out="b11@two">?</div>
+            <div class="math md fade" data-at="b11@two">2<span class="hl c-blue" data-at="b11@add">(n + 3)</span></div>
+          </div>
+          <div class="math xs fade" data-at="b11@fourteen">2(4 + 3) = <span class="green">14</span></div>
+        </div>
+        <div class="col" style="justify-content: center; gap: 20px">
+          <div class="math md red fade" data-at="b11">≠</div>
+          <div class="chip c-yellow fade" data-at="b11@with" style="font-size: 40px; height: 64px">n = 4</div>
+        </div>
+        <div class="card c-purple fade" data-at="b09@twice#2">
+          <div class="phrase">twice a number, <span class="purple">plus 3</span></div>
+          <div class="stack">
+            <div class="math md muted fade" data-at="b10" data-out="b11@twice#2">?</div>
+            <div class="math md fade" data-at="b11@twice#2"><span class="hl c-yellow" data-at="b11@doubles">2n</span> + 3</div>
+          </div>
+          <div class="math xs fade" data-at="b11@eleven">2(4) + 3 = <span class="green">11</span></div>
+        </div>
+      </div>
+      <div class="row fade" data-at="b10" data-out="b11" style="gap: 40px">
+        <div class="say yellow" style="font-size: 44px">Same thing? Pick a number and test it.</div>
+        <div class="timer" data-at="b10.end" data-out="b11"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- s05: your turn + recap -->
+  <section class="scene" data-scene="s05">
+    <div class="layer fade" data-at="b12-0.5" data-out="b14" style="gap: 34px">
+      <div class="label yellow pop" data-at="b12" style="font-size: 34px">★ Your turn · write the cost</div>
+      <div class="row" style="gap: 36px">
+        <div class="card fade" data-at="b12@twelve" style="padding: 24px 44px; gap: 8px"><div class="label muted">ticket</div><div class="math sm blue">$12</div></div>
+        <div class="card fade" data-at="b12@six" style="padding: 24px 44px; gap: 8px"><div class="label muted">popcorn</div><div class="math sm green">$6</div></div>
+        <div class="card fade" data-at="b12@three" style="padding: 24px 44px; gap: 8px"><div class="label muted">coupon</div><div class="math sm green">−$3</div></div>
+      </div>
+      <div class="say fade muted" data-at="b12@tickets" style="font-size: 40px">Let <span class="blue">t</span> = number of tickets</div>
+      <div class="stack">
+        <div class="row fade" data-at="b12@pause" data-out="b13" style="gap: 40px">
+          <div class="say muted">⏸ Pause the video and try it</div>
+          <div class="timer" data-at="b12.end" data-out="b13"></div>
+        </div>
+        <div class="col fade" data-at="b13" style="gap: 18px">
+          <div class="math md">
+            <span class="blue fade" data-at="b13@twelve">12t</span>
+            <span class="hl c-yellow" data-at="b13@simplifies"><span class="green fade" data-at="b13@six">+ 6</span> <span class="green fade" data-at="b13@minus">− 3</span></span>
+          </div>
+          <div class="math md fade" data-at="b13@simplifies">= <span class="blue">12t</span> <span class="green">+ 3</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="layer fade recap" data-at="b14">
+      <div class="card pop c-yellow glow" data-at="b14">
+        <div class="line fade" data-at="b14@define"><div class="name blue">Define</div><div class="what">say what your variable means</div></div>
+        <div class="line fade" data-at="b14@match"><div class="name purple">Match</div><div class="what">each word to its operation</div></div>
+        <div class="line fade" data-at="b14@test"><div class="name green">Test</div><div class="what">the order, with a real number</div></div>
+        <div class="line fade" data-at="b14@parentheses"><div class="name yellow">Group</div><div class="what">parentheses for "the sum" and "the difference"</div></div>
+      </div>
+      <div class="say fade muted" data-at="b15@next" style="font-size: 38px">Next unit: <span style="color: var(--ink)">Linear Equations and Inequalities</span></div>
+      <div class="label fade muted" data-at="b16" style="font-size: 22px; font-weight: 500">This video uses an AI-generated voice.</div>
+    </div>
+  </section>
+
+  <div class="caption"></div>
+  <div class="progress"></div>
+  <div id="seek" title="Jump to a moment"></div>
+  <button id="play" type="button" aria-label="Play"><span class="play-btn">▶</span><span class="play-label">Watch the lesson</span></button>
+</div>
+<script src="../_engine/player.js"></script>
+</body>
+</html>
