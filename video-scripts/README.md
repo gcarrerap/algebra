@@ -52,6 +52,15 @@
 | 8.2 | [Exponential growth and decay](u08.md) | `u08-l02-growth-and-decay` | script | 3:20 | 42 s |
 | 8.3 | [Percent change and compound interest](u08.md) | `u08-l03-percent-change-and-interest` | script | 3:13 | 44 s |
 | 8.4 | [Building exponential functions](u08.md) | `u08-l04-building-exponentials` | script | 3:03 | 47 s |
-| 8.5 | [Exponential growth wins](u08.md) | `u08-l05-exponential-wins` | script | 3:03 | 44 s |
-| | **50 videos** | | | **172:19** (≈ 2.9 h) | |
+| 8.5 | [Exponential growth wins](u08.md) | `u08-l05-exponential-wins` | script | 3:06 | 44 s |
+| 9.1 | [Polynomial vocabulary](u09.md) | `u09-l01-polynomial-vocabulary` | script | 3:04 | 42 s |
+| 9.2 | [Adding and subtracting polynomials](u09.md) | `u09-l02-adding-subtracting-polynomials` | script | 2:58 | 42 s |
+| 9.3 | [Multiplying polynomials](u09.md) | `u09-l03-multiplying-polynomials` | script | 3:15 | 42 s |
+| 9.4 | [Special products](u09.md) | `u09-l04-special-products` | script | 3:20 | 40 s |
+| 10.1 | [Greatest common factor](u10.md) | `u10-l01-greatest-common-factor` | script | 3:52 | 42 s |
+| 10.2 | [Factoring x² + bx + c](u10.md) | `u10-l02-factoring-x2-bx-c` | script | 3:15 | 42 s |
+| 10.3 | [Factoring ax² + bx + c](u10.md) | `u10-l03-factoring-ax2-bx-c` | script | 3:36 | 47 s |
+| 10.4 | [Difference of squares and perfect-square trinomials](u10.md) | `u10-l04-special-factoring` | script | 3:17 | 42 s |
+| 10.5 | [Factoring to find zeros](u10.md) | `u10-l05-zeros-by-factoring` | script | 3:08 | 42 s |
+| | **59 videos** | | | **202:06** (≈ 3.4 h) | |
 <!-- estimates:end -->
