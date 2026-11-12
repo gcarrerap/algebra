@@ -1,0 +1,57 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l02-ex10",
+  "title": "Exercise 10",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Seven times the quantity two x minus one.",
+          "display": "7(2x − 1)",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Seven multiplies both terms: seven times two x, minus seven times one.",
+          "display": "7 · 2x − 7 · 1",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Seven times two x is fourteen x. Seven times one is seven.",
+          "display": "14x − 7",
+          "cue": "step-2"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b04",
+          "text": "So the answer is fourteen x minus seven.",
+          "display": "= 14x − 7",
+          "cue": "answer"
+        },
+        {
+          "id": "b05",
+          "text": "Watch out for these traps. If you multiply only the two x, you get fourteen x minus one. If you add seven and two, you get nine x minus seven.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

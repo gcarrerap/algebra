@@ -1,0 +1,63 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l02-ex17",
+  "title": "Exercise 17",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Seventeen times six, plus seventeen times four.",
+          "display": "17 × 6 + 17 × 4",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Both products have a seventeen. The distributive property works backwards too: seventeen times the quantity six plus four.",
+          "display": "17 × (6 + 4)",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Six plus four is ten.",
+          "display": "17 × 10",
+          "cue": "step-2"
+        },
+        {
+          "id": "b04",
+          "text": "Seventeen times ten is one hundred seventy.",
+          "display": "170",
+          "cue": "step-3"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b05",
+          "text": "So the answer is one hundred seventy.",
+          "display": "= 170",
+          "cue": "answer"
+        },
+        {
+          "id": "b06",
+          "text": "Watch out for these traps. If you drop the second seventeen, you get one hundred six. If you work straight left to right, you get four hundred seventy-six.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

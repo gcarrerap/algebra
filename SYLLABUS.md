@@ -154,13 +154,13 @@ Mathematics. Each unit lists the standards it covers.
 
 ## Lesson Format
 
-See [docs/course-design.md](docs/course-design.md): topics and subtopics, one video and one exercise
-set per learning block, and an exam at the end of every unit.
+See [docs/course-design.md](docs/course-design.md): topics and subtopics, one video per learning block,
+one exercise set per topic, and an exam at the end of every unit.
 
 Every video is written as a script first ([video-scripts/](video-scripts/README.md)); the lengths
 above are estimated from those scripts, reflection pauses included. A topic with numbered
 subtopics (0.1, 0.2) is split because one video would run over 7 minutes; each subtopic has its own
-video and exercise set. In total: 72 lesson videos, about 4 hours.
+video, and the topic's subtopics share one exercise set. In total: 72 lesson videos, about 4 hours.
 
 ## Mathematical Practices (throughout)
 

@@ -17,7 +17,10 @@ Chapter
 - A topic is divided into **subtopics** only when it is complex enough to need it; a simple topic
   has none.
 - The **learning block** is the topic, or each of its subtopics when it has them. Every learning
-  block has exactly one video and one exercise set.
+  block has exactly one video.
+- Every topic has exactly **one exercise set**. When the topic has subtopics, their videos share
+  that set: it covers all of them, ordered by level, and comes after the last subtopic's video
+  (0.1 and 0.2 work this way).
 
 ## Videos
 
@@ -166,5 +169,4 @@ What already exists and does not follow these rules yet:
 | Rule | Today |
 |---|---|
 | Unit exam with question bank, ≥90% to unlock | No exam pages or question banks yet. The home page already locks units and reads exam results (`algebra.exams.v1`). |
-| Own exercise set per learning block | 0.1's two subtopics share one practice set. |
 | Reflection pauses (2 × 10–15 s, 1 × 15–30 s) | The produced lesson videos (0.1.1, 0.2.1, 0.2.2) pause 1.5–4 s and lack the reflection lines marked *(new)* in their scripts; solution videos pause 1.2–1.5 s. |

@@ -50,7 +50,7 @@ How it is built:
   `?render` mode the bar is never built and `.render .controls` hides it, so MP4s and stills look
   as before. The old invisible `#seek` strip is ignored and can stay in existing pages.
 - **Which kind of video:** the id is `timeline.json`'s `video` (falling back to the folder name).
-  An id ending in `-exNN` (`u00-l02-s2-ex03`) is a solution video; anything else is a lesson.
+  An id ending in `-exNN` (`u00-l02-ex03`) is a solution video; anything else is a lesson.
   Nothing to mark in `video.html`.
 - **Watched:** when a lesson's narration ends, the player writes
   `localStorage["algebra.videos.v1"] = { "<video id>": { "watched": "<ISO date>" } }` and unlocks

@@ -1,0 +1,57 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l02-ex09",
+  "title": "Exercise 9",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Negative three times the quantity x plus four.",
+          "display": "−3(x + 4)",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Distribute the negative three to both terms, sign included. Negative three times x, plus negative three times four.",
+          "display": "(−3) · x + (−3) · 4",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Negative three times x is negative three x. Negative three times four is negative twelve, so we subtract twelve.",
+          "display": "−3x − 12",
+          "cue": "step-2"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b04",
+          "text": "So the answer is negative three x minus twelve.",
+          "display": "= −3x − 12",
+          "cue": "answer"
+        },
+        {
+          "id": "b05",
+          "text": "Watch out for these traps. If you lose the sign on the twelve, you get negative three x plus twelve. If you multiply only the x, you get negative three x plus four.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

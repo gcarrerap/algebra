@@ -1,0 +1,69 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l02-ex11",
+  "title": "Exercise 11",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Eight times one hundred two.",
+          "display": "8 × 102",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "One hundred two is one hundred plus two.",
+          "display": "8 × (100 + 2)",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Eight multiplies both parts: eight times one hundred, plus eight times two.",
+          "display": "8 × 100 + 8 × 2",
+          "cue": "step-2"
+        },
+        {
+          "id": "b04",
+          "text": "Eight times one hundred is eight hundred. Eight times two is sixteen.",
+          "display": "800 + 16",
+          "cue": "step-3"
+        },
+        {
+          "id": "b05",
+          "text": "Eight hundred plus sixteen is eight hundred sixteen.",
+          "display": "816",
+          "cue": "step-4"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b06",
+          "text": "So the answer is eight hundred sixteen.",
+          "display": "= 816",
+          "cue": "answer"
+        },
+        {
+          "id": "b07",
+          "text": "Watch out for these traps. If you multiply only the hundred, you get eight hundred two. If you multiply the parts instead of adding them, you get one thousand six hundred.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

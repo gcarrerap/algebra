@@ -8,7 +8,7 @@ rules and how a script becomes a video: [docs/video-scripts.md](../docs/video-sc
 | File | Contents |
 |---|---|
 | [`u00.md`](u00.md) … [`u13.md`](u13.md) | Lesson videos of each unit, in syllabus order. |
-| [`u00-l01-solutions.md`](u00-l01-solutions.md), [`u00-l02-s1-solutions.md`](u00-l02-solutions.md) | The 40 produced solution videos of practice sets 0.1 and 0.2 (generated). |
+| [`u00-l01-solutions.md`](u00-l01-solutions.md), [`u00-l02-solutions.md`](u00-l02-solutions.md) | The 40 produced solution videos of practice sets 0.1 and 0.2 (generated). |
 
 ## How the topics were split
 

@@ -1,0 +1,63 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l02-ex14",
+  "title": "Exercise 14",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's look at this one. Match each identity with the property it shows.",
+          "display": "Match each identity with the property it shows.",
+          "cue": "show-problem",
+          "pause_after_s": 1.5
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Pair by pair",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Eight times five equals five times eight. The factors swap places, so it is commutative.",
+          "display": "8 × 5 = 5 × 8 → Commutative",
+          "cue": "pair-1"
+        },
+        {
+          "id": "b03",
+          "text": "The quantity a plus b, plus four, equals a plus the quantity b plus four. Same order, the parentheses moved. Associative.",
+          "display": "(a + b) + 4 = a + (b + 4) → Associative",
+          "cue": "pair-2"
+        },
+        {
+          "id": "b04",
+          "text": "Seven plus the quantity y plus one equals seven plus the quantity one plus y. The parentheses stay where they are. Inside, y and one swap. Commutative.",
+          "display": "7 + (y + 1) = 7 + (1 + y) → Commutative",
+          "cue": "pair-3"
+        },
+        {
+          "id": "b05",
+          "text": "x times the quantity three times two equals the quantity x times three, times two. Same order, new grouping. Associative.",
+          "display": "x · (3 · 2) = (x · 3) · 2 → Associative",
+          "cue": "pair-4"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b06",
+          "text": "Order changes mean commutative. Grouping changes mean associative.",
+          "cue": "answer"
+        }
+      ]
+    }
+  ]
+}

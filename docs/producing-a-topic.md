@@ -26,7 +26,7 @@ that has them ([course-design.md](course-design.md)).
   (or to continue to the next one), that request authorizes the runs the block needs: one for the
   lesson, one for its solutions. Re-runs for a few bad takes are fine; anything else, ask first.
 - **Numbering.** Folders follow the syllabus: `videos/uNN-lTT-<slug>/` for lessons,
-  `exercises/uNN-lTT/` for a topic's set and `exercises/uNN-lTT-sS/` for subtopic S.
+  `exercises/uNN-lTT/` for a topic's set (one per topic, shared by its subtopics).
 
 ## 1. The script
 
@@ -83,7 +83,8 @@ committed).
 
 ## 6. Exercises
 
-Each learning block has its own set ([course-design.md](course-design.md), [exercises.md](exercises.md)):
+Each topic has one set, shared by its subtopics; make it once the last subtopic's video is done
+([course-design.md](course-design.md), [exercises.md](exercises.md)):
 
 - **10–20 exercises** in the four levels (Warm-up, Tricky, Challenging, Boss level), roughly a
   quarter each, harder ones last.

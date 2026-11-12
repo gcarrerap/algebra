@@ -44,7 +44,7 @@ def mmss(s):
 def main():
     folder = ROOT / sys.argv[1]
     data = json.loads((folder / "exercises.json").read_text(encoding="utf-8"))
-    set_id = folder.name                                   # u00-l01, or u00-l02-s1 for a subtopic
+    set_id = folder.name                                   # u00-l01: one set per topic
     number = f"{int(set_id[1:3])}.{int(set_id[5:7])}"
     if "-s" in set_id:
         number += "." + set_id.split("-s")[1]

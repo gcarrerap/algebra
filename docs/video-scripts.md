@@ -83,8 +83,8 @@ produced lesson videos it is within 3% of the real narration.
 | 7–10 min | Allowed, but look for a natural split. |
 | over 10 min | **Must** be split into subtopics (the tool fails). |
 
-When a topic is split, each subtopic gets its own script, video and exercise set
-([course-design.md](course-design.md)), and the split goes into [SYLLABUS.md](../SYLLABUS.md)
+When a topic is split, each subtopic gets its own script and video; the exercise set stays one per
+topic ([course-design.md](course-design.md)), and the split goes into [SYLLABUS.md](../SYLLABUS.md)
 and the course tree in [index.html](../index.html).
 
 ```

@@ -7,10 +7,10 @@ Each lesson can have a practice set. The first one is
 Topic 0.3 (parts of an expression) has [`exercises/u00-l03/`](../exercises/u00-l03/) (14 exercises).
 Topic 0.4 (combining like terms) has [`exercises/u00-l04/`](../exercises/u00-l04/) (14 exercises).
 
-Topic 0.2 (properties of operations) has two subtopics, each with its own set:
-[`exercises/u00-l02-s1/`](../exercises/u00-l02-s1/) (0.2.1, commutative and associative, 10 exercises) and
-[`exercises/u00-l02-s2/`](../exercises/u00-l02-s2/) (0.2.2, distributive, 14 exercises). A set's folder is
-`u<unit>-l<topic>` for a topic and `u<unit>-l<topic>-s<subtopic>` for a subtopic. Kinds of exercise:
+Topic 0.2 (properties of operations) has [`exercises/u00-l02/`](../exercises/u00-l02/) (24 exercises),
+shared by its two subtopics 0.2.1 (commutative and associative) and 0.2.2 (distributive): within each
+level, 0.2.1's exercises come first. A set's folder is always `u<unit>-l<topic>`: a topic with
+subtopics has one set for all of them. Kinds of exercise:
 
 | `kind` | The question | How it is checked |
 |---|---|---|
@@ -83,5 +83,5 @@ git -C ../api-access fetch --depth 1 origin audio-temp
 for d in videos/u00-l01-ex*; do python3 tools/plan_audio.py $d --fetch ../api-access; python3 tools/assemble_audio.py $d; done
 ```
 
-The 20 videos of 0.1 are 133 blocks, about 11,300 characters, in a single run. All 22 videos of 0.2
-(two lessons + 20 solutions) are 162 blocks, about 14,500 characters, also in one run.
+The 20 videos of 0.1 are 133 blocks, about 11,300 characters, in a single run. All 26 videos of 0.2
+(two lessons + 24 solutions) are 162 blocks, about 14,500 characters, also in one run.
