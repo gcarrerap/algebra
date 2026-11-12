@@ -30,12 +30,14 @@ Rules from [course-design.md](course-design.md#videos); **not built yet** (see i
 
 - A visible control bar shows the **current time and the total duration** (`timeline.json`'s
   `duration`) and a **full-screen** button (the stage scales to the screen).
-- **First viewing: no seeking.** The progress bar is display-only, taps on it and the arrow keys
+- **Lesson videos, first viewing: no seeking.** The progress bar is display-only, taps on it and the arrow keys
   do nothing; play and pause still work.
 - **After the video has played to the end once**, the bar is a slider again: tap or drag to jump,
   arrow keys to step. Remember "watched" per video in the browser (`localStorage`, one entry per
   video id, in the same spirit as the exam results `algebra.exams.v1`); clearing the browser's
   data starts again at the first viewing.
+- **Solution videos** (`videos/<set>-exNN/`) are always seekable, from the first viewing, and
+  never record "watched". They still show the duration and the full-screen button.
 - Pausing, and resuming, are always allowed.
 
 ## Web version (no MP4)
