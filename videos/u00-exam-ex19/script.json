@@ -1,0 +1,81 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-exam-ex19",
+  "title": "Solution · Signed numbers",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Negative three times negative two, squared, minus four times the quantity five minus eight, minus negative nine.",
+          "display": "−3(−2)^2 − 4(5 − 8) − (−9)",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Parentheses first. Five minus eight is negative three.",
+          "display": "−3(−2)^2 − 4(−3) − (−9)",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Next, the exponent. Negative two, squared, is four.",
+          "display": "−3(4) − 4(−3) − (−9)",
+          "cue": "step-2"
+        },
+        {
+          "id": "b04",
+          "text": "Now the multiplications. Negative three times four is negative twelve.",
+          "display": "−12 − 4(−3) − (−9)",
+          "cue": "step-3"
+        },
+        {
+          "id": "b05",
+          "text": "Four times negative three is also negative twelve.",
+          "display": "−12 − (−12) − (−9)",
+          "cue": "step-4"
+        },
+        {
+          "id": "b06",
+          "text": "Left to right. Negative twelve minus negative twelve is the same as negative twelve plus twelve, which is zero.",
+          "display": "0 − (−9)",
+          "cue": "step-5"
+        },
+        {
+          "id": "b07",
+          "text": "Finally, zero minus negative nine is zero plus nine. That's nine.",
+          "display": "9",
+          "cue": "step-6"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b08",
+          "text": "So the answer is nine.",
+          "display": "= 9",
+          "cue": "answer"
+        },
+        {
+          "id": "b09",
+          "text": "Watch out for these traps. If you square the whole product, you get fifty-seven. If you multiply the four by only the five, you get negative thirty-one.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

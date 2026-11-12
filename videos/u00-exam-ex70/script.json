@@ -1,0 +1,63 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-exam-ex70",
+  "title": "Solution · Translating words into expressions",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Write an expression for: two less than five times the difference of a number and three. Use x for the number.",
+          "display": "Write an expression for “two less than five times the difference of a number and three”. Use x for the number.",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "With x as the number, the difference of a number and three is a group: x minus three, in parentheses.",
+          "display": "Two less than five times (x − 3)",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Five times means multiply the whole group by five.",
+          "display": "Two less than 5(x − 3)",
+          "cue": "step-2"
+        },
+        {
+          "id": "b04",
+          "text": "Two less than that means start from the product and take away two.",
+          "display": "5(x − 3) − 2",
+          "cue": "step-3"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b05",
+          "text": "So the answer is five x minus three minus two. Test it. If x is seven, the expression gives eighteen.",
+          "display": "= 5(x − 3) − 2",
+          "cue": "answer"
+        },
+        {
+          "id": "b06",
+          "text": "Watch out for these traps. If you multiply only the number, you get five x minus three minus two. If you put the two inside the parentheses, you get five times the quantity x minus three minus two.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

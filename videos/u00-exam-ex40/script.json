@@ -1,0 +1,75 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-exam-ex40",
+  "title": "Solution · Distributive property",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's look at this one. Which of these equal negative three times the quantity x minus two? Choose all that apply.",
+          "display": "Select all the expressions equal to −3(x − 2).",
+          "cue": "show-problem",
+          "pause_after_s": 1.5
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "One by one",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Negative three x plus six. Negative three times x is negative three x, and negative three times negative two is positive six. Right.",
+          "display": "−3x + 6",
+          "cue": "option-1"
+        },
+        {
+          "id": "b03",
+          "text": "Negative three x minus six makes the six negative. But negative three times negative two is positive six. Not a match.",
+          "display": "−3x − 6",
+          "cue": "option-2"
+        },
+        {
+          "id": "b04",
+          "text": "Six minus three x has the same terms as negative three x plus six, in another order. Right.",
+          "display": "6 − 3x",
+          "cue": "option-3"
+        },
+        {
+          "id": "b05",
+          "text": "Negative three x minus two multiplies only the x. The negative two needs the negative three too. Not a match.",
+          "display": "−3x − 2",
+          "cue": "option-4"
+        },
+        {
+          "id": "b06",
+          "text": "The opposite of the quantity three x minus six changes both signs. That is negative three x plus six. Right.",
+          "display": "−(3x − 6)",
+          "cue": "option-5"
+        },
+        {
+          "id": "b07",
+          "text": "Three times the quantity two minus x is six minus three x. Right.",
+          "display": "3(2 − x)",
+          "cue": "option-6"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b08",
+          "text": "Four of them are equal: negative three x plus six, six minus three x, the opposite of the quantity three x minus six, and three times the quantity two minus x. The negative three multiplies both terms, and the minus times minus makes plus six.",
+          "cue": "answer"
+        }
+      ]
+    }
+  ]
+}

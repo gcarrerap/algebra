@@ -168,5 +168,5 @@ What already exists and does not follow these rules yet:
 
 | Rule | Today |
 |---|---|
-| Unit exam with question bank, ≥90% to unlock | No exam pages or question banks yet. The home page already locks units and reads exam results (`algebra.exams.v1`). |
+| Unit exam with question bank, ≥90% to unlock | Unit 0 has its exam ([`exams/u00/`](../exams/u00/), see [exams.md](exams.md)); the other units have none yet. The Boss solution videos of Unit 0 are written but not narrated yet. |
 | Reflection pauses (2 × 10–15 s, 1 × 15–30 s) | The produced lesson videos (0.1.1, 0.2.1, 0.2.2) pause 1.5–4 s and lack the reflection lines marked *(new)* in their scripts; solution videos pause 1.2–1.5 s. |

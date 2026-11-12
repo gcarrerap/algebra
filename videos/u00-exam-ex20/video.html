@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Solution · Signed numbers — step by step</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="../_engine/player.css">
+<style>
+  .c-ink { --c: var(--ink); }
+  .frac { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; margin: 0 0.12em; }
+  .frac .top { padding: 0.04em 0.25em 0.2em; border-bottom: 0.07em solid currentColor; }
+  .frac .bot { padding: 0.2em 0.25em 0.04em; }
+  /* highlight boxes reach past the text but take no room, so lines never shift when they appear */
+  .hl { padding: 0 10px; margin: 0 -10px; }
+  sup { font-size: 0.6em; vertical-align: 0.55em; line-height: 0; }
+  .deriv { display: grid; grid-template-columns: auto auto; align-items: center; justify-content: center; gap: 10px 28px; }
+  .deriv .chip { justify-self: end; }
+  .deriv:has(.md) .chip { min-width: 84px; height: 72px; font-size: 38px; }
+  .deriv:has(.sm) .chip { min-width: 70px; height: 60px; font-size: 32px; border-radius: 18px; }
+  .deriv:has(.xs) .chip { min-width: 58px; height: 48px; font-size: 26px; border-radius: 14px; }
+  .trap { width: 520px; padding: 28px 34px; gap: 14px; }
+  .trap .why { font: 500 30px/1.3 Inter, sans-serif; color: var(--muted); text-align: center; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="header"><span class="unit">Unit 0 · Exam</span><span class="title">Solution · Signed numbers</span></div>
+
+  <!-- s01: the problem -->
+  <section class="scene" data-scene="s01">
+    <div class="label yellow fade" data-at="b01">Solution · Signed numbers · Boss level</div>
+    <div class="math md pop" data-at="b01">(x − 1)<sup>2</sup> − 3x(x + 2)</div>
+    <div class="say fade muted" data-at="b01+0.4" style="font-size: 40px">Evaluate the expression when x = −3.</div>
+  </section>
+
+  <!-- s02: step by step -->
+  <section class="scene" data-scene="s02">
+    <div class="deriv">
+      <span></span>
+      <div class="math sm fade" data-at="b02-0.7">(<span class="hl c-ink" data-at="b02" data-out="b02.end">x</span> − 1)<sup>2</sup> − 3<span class="hl c-ink" data-at="b02" data-out="b02.end">x</span>(<span class="hl c-ink" data-at="b02" data-out="b02.end">x</span> + 2)</div>
+      <span class="chip c-ink pop" data-at="b02@three">SUB</span>
+      <div class="math sm fade" data-at="b02@three"><span class="hl c-blue" data-at="b03" data-out="b03.end">((−3) − 1)</span><sup>2</sup> − 3(−3)((−3) + 2)</div>
+      <span class="chip c-blue pop" data-at="b03@four">P</span>
+      <div class="math sm fade" data-at="b03@four">(−4)<sup>2</sup> − 3(−3)<span class="hl c-blue" data-at="b04" data-out="b04.end">((−3) + 2)</span></div>
+      <span class="chip c-blue pop" data-at="b04@one">P</span>
+      <div class="math sm fade" data-at="b04@one"><span class="hl c-purple" data-at="b05" data-out="b05.end">(−4)<sup>2</sup></span> − 3(−3)(−1)</div>
+      <span class="chip c-purple pop" data-at="b05@sixteen">E</span>
+      <div class="math sm fade" data-at="b05@sixteen">16 − <span class="hl c-yellow" data-at="b06" data-out="b06.end">3(−3)</span>(−1)</div>
+      <span class="chip c-yellow pop" data-at="b06@nine">MD</span>
+      <div class="math sm fade" data-at="b06@nine">16 − <span class="hl c-yellow" data-at="b07" data-out="b07.end">(−9)(−1)</span></div>
+      <span class="chip c-yellow pop" data-at="b07@nine#2">MD</span>
+      <div class="math sm fade" data-at="b07@nine#2"><span class="hl c-green" data-at="b08" data-out="b08.end">16 − 9</span></div>
+      <span class="chip c-green pop" data-at="b08@seven">AS</span>
+      <div class="math sm pop green" data-at="b08@seven">7</div>
+    </div>
+  </section>
+
+  <!-- s03: the answer and the traps -->
+  <section class="scene" data-scene="s03">
+    <div class="math sm fade" data-at="b09-0.5">(x − 1)<sup>2</sup> − 3x(x + 2) <span class="green pop" data-at="b09@seven">= 7</span></div>
+    <div class="label red fade" data-at="b10">Common traps</div>
+    <div class="row" style="align-items: stretch; gap: 36px">
+        <div class="card trap fade c-red" data-at="b10+0.15"><div class="math sm red"><span class="strike" data-at="b10+0.90" data-dur="0.5">−13</span></div><div class="why">You squared only the 1. The parentheses (x − 1) are the base.</div></div>
+        <div class="card trap fade c-red" data-at="b10+0.40"><div class="math sm red"><span class="strike" data-at="b10+1.15" data-dur="0.5">−9</span></div><div class="why">You multiplied 3x by only the first x. The parentheses (x + 2) multiply the whole thing.</div></div>
+        <div class="card trap fade c-red" data-at="b10+0.65"><div class="math sm red"><span class="strike" data-at="b10+1.40" data-dur="0.5">25</span></div><div class="why">You changed the minus before 3x(x + 2) into a plus.</div></div>
+    </div>
+    <div class="label muted fade" data-at="b10+1.5" style="font-size: 22px; font-weight: 500; position: absolute; right: 0; top: -72px">This video uses an AI-generated voice.</div>
+  </section>
+
+  <div class="caption"></div>
+  <div class="progress"></div>
+  <div id="seek" title="Jump to a moment"></div>
+  <button id="play" type="button" aria-label="Play"><span class="play-btn">▶</span><span class="play-label">Watch the solution</span></button>
+</div>
+<script src="../_engine/player.js"></script>
+</body>
+</html>

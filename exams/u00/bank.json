@@ -1,0 +1,3377 @@
+{
+ "unit": "0",
+ "title": "Unit 0 exam",
+ "levels": {
+  "1": "Warm-up",
+  "2": "Tricky",
+  "3": "Challenging",
+  "4": "Boss level"
+ },
+ "pass": 0.9,
+ "draw": {
+  "total": 20,
+  "boss_per_block": 1
+ },
+ "video_unit": "Unit 0 · Exam",
+ "video_title": "Solution · {block}",
+ "blocks": [
+  {
+   "id": "0.1.1",
+   "name": "Order of operations"
+  },
+  {
+   "id": "0.1.2",
+   "name": "Signed numbers"
+  },
+  {
+   "id": "0.2.1",
+   "name": "Commutative and associative properties"
+  },
+  {
+   "id": "0.2.2",
+   "name": "Distributive property"
+  },
+  {
+   "id": "0.3",
+   "name": "Parts of an expression"
+  },
+  {
+   "id": "0.4",
+   "name": "Combining like terms"
+  },
+  {
+   "id": "0.5",
+   "name": "Translating words into expressions"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "ex01",
+   "level": 1,
+   "block": "0.1.1",
+   "q": "18 − 6 ÷ 3 + 3",
+   "lines": [
+    "18 − ⟨6 ÷ 3⟩ + 3",
+    "⟨18 − 2⟩ + 3",
+    "⟨16 + 3⟩",
+    "19"
+   ],
+   "chips": [
+    "MD",
+    "AS",
+    "AS"
+   ],
+   "say": [
+    "No parentheses or exponents, so division comes first: 6 ÷ 3 = 2.",
+    "Subtraction and addition share a level, so go left to right: 18 − 2 = 16.",
+    "Last, 16 + 3 = 19."
+   ],
+   "wrong": [
+    {
+     "e": "(18 − 6) ÷ 3 + 3",
+     "why": "You subtracted 18 − 6 first, but division comes before subtraction.",
+     "say": "subtract before dividing"
+    },
+    {
+     "e": "18 − 6 ÷ (3 + 3)",
+     "why": "You added 3 + 3 first, but addition comes last.",
+     "say": "add before dividing"
+    },
+    {
+     "e": "18 − (6 ÷ 3 + 3)",
+     "why": "You added 2 + 3 before subtracting. Subtraction and addition share a level: left to right.",
+     "say": "add before subtracting"
+    }
+   ],
+   "at": [
+    "no",
+    "subtraction",
+    "last"
+   ],
+   "block_name": "Order of operations"
+  },
+  {
+   "id": "ex02",
+   "level": 2,
+   "block": "0.1.1",
+   "q": "4 + 2 × 3^2",
+   "lines": [
+    "4 + 2 × ⟨3^2⟩",
+    "4 + ⟨2 × 9⟩",
+    "⟨4 + 18⟩",
+    "22"
+   ],
+   "chips": [
+    "E",
+    "MD",
+    "AS"
+   ],
+   "say": [
+    "The exponent comes first, and it only touches the 3: 3² = 9.",
+    "Then multiplication: 2 × 9 = 18.",
+    "Last, 4 + 18 = 22."
+   ],
+   "wrong": [
+    {
+     "e": "(4 + 2) × 3^2",
+     "why": "You added 4 + 2 first, but addition comes last.",
+     "say": "add first"
+    },
+    {
+     "e": "4 + (2 × 3)^2",
+     "why": "You squared the whole product 2 × 3. The exponent belongs only to the 3.",
+     "say": "square the product"
+    },
+    {
+     "e": "4 + 2 × 3 × 2",
+     "why": "You multiplied 3 by 2 instead of squaring it.",
+     "say": "multiply the three by two instead of squaring"
+    }
+   ],
+   "at": [
+    "the",
+    "then",
+    "last"
+   ],
+   "block_name": "Order of operations"
+  },
+  {
+   "id": "ex03",
+   "level": 2,
+   "block": "0.1.1",
+   "q": "(2 + 3)^2 − 2 × 5",
+   "lines": [
+    "⟨(2 + 3)⟩^2 − 2 × 5",
+    "⟨5^2⟩ − 2 × 5",
+    "25 − ⟨2 × 5⟩",
+    "⟨25 − 10⟩",
+    "15"
+   ],
+   "chips": [
+    "P",
+    "E",
+    "MD",
+    "AS"
+   ],
+   "say": [
+    "Parentheses first: 2 + 3 = 5.",
+    "Then the exponent: 5² = 25.",
+    "Then multiplication: 2 × 5 = 10.",
+    "Last, 25 − 10 = 15."
+   ],
+   "wrong": [
+    {
+     "e": "2 + 3^2 − 2 × 5",
+     "why": "You squared only the 3. The parentheses make 2 + 3 the base.",
+     "say": "square only the three"
+    },
+    {
+     "e": "(2 + 3) × 2 − 2 × 5",
+     "why": "You multiplied by 2 instead of squaring.",
+     "say": "multiply by two instead of squaring"
+    },
+    {
+     "e": "((2 + 3)^2 − 2) × 5",
+     "why": "You subtracted 25 − 2 before multiplying. Multiplication comes before subtraction.",
+     "say": "subtract before multiplying"
+    }
+   ],
+   "at": [
+    "parentheses",
+    "then",
+    "then",
+    "last"
+   ],
+   "block_name": "Order of operations"
+  },
+  {
+   "id": "ex04",
+   "level": 2,
+   "block": "0.1.1",
+   "q": "−4^2 + 20",
+   "lines": [
+    "⟨−4^2⟩ + 20",
+    "⟨−16 + 20⟩",
+    "4"
+   ],
+   "chips": [
+    "E",
+    "AS"
+   ],
+   "say": [
+    "With no parentheses, the exponent only touches the 4: 4² = 16, and the minus stays outside, so −4² = −16.",
+    "Then −16 + 20 = 4."
+   ],
+   "wrong": [
+    {
+     "e": "(−4)^2 + 20",
+     "why": "You squared the negative sign too. Without parentheses, the exponent only touches the 4.",
+     "say": "square the negative sign too"
+    },
+    {
+     "e": "−4 × 2 + 20",
+     "why": "You multiplied 4 by 2 instead of squaring it.",
+     "say": "multiply by two instead of squaring"
+    },
+    {
+     "e": "−4 + 20",
+     "why": "You forgot to square the 4.",
+     "say": "forget the exponent"
+    }
+   ],
+   "at": [
+    "with",
+    "then"
+   ],
+   "block_name": "Order of operations"
+  },
+  {
+   "id": "ex05",
+   "level": 3,
+   "block": "0.1.1",
+   "q": "[20 − 2 × (3 + 1)] ÷ 3 + 2^3",
+   "lines": [
+    "[20 − 2 × ⟨(3 + 1)⟩] ÷ 3 + 2^3",
+    "[20 − ⟨2 × 4⟩] ÷ 3 + 2^3",
+    "⟨[20 − 8]⟩ ÷ 3 + 2^3",
+    "12 ÷ 3 + ⟨2^3⟩",
+    "⟨12 ÷ 3⟩ + 8",
+    "⟨4 + 8⟩",
+    "12"
+   ],
+   "chips": [
+    "P",
+    "MD",
+    "P",
+    "E",
+    "MD",
+    "AS"
+   ],
+   "say": [
+    "Work from the inside out. In the innermost group, 3 + 1 = 4.",
+    "Inside the brackets, multiplication comes before subtraction: 2 × 4 = 8.",
+    "Now finish the brackets: 20 − 8 = 12.",
+    "Next, the exponent: 2³ = 8.",
+    "Then division: 12 ÷ 3 = 4.",
+    "Last, 4 + 8 = 12."
+   ],
+   "wrong": [
+    {
+     "e": "[20 − 2] × (3 + 1) ÷ 3 + 2^3",
+     "why": "You subtracted 20 − 2 before multiplying inside the brackets.",
+     "say": "subtract before multiplying"
+    },
+    {
+     "e": "[20 − 2 × (3 + 1)] ÷ 3 + 2 × 3",
+     "why": "You multiplied 2 by 3 instead of cubing the 2.",
+     "say": "multiply the two by three instead of cubing"
+    },
+    {
+     "e": "[20 − 2 × 3 + 1] ÷ 3 + 2^3",
+     "why": "You ignored the parentheses around 3 + 1.",
+     "say": "ignore the parentheses around three plus one"
+    }
+   ],
+   "at": [
+    "work",
+    "inside",
+    "now",
+    "next",
+    "then",
+    "last"
+   ],
+   "block_name": "Order of operations"
+  },
+  {
+   "id": "ex06",
+   "level": 3,
+   "block": "0.1.1",
+   "q": "5 + 12 ÷ 3 × 2 − 3^2",
+   "lines": [
+    "5 + 12 ÷ 3 × 2 − ⟨3^2⟩",
+    "5 + ⟨12 ÷ 3⟩ × 2 − 9",
+    "5 + ⟨4 × 2⟩ − 9",
+    "⟨5 + 8⟩ − 9",
+    "⟨13 − 9⟩",
+    "4"
+   ],
+   "chips": [
+    "E",
+    "MD",
+    "MD",
+    "AS",
+    "AS"
+   ],
+   "say": [
+    "The exponent comes first: 3² = 9.",
+    "Division and multiplication share a level, so go left to right: 12 ÷ 3 = 4.",
+    "Then 4 × 2 = 8.",
+    "Now addition and subtraction, left to right: 5 + 8 = 13.",
+    "Last, 13 − 9 = 4."
+   ],
+   "wrong": [
+    {
+     "e": "5 + 12 ÷ (3 × 2) − 3^2",
+     "why": "You multiplied 3 × 2 before dividing. Same level means left to right.",
+     "say": "multiply before dividing"
+    },
+    {
+     "e": "5 + 12 ÷ 3 × 2 − 3 × 2",
+     "why": "You multiplied 3 by 2 instead of squaring the 3.",
+     "say": "multiply the three by two instead of squaring"
+    },
+    {
+     "e": "5 + 12 ÷ 3 × 2 − 3",
+     "why": "You forgot to square the 3.",
+     "say": "forget the exponent"
+    }
+   ],
+   "at": [
+    "the",
+    "division",
+    "then",
+    "now",
+    "last"
+   ],
+   "block_name": "Order of operations"
+  },
+  {
+   "id": "ex07",
+   "level": 3,
+   "block": "0.1.1",
+   "q": "10 − 3^2 + (−2)^3",
+   "lines": [
+    "10 − ⟨3^2⟩ + (−2)^3",
+    "10 − 9 + ⟨(−2)^3⟩",
+    "⟨10 − 9⟩ + (−8)",
+    "⟨1 + (−8)⟩",
+    "−7"
+   ],
+   "chips": [
+    "E",
+    "E",
+    "AS",
+    "AS"
+   ],
+   "say": [
+    "Exponents first. 3² = 9, and the 3 is not negative.",
+    "The other exponent has parentheses, so the negative is part of the base: (−2)³ = (−2)(−2)(−2) = −8.",
+    "Then left to right: 10 − 9 = 1.",
+    "Last, 1 + (−8) = −7."
+   ],
+   "wrong": [
+    {
+     "e": "(10 − 3)^2 + (−2)^3",
+     "why": "You squared 10 − 3 together. The exponent only touches the 3.",
+     "say": "square ten minus three"
+    },
+    {
+     "e": "10 − 3 × 2 + (−2)^3",
+     "why": "You multiplied 3 by 2 instead of squaring.",
+     "say": "multiply the three by two instead of squaring"
+    },
+    {
+     "e": "10 − 3^2 + 2^3",
+     "why": "You dropped the negative: (−2)³ is −8, not 8.",
+     "say": "lose the negative sign on negative two"
+    }
+   ],
+   "at": [
+    "exponents",
+    "the",
+    "then",
+    "last"
+   ],
+   "block_name": "Order of operations"
+  },
+  {
+   "id": "ex08",
+   "level": 3,
+   "block": "0.1.1",
+   "kind": "multi",
+   "prompt": "Select all the expressions that equal 17.",
+   "read": "Which of these expressions equal seventeen? Choose all that apply.",
+   "check": "equals:17",
+   "say_answer": "Three of them equal seventeen: five plus three times four, two times three squared minus one, and twenty minus nine divided by three. In each, the order of operations decides what happens first.",
+   "options": [
+    {
+     "t": "5 + 3 × 4",
+     "ok": true,
+     "why": "Multiply first: 3 × 4 = 12, then 5 + 12 = 17.",
+     "say": "Five plus three times four. Multiply first: three times four is twelve, and five plus twelve is seventeen. Right."
+    },
+    {
+     "t": "(5 + 3) × 4",
+     "ok": false,
+     "why": "The parentheses make 5 + 3 happen first: 8 × 4 = 32.",
+     "say": "The quantity five plus three, times four. The parentheses make the addition happen first, so this is thirty-two. Not a match."
+    },
+    {
+     "t": "2 × 3^2 − 1",
+     "ok": true,
+     "why": "Exponent first: 3² = 9, then 2 × 9 = 18, and 18 − 1 = 17.",
+     "say": "Two times three squared, minus one. The exponent comes first: nine. Then eighteen, then seventeen. Right."
+    },
+    {
+     "t": "(20 − 9) ÷ 3",
+     "ok": false,
+     "why": "The parentheses make 20 − 9 = 11 happen first, and 11 ÷ 3 is not 17.",
+     "say": "The quantity twenty minus nine, divided by three. The parentheses make the subtraction happen first, so this is eleven over three. Not a match."
+    },
+    {
+     "t": "20 − 9 ÷ 3",
+     "ok": true,
+     "why": "Divide first: 9 ÷ 3 = 3, then 20 − 3 = 17.",
+     "say": "Twenty minus nine divided by three. Divide first: three. Then twenty minus three is seventeen. Right."
+    }
+   ],
+   "block_name": "Order of operations"
+  },
+  {
+   "id": "ex09",
+   "level": 4,
+   "block": "0.1.1",
+   "q": "2 × [5 + 3 × (10 − 5)^2 ÷ 5] − 6",
+   "read": "Two times the bracket five plus three times the quantity ten minus five, squared, divided by five, close bracket, minus six.",
+   "lines": [
+    "2 × [5 + 3 × ⟨(10 − 5)⟩^2 ÷ 5] − 6",
+    "2 × [5 + 3 × ⟨5^2⟩ ÷ 5] − 6",
+    "2 × [5 + ⟨3 × 25⟩ ÷ 5] − 6",
+    "2 × [5 + ⟨75 ÷ 5⟩] − 6",
+    "2 × ⟨[5 + 15]⟩ − 6",
+    "⟨2 × 20⟩ − 6",
+    "⟨40 − 6⟩",
+    "34"
+   ],
+   "chips": [
+    "P",
+    "E",
+    "MD",
+    "MD",
+    "P",
+    "MD",
+    "AS"
+   ],
+   "say": [
+    "Work from the inside out. In the innermost group, ten minus five is five.",
+    "Inside the brackets, the exponent comes next. Five squared is twenty-five.",
+    "Then multiplication and division, left to right. Three times twenty-five is seventy-five.",
+    "Seventy-five divided by five is fifteen.",
+    "Now finish the brackets. Five plus fifteen is twenty.",
+    "The brackets are done, so multiply. Two times twenty is forty.",
+    "Finally, forty minus six is thirty-four."
+   ],
+   "at": [
+    "five#2",
+    "twenty-five",
+    "seventy-five",
+    "fifteen",
+    "twenty",
+    "forty",
+    "thirty-four"
+   ],
+   "wrong": [
+    {
+     "e": "2 × [5 + 3 × (10 − 5^2) ÷ 5] − 6",
+     "why": "You squared only the 5. The parentheses make 10 − 5 the base.",
+     "say": "square only the five"
+    },
+    {
+     "e": "2 × [(5 + 3) × (10 − 5)^2 ÷ 5] − 6",
+     "why": "You added 5 + 3 before multiplying. Multiplication comes before addition, even inside brackets.",
+     "say": "add five and three before multiplying"
+    },
+    {
+     "e": "2 × 5 + 3 × (10 − 5)^2 ÷ 5 − 6",
+     "why": "You multiplied the 2 by only the 5. It multiplies the whole bracket.",
+     "say": "multiply the two by only the five"
+    }
+   ],
+   "block_name": "Order of operations"
+  },
+  {
+   "id": "ex10",
+   "level": 4,
+   "block": "0.1.1",
+   "q": "−3^2 + 2 × (4 − 7)^2 − 20 ÷ 2^2",
+   "read": "Negative three squared, plus two times the quantity four minus seven, squared, minus twenty divided by two squared.",
+   "lines": [
+    "−3^2 + 2 × ⟨(4 − 7)⟩^2 − 20 ÷ 2^2",
+    "⟨−3^2⟩ + 2 × (−3)^2 − 20 ÷ 2^2",
+    "−9 + 2 × ⟨(−3)^2⟩ − 20 ÷ 2^2",
+    "−9 + 2 × 9 − 20 ÷ ⟨2^2⟩",
+    "−9 + ⟨2 × 9⟩ − 20 ÷ 4",
+    "−9 + 18 − ⟨20 ÷ 4⟩",
+    "⟨−9 + 18⟩ − 5",
+    "⟨9 − 5⟩",
+    "4"
+   ],
+   "chips": [
+    "P",
+    "E",
+    "E",
+    "E",
+    "MD",
+    "MD",
+    "AS",
+    "AS"
+   ],
+   "say": [
+    "Parentheses first. Four minus seven is negative three.",
+    "Now the exponents. The first one has no parentheses, so the exponent only touches the three. Three squared is nine, and the minus sign stays outside: negative nine.",
+    "Next, negative three in parentheses, squared. Negative three times negative three is nine.",
+    "Then two squared is four.",
+    "Now multiplication and division, left to right. Two times nine is eighteen.",
+    "Twenty divided by four is five.",
+    "Add and subtract, left to right. Negative nine plus eighteen is nine.",
+    "Finally, nine minus five is four."
+   ],
+   "at": [
+    "three",
+    "nine#2",
+    "nine",
+    "four",
+    "eighteen",
+    "five",
+    "nine#2",
+    "four"
+   ],
+   "wrong": [
+    {
+     "e": "(−3)^2 + 2 × (4 − 7)^2 − 20 ÷ 2^2",
+     "why": "You squared the negative sign too. Without parentheses, −3² means the opposite of 3².",
+     "say": "square the negative sign too"
+    },
+    {
+     "e": "−3^2 + 2 × 4 − 7^2 − 20 ÷ 2^2",
+     "why": "You squared only the 7. The parentheses 4 − 7 have to be finished first.",
+     "say": "square only the seven"
+    },
+    {
+     "e": "−3^2 + 2 × (4 − 7)^2 − (20 ÷ 2)^2",
+     "why": "You divided 20 ÷ 2 before squaring. The exponent belongs only to the 2.",
+     "say": "divide before squaring the two"
+    }
+   ],
+   "block_name": "Order of operations"
+  },
+  {
+   "id": "ex11",
+   "level": 1,
+   "block": "0.1.2",
+   "q": "−9 + 4",
+   "lines": [
+    "⟨−9 + 4⟩",
+    "−5"
+   ],
+   "chips": [
+    "AS"
+   ],
+   "say": [
+    "Start at −9 on the number line and move 4 to the right. You land on −5."
+   ],
+   "wrong": [
+    {
+     "e": "−9 − 4",
+     "why": "You moved left instead of right: + 4 means move right.",
+     "say": "move left instead of right"
+    },
+    {
+     "e": "9 − 4",
+     "why": "The size is right, but −9 is farther from zero than 4, so the answer is negative.",
+     "say": "ignore the sign of the bigger number"
+    },
+    {
+     "e": "9 + 4",
+     "why": "You ignored both signs.",
+     "say": "ignore both signs"
+    }
+   ],
+   "at": [
+    "start"
+   ],
+   "block_name": "Signed numbers"
+  },
+  {
+   "id": "ex12",
+   "level": 2,
+   "block": "0.1.2",
+   "q": "−6 − (−11)",
+   "lines": [
+    "⟨−6 − (−11)⟩",
+    "⟨−6 + 11⟩",
+    "5"
+   ],
+   "chips": [
+    "AS",
+    "AS"
+   ],
+   "say": [
+    "Subtracting a negative is the same as adding its opposite: −6 − (−11) becomes −6 + 11.",
+    "Start at −6 and move 11 to the right: you land on 5."
+   ],
+   "wrong": [
+    {
+     "e": "−6 − 11",
+     "why": "You subtracted 11, but you were subtracting −11. Subtracting a negative adds.",
+     "say": "subtract eleven instead of negative eleven"
+    },
+    {
+     "e": "6 − 11",
+     "why": "You dropped the minus sign of −6.",
+     "say": "drop the minus on negative six"
+    },
+    {
+     "e": "6 + 11",
+     "why": "You ignored the sign of −6.",
+     "say": "ignore the sign of negative six"
+    }
+   ],
+   "at": [
+    "subtracting",
+    "start"
+   ],
+   "block_name": "Signed numbers"
+  },
+  {
+   "id": "ex13",
+   "level": 2,
+   "block": "0.1.2",
+   "q": "(−3)(−4)(−2)",
+   "lines": [
+    "⟨(−3)(−4)⟩(−2)",
+    "⟨12(−2)⟩",
+    "−24"
+   ],
+   "chips": [
+    "MD",
+    "MD"
+   ],
+   "say": [
+    "Multiply left to right. Negative times negative is positive, so (−3)(−4) = 12.",
+    "Positive times negative is negative: 12 × (−2) = −24."
+   ],
+   "wrong": [
+    {
+     "e": "3 × 4 × 2",
+     "why": "You ignored the signs. Three negative factors multiply to a negative.",
+     "say": "ignore the signs"
+    },
+    {
+     "e": "−3 − 4 − 2",
+     "why": "You added the numbers instead of multiplying them.",
+     "say": "add instead of multiplying"
+    },
+    {
+     "e": "(−3)(−4) − 2",
+     "why": "You subtracted the last factor instead of multiplying by it.",
+     "say": "subtract the last factor"
+    }
+   ],
+   "at": [
+    "multiply",
+    "positive"
+   ],
+   "block_name": "Signed numbers"
+  },
+  {
+   "id": "ex14",
+   "level": 2,
+   "block": "0.1.2",
+   "q": "−18 ÷ 3 − 2",
+   "lines": [
+    "⟨−18 ÷ 3⟩ − 2",
+    "⟨−6 − 2⟩",
+    "−8"
+   ],
+   "chips": [
+    "MD",
+    "AS"
+   ],
+   "say": [
+    "Division comes first: −18 ÷ 3 = −6.",
+    "Then −6 − 2 = −8."
+   ],
+   "wrong": [
+    {
+     "e": "−18 ÷ (3 − 2)",
+     "why": "You subtracted 3 − 2 first, but division comes before subtraction.",
+     "say": "subtract before dividing"
+    },
+    {
+     "e": "18 ÷ 3 − 2",
+     "why": "You dropped the negative sign on 18.",
+     "say": "drop the negative sign"
+    },
+    {
+     "e": "−18 ÷ 3 + 2",
+     "why": "You changed − 2 into + 2.",
+     "say": "turn minus two into plus two"
+    }
+   ],
+   "at": [
+    "division",
+    "then"
+   ],
+   "block_name": "Signed numbers"
+  },
+  {
+   "id": "ex15",
+   "level": 3,
+   "block": "0.1.2",
+   "prompt": "Evaluate the expression when x = −5.",
+   "q": "x^2 + 4x − 3",
+   "sub": {
+    "x": "(−5)"
+   },
+   "lines": [
+    "⟨x⟩^2 + 4⟨x⟩ − 3",
+    "⟨(−5)^2⟩ + 4(−5) − 3",
+    "25 + ⟨4(−5)⟩ − 3",
+    "⟨25 + (−20)⟩ − 3",
+    "⟨5 − 3⟩",
+    "2"
+   ],
+   "chips": [
+    "SUB",
+    "E",
+    "MD",
+    "AS",
+    "AS"
+   ],
+   "say": [
+    "Replace every x with (−5), using parentheses so the sign stays attached.",
+    "Exponent first: (−5)² = 25.",
+    "Then multiplication: 4 × (−5) = −20.",
+    "Now left to right: 25 + (−20) = 5.",
+    "Last, 5 − 3 = 2."
+   ],
+   "wrong": [
+    {
+     "e": "−5^2 + 4 × (−5) − 3",
+     "why": "You wrote −5² and got −25 instead of (−5)² = 25.",
+     "say": "square only the five and keep the minus outside"
+    },
+    {
+     "e": "(−5)^2 + 4 × 5 − 3",
+     "why": "You lost the negative sign on x in the 4x term.",
+     "say": "lose the negative sign in the four x term"
+    },
+    {
+     "e": "(−5)^2 + 4 − 5 − 3",
+     "why": "You read 4x as 4 − 5.",
+     "say": "read four x as four minus five"
+    }
+   ],
+   "at": [
+    "replace",
+    "exponent",
+    "then",
+    "now",
+    "last"
+   ],
+   "block_name": "Signed numbers"
+  },
+  {
+   "id": "ex16",
+   "level": 3,
+   "block": "0.1.2",
+   "q": "|−9 + 4| − |2 − 8|",
+   "lines": [
+    "|⟨−9 + 4⟩| − |2 − 8|",
+    "⟨|−5|⟩ − |2 − 8|",
+    "5 − |⟨2 − 8⟩|",
+    "5 − ⟨|−6|⟩",
+    "⟨5 − 6⟩",
+    "−1"
+   ],
+   "chips": [
+    "P",
+    "P",
+    "P",
+    "P",
+    "AS"
+   ],
+   "say": [
+    "Absolute value bars work like parentheses, so work inside first: −9 + 4 = −5.",
+    "The absolute value of −5 is 5, its distance from zero.",
+    "Now the second pair of bars: 2 − 8 = −6.",
+    "The absolute value of −6 is 6.",
+    "Last, 5 − 6 = −1."
+   ],
+   "wrong": [
+    {
+     "e": "−9 + 4 − (2 − 8)",
+     "why": "You ignored the absolute value bars.",
+     "say": "ignore the bars"
+    },
+    {
+     "e": "|−9 + 4| + |2 − 8|",
+     "why": "You added the two absolute values instead of subtracting them.",
+     "say": "add instead of subtracting"
+    },
+    {
+     "e": "|−9| + |4| − |2| − |8|",
+     "why": "You put bars around each number separately instead of around each sum.",
+     "say": "put the bars around each number"
+    }
+   ],
+   "at": [
+    "absolute",
+    "the",
+    "now",
+    "the",
+    "last"
+   ],
+   "block_name": "Signed numbers"
+  },
+  {
+   "id": "ex17",
+   "level": 3,
+   "block": "0.1.2",
+   "q": "4 − 3(−2 + 6)^2 ÷ 4",
+   "lines": [
+    "4 − 3⟨(−2 + 6)⟩^2 ÷ 4",
+    "4 − 3 × ⟨4^2⟩ ÷ 4",
+    "4 − ⟨3 × 16⟩ ÷ 4",
+    "4 − ⟨48 ÷ 4⟩",
+    "⟨4 − 12⟩",
+    "−8"
+   ],
+   "chips": [
+    "P",
+    "E",
+    "MD",
+    "MD",
+    "AS"
+   ],
+   "say": [
+    "Parentheses first: −2 + 6 = 4.",
+    "Exponent next: 4² = 16.",
+    "Multiplication and division, left to right: 3 × 16 = 48.",
+    "Then 48 ÷ 4 = 12.",
+    "Last, 4 − 12 = −8."
+   ],
+   "wrong": [
+    {
+     "e": "(4 − 3)(−2 + 6)^2 ÷ 4",
+     "why": "You subtracted 4 − 3 first. Multiplication and division come before subtraction.",
+     "say": "subtract four minus three first"
+    },
+    {
+     "e": "4 − (3 × 4)^2 ÷ 4",
+     "why": "You squared 3 × 4 together. The exponent only touches the 4 from the parentheses.",
+     "say": "square the three times four"
+    },
+    {
+     "e": "4 − 3(−2 + 6) × 2 ÷ 4",
+     "why": "You multiplied by 2 instead of squaring.",
+     "say": "multiply by two instead of squaring"
+    }
+   ],
+   "at": [
+    "parentheses",
+    "exponent",
+    "multiplication",
+    "then",
+    "last"
+   ],
+   "block_name": "Signed numbers"
+  },
+  {
+   "id": "ex18",
+   "level": 3,
+   "block": "0.1.2",
+   "kind": "match",
+   "prompt": "Match each expression with its value.",
+   "read": "Match each expression with its value.",
+   "check": "equal",
+   "say_answer": "Every expression now has its value. Subtracting a negative adds, a negative divided by a positive is negative, and absolute value is a distance, so it is never negative.",
+   "pairs": [
+    {
+     "l": "−5 − (−3)",
+     "r": "−2",
+     "why": "Subtracting −3 is adding 3: −5 + 3 = −2.",
+     "say": "Negative five minus negative three is negative five plus three. That is negative two."
+    },
+    {
+     "l": "(−4)(−3)",
+     "r": "12",
+     "why": "Negative times negative is positive: 4 × 3 = 12.",
+     "say": "Negative four times negative three. Negative times negative is positive, so twelve."
+    },
+    {
+     "l": "−12 ÷ 4",
+     "r": "−3",
+     "why": "Different signs give a negative: 12 ÷ 4 = 3, so −3.",
+     "say": "Negative twelve divided by four. The signs are different, so the answer is negative three."
+    },
+    {
+     "l": "|−7|",
+     "r": "7",
+     "why": "Absolute value is the distance from zero, so |−7| = 7.",
+     "say": "The absolute value of negative seven is its distance from zero, so seven."
+    },
+    {
+     "l": "−|7|",
+     "r": "−7",
+     "why": "First |7| = 7, then the minus in front makes it −7.",
+     "say": "The minus sign is outside the bars. The absolute value of seven is seven, and the minus makes it negative seven."
+    }
+   ],
+   "block_name": "Signed numbers"
+  },
+  {
+   "id": "ex19",
+   "level": 4,
+   "block": "0.1.2",
+   "q": "−3(−2)^2 − 4(5 − 8) − (−9)",
+   "read": "Negative three times negative two, squared, minus four times the quantity five minus eight, minus negative nine.",
+   "lines": [
+    "−3(−2)^2 − 4⟨(5 − 8)⟩ − (−9)",
+    "−3⟨(−2)^2⟩ − 4(−3) − (−9)",
+    "⟨−3(4)⟩ − 4(−3) − (−9)",
+    "−12 − ⟨4(−3)⟩ − (−9)",
+    "⟨−12 − (−12)⟩ − (−9)",
+    "⟨0 − (−9)⟩",
+    "9"
+   ],
+   "chips": [
+    "P",
+    "E",
+    "MD",
+    "MD",
+    "AS",
+    "AS"
+   ],
+   "say": [
+    "Parentheses first. Five minus eight is negative three.",
+    "Next, the exponent. Negative two, squared, is four.",
+    "Now the multiplications. Negative three times four is negative twelve.",
+    "Four times negative three is also negative twelve.",
+    "Left to right. Negative twelve minus negative twelve is the same as negative twelve plus twelve, which is zero.",
+    "Finally, zero minus negative nine is zero plus nine. That's nine."
+   ],
+   "at": [
+    "three",
+    "four",
+    "twelve",
+    "twelve",
+    "zero",
+    "nine#3"
+   ],
+   "wrong": [
+    {
+     "e": "(−3 × (−2))^2 − 4(5 − 8) − (−9)",
+     "why": "You squared −3 × (−2) together. The exponent only touches the −2.",
+     "say": "square the whole product"
+    },
+    {
+     "e": "−3(−2)^2 − 4 × 5 − 8 − (−9)",
+     "why": "You multiplied the 4 by only the 5, not by the whole parentheses.",
+     "say": "multiply the four by only the five"
+    },
+    {
+     "e": "−3(−2)^2 − 4(5 − 8) − 9",
+     "why": "Subtracting −9 means adding 9. You subtracted 9.",
+     "say": "subtract nine instead of negative nine"
+    }
+   ],
+   "block_name": "Signed numbers"
+  },
+  {
+   "id": "ex20",
+   "level": 4,
+   "block": "0.1.2",
+   "prompt": "Evaluate the expression when x = −3.",
+   "q": "(x − 1)^2 − 3x(x + 2)",
+   "sub": {
+    "x": "(−3)"
+   },
+   "read": "Evaluate x minus one, squared, minus three x times the quantity x plus two, when x equals negative three.",
+   "lines": [
+    "(⟨x⟩ − 1)^2 − 3⟨x⟩(⟨x⟩ + 2)",
+    "⟨((−3) − 1)⟩^2 − 3(−3)((−3) + 2)",
+    "(−4)^2 − 3(−3)⟨((−3) + 2)⟩",
+    "⟨(−4)^2⟩ − 3(−3)(−1)",
+    "16 − ⟨3(−3)⟩(−1)",
+    "16 − ⟨(−9)(−1)⟩",
+    "⟨16 − 9⟩",
+    "7"
+   ],
+   "chips": [
+    "SUB",
+    "P",
+    "P",
+    "E",
+    "MD",
+    "MD",
+    "AS"
+   ],
+   "say": [
+    "Replace every x with negative three, in parentheses.",
+    "Work inside the first parentheses. Negative three minus one is negative four.",
+    "Now the second parentheses. Negative three plus two is negative one.",
+    "Exponent next. Negative four, squared, is sixteen.",
+    "Then multiplication, left to right. Three times negative three is negative nine.",
+    "Negative nine times negative one is nine.",
+    "Finally, sixteen minus nine is seven."
+   ],
+   "at": [
+    "three",
+    "four",
+    "one",
+    "sixteen",
+    "nine",
+    "nine#2",
+    "seven"
+   ],
+   "wrong": [
+    {
+     "e": "x − 1^2 − 3x(x + 2)",
+     "why": "You squared only the 1. The parentheses (x − 1) are the base.",
+     "say": "square only the one"
+    },
+    {
+     "e": "(x − 1)^2 − 3x × x + 2",
+     "why": "You multiplied 3x by only the first x. The parentheses (x + 2) multiply the whole thing.",
+     "say": "multiply by only the first x"
+    },
+    {
+     "e": "(x − 1)^2 + 3x(x + 2)",
+     "why": "You changed the minus before 3x(x + 2) into a plus.",
+     "say": "turn the minus into a plus"
+    }
+   ],
+   "block_name": "Signed numbers"
+  },
+  {
+   "id": "ex21",
+   "level": 1,
+   "block": "0.2.1",
+   "kind": "name",
+   "prompt": "Which property is shown?",
+   "q": "(2 + 9) + 5 = 2 + (9 + 5)",
+   "read": "The quantity two plus nine, plus five, equals two plus the quantity nine plus five.",
+   "a": "Associative",
+   "show": [
+    "⟨(2 + 9)⟩ + 5 = 2 + ⟨(9 + 5)⟩",
+    "11 + 5 = 2 + 14"
+   ],
+   "say": [
+    "The numbers are in the same order on both sides: 2, 9, 5. What moved are the parentheses.",
+    "Both sides equal 16. Regrouping is the associative property."
+   ],
+   "notes": [
+    "Same order, <b>new grouping</b>",
+    "Both sides are 16"
+   ],
+   "wrong": [
+    {
+     "a": "Commutative",
+     "why": "The numbers did not trade places: 2, 9, 5 is the same order on both sides.",
+     "say": "the numbers stay in the same order"
+    },
+    {
+     "a": "Distributive",
+     "why": "Distributive spreads a multiplication over a sum. Here everything is addition.",
+     "say": "nothing multiplies a sum"
+    }
+   ],
+   "block_name": "Commutative and associative properties"
+  },
+  {
+   "id": "ex22",
+   "level": 2,
+   "block": "0.2.1",
+   "prompt": "Use the properties to find the value.",
+   "q": "50 × 17 × 2",
+   "lines": [
+    "50 × ⟨17 × 2⟩",
+    "⟨50 × 2⟩ × 17",
+    "⟨(50 × 2)⟩ × 17",
+    "⟨100 × 17⟩",
+    "1700"
+   ],
+   "chips": [
+    "COMM",
+    "ASSOC",
+    "CALC",
+    "CALC"
+   ],
+   "say": [
+    "50 and 2 make 100, so let's put them together. The commutative property lets us swap the 17 and the 2.",
+    "The associative property lets us group the 50 with the 2.",
+    "50 × 2 = 100.",
+    "100 × 17 = 1700."
+   ],
+   "wrong": [
+    {
+     "e": "(50 + 17) × 2",
+     "why": "You added 50 and 17 instead of multiplying.",
+     "say": "add fifty and seventeen"
+    },
+    {
+     "e": "50 × 17 + 2",
+     "why": "You added the 2 instead of multiplying by it.",
+     "say": "add the two at the end"
+    },
+    {
+     "e": "50 × 2 + 17",
+     "why": "You multiplied 50 × 2 but added the 17 instead of multiplying by it.",
+     "say": "add the seventeen"
+    }
+   ],
+   "at": [
+    "50",
+    "the",
+    "50",
+    "100"
+   ],
+   "block_name": "Commutative and associative properties"
+  },
+  {
+   "id": "ex23",
+   "level": 2,
+   "block": "0.2.1",
+   "kind": "multi",
+   "prompt": "Select all the true statements.",
+   "read": "Which of these statements are true? Choose all that apply.",
+   "check": "true",
+   "say_answer": "Two of them are true: x plus eight equals eight plus x, and four times y equals y times four. Addition and multiplication are commutative. Subtraction and division are not.",
+   "options": [
+    {
+     "t": "x + 8 = 8 + x",
+     "ok": true,
+     "why": "Addition is commutative: the order doesn't matter.",
+     "say": "x plus eight equals eight plus x. Addition is commutative, so this is true."
+    },
+    {
+     "t": "x − 8 = 8 − x",
+     "ok": false,
+     "why": "Subtraction is not commutative. For x = 10: x − 8 = 2, but 8 − x = −2.",
+     "say": "x minus eight is not eight minus x. If x is ten, one is two and the other is negative two. False."
+    },
+    {
+     "t": "4 · y = y · 4",
+     "ok": true,
+     "why": "Multiplication is commutative: the order doesn't matter.",
+     "say": "Four times y equals y times four. Multiplication is commutative, so this is true."
+    },
+    {
+     "t": "y ÷ 4 = 4 ÷ y",
+     "ok": false,
+     "why": "Division is not commutative. For y = 8: y ÷ 4 = 2, but 4 ÷ y is one half.",
+     "say": "y divided by four is not four divided by y. If y is eight, one is two and the other is one half. False."
+    },
+    {
+     "t": "6 − 2 = 2 − 6",
+     "ok": false,
+     "why": "6 − 2 = 4, but 2 − 6 = −4.",
+     "say": "Six minus two is four, but two minus six is negative four. False."
+    }
+   ],
+   "block_name": "Commutative and associative properties"
+  },
+  {
+   "id": "ex24",
+   "level": 2,
+   "block": "0.2.1",
+   "kind": "name",
+   "prompt": "Which property is shown?",
+   "q": "(a · b) · 6 = 6 · (a · b)",
+   "read": "The quantity a times b, times six, equals six times the quantity a times b.",
+   "a": "Commutative",
+   "show": [
+    "⟨(a · b)⟩ · ⟨6⟩ = ⟨6⟩ · ⟨(a · b)⟩",
+    "ab · 6 = 6 · ab"
+   ],
+   "say": [
+    "There are parentheses, but the group (a · b) never opens. It stays together as one factor.",
+    "The factor 6 and the whole group traded places. Swapping the order is the commutative property."
+   ],
+   "notes": [
+    "The group stays together",
+    "Two factors <b>trade places</b>"
+   ],
+   "wrong": [
+    {
+     "a": "Associative",
+     "why": "Associative changes which factors are grouped. Here the group (a · b) is the same on both sides.",
+     "say": "the grouping does not change"
+    },
+    {
+     "a": "Distributive",
+     "why": "Distributive needs a sum inside, like 6(a + b). Here it's a product.",
+     "say": "there is no sum inside the parentheses"
+    }
+   ],
+   "block_name": "Commutative and associative properties"
+  },
+  {
+   "id": "ex25",
+   "level": 3,
+   "block": "0.2.1",
+   "prompt": "Use the properties to find the value.",
+   "q": "38 + 47 + 62",
+   "lines": [
+    "38 + ⟨47 + 62⟩",
+    "⟨38 + 62⟩ + 47",
+    "⟨(38 + 62)⟩ + 47",
+    "⟨100 + 47⟩",
+    "147"
+   ],
+   "chips": [
+    "COMM",
+    "ASSOC",
+    "CALC",
+    "CALC"
+   ],
+   "say": [
+    "38 and 62 make 100, so let's put them together. The commutative property lets us swap the 47 and the 62.",
+    "The associative property lets us group the 38 with the 62.",
+    "38 + 62 = 100.",
+    "100 + 47 = 147."
+   ],
+   "wrong": [
+    {
+     "e": "38 + 62",
+     "why": "You forgot to add the 47.",
+     "say": "forget the forty-seven"
+    },
+    {
+     "e": "100 − 47",
+     "why": "You subtracted the 47 instead of adding it.",
+     "say": "subtract the forty-seven"
+    },
+    {
+     "e": "90 + 47",
+     "why": "You added 38 + 62 and got 90, but it is 100.",
+     "say": "get ninety for thirty-eight plus sixty-two"
+    }
+   ],
+   "at": [
+    "38",
+    "the",
+    "38",
+    "100"
+   ],
+   "block_name": "Commutative and associative properties"
+  },
+  {
+   "id": "ex26",
+   "level": 3,
+   "block": "0.2.1",
+   "kind": "match",
+   "prompt": "Match each identity with the property it shows.",
+   "read": "Match each identity with the property it shows.",
+   "check": "property",
+   "say_answer": "Order changes mean commutative. Grouping changes mean associative. A group that moves as a whole is still a change of order.",
+   "pairs": [
+    {
+     "l": "14 · 5 = 5 · 14",
+     "r": "Commutative",
+     "why": "The factors swapped places.",
+     "say": "Fourteen times five equals five times fourteen. The factors swap places, so it is commutative."
+    },
+    {
+     "l": "(a + 4) + b = a + (4 + b)",
+     "r": "Associative",
+     "why": "Same order; the parentheses moved.",
+     "say": "The quantity a plus four, plus b, equals a plus the quantity four plus b. Same order, the parentheses moved. Associative."
+    },
+    {
+     "l": "3 + (y + 8) = 3 + (8 + y)",
+     "r": "Commutative",
+     "why": "The parentheses stayed; y and 8 swapped inside.",
+     "say": "Three plus the quantity y plus eight equals three plus the quantity eight plus y. The parentheses stay where they are. Inside, y and eight swap. Commutative."
+    },
+    {
+     "l": "(c · 6) · 2 = c · (6 · 2)",
+     "r": "Associative",
+     "why": "Same order of factors, new grouping.",
+     "say": "The quantity c times six, times two, equals c times the quantity six times two. Same order, new grouping. Associative."
+    }
+   ],
+   "block_name": "Commutative and associative properties"
+  },
+  {
+   "id": "ex27",
+   "level": 3,
+   "block": "0.2.1",
+   "kind": "name",
+   "prompt": "Which property is shown?",
+   "q": "4 · (x · 3) = (4 · x) · 3",
+   "read": "Four times the quantity x times three equals the quantity four times x, times three.",
+   "a": "Associative",
+   "show": [
+    "4 · ⟨(x · 3)⟩ = ⟨(4 · x)⟩ · 3",
+    "12x = 12x"
+   ],
+   "say": [
+    "Look inside the parentheses: there is no sum, only multiplication. The factors stay in the order 4, x, 3.",
+    "Only the grouping changed, and both sides are 12x. That's the associative property."
+   ],
+   "notes": [
+    "No sum inside: only ×",
+    "Same order, <b>new grouping</b>"
+   ],
+   "wrong": [
+    {
+     "a": "Distributive",
+     "why": "Distributive needs a sum inside, like 4(x + 3). Here it's x · 3, a product.",
+     "say": "there is no sum inside the parentheses"
+    },
+    {
+     "a": "Commutative",
+     "why": "The order is the same on both sides: 4, x, 3.",
+     "say": "the factors stay in the same order"
+    }
+   ],
+   "block_name": "Commutative and associative properties"
+  },
+  {
+   "id": "ex28",
+   "level": 3,
+   "block": "0.2.1",
+   "kind": "multi",
+   "prompt": "Select all the true statements.",
+   "read": "Which of these statements are true? Choose all that apply.",
+   "check": "true",
+   "say_answer": "Two of them are true: the multiplication regrouping and the addition regrouping. Regrouping subtraction or division changes the answer, and so does swapping the order of a subtraction.",
+   "options": [
+    {
+     "t": "(12 − 5) − 3 = 12 − (5 − 3)",
+     "ok": false,
+     "why": "Regrouping subtraction changes the answer: the left side is 4, the right side is 10.",
+     "say": "The quantity twelve minus five, minus three, is four. Twelve minus the quantity five minus three is ten. Not equal, so false."
+    },
+    {
+     "t": "(2 · 9) · 5 = 2 · (9 · 5)",
+     "ok": true,
+     "why": "Multiplication is associative: both sides are 90.",
+     "say": "Two times nine, times five, and two times nine times five regrouped are both ninety. Multiplication is associative, so this is true."
+    },
+    {
+     "t": "(24 ÷ 6) ÷ 2 = 24 ÷ (6 ÷ 2)",
+     "ok": false,
+     "why": "Regrouping division changes the answer: the left side is 2, the right side is 8.",
+     "say": "Twenty-four divided by six, divided by two, is two. Twenty-four divided by the quantity six divided by two is eight. Not equal, so false."
+    },
+    {
+     "t": "(8 + 3) + 7 = 8 + (3 + 7)",
+     "ok": true,
+     "why": "Addition is associative: both sides are 18.",
+     "say": "Eight plus three, plus seven, and eight plus the quantity three plus seven are both eighteen. Addition is associative, so this is true."
+    },
+    {
+     "t": "7 − 3 = 3 − 7",
+     "ok": false,
+     "why": "7 − 3 = 4, but 3 − 7 = −4.",
+     "say": "Seven minus three is four, but three minus seven is negative four. False."
+    }
+   ],
+   "block_name": "Commutative and associative properties"
+  },
+  {
+   "id": "ex29",
+   "level": 4,
+   "block": "0.2.1",
+   "prompt": "Use the properties to find the value.",
+   "q": "8 × 17 × 125",
+   "read": "Eight times seventeen times one hundred twenty-five.",
+   "lines": [
+    "8 × ⟨17 × 125⟩",
+    "⟨8 × 125⟩ × 17",
+    "⟨(8 × 125)⟩ × 17",
+    "⟨1000 × 17⟩",
+    "17000"
+   ],
+   "chips": [
+    "COMM",
+    "ASSOC",
+    "CALC",
+    "CALC"
+   ],
+   "say": [
+    "Eight and one hundred twenty-five make one thousand, so let's put them together. The commutative property lets us swap the seventeen and the one hundred twenty-five.",
+    "The associative property lets us group the eight with the one hundred twenty-five.",
+    "Eight times one hundred twenty-five is one thousand.",
+    "One thousand times seventeen is seventeen thousand."
+   ],
+   "at": [
+    "twenty-five#2",
+    "twenty-five",
+    "thousand",
+    "thousand"
+   ],
+   "wrong": [
+    {
+     "e": "8 × 17 + 125",
+     "why": "You added the 125 instead of multiplying by it.",
+     "say": "add the one hundred twenty-five"
+    },
+    {
+     "e": "(8 + 125) × 17",
+     "why": "You added 8 and 125 instead of multiplying them.",
+     "say": "add eight and one hundred twenty-five"
+    },
+    {
+     "e": "8 × 125",
+     "why": "You forgot to multiply by 17.",
+     "say": "forget the seventeen"
+    }
+   ],
+   "block_name": "Commutative and associative properties"
+  },
+  {
+   "id": "ex30",
+   "level": 4,
+   "block": "0.2.1",
+   "kind": "name",
+   "prompt": "Which property is shown?",
+   "q": "(2 + 5) + x = x + (2 + 5)",
+   "read": "The quantity two plus five, plus x, equals x plus the quantity two plus five.",
+   "a": "Commutative",
+   "show": [
+    "⟨(2 + 5)⟩ + ⟨x⟩ = ⟨x⟩ + ⟨(2 + 5)⟩",
+    "7 + x = x + 7"
+   ],
+   "say": [
+    "There are parentheses, so associative is tempting. But look: the group 2 plus 5 never changes. It stays together.",
+    "The whole group and x simply traded places. Swapping the order is the commutative property."
+   ],
+   "notes": [
+    "The group stays together",
+    "Two things <b>trade places</b>"
+   ],
+   "wrong": [
+    {
+     "a": "Associative",
+     "why": "Associative changes which numbers are grouped together. Here (2 + 5) is grouped the same way on both sides.",
+     "say": "the grouping does not change"
+    },
+    {
+     "a": "Distributive",
+     "why": "Distributive needs a multiplication over a sum. Here everything is addition.",
+     "say": "nothing multiplies a sum"
+    }
+   ],
+   "block_name": "Commutative and associative properties"
+  },
+  {
+   "id": "ex31",
+   "level": 1,
+   "block": "0.2.2",
+   "kind": "expr",
+   "prompt": "Use the distributive property to expand.",
+   "q": "4(x + 6)",
+   "read": "Four times times the quantity x plus six.",
+   "a": "4x + 24",
+   "a_read": "four x plus twenty-four",
+   "lines": [
+    "⟨4(x + 6)⟩",
+    "⟨4 · x + 4 · 6⟩",
+    "4x + 24"
+   ],
+   "chips": [
+    "DIST",
+    "CALC"
+   ],
+   "say": [
+    "The 4 outside multiplies every term inside: 4 times x, plus 4 times 6.",
+    "4 times x is 4x, and 4 times 6 is 24."
+   ],
+   "wrong": [
+    {
+     "e": "4x + 6",
+     "why": "You multiplied only the x by 4. The 6 needs it too.",
+     "say": "multiply only the x",
+     "read": "four x plus six"
+    },
+    {
+     "e": "4x + 10",
+     "why": "You added 4 + 6 instead of multiplying.",
+     "say": "add four and six instead of multiplying",
+     "read": "four x plus ten"
+    },
+    {
+     "e": "x + 24",
+     "why": "You multiplied only the 6 by 4.",
+     "say": "multiply only the six",
+     "read": "x plus twenty-four"
+    }
+   ],
+   "at": [
+    "the",
+    "4"
+   ],
+   "block_name": "Distributive property"
+  },
+  {
+   "id": "ex32",
+   "level": 2,
+   "block": "0.2.2",
+   "prompt": "Use the distributive property to find the value.",
+   "q": "7 × 98",
+   "lines": [
+    "7 × ⟨98⟩",
+    "⟨7 × (100 − 2)⟩",
+    "⟨7 × 100 − 7 × 2⟩",
+    "⟨700 − 14⟩",
+    "686"
+   ],
+   "chips": [
+    "REWRITE",
+    "DIST",
+    "CALC",
+    "CALC"
+   ],
+   "say": [
+    "98 is 100 − 2.",
+    "7 multiplies both parts: 7 × 100 − 7 × 2.",
+    "7 × 100 = 700, and 7 × 2 = 14.",
+    "700 − 14 = 686."
+   ],
+   "wrong": [
+    {
+     "e": "7 × 100 − 2",
+     "why": "You multiplied only the 100 by 7.",
+     "say": "multiply only the hundred"
+    },
+    {
+     "e": "7 × 100 + 7 × 2",
+     "why": "98 is 100 − 2, so subtract. Don't add.",
+     "say": "add instead of subtracting"
+    },
+    {
+     "e": "7 × 90 + 8",
+     "why": "You multiplied only the 90 by 7. The 8 needs the 7 too.",
+     "say": "multiply only the ninety"
+    }
+   ],
+   "at": [
+    "98",
+    "7",
+    "7",
+    "700"
+   ],
+   "block_name": "Distributive property"
+  },
+  {
+   "id": "ex33",
+   "level": 2,
+   "block": "0.2.2",
+   "kind": "expr",
+   "prompt": "Use the distributive property to expand.",
+   "q": "−2(x − 5)",
+   "read": "Negative two times times the quantity x minus five.",
+   "a": "−2x + 10",
+   "a_read": "negative two x plus ten",
+   "lines": [
+    "⟨−2(x − 5)⟩",
+    "⟨(−2)(x) + (−2)(−5)⟩",
+    "−2x + 10"
+   ],
+   "chips": [
+    "DIST",
+    "CALC"
+   ],
+   "say": [
+    "−2 multiplies every term inside: (−2)(x) and (−2)(−5).",
+    "−2 times x is −2x. Negative times negative is positive: (−2)(−5) = 10."
+   ],
+   "wrong": [
+    {
+     "e": "−2x − 10",
+     "why": "(−2)(−5) is positive 10: negative times negative.",
+     "say": "make negative two times negative five negative",
+     "read": "negative two x minus ten"
+    },
+    {
+     "e": "−2x − 5",
+     "why": "You multiplied only the x by −2.",
+     "say": "multiply only the x",
+     "read": "negative two x minus five"
+    },
+    {
+     "e": "−2x + 5",
+     "why": "You multiplied the −5 by −1 instead of by −2.",
+     "say": "multiply the five by negative one instead of negative two",
+     "read": "negative two x plus five"
+    }
+   ],
+   "at": [
+    "2",
+    "2"
+   ],
+   "block_name": "Distributive property"
+  },
+  {
+   "id": "ex34",
+   "level": 2,
+   "block": "0.2.2",
+   "kind": "multi",
+   "prompt": "Select all the expressions equal to 3(x + 4).",
+   "read": "Which of these equal three times the quantity x plus four? Choose all that apply.",
+   "check": "equals:3(x + 4)",
+   "say_answer": "Three of them are equal: three x plus twelve, x times three plus twelve, and twelve plus three x. The three multiplies both terms inside the parentheses.",
+   "options": [
+    {
+     "t": "3x + 12",
+     "ok": true,
+     "why": "3 · x = 3x and 3 · 4 = 12.",
+     "say": "Three x plus twelve. Three times x is three x, and three times four is twelve. Right."
+    },
+    {
+     "t": "3x + 4",
+     "ok": false,
+     "why": "The 3 multiplies both terms: the 4 becomes 12.",
+     "say": "Three x plus four multiplies only the x. The four needs the three too. Not a match."
+    },
+    {
+     "t": "x · 3 + 12",
+     "ok": true,
+     "why": "x · 3 is 3x: the same as 3x + 12.",
+     "say": "x times three plus twelve. X times three is three x, so this is three x plus twelve. Right."
+    },
+    {
+     "t": "3x + 7",
+     "ok": false,
+     "why": "You added 3 + 4 instead of multiplying.",
+     "say": "Three x plus seven adds three and four instead of multiplying. Not a match."
+    },
+    {
+     "t": "12 + 3x",
+     "ok": true,
+     "why": "The same terms in another order: addition is commutative.",
+     "say": "Twelve plus three x has the same terms in another order. Right."
+    }
+   ],
+   "block_name": "Distributive property"
+  },
+  {
+   "id": "ex35",
+   "level": 3,
+   "block": "0.2.2",
+   "kind": "expr",
+   "prompt": "Use the distributive property to expand.",
+   "q": "−3(2x − 4y + 1)",
+   "read": "Negative three times times the quantity two x minus four y plus one.",
+   "a": "−6x + 12y − 3",
+   "a_read": "negative six x plus twelve y minus three",
+   "lines": [
+    "⟨−3(2x − 4y + 1)⟩",
+    "⟨(−3)(2x) + (−3)(−4y) + (−3)(1)⟩",
+    "−6x + 12y − 3"
+   ],
+   "chips": [
+    "DIST",
+    "CALC"
+   ],
+   "say": [
+    "−3 multiplies every term inside: (−3)(2x), (−3)(−4y) and (−3)(1).",
+    "(−3)(2x) = −6x. Negative times negative is positive: (−3)(−4y) = 12y. And (−3)(1) = −3."
+   ],
+   "wrong": [
+    {
+     "e": "−6x − 12y − 3",
+     "why": "(−3)(−4y) is positive 12y: negative times negative.",
+     "say": "make negative three times negative four y negative",
+     "read": "negative six x minus twelve y minus three"
+    },
+    {
+     "e": "−6x + 12y + 1",
+     "why": "The −3 multiplies the last term too: (−3)(1) = −3.",
+     "say": "forget to multiply the one",
+     "read": "negative six x plus twelve y plus one"
+    },
+    {
+     "e": "−6x − 4y − 3",
+     "why": "The −3 multiplies the −4y too: (−3)(−4y) = 12y.",
+     "say": "leave the four y alone",
+     "read": "negative six x minus four y minus three"
+    }
+   ],
+   "at": [
+    "3",
+    "32x"
+   ],
+   "block_name": "Distributive property"
+  },
+  {
+   "id": "ex36",
+   "level": 3,
+   "block": "0.2.2",
+   "kind": "expr",
+   "prompt": "Use the distributive property to expand.",
+   "q": "x(3x − 7)",
+   "read": "X times the quantity three x minus seven.",
+   "a": "3x^2 − 7x",
+   "a_read": "three x squared minus seven x",
+   "lines": [
+    "⟨x(3x − 7)⟩",
+    "⟨x · 3x + x · (−7)⟩",
+    "3x^2 − 7x"
+   ],
+   "chips": [
+    "DIST",
+    "CALC"
+   ],
+   "say": [
+    "x multiplies every term inside: x · 3x and x · (−7).",
+    "x · 3x = 3x², and x · (−7) = −7x."
+   ],
+   "wrong": [
+    {
+     "e": "3x^2 − 7",
+     "why": "You multiplied only the first term by x.",
+     "say": "multiply only the first term",
+     "read": "three x squared minus seven"
+    },
+    {
+     "e": "3x^2 + 7x",
+     "why": "x · (−7) is −7x: the minus sign stays.",
+     "say": "lose the minus sign",
+     "read": "three x squared plus seven x"
+    },
+    {
+     "e": "3x − 7x",
+     "why": "x · 3x is 3x², not 3x: multiplying x by x makes x².",
+     "say": "forget the exponent",
+     "read": "three x minus seven x"
+    }
+   ],
+   "at": [
+    "x",
+    "x"
+   ],
+   "block_name": "Distributive property"
+  },
+  {
+   "id": "ex37",
+   "level": 3,
+   "block": "0.2.2",
+   "prompt": "Use the distributive property backwards to find the value.",
+   "q": "13 × 8 + 13 × 12",
+   "lines": [
+    "⟨13 × 8 + 13 × 12⟩",
+    "⟨13 × (8 + 12)⟩",
+    "⟨13 × 20⟩",
+    "260"
+   ],
+   "chips": [
+    "DIST",
+    "CALC",
+    "CALC"
+   ],
+   "say": [
+    "Both products have a 13, so factor it out: 13 × (8 + 12).",
+    "8 + 12 = 20.",
+    "13 × 20 = 260."
+   ],
+   "wrong": [
+    {
+     "e": "13 × 8 + 12",
+     "why": "You factored the 13 out of only the first product.",
+     "say": "factor the thirteen out of only one product"
+    },
+    {
+     "e": "13 × 8 × 12",
+     "why": "You multiplied 8 by 12 instead of adding the parts.",
+     "say": "multiply instead of adding"
+    },
+    {
+     "e": "(13 + 13) × (8 + 12)",
+     "why": "You added the two 13s. A common factor is pulled out once, not added.",
+     "say": "add the thirteens"
+    }
+   ],
+   "at": [
+    "both",
+    "8",
+    "13"
+   ],
+   "block_name": "Distributive property"
+  },
+  {
+   "id": "ex38",
+   "level": 3,
+   "block": "0.2.2",
+   "kind": "match",
+   "prompt": "Match each expression with its value.",
+   "read": "Match each expression with its value.",
+   "check": "equal",
+   "say_answer": "Every expression now has its value. Split the harder number into a friendly sum or difference, and let the distributive property do the work.",
+   "pairs": [
+    {
+     "l": "6 × 52",
+     "r": "312",
+     "why": "6 × 52 = 6 × (50 + 2) = 300 + 12 = 312.",
+     "say": "Six times fifty-two is six times the quantity fifty plus two. Three hundred plus twelve is three hundred twelve."
+    },
+    {
+     "l": "9 × 99",
+     "r": "891",
+     "why": "9 × 99 = 9 × (100 − 1) = 900 − 9 = 891.",
+     "say": "Nine times ninety-nine is nine times the quantity one hundred minus one. Nine hundred minus nine is eight hundred ninety-one."
+    },
+    {
+     "l": "4 × 205",
+     "r": "820",
+     "why": "4 × 205 = 4 × (200 + 5) = 800 + 20 = 820.",
+     "say": "Four times two hundred five is four times the quantity two hundred plus five. Eight hundred plus twenty is eight hundred twenty."
+    },
+    {
+     "l": "8 × 101",
+     "r": "808",
+     "why": "8 × 101 = 8 × (100 + 1) = 800 + 8 = 808.",
+     "say": "Eight times one hundred one is eight times the quantity one hundred plus one. Eight hundred plus eight is eight hundred eight."
+    }
+   ],
+   "block_name": "Distributive property"
+  },
+  {
+   "id": "ex39",
+   "level": 4,
+   "block": "0.2.2",
+   "kind": "expr",
+   "prompt": "Use the distributive property to expand.",
+   "q": "−2(3x^2 − 4x + 5)",
+   "read": "Negative two times the quantity three x squared minus four x plus five.",
+   "a": "−6x^2 + 8x − 10",
+   "a_read": "negative six x squared plus eight x minus ten",
+   "lines": [
+    "⟨−2(3x^2 − 4x + 5)⟩",
+    "⟨(−2)(3x^2) + (−2)(−4x) + (−2)(5)⟩",
+    "−6x^2 + 8x − 10"
+   ],
+   "chips": [
+    "DIST",
+    "CALC"
+   ],
+   "say": [
+    "Negative two multiplies every term inside the parentheses. Negative two times three x squared, negative two times negative four x, and negative two times five.",
+    "Negative two times three x squared is negative six x squared. Negative times negative is positive, so negative two times negative four x is eight x. And negative two times five is negative ten."
+   ],
+   "at": [
+    "five",
+    "ten"
+   ],
+   "wrong": [
+    {
+     "e": "−6x^2 − 8x − 10",
+     "why": "Negative times negative is positive: (−2)(−4x) = +8x.",
+     "say": "make the middle term negative",
+     "read": "negative six x squared minus eight x minus ten"
+    },
+    {
+     "e": "−6x^2 + 8x + 5",
+     "why": "The −2 multiplies the last term too: (−2)(5) = −10.",
+     "say": "forget to multiply the five",
+     "read": "negative six x squared plus eight x plus five"
+    },
+    {
+     "e": "6x^2 + 8x − 10",
+     "why": "(−2)(3x²) is −6x², not +6x²: the minus sign matters.",
+     "say": "lose the minus sign on the first term",
+     "read": "six x squared plus eight x minus ten"
+    }
+   ],
+   "block_name": "Distributive property"
+  },
+  {
+   "id": "ex40",
+   "level": 4,
+   "block": "0.2.2",
+   "kind": "multi",
+   "prompt": "Select all the expressions equal to −3(x − 2).",
+   "read": "Which of these equal negative three times the quantity x minus two? Choose all that apply.",
+   "check": "equals:−3(x − 2)",
+   "say_answer": "Four of them are equal: negative three x plus six, six minus three x, the opposite of the quantity three x minus six, and three times the quantity two minus x. The negative three multiplies both terms, and the minus times minus makes plus six.",
+   "options": [
+    {
+     "t": "−3x + 6",
+     "ok": true,
+     "why": "(−3)(x) = −3x and (−3)(−2) = +6.",
+     "say": "Negative three x plus six. Negative three times x is negative three x, and negative three times negative two is positive six. Right."
+    },
+    {
+     "t": "−3x − 6",
+     "ok": false,
+     "why": "Negative times negative is positive: the 6 is +6.",
+     "say": "Negative three x minus six makes the six negative. But negative three times negative two is positive six. Not a match."
+    },
+    {
+     "t": "6 − 3x",
+     "ok": true,
+     "why": "The same terms in another order: −3x + 6 = 6 − 3x.",
+     "say": "Six minus three x has the same terms as negative three x plus six, in another order. Right."
+    },
+    {
+     "t": "−3x − 2",
+     "ok": false,
+     "why": "The −3 multiplies both terms: the −2 becomes +6.",
+     "say": "Negative three x minus two multiplies only the x. The negative two needs the negative three too. Not a match."
+    },
+    {
+     "t": "−(3x − 6)",
+     "ok": true,
+     "why": "The minus sign changes the sign of both terms: −3x + 6.",
+     "say": "The opposite of the quantity three x minus six changes both signs. That is negative three x plus six. Right."
+    },
+    {
+     "t": "3(2 − x)",
+     "ok": true,
+     "why": "3(2 − x) = 6 − 3x, the same as −3x + 6.",
+     "say": "Three times the quantity two minus x is six minus three x. Right."
+    }
+   ],
+   "block_name": "Distributive property"
+  },
+  {
+   "id": "ex41",
+   "level": 1,
+   "block": "0.3",
+   "kind": "num",
+   "prompt": "How many terms does this expression have?",
+   "q": "8y − 3x + 5",
+   "read": "How many terms does eight y minus three x plus five have?",
+   "derive": "terms",
+   "lines": [
+    "⟨8y⟩ − 3x + 5",
+    "8y ⟨− 3x⟩ + 5",
+    "8y − 3x ⟨+ 5⟩",
+    "3 terms"
+   ],
+   "chips": [
+    "TERM",
+    "TERM",
+    "TERM"
+   ],
+   "say": [
+    "Terms are the pieces that are added or subtracted. The first term is 8y.",
+    "The second term is −3x. The minus sign belongs to it.",
+    "The last term is +5. Nothing else is added or subtracted, so there are 3 terms."
+   ],
+   "wrong": [
+    {
+     "v": 1,
+     "m": "one",
+     "why": "The plus and minus signs separate the pieces, so there is more than one term.",
+     "say": "count the whole expression as one term"
+    },
+    {
+     "v": 5,
+     "m": "pieces",
+     "why": "8, y, 3, x and 5 are numbers and letters, not pieces separated by + or −. 8y is a single term.",
+     "say": "count every number and letter separately"
+    },
+    {
+     "v": 7,
+     "m": "tokens",
+     "why": "The plus and minus signs separate the terms; they are not terms themselves.",
+     "say": "count the signs as terms too"
+    }
+   ],
+   "at": [
+    "terms",
+    "the",
+    "the"
+   ],
+   "block_name": "Parts of an expression"
+  },
+  {
+   "id": "ex42",
+   "level": 2,
+   "block": "0.3",
+   "kind": "num",
+   "prompt": "What is the constant term?",
+   "q": "−x^2 + 3x − 11",
+   "read": "What is the constant term of negative x squared plus three x minus eleven?",
+   "derive": "constant",
+   "lines": [
+    "⟨−x^2⟩ + ⟨3x⟩ − 11",
+    "−x^2 + 3x ⟨− 11⟩",
+    "−11"
+   ],
+   "chips": [
+    "TERM",
+    "CONST"
+   ],
+   "say": [
+    "The terms with a variable are not constants: −x² and 3x both have an x.",
+    "The only term with no variable is −11. The minus sign belongs to it, so the constant is −11."
+   ],
+   "wrong": [
+    {
+     "v": 11,
+     "m": "drop-sign",
+     "why": "The minus sign belongs to the term, so the constant is −11, not 11.",
+     "say": "drop the minus sign"
+    },
+    {
+     "v": 3,
+     "m": "coef-of:3x",
+     "why": "3 is the coefficient of 3x, a term with a variable. The constant has no variable.",
+     "say": "pick the three from the three x term"
+    },
+    {
+     "v": -9,
+     "m": "sum-numbers",
+     "why": "You added every number. The constant is only the term with no variable.",
+     "say": "add all the numbers together"
+    }
+   ],
+   "at": [
+    "the",
+    "the"
+   ],
+   "block_name": "Parts of an expression"
+  },
+  {
+   "id": "ex43",
+   "level": 2,
+   "block": "0.3",
+   "kind": "num",
+   "prompt": "How many factors are multiplied in this term?",
+   "q": "5ab^2",
+   "read": "How many factors are multiplied in the term five a b squared?",
+   "derive": "factors:5ab^2",
+   "lines": [
+    "⟨5ab^2⟩ = 5 · a · b^2",
+    "⟨5⟩ · ⟨a⟩ · ⟨b⟩ · ⟨b⟩",
+    "4 factors"
+   ],
+   "chips": [
+    "FACTOR",
+    "FACTOR"
+   ],
+   "say": [
+    "Factors are the things multiplied inside a term. Write it as a product: 5 times a times b squared.",
+    "Now b squared means b times b. So the factors are 5, a, b and b: 4 factors."
+   ],
+   "wrong": [
+    {
+     "v": 3,
+     "m": "pieces",
+     "why": "b² means b · b, so it is two factors, not one.",
+     "say": "count b squared as one factor"
+    },
+    {
+     "v": 2,
+     "m": "distinct-vars",
+     "why": "The 5 is a factor too, and b appears twice.",
+     "say": "count only the letters a and b"
+    },
+    {
+     "v": 1,
+     "m": "one",
+     "why": "A term is a product of several factors; this one has more than one.",
+     "say": "count the whole term as one factor"
+    }
+   ],
+   "at": [
+    "factors",
+    "now"
+   ],
+   "block_name": "Parts of an expression"
+  },
+  {
+   "id": "ex44",
+   "level": 2,
+   "block": "0.3",
+   "kind": "multi",
+   "prompt": "Select all the expressions with exactly 2 terms.",
+   "read": "Which of these expressions have exactly two terms? Choose all that apply.",
+   "check": "terms:2",
+   "say_answer": "Three of them have exactly two terms: four x minus nine, negative two y plus eight, and seven minus three times the quantity y plus one. A product with a group is one term, whatever is inside the parentheses.",
+   "options": [
+    {
+     "t": "4x − 9",
+     "ok": true,
+     "why": "Two pieces: 4x and −9.",
+     "say": "Four x minus nine has two pieces: four x and negative nine. Two terms. Right."
+    },
+    {
+     "t": "3(x + 2)",
+     "ok": false,
+     "why": "It is one term: 3 times a group.",
+     "say": "Three times the quantity x plus two is a single product. The parentheses make it one term. Not a match."
+    },
+    {
+     "t": "5x^2 + 2x − 1",
+     "ok": false,
+     "why": "Three terms: 5x², 2x and −1.",
+     "say": "Five x squared plus two x minus one has three terms. Not a match."
+    },
+    {
+     "t": "−2y + 8",
+     "ok": true,
+     "why": "Two pieces: −2y and 8.",
+     "say": "Negative two y plus eight has two pieces. Two terms. Right."
+    },
+    {
+     "t": "7 − 3(y + 1)",
+     "ok": true,
+     "why": "Two terms: 7 and −3(y + 1). The group stays inside its term.",
+     "say": "Seven minus three times the quantity y plus one has two terms: seven, and negative three times the group. The plus inside the parentheses does not make a new term. Right."
+    }
+   ],
+   "block_name": "Parts of an expression"
+  },
+  {
+   "id": "ex45",
+   "level": 3,
+   "block": "0.3",
+   "kind": "num",
+   "prompt": "What is the coefficient of the y term?",
+   "q": "4x^2 − 9y + xy",
+   "read": "What is the coefficient of the y term in four x squared minus nine y plus x y?",
+   "derive": "coef:-9y",
+   "lines": [
+    "4x^2 ⟨− 9y⟩ + xy",
+    "⟨−9y⟩ = −9 · y",
+    "−9"
+   ],
+   "chips": [
+    "TERM",
+    "COEF"
+   ],
+   "say": [
+    "The y term is −9y. The minus sign belongs to it.",
+    "The number multiplying y is 9, and the minus sign makes it negative: the coefficient is −9."
+   ],
+   "wrong": [
+    {
+     "v": 9,
+     "m": "drop-sign",
+     "why": "The minus sign belongs to the term, so the coefficient is −9, not 9.",
+     "say": "drop the minus sign"
+    },
+    {
+     "v": 4,
+     "m": "coef-of:4x^2",
+     "why": "4 is the coefficient of 4x², the first term, not of the y term.",
+     "say": "use the four from the first term"
+    },
+    {
+     "v": 1,
+     "m": "coef-of:xy",
+     "why": "xy is a different term, and its coefficient is 1. The y term is −9y.",
+     "say": "use the coefficient of x y"
+    }
+   ],
+   "at": [
+    "the",
+    "the"
+   ],
+   "block_name": "Parts of an expression"
+  },
+  {
+   "id": "ex46",
+   "level": 3,
+   "block": "0.3",
+   "kind": "num",
+   "prompt": "How many terms does this expression have?",
+   "q": "3(x − 2) + 4y − (y + 1)",
+   "read": "How many terms does three times the quantity x minus two, plus four y, minus the quantity y plus one, have?",
+   "derive": "terms",
+   "lines": [
+    "⟨3(x − 2)⟩ + 4y − (y + 1)",
+    "3(x − 2) ⟨+ 4y⟩ − (y + 1)",
+    "3(x − 2) + 4y ⟨− (y + 1)⟩",
+    "3 terms"
+   ],
+   "chips": [
+    "TERM",
+    "TERM",
+    "TERM"
+   ],
+   "say": [
+    "A product with a group is one term, whatever is inside the parentheses. 3(x − 2) is the first term.",
+    "After the plus sign comes the second term, 4y.",
+    "After the minus sign comes the third term, −(y + 1). Nothing else is added or subtracted outside parentheses, so there are 3 terms."
+   ],
+   "wrong": [
+    {
+     "v": 5,
+     "m": "flat",
+     "why": "Signs inside parentheses don't make new terms of the whole expression: each group stays inside its term.",
+     "say": "count the pieces inside the parentheses too"
+    },
+    {
+     "v": 7,
+     "m": "pieces",
+     "why": "Numbers and letters are not terms. Terms are separated by + or − outside the parentheses.",
+     "say": "count every number and letter"
+    },
+    {
+     "v": 1,
+     "m": "one",
+     "why": "The plus and minus signs outside the parentheses separate the terms.",
+     "say": "count the whole expression as one term"
+    }
+   ],
+   "at": [
+    "a",
+    "after",
+    "after"
+   ],
+   "block_name": "Parts of an expression"
+  },
+  {
+   "id": "ex47",
+   "level": 3,
+   "block": "0.3",
+   "kind": "multi",
+   "prompt": "Select all the terms with coefficient 5.",
+   "read": "Which of these terms have a coefficient of five? Choose all that apply.",
+   "check": "coefficient:5",
+   "say_answer": "Two of them have coefficient five: five x squared and five a b. In x to the fifth the five is an exponent, and a minus sign or a bigger number changes the coefficient.",
+   "options": [
+    {
+     "t": "5x^2",
+     "ok": true,
+     "why": "The number multiplying x² is 5.",
+     "say": "Five x squared. The number multiplying x squared is five. Right."
+    },
+    {
+     "t": "5ab",
+     "ok": true,
+     "why": "The number in front of the letters is 5.",
+     "say": "Five a b. The number in front of the letters is five. Right."
+    },
+    {
+     "t": "x^5",
+     "ok": false,
+     "why": "5 is the exponent here. The coefficient is the hidden 1.",
+     "say": "x to the fifth. The five is an exponent, not a coefficient. The coefficient is the hidden one. Not a match."
+    },
+    {
+     "t": "−5y",
+     "ok": false,
+     "why": "The minus sign belongs to the term: the coefficient is −5.",
+     "say": "Negative five y. The minus sign belongs to the term, so the coefficient is negative five. Not a match."
+    },
+    {
+     "t": "15z",
+     "ok": false,
+     "why": "The coefficient is the whole number 15, not 5.",
+     "say": "Fifteen z. The coefficient is fifteen. Not a match."
+    }
+   ],
+   "block_name": "Parts of an expression"
+  },
+  {
+   "id": "ex48",
+   "level": 3,
+   "block": "0.3",
+   "kind": "match",
+   "prompt": "Match each expression with its number of terms.",
+   "read": "Match each expression with its number of terms.",
+   "check": "terms",
+   "say_answer": "Every expression now has its number of terms. Count the pieces separated by plus and minus signs outside parentheses. A product with a group is one term, and so is a single piece with a minus sign.",
+   "pairs": [
+    {
+     "l": "4x − 7",
+     "r": "2",
+     "why": "Two pieces: 4x and −7.",
+     "say": "Four x minus seven has two pieces, so two terms."
+    },
+    {
+     "l": "5(x + 3)",
+     "r": "1",
+     "why": "A number times a group is one term.",
+     "say": "Five times the quantity x plus three is one product, so one term."
+    },
+    {
+     "l": "a + b − c",
+     "r": "3",
+     "why": "Three pieces: a, b and −c.",
+     "say": "A plus b minus c has three pieces, so three terms."
+    },
+    {
+     "l": "6x^2 + 2x − 8 + y",
+     "r": "4",
+     "why": "Four pieces: 6x², 2x, −8 and y.",
+     "say": "Six x squared plus two x minus eight plus y has four pieces, so four terms."
+    },
+    {
+     "l": "−x",
+     "r": "1",
+     "why": "A single piece. The minus sign belongs to the term.",
+     "say": "Negative x is a single piece, so one term."
+    }
+   ],
+   "block_name": "Parts of an expression"
+  },
+  {
+   "id": "ex49",
+   "level": 4,
+   "block": "0.3",
+   "kind": "num",
+   "prompt": "How many factors are multiplied in this term?",
+   "q": "4m^3(n − 2)",
+   "read": "How many factors are multiplied in the term four m cubed times the quantity n minus two?",
+   "derive": "factors:4m^3(n − 2)",
+   "lines": [
+    "⟨4m^3(n − 2)⟩ = 4 · m^3 · (n − 2)",
+    "⟨4⟩ · ⟨m⟩ · ⟨m⟩ · ⟨m⟩ · ⟨(n − 2)⟩",
+    "5 factors"
+   ],
+   "chips": [
+    "FACTOR",
+    "FACTOR"
+   ],
+   "say": [
+    "Factors are the things multiplied inside a term. Write it as a product: four times m cubed times the group n minus two.",
+    "Now m cubed means m times m times m, and the group counts as one factor. So the factors are four, m, m, m, and the group: five factors."
+   ],
+   "at": [
+    "product",
+    "cubed"
+   ],
+   "wrong": [
+    {
+     "v": 4,
+     "m": "pieces",
+     "why": "m³ means m · m · m, so it is three factors, and the group (n − 2) is one factor.",
+     "say": "count each number and letter once"
+    },
+    {
+     "v": 2,
+     "m": "distinct-vars",
+     "why": "The 4 is a factor, m appears three times, and the group is a factor too.",
+     "say": "count only the letters m and n"
+    },
+    {
+     "v": 1,
+     "m": "one",
+     "why": "A term is a product of several factors; this one has more than one.",
+     "say": "count the whole term as one factor"
+    }
+   ],
+   "block_name": "Parts of an expression"
+  },
+  {
+   "id": "ex50",
+   "level": 4,
+   "block": "0.3",
+   "kind": "multi",
+   "prompt": "Select all the terms of 6 − 4a^2 + a − 2ab.",
+   "read": "Which of these are terms of six minus four a squared plus a minus two a b? Choose all that apply.",
+   "check": "term-of:6 − 4a^2 + a − 2ab",
+   "say_answer": "Four of them are terms: six, negative four a squared, a, and negative two a b. Each term keeps the sign in front of it, and a letter on its own is a term with a hidden coefficient of one.",
+   "options": [
+    {
+     "t": "6",
+     "ok": true,
+     "why": "The first piece: a constant term.",
+     "say": "Six. It is the first piece, a constant term. Right."
+    },
+    {
+     "t": "−4a^2",
+     "ok": true,
+     "why": "The minus sign belongs to the term after it.",
+     "say": "Negative four a squared. The minus sign belongs to the term after it. Right."
+    },
+    {
+     "t": "4a^2",
+     "ok": false,
+     "why": "This leaves out the minus sign. The term is −4a².",
+     "say": "Four a squared leaves out the minus sign. The term is negative four a squared. Not a term of this expression."
+    },
+    {
+     "t": "a",
+     "ok": true,
+     "why": "A single letter is a term: it is 1a.",
+     "say": "a. A letter on its own is a term, with a hidden coefficient of one. Right."
+    },
+    {
+     "t": "−2ab",
+     "ok": true,
+     "why": "The minus sign belongs to the term.",
+     "say": "Negative two a b. The minus sign belongs to the term. Right."
+    },
+    {
+     "t": "2ab",
+     "ok": false,
+     "why": "This leaves out the minus sign. The term is −2ab.",
+     "say": "Two a b leaves out the minus sign. The term is negative two a b. Not a term of this expression."
+    }
+   ],
+   "block_name": "Parts of an expression"
+  },
+  {
+   "id": "ex51",
+   "level": 1,
+   "block": "0.4",
+   "kind": "expr",
+   "prompt": "Simplify by combining like terms.",
+   "q": "8x − 3x",
+   "read": "Eight x minus three x.",
+   "a": "5x",
+   "a_read": "five x",
+   "lines": [
+    "⟨8x − 3x⟩",
+    "5x"
+   ],
+   "chips": [
+    "COMBINE"
+   ],
+   "say": [
+    "Both terms have the same variable part, x. Combine the coefficients: 8 − 3 = 5, so 5x."
+   ],
+   "wrong": [
+    {
+     "e": "5",
+     "why": "The x stays: it is part of the like terms, so the answer is 5x.",
+     "say": "drop the x",
+     "read": "five"
+    },
+    {
+     "e": "11x",
+     "why": "It is 8x − 3x, so subtract the coefficients: 8 − 3, not 8 + 3.",
+     "say": "add the coefficients instead of subtracting",
+     "read": "eleven x"
+    },
+    {
+     "e": "5x^2",
+     "why": "Combining like terms adds the coefficients; the variable part stays x.",
+     "say": "change x into x squared",
+     "read": "five x squared"
+    }
+   ],
+   "at": [
+    "both"
+   ],
+   "block_name": "Combining like terms"
+  },
+  {
+   "id": "ex52",
+   "level": 2,
+   "block": "0.4",
+   "kind": "expr",
+   "prompt": "Simplify by combining like terms.",
+   "q": "4a + 7 − 6a − 2",
+   "read": "Four a plus seven minus six a minus two.",
+   "a": "−2a + 5",
+   "a_read": "negative two a plus five",
+   "lines": [
+    "⟨4a + 7 − 6a − 2⟩",
+    "⟨(4a − 6a)⟩ + ⟨(7 − 2)⟩",
+    "−2a + 5"
+   ],
+   "chips": [
+    "COMBINE",
+    "COMBINE"
+   ],
+   "say": [
+    "Collect the like terms: the a terms are 4a and −6a, and the constants are 7 and −2.",
+    "4a − 6a = −2a, and 7 − 2 = 5."
+   ],
+   "wrong": [
+    {
+     "e": "−2a + 9",
+     "why": "The constants are 7 and −2, so 7 − 2 = 5, not 9.",
+     "say": "add the two to the seven",
+     "read": "negative two a plus nine"
+    },
+    {
+     "e": "2a + 5",
+     "why": "4a − 6a = −2a: the bigger coefficient, 6, is the negative one.",
+     "say": "get positive two a",
+     "read": "two a plus five"
+    },
+    {
+     "e": "−2a − 5",
+     "why": "The 7 is positive: 7 − 2 = 5.",
+     "say": "make the seven negative",
+     "read": "negative two a minus five"
+    }
+   ],
+   "at": [
+    "collect",
+    "4a"
+   ],
+   "block_name": "Combining like terms"
+  },
+  {
+   "id": "ex53",
+   "level": 2,
+   "block": "0.4",
+   "kind": "multi",
+   "prompt": "Select all the like terms of 3x^2y.",
+   "read": "Which of these are like terms of three x squared y? Choose all that apply.",
+   "check": "like:3x^2y",
+   "say_answer": "Two of them are like terms of three x squared y: negative x squared y, and y x squared. Like terms have exactly the same letters with the same powers. The order of the letters and the number in front do not matter.",
+   "options": [
+    {
+     "t": "−x^2y",
+     "ok": true,
+     "why": "Same variable part, x²y. The coefficient doesn't matter.",
+     "say": "Negative x squared y. The variable part is x squared y, the same as in three x squared y. A like term."
+    },
+    {
+     "t": "yx^2",
+     "ok": true,
+     "why": "Same letters with the same powers, in another order: x²y.",
+     "say": "y x squared. The same letters with the same powers in another order. A like term."
+    },
+    {
+     "t": "3xy",
+     "ok": false,
+     "why": "x is not x²: the exponents are different.",
+     "say": "Three x y. This has x, not x squared. The exponents are different, so it is not a like term."
+    },
+    {
+     "t": "3x^2",
+     "ok": false,
+     "why": "It has no y, so the variable part is different.",
+     "say": "Three x squared. It has no y, so the variable part is different. Not a like term."
+    },
+    {
+     "t": "y^2x",
+     "ok": false,
+     "why": "The powers are swapped: y²x is not x²y.",
+     "say": "y squared x. The powers are swapped: this is y squared times x, not x squared times y. Not a like term."
+    }
+   ],
+   "block_name": "Combining like terms"
+  },
+  {
+   "id": "ex54",
+   "level": 2,
+   "block": "0.4",
+   "kind": "expr",
+   "prompt": "Simplify by combining like terms.",
+   "q": "4(x − 2) + 7x",
+   "read": "Four times times the quantity x minus two plus seven x.",
+   "a": "11x − 8",
+   "a_read": "eleven x minus eight",
+   "lines": [
+    "⟨4(x − 2)⟩ + 7x",
+    "⟨4x⟩ − 8 ⟨+ 7x⟩",
+    "11x − 8"
+   ],
+   "chips": [
+    "DIST",
+    "COMBINE"
+   ],
+   "say": [
+    "Distribute first: 4 times x is 4x, and 4 times −2 is −8.",
+    "Now combine the x terms: 4x + 7x = 11x. The −8 has no like term, so it stays."
+   ],
+   "wrong": [
+    {
+     "e": "11x − 2",
+     "why": "The 4 multiplies both terms: 4 · (−2) = −8.",
+     "say": "multiply only the x by four",
+     "read": "eleven x minus two"
+    },
+    {
+     "e": "11x + 8",
+     "why": "4 · (−2) is −8: positive times negative is negative.",
+     "say": "make four times negative two positive",
+     "read": "eleven x plus eight"
+    },
+    {
+     "e": "3x",
+     "why": "−8 is a constant, so it can't join the x terms.",
+     "say": "combine the eight with the x terms",
+     "read": "three x"
+    }
+   ],
+   "at": [
+    "distribute",
+    "now"
+   ],
+   "block_name": "Combining like terms"
+  },
+  {
+   "id": "ex55",
+   "level": 3,
+   "block": "0.4",
+   "kind": "expr",
+   "prompt": "Simplify by combining like terms.",
+   "q": "6x^2 − 2x + 5 − 4x^2 + 7x − 9",
+   "read": "Six x squared minus two x plus five minus four x squared plus seven x minus nine.",
+   "a": "2x^2 + 5x − 4",
+   "a_read": "two x squared plus five x minus four",
+   "lines": [
+    "⟨6x^2 − 2x + 5 − 4x^2 + 7x − 9⟩",
+    "⟨(6x^2 − 4x^2)⟩ + ⟨(−2x + 7x)⟩ + ⟨(5 − 9)⟩",
+    "2x^2 + 5x − 4"
+   ],
+   "chips": [
+    "COMBINE",
+    "COMBINE"
+   ],
+   "say": [
+    "Sort the terms by their variable part: x² terms 6x² and −4x², x terms −2x and 7x, constants 5 and −9.",
+    "6x² − 4x² = 2x², −2x + 7x = 5x, and 5 − 9 = −4."
+   ],
+   "wrong": [
+    {
+     "e": "2x^2 + 5x + 4",
+     "why": "5 − 9 = −4, not +4.",
+     "say": "get positive four",
+     "read": "two x squared plus five x plus four"
+    },
+    {
+     "e": "10x^2 + 5x − 4",
+     "why": "6x² − 4x² = 2x². The minus sign belongs to the 4x² term.",
+     "say": "add the x squared terms",
+     "read": "ten x squared plus five x minus four"
+    },
+    {
+     "e": "2x^2 − 9x − 4",
+     "why": "−2x + 7x = 5x: the signs are different, so subtract the sizes.",
+     "say": "add the sizes of the x terms",
+     "read": "two x squared minus nine x minus four"
+    }
+   ],
+   "at": [
+    "sort",
+    "6x"
+   ],
+   "block_name": "Combining like terms"
+  },
+  {
+   "id": "ex56",
+   "level": 3,
+   "block": "0.4",
+   "kind": "expr",
+   "prompt": "Simplify by combining like terms.",
+   "q": "3(2x − 1) − 2(x − 4)",
+   "read": "Three times times the quantity two x minus one minus two times times the quantity x minus four.",
+   "a": "4x + 5",
+   "a_read": "four x plus five",
+   "lines": [
+    "⟨3(2x − 1)⟩ ⟨− 2(x − 4)⟩",
+    "⟨6x − 3 − 2x + 8⟩",
+    "4x + 5"
+   ],
+   "chips": [
+    "DIST",
+    "COMBINE"
+   ],
+   "say": [
+    "Distribute both parts. 3(2x − 1) = 6x − 3. And −2(x − 4) = −2x + 8, since negative times negative is positive.",
+    "Combine like terms: 6x − 2x = 4x, and −3 + 8 = 5."
+   ],
+   "wrong": [
+    {
+     "e": "4x − 11",
+     "why": "(−2)(−4) is +8: negative times negative is positive.",
+     "say": "make negative two times negative four negative",
+     "read": "four x minus eleven"
+    },
+    {
+     "e": "4x + 11",
+     "why": "3 · (−1) is −3, not +3.",
+     "say": "make three times negative one positive",
+     "read": "four x plus eleven"
+    },
+    {
+     "e": "4x − 7",
+     "why": "The −2 multiplies both terms: (−2)(−4) = +8.",
+     "say": "leave the minus four without multiplying",
+     "read": "four x minus seven"
+    }
+   ],
+   "at": [
+    "distribute",
+    "combine"
+   ],
+   "block_name": "Combining like terms"
+  },
+  {
+   "id": "ex57",
+   "level": 3,
+   "block": "0.4",
+   "kind": "multi",
+   "prompt": "Select all the expressions equal to 2x + 6.",
+   "read": "Which of these equal two x plus six? Choose all that apply.",
+   "check": "equals:2x + 6",
+   "say_answer": "Three of them equal two x plus six: x plus x plus six, two times the quantity x plus three, and x plus two plus x plus four. Combining like terms never changes the value, and the two multiplies both terms inside parentheses.",
+   "options": [
+    {
+     "t": "x + x + 6",
+     "ok": true,
+     "why": "x + x = 2x.",
+     "say": "x plus x plus six. x plus x is two x. Right."
+    },
+    {
+     "t": "2(x + 3)",
+     "ok": true,
+     "why": "2 · x = 2x and 2 · 3 = 6.",
+     "say": "Two times the quantity x plus three. Two times x is two x, and two times three is six. Right."
+    },
+    {
+     "t": "x + 2 + x + 4",
+     "ok": true,
+     "why": "x + x = 2x and 2 + 4 = 6.",
+     "say": "x plus two plus x plus four. The x terms make two x, and the constants make six. Right."
+    },
+    {
+     "t": "2x^2 + 6",
+     "ok": false,
+     "why": "Combining like terms never changes the exponent: x + x is 2x, not 2x².",
+     "say": "Two x squared plus six has an exponent that two x does not have. Not a match."
+    },
+    {
+     "t": "2(x + 6)",
+     "ok": false,
+     "why": "The 2 multiplies both terms: 2(x + 6) = 2x + 12.",
+     "say": "Two times the quantity x plus six is two x plus twelve. Not a match."
+    }
+   ],
+   "block_name": "Combining like terms"
+  },
+  {
+   "id": "ex58",
+   "level": 3,
+   "block": "0.4",
+   "kind": "match",
+   "prompt": "Match each expression with its simplified form.",
+   "read": "Match each expression with its simplified form.",
+   "check": "equal",
+   "say_answer": "Every expression now has its simplified form. Adding like terms adds the coefficients; multiplying x by x by x makes x cubed.",
+   "pairs": [
+    {
+     "l": "3x + 5x",
+     "r": "8x",
+     "why": "3 + 5 = 8, and the x stays.",
+     "say": "Three x plus five x. Three plus five is eight, so eight x."
+    },
+    {
+     "l": "x · x · x",
+     "r": "x^3",
+     "why": "Multiplying x by itself three times makes x³.",
+     "say": "x times x times x. This is multiplication, so it is x cubed, not three x."
+    },
+    {
+     "l": "7y − 7y + 4",
+     "r": "4",
+     "why": "7y − 7y = 0, so only the 4 is left.",
+     "say": "Seven y minus seven y is zero. Only the four is left."
+    },
+    {
+     "l": "2(a + a)",
+     "r": "4a",
+     "why": "a + a = 2a, and 2 · 2a = 4a.",
+     "say": "Two times the quantity a plus a. A plus a is two a, and two times two a is four a."
+    }
+   ],
+   "block_name": "Combining like terms"
+  },
+  {
+   "id": "ex59",
+   "level": 4,
+   "block": "0.4",
+   "kind": "expr",
+   "prompt": "Simplify by combining like terms.",
+   "q": "2(3x^2 − x) − (x^2 − 5x) + 4(x − 3)",
+   "read": "Two times the quantity three x squared minus x, minus the quantity x squared minus five x, plus four times the quantity x minus three.",
+   "a": "5x^2 + 7x − 12",
+   "a_read": "five x squared plus seven x minus twelve",
+   "lines": [
+    "⟨2(3x^2 − x)⟩ ⟨− (x^2 − 5x)⟩ ⟨+ 4(x − 3)⟩",
+    "⟨6x^2 − 2x − x^2 + 5x + 4x − 12⟩",
+    "5x^2 + 7x − 12"
+   ],
+   "chips": [
+    "DIST",
+    "COMBINE"
+   ],
+   "say": [
+    "Distribute all three parts. Two times three x squared minus x is six x squared minus two x. The minus sign in front of the second parentheses changes both signs: negative x squared plus five x. And four times x minus three is four x minus twelve.",
+    "Now combine like terms. Six x squared minus x squared is five x squared. Negative two x plus five x plus four x is seven x. The constant is negative twelve."
+   ],
+   "at": [
+    "twelve",
+    "twelve"
+   ],
+   "wrong": [
+    {
+     "e": "5x^2 − 3x − 12",
+     "why": "The minus before (x² − 5x) changes both signs: −x² + 5x, not −x² − 5x.",
+     "say": "change only the first sign",
+     "read": "five x squared minus three x minus twelve"
+    },
+    {
+     "e": "5x^2 + 7x − 3",
+     "why": "The 4 multiplies both terms: 4 · (−3) = −12.",
+     "say": "multiply only the x by four",
+     "read": "five x squared plus seven x minus three"
+    },
+    {
+     "e": "7x^2 + 7x − 12",
+     "why": "The minus before (x² − 5x) makes −x², not +x².",
+     "say": "leave the x squared positive",
+     "read": "seven x squared plus seven x minus twelve"
+    }
+   ],
+   "block_name": "Combining like terms"
+  },
+  {
+   "id": "ex60",
+   "level": 4,
+   "block": "0.4",
+   "kind": "expr",
+   "prompt": "Simplify by combining like terms.",
+   "q": "x(x + 3) − 2(x^2 − 4x) + 5x",
+   "read": "x times the quantity x plus three, minus two times the quantity x squared minus four x, plus five x.",
+   "a": "−x^2 + 16x",
+   "a_read": "negative x squared plus sixteen x",
+   "lines": [
+    "⟨x(x + 3)⟩ ⟨− 2(x^2 − 4x)⟩ + 5x",
+    "⟨x^2 + 3x − 2x^2 + 8x + 5x⟩",
+    "−x^2 + 16x"
+   ],
+   "chips": [
+    "DIST",
+    "COMBINE"
+   ],
+   "say": [
+    "Distribute first. x times x plus three is x squared plus three x. Negative two times x squared minus four x is negative two x squared plus eight x, since negative times negative is positive.",
+    "Now combine like terms. x squared minus two x squared is negative x squared. Three x plus eight x plus five x is sixteen x."
+   ],
+   "at": [
+    "eight",
+    "sixteen"
+   ],
+   "wrong": [
+    {
+     "e": "−x^2",
+     "why": "(−2)(−4x) is +8x: negative times negative is positive.",
+     "say": "make negative two times negative four x negative",
+     "read": "negative x squared"
+    },
+    {
+     "e": "3x^2 + 16x",
+     "why": "−2 times x² is −2x², not +2x².",
+     "say": "turn negative two x squared into positive",
+     "read": "three x squared plus sixteen x"
+    },
+    {
+     "e": "−x^2 + 4x",
+     "why": "The −2 multiplies both terms: (−2)(−4x) = 8x.",
+     "say": "multiply the negative two by only the x squared",
+     "read": "negative x squared plus four x"
+    }
+   ],
+   "block_name": "Combining like terms"
+  },
+  {
+   "id": "ex61",
+   "level": 1,
+   "block": "0.5",
+   "kind": "match",
+   "prompt": "Match each phrase with its operation.",
+   "read": "Match each phrase with the operation it asks for.",
+   "check": "operation",
+   "say_answer": "Every phrase now has its operation. Total of and added to mean addition, fewer than means subtraction, times means multiplication, and shared equally means division.",
+   "pairs": [
+    {
+     "l": "the total of",
+     "r": "addition",
+     "why": "Total means put together: add.",
+     "say": "The total of means put together, so addition."
+    },
+    {
+     "l": "fewer than",
+     "r": "subtraction",
+     "why": "Fewer than means take away: subtract.",
+     "say": "Fewer than means take away, so subtraction."
+    },
+    {
+     "l": "times",
+     "r": "multiplication",
+     "why": "Times means multiply.",
+     "say": "Times means multiplication."
+    },
+    {
+     "l": "shared equally among",
+     "r": "division",
+     "why": "Sharing equally splits into equal parts: divide.",
+     "say": "Shared equally among means splitting into equal parts, so division."
+    },
+    {
+     "l": "added to",
+     "r": "addition",
+     "why": "Added to means add.",
+     "say": "Added to means addition."
+    }
+   ],
+   "block_name": "Translating words into expressions"
+  },
+  {
+   "id": "ex62",
+   "level": 2,
+   "block": "0.5",
+   "kind": "words",
+   "prompt": "Write an expression for “the quotient of twelve and a number”. Use x for the number.",
+   "read": "Write an expression for: the quotient of twelve and a number. Use x for the number.",
+   "a": "[[12 | x]]",
+   "a_read": "twelve x",
+   "test": {
+    "var": "x",
+    "value": 4,
+    "means": "12 ÷ 4"
+   },
+   "lines": [
+    "The quotient of twelve and ⟨a number⟩",
+    "⟨The quotient of⟩ twelve and x",
+    "[[12 | x]]"
+   ],
+   "chips": [
+    "VAR",
+    "WORDS"
+   ],
+   "say": [
+    "Let x be the number.",
+    "Quotient means divide, with twelve on top and x on the bottom."
+   ],
+   "at": [
+    "x",
+    "bottom"
+   ],
+   "wrong": [
+    {
+     "e": "[[x | 12]]",
+     "why": "The quotient of a and b is a divided by b: the first number goes on top.",
+     "say": "put the x on top",
+     "read": "x over twelve"
+    },
+    {
+     "e": "12 − x",
+     "why": "Quotient means divide, not subtract.",
+     "say": "subtract",
+     "read": "twelve minus x"
+    },
+    {
+     "e": "12x",
+     "why": "Quotient means divide, not multiply.",
+     "say": "multiply",
+     "read": "twelve x"
+    }
+   ],
+   "block_name": "Translating words into expressions"
+  },
+  {
+   "id": "ex63",
+   "level": 2,
+   "block": "0.5",
+   "kind": "multi",
+   "prompt": "Select all the expressions that mean the same as “four less than a number”.",
+   "read": "Which of these mean four less than a number? Choose all that apply.",
+   "check": "equals:x − 4",
+   "say_answer": "Two of them mean four less than a number: x minus four, and negative four plus x. In less than, the number you start from comes first, and the four is taken away from it. Four minus x is the reverse.",
+   "options": [
+    {
+     "t": "x − 4",
+     "ok": true,
+     "why": "Start from the number and take away 4.",
+     "say": "x minus four. Start from the number and take away four. Right."
+    },
+    {
+     "t": "4 − x",
+     "ok": false,
+     "why": "That is the reverse order: it takes the number from 4.",
+     "say": "Four minus x takes the number away from four, which is the reverse order. Not a match."
+    },
+    {
+     "t": "−4 + x",
+     "ok": true,
+     "why": "Adding −4 is the same as taking away 4.",
+     "say": "Negative four plus x. Adding negative four is the same as taking away four. Right."
+    },
+    {
+     "t": "4x",
+     "ok": false,
+     "why": "That multiplies. Less than means subtract.",
+     "say": "Four x multiplies. Less than asks for subtraction. Not a match."
+    },
+    {
+     "t": "x + 4",
+     "ok": false,
+     "why": "That adds 4. Less than means subtract.",
+     "say": "x plus four adds. Less than asks for subtraction. Not a match."
+    }
+   ],
+   "block_name": "Translating words into expressions"
+  },
+  {
+   "id": "ex64",
+   "level": 2,
+   "block": "0.5",
+   "kind": "words",
+   "prompt": "Write an expression for “twelve decreased by a number”. Use x for the number.",
+   "read": "Write an expression for: twelve decreased by a number. Use x for the number.",
+   "a": "12 − x",
+   "a_read": "twelve minus x",
+   "test": {
+    "var": "x",
+    "value": 5,
+    "means": "12 − 5"
+   },
+   "lines": [
+    "Twelve decreased by ⟨a number⟩",
+    "⟨Twelve decreased by⟩ x",
+    "12 − x"
+   ],
+   "chips": [
+    "VAR",
+    "ORDER"
+   ],
+   "say": [
+    "Call the number x.",
+    "Decreased by means subtract, and twelve comes first: twelve minus x."
+   ],
+   "at": [
+    "x",
+    "subtract"
+   ],
+   "wrong": [
+    {
+     "e": "x − 12",
+     "why": "Start from twelve: the number is what gets taken away.",
+     "say": "swap the order",
+     "read": "x minus twelve"
+    },
+    {
+     "e": "12 + x",
+     "why": "Decreased means subtract, not add.",
+     "say": "add",
+     "read": "twelve plus x"
+    },
+    {
+     "e": "12x",
+     "why": "Decreased by means subtract, not multiply.",
+     "say": "multiply",
+     "read": "twelve x"
+    }
+   ],
+   "block_name": "Translating words into expressions"
+  },
+  {
+   "id": "ex65",
+   "level": 3,
+   "block": "0.5",
+   "kind": "words",
+   "prompt": "Write an expression for “five more than three times a number”. Use x for the number.",
+   "read": "Write an expression for: five more than three times a number. Use x for the number.",
+   "a": "3x + 5",
+   "a_read": "three x plus five",
+   "test": {
+    "var": "x",
+    "value": 4,
+    "means": "3 × 4 + 5"
+   },
+   "lines": [
+    "Five more than ⟨three times a number⟩",
+    "⟨Five more than⟩ 3x",
+    "3x + 5"
+   ],
+   "chips": [
+    "WORDS",
+    "ORDER"
+   ],
+   "say": [
+    "With x as the number, three times a number is three x.",
+    "Five more than three x means start from three x and add five."
+   ],
+   "at": [
+    "three",
+    "add"
+   ],
+   "wrong": [
+    {
+     "e": "3(x + 5)",
+     "why": "Only the number is tripled; the five is added after.",
+     "say": "triple the sum",
+     "read": "three times the quantity x plus five"
+    },
+    {
+     "e": "5x + 3",
+     "why": "The three goes with the number and the five is added.",
+     "say": "swap the two numbers",
+     "read": "five x plus three"
+    },
+    {
+     "e": "3x − 5",
+     "why": "More than means add, not subtract.",
+     "say": "subtract",
+     "read": "three x minus five"
+    }
+   ],
+   "block_name": "Translating words into expressions"
+  },
+  {
+   "id": "ex66",
+   "level": 3,
+   "block": "0.5",
+   "kind": "words",
+   "prompt": "Write an expression for “four times the sum of a number and six”. Use x for the number.",
+   "read": "Write an expression for: four times the sum of a number and six. Use x for the number.",
+   "a": "4(x + 6)",
+   "a_read": "four x plus six",
+   "test": {
+    "var": "x",
+    "value": 2,
+    "means": "4 × (2 + 6)"
+   },
+   "lines": [
+    "Four times ⟨the sum of a number and six⟩",
+    "⟨Four times⟩ (x + 6)",
+    "4(x + 6)"
+   ],
+   "chips": [
+    "GROUP",
+    "WORDS"
+   ],
+   "say": [
+    "With x as the number, the sum of a number and six is a group: x plus six, in parentheses.",
+    "Four times means multiply the whole group by four."
+   ],
+   "at": [
+    "parentheses",
+    "group"
+   ],
+   "wrong": [
+    {
+     "e": "4x + 6",
+     "why": "Four times applies to the whole sum, so the sum needs parentheses.",
+     "say": "multiply only the number",
+     "read": "four x plus six"
+    },
+    {
+     "e": "x + 6",
+     "why": "You still have to multiply the sum by four.",
+     "say": "forget the four",
+     "read": "x plus six"
+    },
+    {
+     "e": "4(x − 6)",
+     "why": "Sum means add, not subtract.",
+     "say": "subtract",
+     "read": "four times the quantity x minus six"
+    }
+   ],
+   "block_name": "Translating words into expressions"
+  },
+  {
+   "id": "ex67",
+   "level": 3,
+   "block": "0.5",
+   "kind": "words",
+   "prompt": "Write an expression for “the quotient of a number and four, increased by nine”. Use x for the number.",
+   "read": "Write an expression for: the quotient of a number and four, increased by nine. Use x for the number.",
+   "a": "[[x | 4]] + 9",
+   "a_read": "x four plus nine",
+   "test": {
+    "var": "x",
+    "value": 8,
+    "means": "8 ÷ 4 + 9"
+   },
+   "lines": [
+    "The quotient of ⟨a number⟩ and four, increased by nine",
+    "⟨The quotient of⟩ x and four, increased by nine",
+    "[[x | 4]] + 9"
+   ],
+   "chips": [
+    "VAR",
+    "WORDS"
+   ],
+   "say": [
+    "Let x be the number.",
+    "Quotient means divide, with x on top and four on the bottom. Then add nine."
+   ],
+   "at": [
+    "x",
+    "divide"
+   ],
+   "wrong": [
+    {
+     "e": "[[x + 9 | 4]]",
+     "why": "Only the quotient is increased by nine, so the nine is added after dividing.",
+     "say": "add the nine before dividing",
+     "read": "x plus nine over four"
+    },
+    {
+     "e": "4x + 9",
+     "why": "Quotient means divide, not multiply.",
+     "say": "multiply",
+     "read": "four x plus nine"
+    },
+    {
+     "e": "[[x | 4]] − 9",
+     "why": "Increased by means add, not subtract.",
+     "say": "subtract",
+     "read": "x over four minus nine"
+    }
+   ],
+   "block_name": "Translating words into expressions"
+  },
+  {
+   "id": "ex68",
+   "level": 3,
+   "block": "0.5",
+   "kind": "multi",
+   "prompt": "Select all the expressions that mean “three times the sum of a number and two”.",
+   "read": "Which of these mean three times the sum of a number and two? Choose all that apply.",
+   "check": "equals:3(x + 2)",
+   "say_answer": "Two of them mean three times the sum of a number and two: three times the quantity x plus two, and three x plus six. The sum is built first, then multiplied by three. Three x plus two only multiplies the number.",
+   "options": [
+    {
+     "t": "3(x + 2)",
+     "ok": true,
+     "why": "The sum x + 2 is grouped and multiplied by 3.",
+     "say": "Three times the quantity x plus two. The sum is grouped, then multiplied by three. Right."
+    },
+    {
+     "t": "3x + 2",
+     "ok": false,
+     "why": "Only x is multiplied by 3 here.",
+     "say": "Three x plus two multiplies only the number. Not a match."
+    },
+    {
+     "t": "3x + 6",
+     "ok": true,
+     "why": "Distributing gives 3x + 6, the same value.",
+     "say": "Three x plus six. Distributing the three gives this, the same value. Right."
+    },
+    {
+     "t": "3 + x + 2",
+     "ok": false,
+     "why": "That adds 3. The sentence says times.",
+     "say": "Three plus x plus two adds three. The sentence says times. Not a match."
+    },
+    {
+     "t": "x + 2 + 3",
+     "ok": false,
+     "why": "That adds 3, not multiplies.",
+     "say": "x plus two plus three adds three. Not a match."
+    }
+   ],
+   "block_name": "Translating words into expressions"
+  },
+  {
+   "id": "ex69",
+   "level": 4,
+   "block": "0.5",
+   "kind": "words",
+   "prompt": "A pizza costs 12 dollars plus 2 dollars for each topping. Three friends share the cost equally. Write an expression for what each friend pays when there are x toppings.",
+   "read": "A pizza costs twelve dollars plus two dollars for each topping. Three friends share the cost equally. Write an expression for what each friend pays when there are x toppings.",
+   "a": "[[12 + 2x | 3]]",
+   "a_read": "twelve plus two x three",
+   "test": {
+    "var": "x",
+    "value": 6,
+    "means": "(12 + 2 × 6) ÷ 3"
+   },
+   "lines": [
+    "⟨Cost: 12 plus 2 for each of x toppings⟩, shared by 3",
+    "⟨12 + 2x⟩, shared by 3",
+    "⟨(12 + 2x) ÷ 3⟩",
+    "[[12 + 2x | 3]]"
+   ],
+   "chips": [
+    "WORDS",
+    "GROUP",
+    "WORDS"
+   ],
+   "say": [
+    "The pizza costs twelve plus two for each topping, so with x toppings that is twelve plus two x.",
+    "That whole cost is shared equally by three friends, so the sum goes on top.",
+    "Dividing the whole sum by three gives the share of each friend."
+   ],
+   "at": [
+    "twelve",
+    "sum",
+    "dividing"
+   ],
+   "wrong": [
+    {
+     "e": "12 + [[2x | 3]]",
+     "why": "The three friends share the whole cost, not just the toppings.",
+     "say": "divide only the toppings",
+     "read": "twelve plus two x over three"
+    },
+    {
+     "e": "12 + 2x",
+     "why": "You still have to share the cost among three friends.",
+     "say": "forget the sharing",
+     "read": "twelve plus two x"
+    },
+    {
+     "e": "[[2x | 3]]",
+     "why": "The twelve dollars is part of the cost that gets shared.",
+     "say": "leave out the base price",
+     "read": "two x over three"
+    }
+   ],
+   "block_name": "Translating words into expressions"
+  },
+  {
+   "id": "ex70",
+   "level": 4,
+   "block": "0.5",
+   "kind": "words",
+   "prompt": "Write an expression for “two less than five times the difference of a number and three”. Use x for the number.",
+   "read": "Write an expression for: two less than five times the difference of a number and three. Use x for the number.",
+   "a": "5(x − 3) − 2",
+   "a_read": "five x minus three minus two",
+   "test": {
+    "var": "x",
+    "value": 7,
+    "means": "5 × (7 − 3) − 2"
+   },
+   "lines": [
+    "Two less than five times ⟨the difference of a number and three⟩",
+    "Two less than ⟨five times⟩ (x − 3)",
+    "⟨Two less than⟩ 5(x − 3)",
+    "5(x − 3) − 2"
+   ],
+   "chips": [
+    "GROUP",
+    "WORDS",
+    "ORDER"
+   ],
+   "say": [
+    "With x as the number, the difference of a number and three is a group: x minus three, in parentheses.",
+    "Five times means multiply the whole group by five.",
+    "Two less than that means start from the product and take away two."
+   ],
+   "at": [
+    "parentheses",
+    "multiply",
+    "start"
+   ],
+   "wrong": [
+    {
+     "e": "5x − 3 − 2",
+     "why": "The five multiplies the whole difference, so it needs parentheses.",
+     "say": "multiply only the number",
+     "read": "five x minus three minus two"
+    },
+    {
+     "e": "5(x − 3 − 2)",
+     "why": "The two is taken away from the product, not inside the group.",
+     "say": "put the two inside the parentheses",
+     "read": "five times the quantity x minus three minus two"
+    },
+    {
+     "e": "5(x − 3) + 2",
+     "why": "Less than means take away, not add.",
+     "say": "add",
+     "read": "five times the quantity x minus three, plus two"
+    }
+   ],
+   "block_name": "Translating words into expressions"
+  }
+ ]
+}

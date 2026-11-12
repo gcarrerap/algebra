@@ -1,0 +1,57 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-exam-ex59",
+  "title": "Solution · Combining like terms",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Two times the quantity three x squared minus x, minus the quantity x squared minus five x, plus four times the quantity x minus three.",
+          "display": "2(3x^2 − x) − (x^2 − 5x) + 4(x − 3)",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Distribute all three parts. Two times three x squared minus x is six x squared minus two x. The minus sign in front of the second parentheses changes both signs: negative x squared plus five x. And four times x minus three is four x minus twelve.",
+          "display": "6x^2 − 2x − x^2 + 5x + 4x − 12",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Now combine like terms. Six x squared minus x squared is five x squared. Negative two x plus five x plus four x is seven x. The constant is negative twelve.",
+          "display": "5x^2 + 7x − 12",
+          "cue": "step-2"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b04",
+          "text": "So the answer is five x squared plus seven x minus twelve.",
+          "display": "= 5x^2 + 7x − 12",
+          "cue": "answer"
+        },
+        {
+          "id": "b05",
+          "text": "Watch out for these traps. If you change only the first sign, you get five x squared minus three x minus twelve. If you multiply only the x by four, you get five x squared plus seven x minus three.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

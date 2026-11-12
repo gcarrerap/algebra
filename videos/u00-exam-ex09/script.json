@@ -1,0 +1,87 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-exam-ex09",
+  "title": "Solution · Order of operations",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Two times the bracket five plus three times the quantity ten minus five, squared, divided by five, close bracket, minus six.",
+          "display": "2 × [5 + 3 × (10 − 5)^2 ÷ 5] − 6",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Work from the inside out. In the innermost group, ten minus five is five.",
+          "display": "2 × [5 + 3 × 5^2 ÷ 5] − 6",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Inside the brackets, the exponent comes next. Five squared is twenty-five.",
+          "display": "2 × [5 + 3 × 25 ÷ 5] − 6",
+          "cue": "step-2"
+        },
+        {
+          "id": "b04",
+          "text": "Then multiplication and division, left to right. Three times twenty-five is seventy-five.",
+          "display": "2 × [5 + 75 ÷ 5] − 6",
+          "cue": "step-3"
+        },
+        {
+          "id": "b05",
+          "text": "Seventy-five divided by five is fifteen.",
+          "display": "2 × [5 + 15] − 6",
+          "cue": "step-4"
+        },
+        {
+          "id": "b06",
+          "text": "Now finish the brackets. Five plus fifteen is twenty.",
+          "display": "2 × 20 − 6",
+          "cue": "step-5"
+        },
+        {
+          "id": "b07",
+          "text": "The brackets are done, so multiply. Two times twenty is forty.",
+          "display": "40 − 6",
+          "cue": "step-6"
+        },
+        {
+          "id": "b08",
+          "text": "Finally, forty minus six is thirty-four.",
+          "display": "34",
+          "cue": "step-7"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b09",
+          "text": "So the answer is thirty-four.",
+          "display": "= 34",
+          "cue": "answer"
+        },
+        {
+          "id": "b10",
+          "text": "Watch out for these traps. If you square only the five, you get negative fourteen. If you add five and three before multiplying, you get seventy-four.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

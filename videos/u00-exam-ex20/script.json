@@ -1,0 +1,87 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-exam-ex20",
+  "title": "Solution · Signed numbers",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Evaluate x minus one, squared, minus three x times the quantity x plus two, when x equals negative three.",
+          "display": "(x − 1)^2 − 3x(x + 2)",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Replace every x with negative three, in parentheses.",
+          "display": "((−3) − 1)^2 − 3(−3)((−3) + 2)",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Work inside the first parentheses. Negative three minus one is negative four.",
+          "display": "(−4)^2 − 3(−3)((−3) + 2)",
+          "cue": "step-2"
+        },
+        {
+          "id": "b04",
+          "text": "Now the second parentheses. Negative three plus two is negative one.",
+          "display": "(−4)^2 − 3(−3)(−1)",
+          "cue": "step-3"
+        },
+        {
+          "id": "b05",
+          "text": "Exponent next. Negative four, squared, is sixteen.",
+          "display": "16 − 3(−3)(−1)",
+          "cue": "step-4"
+        },
+        {
+          "id": "b06",
+          "text": "Then multiplication, left to right. Three times negative three is negative nine.",
+          "display": "16 − (−9)(−1)",
+          "cue": "step-5"
+        },
+        {
+          "id": "b07",
+          "text": "Negative nine times negative one is nine.",
+          "display": "16 − 9",
+          "cue": "step-6"
+        },
+        {
+          "id": "b08",
+          "text": "Finally, sixteen minus nine is seven.",
+          "display": "7",
+          "cue": "step-7"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b09",
+          "text": "So the answer is seven.",
+          "display": "= 7",
+          "cue": "answer"
+        },
+        {
+          "id": "b10",
+          "text": "Watch out for these traps. If you square only the one, you get negative thirteen. If you multiply by only the first x, you get negative nine.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

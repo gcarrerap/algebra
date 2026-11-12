@@ -418,6 +418,8 @@ def validate_derive(ex, problems):
 
 def check_claim(ex, item_text, claim, problems, what):
     """kind multi/match with "check": verify one statement with code.
+    claim "true"            → item is an identity "L = R" that holds for every value of the letters
+                              (so "x − 8 = 8 − x" is false and "x + 8 = 8 + x" is true);
     claim "property:<Name>" → item is a true identity showing that property;
     claim "equals:<expr>"   → item equals <expr> for every value of the variables;
     claim "term-of:<expr>"  → item is one of the terms of <expr> (sign included);
@@ -436,6 +438,9 @@ def check_claim(ex, item_text, claim, problems, what):
             return classify(item_text) == arg
         if kind == "equals":
             return same(item_text, arg)
+        if kind == "true":
+            left, right = item_text.split("=")
+            return same(left, right)
         if kind == "term-of":
             return _norm(item_text).lstrip("+") in [t.lstrip("+") for t in split_terms(arg)]
         if kind == "terms":
@@ -511,7 +516,8 @@ def validate_match(ex, problems):
         if chk and p.get("l") and p.get("r"):
             claim = f"property:{p['r']}" if chk == "property" else f"equals:{p['r']}" if chk == "equal" \
                 else f"coefficient:{p['r']}" if chk == "coefficient" \
-                else f"operation:{p['r']}" if chk == "operation" else chk
+                else f"operation:{p['r']}" if chk == "operation" \
+                else f"terms:{p['r']}" if chk == "terms" else chk
             if check_claim(ex, p["l"], claim, problems, "pair") is False:
                 problems.append(f"{i}: pair {p['l']!r} → {p['r']!r} is not right")
     if chk := ex.get("check"):
@@ -632,6 +638,17 @@ def pick_size(lines, sizes, max_h, max_w=1600):
 
 
 # ---------------------------------------------------------------- videos
+def item_title(data, ex, num):
+    """What a solution video calls itself: "Exercise 5" in a practice set. A unit exam sets
+    data["video_title"] (placeholders {num} and {block}) so its Boss solution videos say so."""
+    return data.get("video_title", "Exercise {num}").format(num=num, block=ex.get("block_name", ""))
+
+
+def unit_label(data):
+    """The small label at the top left of a solution video."""
+    return data.get("video_unit") or f"Unit {data['unit'].split('.')[0]} · Practice {data['unit']}"
+
+
 def video_files(data, ex, num, set_id):
     if ex["kind"] == "name":
         return name_video(data, ex, num, set_id)
@@ -640,6 +657,7 @@ def video_files(data, ex, num, set_id):
     if ex["kind"] == "match":
         return match_video(data, ex, num, set_id)
     vid = f"{set_id}-{ex['id']}"
+    item = item_title(data, ex, num)
     n, lv = len(ex["chips"]), data["levels"][str(ex["level"])]
     wrong = ex["wrong"]
     isw = ex["kind"] == "words"
@@ -673,7 +691,7 @@ def video_files(data, ex, num, set_id):
     b_ans, b_trap = f"b{n + 2:02d}", f"b{n + 3:02d}"
     script = {
         "format": "algebra-video-script", "version": 1, "video": vid,
-        "title": f"Exercise {num}", "voice": "narrator",
+        "title": item, "voice": "narrator",
         "scenes": [
             {"id": "s01", "title": "The problem", "blocks": [
                 {"id": "b01", "text": "Let's solve this one step by step. " + ex["read"], "display": q_plain,
@@ -730,7 +748,7 @@ def video_files(data, ex, num, set_id):
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Exercise {num} — step by step</title>
+<title>{item} — step by step</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap">
@@ -754,11 +772,11 @@ def video_files(data, ex, num, set_id):
 </head>
 <body>
 <div id="stage">
-  <div class="header"><span class="unit">Unit 0 · Practice {data["unit"]}</span><span class="title">Exercise {num}</span></div>
+  <div class="header"><span class="unit">{unit_label(data)}</span><span class="title">{item}</span></div>
 
   <!-- s01: the problem -->
   <section class="scene" data-scene="s01">
-    <div class="label yellow fade" data-at="b01">Exercise {num} · {lv}</div>
+    <div class="label yellow fade" data-at="b01">{item} · {lv}</div>
     {problem_div}{prompt}
   </section>
 
@@ -790,7 +808,7 @@ def video_files(data, ex, num, set_id):
 """
     return vid, script, html
 
-def page(title, header_unit, num, style, scenes, play_label="Watch the solution"):
+def page(title, header_unit, item, style, scenes, play_label="Watch the solution"):
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -805,7 +823,7 @@ def page(title, header_unit, num, style, scenes, play_label="Watch the solution"
 </head>
 <body>
 <div id="stage">
-  <div class="header"><span class="unit">{header_unit}</span><span class="title">Exercise {num}</span></div>
+  <div class="header"><span class="unit">{header_unit}</span><span class="title">{item}</span></div>
 {scenes}
   <div class="caption"></div>
   <div class="progress"></div>
@@ -821,6 +839,7 @@ def page(title, header_unit, num, style, scenes, play_label="Watch the solution"
 def name_video(data, ex, num, set_id):
     """Video for "which property is this?": the identity, what changed (highlighted), the name, the traps."""
     vid = f"{set_id}-{ex['id']}"
+    item = item_title(data, ex, num)
     lv = data["levels"][str(ex["level"])]
     color = PROPERTIES[ex["a"]]
     nb = len(ex["say"])
@@ -830,7 +849,7 @@ def name_video(data, ex, num, set_id):
                  + " ".join(f"It isn't the {w['a'].lower()} property, because {w['say']}." for w in wrong))
     script = {
         "format": "algebra-video-script", "version": 1, "video": vid,
-        "title": f"Exercise {num}", "voice": "narrator",
+        "title": item, "voice": "narrator",
         "scenes": [
             {"id": "s01", "title": "The problem", "blocks": [
                 {"id": "b01", "text": "Let's look at this one. " + ex["read"] + " Which property does it show?",
@@ -869,7 +888,7 @@ def name_video(data, ex, num, set_id):
     scenes = f"""
   <!-- s01: the problem -->
   <section class="scene" data-scene="s01">
-    <div class="label yellow fade" data-at="b01">Exercise {num} · {lv}</div>
+    <div class="label yellow fade" data-at="b01">{item} · {lv}</div>
     <div class="math {size} pop" data-at="b01">{markup(ex["q"])}</div>
     <div class="say fade muted" data-at="b01@which" style="font-size: 40px">Which property is shown?</div>
   </section>
@@ -896,8 +915,7 @@ def name_video(data, ex, num, set_id):
     <div class="label muted fade" data-at="{b_trap}+1.5" style="font-size: 22px; font-weight: 500">This video uses an AI-generated voice.</div>
   </section>
 """
-    unit_label = f"Unit {data['unit'].split('.')[0]} · Practice {data['unit']}"
-    return vid, script, page(f"Exercise {num} — step by step", unit_label, num, style, scenes)
+    return vid, script, page(f"{item} — step by step", unit_label(data), item, style, scenes)
 
 
 CHOICE_STYLE = """
@@ -929,12 +947,13 @@ def choice_text(t):
 def multi_video(data, ex, num, set_id):
     """Select all that apply: the options, then one block per option that says why it is in or out."""
     vid = f"{set_id}-{ex['id']}"
+    item = item_title(data, ex, num)
     lv = data["levels"][str(ex["level"])]
     opts = ex["options"]
     nb = len(opts)
     b_ans = f"b{nb + 2:02d}"
     script = {
-        "format": "algebra-video-script", "version": 1, "video": vid, "title": f"Exercise {num}", "voice": "narrator",
+        "format": "algebra-video-script", "version": 1, "video": vid, "title": item, "voice": "narrator",
         "scenes": [
             {"id": "s01", "title": "The problem", "blocks": [
                 {"id": "b01", "text": "Let's look at this one. " + ex["read"], "display": ex["prompt"],
@@ -965,7 +984,7 @@ def multi_video(data, ex, num, set_id):
                       for k, o in enumerate(x for x in opts if x["ok"]))
     scenes = f"""
   <section class="scene" data-scene="s01">
-    <div class="label yellow fade" data-at="b01">Exercise {num} · {lv}</div>
+    <div class="label yellow fade" data-at="b01">{item} · {lv}</div>
     <div class="prompt-l fade" data-at="b01">{ex["prompt"]}</div>
     <div class="grid fade" data-at="b01+0.6">
 {plain_cells}
@@ -989,19 +1008,19 @@ def multi_video(data, ex, num, set_id):
     <div class="label muted fade" data-at="{b_ans}+1.5" style="font-size: 22px; font-weight: 500">This video uses an AI-generated voice.</div>
   </section>
 """
-    unit_label = f"Unit {data['unit'].split('.')[0]} · Practice {data['unit']}"
-    return vid, script, page(f"Exercise {num} — step by step", unit_label, num, CHOICE_STYLE, scenes)
+    return vid, script, page(f"{item} — step by step", unit_label(data), item, CHOICE_STYLE, scenes)
 
 
 def match_video(data, ex, num, set_id):
     """Matching: the items, then one block per pair that joins it and says why."""
     vid = f"{set_id}-{ex['id']}"
+    item = item_title(data, ex, num)
     lv = data["levels"][str(ex["level"])]
     pairs = ex["pairs"]
     nb = len(pairs)
     b_ans = f"b{nb + 2:02d}"
     script = {
-        "format": "algebra-video-script", "version": 1, "video": vid, "title": f"Exercise {num}", "voice": "narrator",
+        "format": "algebra-video-script", "version": 1, "video": vid, "title": item, "voice": "narrator",
         "scenes": [
             {"id": "s01", "title": "The problem", "blocks": [
                 {"id": "b01", "text": "Let's look at this one. " + ex["read"], "display": ex["prompt"],
@@ -1027,7 +1046,7 @@ def match_video(data, ex, num, set_id):
         for k, p in enumerate(pairs))
     scenes = f"""
   <section class="scene" data-scene="s01">
-    <div class="label yellow fade" data-at="b01">Exercise {num} · {lv}</div>
+    <div class="label yellow fade" data-at="b01">{item} · {lv}</div>
     <div class="prompt-l fade" data-at="b01">{ex["prompt"]}</div>
     <div class="row fade" data-at="b01+0.6" style="gap: 120px; align-items: center">
       <div class="col" style="gap: 20px">
@@ -1056,8 +1075,7 @@ def match_video(data, ex, num, set_id):
     <div class="label muted fade" data-at="{b_ans}+1.5" style="font-size: 22px; font-weight: 500">This video uses an AI-generated voice.</div>
   </section>
 """
-    unit_label = f"Unit {data['unit'].split('.')[0]} · Practice {data['unit']}"
-    return vid, script, page(f"Exercise {num} — step by step", unit_label, num, CHOICE_STYLE, scenes)
+    return vid, script, page(f"{item} — step by step", unit_label(data), item, CHOICE_STYLE, scenes)
 
 
 # ---------------------------------------------------------------- quiz page

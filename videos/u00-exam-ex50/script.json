@@ -1,0 +1,75 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-exam-ex50",
+  "title": "Solution · Parts of an expression",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's look at this one. Which of these are terms of six minus four a squared plus a minus two a b? Choose all that apply.",
+          "display": "Select all the terms of 6 − 4a^2 + a − 2ab.",
+          "cue": "show-problem",
+          "pause_after_s": 1.5
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "One by one",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Six. It is the first piece, a constant term. Right.",
+          "display": "6",
+          "cue": "option-1"
+        },
+        {
+          "id": "b03",
+          "text": "Negative four a squared. The minus sign belongs to the term after it. Right.",
+          "display": "−4a^2",
+          "cue": "option-2"
+        },
+        {
+          "id": "b04",
+          "text": "Four a squared leaves out the minus sign. The term is negative four a squared. Not a term of this expression.",
+          "display": "4a^2",
+          "cue": "option-3"
+        },
+        {
+          "id": "b05",
+          "text": "a. A letter on its own is a term, with a hidden coefficient of one. Right.",
+          "display": "a",
+          "cue": "option-4"
+        },
+        {
+          "id": "b06",
+          "text": "Negative two a b. The minus sign belongs to the term. Right.",
+          "display": "−2ab",
+          "cue": "option-5"
+        },
+        {
+          "id": "b07",
+          "text": "Two a b leaves out the minus sign. The term is negative two a b. Not a term of this expression.",
+          "display": "2ab",
+          "cue": "option-6"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b08",
+          "text": "Four of them are terms: six, negative four a squared, a, and negative two a b. Each term keeps the sign in front of it, and a letter on its own is a term with a hidden coefficient of one.",
+          "cue": "answer"
+        }
+      ]
+    }
+  ]
+}

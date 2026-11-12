@@ -1,0 +1,93 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-exam-ex10",
+  "title": "Solution · Order of operations",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Negative three squared, plus two times the quantity four minus seven, squared, minus twenty divided by two squared.",
+          "display": "−3^2 + 2 × (4 − 7)^2 − 20 ÷ 2^2",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Parentheses first. Four minus seven is negative three.",
+          "display": "−3^2 + 2 × (−3)^2 − 20 ÷ 2^2",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Now the exponents. The first one has no parentheses, so the exponent only touches the three. Three squared is nine, and the minus sign stays outside: negative nine.",
+          "display": "−9 + 2 × (−3)^2 − 20 ÷ 2^2",
+          "cue": "step-2"
+        },
+        {
+          "id": "b04",
+          "text": "Next, negative three in parentheses, squared. Negative three times negative three is nine.",
+          "display": "−9 + 2 × 9 − 20 ÷ 2^2",
+          "cue": "step-3"
+        },
+        {
+          "id": "b05",
+          "text": "Then two squared is four.",
+          "display": "−9 + 2 × 9 − 20 ÷ 4",
+          "cue": "step-4"
+        },
+        {
+          "id": "b06",
+          "text": "Now multiplication and division, left to right. Two times nine is eighteen.",
+          "display": "−9 + 18 − 20 ÷ 4",
+          "cue": "step-5"
+        },
+        {
+          "id": "b07",
+          "text": "Twenty divided by four is five.",
+          "display": "−9 + 18 − 5",
+          "cue": "step-6"
+        },
+        {
+          "id": "b08",
+          "text": "Add and subtract, left to right. Negative nine plus eighteen is nine.",
+          "display": "9 − 5",
+          "cue": "step-7"
+        },
+        {
+          "id": "b09",
+          "text": "Finally, nine minus five is four.",
+          "display": "4",
+          "cue": "step-8"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b10",
+          "text": "So the answer is four.",
+          "display": "= 4",
+          "cue": "answer"
+        },
+        {
+          "id": "b11",
+          "text": "Watch out for these traps. If you square the negative sign too, you get twenty-two. If you square only the seven, you get negative fifty-five.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

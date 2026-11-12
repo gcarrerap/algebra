@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>__TITLE__</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap">
+<style>__BASE_STYLE__
+  /* exam only: no right/wrong colours while answering */
+  .dots button[data-a="1"] { background: var(--blue); border-color: var(--blue); color: var(--bg); }
+  .hl { background: rgba(255,204,77,.22); border-radius: 6px; padding: 0 .12em; }
+  .intro ul { padding-left: 1.2em; margin: 12px 0 18px; } .intro li { margin: 4px 0; }
+  .nav { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+  .opt[data-pick="1"] { border-color: var(--yellow); background: rgba(255,204,77,.10); }
+  .opt[data-pick="1"] .k { background: var(--yellow); color: var(--bg); }
+  .pair[data-set="1"] { border-color: var(--blue); }
+  .rv { margin: 14px 0 0; border: 1px solid var(--line); border-radius: 16px; background: var(--card); }
+  .rv > summary { cursor: pointer; list-style: none; padding: 14px 18px; display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap; }
+  .rv > summary::-webkit-details-marker { display: none; }
+  .rv .mark { font: 700 15px var(--display); width: 28px; height: 28px; border-radius: 9px; display: grid; place-items: center; flex: none; }
+  .rv[data-ok="1"] { border-color: rgba(74,222,128,.45); } .rv[data-ok="1"] .mark { background: var(--green); color: var(--bg); }
+  .rv[data-ok="0"] { border-color: rgba(248,113,113,.55); } .rv[data-ok="0"] .mark { background: var(--red); color: var(--bg); }
+  .rv .body { padding: 0 18px 18px; }
+  .rv .qline { font: 600 22px var(--display); margin: 6px 0 12px; overflow-x: auto; white-space: nowrap; }
+  .kv { display: grid; grid-template-columns: max-content 1fr; gap: 6px 14px; margin: 10px 0; }
+  .kv dt { color: var(--muted); font-size: 14px; } .kv dd { margin: 0; font-weight: 600; }
+  .kv dd.bad { color: var(--red); } .kv dd.good { color: var(--green); }
+  .steps { margin: 10px 0 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+  .steps li { background: #101a2e; border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px; }
+  .steps .ln { font: 600 20px var(--display); overflow-x: auto; white-space: nowrap; }
+  .steps .sy { color: var(--muted); font-size: 15px; margin-top: 2px; }
+  .steps li[data-ok="1"] .sy::before { content: "✓ "; color: var(--green); } .steps li[data-ok="0"] .sy::before { content: "✗ "; color: var(--red); }
+  .blocks { list-style: none; padding: 0; margin: 14px 0; display: grid; gap: 8px; }
+  .blocks li b { white-space: nowrap; }
+  .blocks li { display: flex; justify-content: space-between; gap: 12px; padding: 10px 14px; border-radius: 12px; background: #101a2e; border: 1px solid var(--line); }
+  .verdict.pass { border-color: var(--green); } .verdict.pass strong { color: var(--green); }
+  .verdict.fail strong { color: var(--yellow); }
+  .vidhead { margin: 12px 0 6px; font-weight: 600; }
+</style>
+</head>
+<body>
+<script type="module" src="../../components/equation-editor/equation-editor.js"></script>
+<script src="../../components/answer-check/answer-check.js"></script>
+<main>
+  <a class="back" href="../../">← All lessons</a>
+  <div class="eyebrow" id="eyebrow"></div>
+  <h1>__H1__</h1>
+  <ol class="dots" id="dots" aria-label="Questions" hidden></ol>
+  <div id="app"></div>
+  <footer id="foot"></footer>
+</main>
+
+<script>
+const DATA = __DATA__;
+const KEY = "algebra.exam." + DATA.unit + ".v1";          // the attempt in progress (or just reviewed)
+const EXAMS = "algebra.exams.v1";                          // every submitted attempt, read by the home page
+const $ = (s) => document.querySelector(s);
+const el = (tag, attrs = {}, ...kids) => {
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (k === "class") e.className = v; else if (k === "html") e.innerHTML = v;
+    else if (k.startsWith("on")) e.addEventListener(k.slice(2), v); else e.setAttribute(k, v);
+  }
+  kids.flat().forEach((c) => e.append(c));
+  return e;
+};
+const byId = Object.fromEntries(DATA.questions.map((q) => [q.id, q]));
+const rnd = (a) => { a = [...a]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const SUPS = "⁰¹²³⁴⁵⁶⁷⁸⁹";
+const asText = (html) => html.replace(/<sup>(\d+)<\/sup>/g, (m, d) => [...d].map((c) => SUPS[c]).join("")).replace(/<[^>]+>/g, "");
+const promptHtml = (s) => esc(s).replace(/\^(\d+)/g, "<sup>$1</sup>");
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+// ---- storage (every read and write may fail: private windows, cleared data)
+function readJSON(key, fallback) { try { const v = JSON.parse(localStorage.getItem(key)); return v == null ? fallback : v; } catch (e) { return fallback; } }
+function writeJSON(key, v) { try { localStorage.setItem(key, JSON.stringify(v)); } catch (e) {} }
+let S = readJSON(KEY, null);                                // { phase, ids, answers, orders, i, result }
+function save() { writeJSON(KEY, S); }
+const attempts = () => (readJSON(EXAMS, {})[DATA.unit] || []);
+function recordAttempt(a) {
+  const all = readJSON(EXAMS, {});
+  (all[DATA.unit] = all[DATA.unit] || []).push(a);
+  writeJSON(EXAMS, all);
+}
+
+// ---- drawing the exam: one Boss per block, the rest from levels 1-3, spread over the blocks, new questions each time
+function draw() {
+  const prev = new Set((attempts().slice(-1)[0] || {}).questions || []);
+  const fresh = (list) => { const r = rnd(list); return [...r.filter((q) => !prev.has(q.id)), ...r.filter((q) => prev.has(q.id))]; };
+  const picked = [];
+  DATA.blocks.forEach((b) => picked.push(fresh(DATA.questions.filter((q) => q.block === b.id && q.level === 4))[0]));
+  const pools = rnd(DATA.blocks).map((b) => fresh(DATA.questions.filter((q) => q.block === b.id && q.level < 4)));
+  let left = DATA.draw.total - picked.length;
+  while (left > 0 && pools.some((p) => p.length)) pools.forEach((p) => { if (left > 0 && p.length) { picked.push(p.shift()); left--; } });
+  const bi = (q) => DATA.blocks.findIndex((b) => b.id === q.block);
+  picked.sort((a, b) => bi(a) - bi(b) || a.level - b.level);
+  return picked.map((q) => q.id);
+}
+function start() {
+  S = { phase: "taking", ids: draw(), answers: {}, orders: {}, i: 0 };
+  try { localStorage.removeItem(KEY + ".work"); } catch (e) {}
+  notes = {};
+  save(); show(); window.scrollTo({ top: 0 });
+}
+
+// ---- grading (nothing is shown until the exam is submitted)
+const pretty = (s) => esc(s).replace(/\*/g, "·").replace(/-/g, "−").replace(/\^(\d+)/g, "<sup>$1</sup>");
+function grade(q, a) {
+  if (q.input) {
+    const typed = a && a.a ? a.a : "";
+    const r = q.input === "num" ? AnswerCheck.number(typed, q.answer) : AnswerCheck.expression(typed, q.answer);
+    if (r.error) return { ok: false, why: typed ? r.error : "No answer." };
+    const ok = q.anyForm ? !!r.equal : !!r.ok;
+    if (ok) return { ok: true };
+    if (q.input === "expr" && !q.anyForm && r.equal && !r.expanded) return { ok: false, why: "Equal, but not finished: write it with no parentheses and like terms combined." };
+    const same = q.input === "num" ? (m) => AnswerCheck.sameNumber(typed, m.v) : (m) => AnswerCheck.sameExpression(typed, m.e);
+    const known = (q.mistakes || []).find(same);
+    return { ok: false, why: known ? known.why : "That is not equal to the answer." };
+  }
+  if (q.pick === "multi") {
+    const picked = Array.isArray(a) ? a : [];
+    const bad = q.options.map((o, i) => (o.ok !== picked.includes(i) ? i : -1)).filter((i) => i >= 0);
+    return { ok: !bad.length, why: "" };
+  }
+  if (q.pick === "match") {
+    const ch = Array.isArray(a) ? a : [];
+    const bad = q.pairs.map((p, i) => (+ch[i] === p.r && ch[i] !== "" && ch[i] != null ? -1 : i)).filter((i) => i >= 0);
+    return { ok: !bad.length, why: "" };
+  }
+  const o = typeof a === "number" ? q.options[a] : null;
+  return { ok: !!(o && o.ok), why: o && !o.ok ? o.why : (o ? "" : "No answer.") };
+}
+const answered = (q, a) => (q.input ? !!(a && a.a) : q.pick === "multi" ? Array.isArray(a) && a.length > 0 : q.pick === "match" ? Array.isArray(a) && a.length === q.pairs.length && a.every((v) => v !== "" && v != null) : typeof a === "number");
+
+// ---- work area, one notebook per question, kept on this device
+let notes = readJSON(KEY + ".work", {});
+let saveTimer = 0, padOpen = false;
+function flushNotes() { clearTimeout(saveTimer); writeJSON(KEY + ".work", notes); }
+addEventListener("pagehide", flushNotes);
+document.addEventListener("visibilitychange", () => { if (document.hidden) flushNotes(); });
+function makePad(q) {
+  const n = notes[q.id] || (notes[q.id] = { lines: [""] });
+  const toggle = el("button", { type: "button", class: "padbtn", "aria-expanded": String(padOpen), "aria-controls": "padbody" },
+    el("span", {}, "✏️ Work area — write your steps"), el("span", { class: "chev", "aria-hidden": "true" }, "▾"));
+  const body = el("div", { class: "padbody", id: "padbody" }); body.hidden = !padOpen;
+  const nb = document.createElement("equation-notebook");
+  nb.setAttribute("placeholder", "Write a step…");
+  customElements.whenDefined("equation-notebook").then(() => { nb.value = n.lines; });
+  nb.addEventListener("input", () => { n.lines = nb.value; clearTimeout(saveTimer); saveTimer = setTimeout(flushNotes, 300); });
+  body.append(nb);
+  toggle.addEventListener("click", () => { padOpen = !padOpen; toggle.setAttribute("aria-expanded", String(padOpen)); body.hidden = !padOpen; });
+  return el("div", { class: "pad" }, toggle, body);
+}
+
+// ---- screens
+function show() {
+  const app = $("#app"); app.innerHTML = "";
+  $("#eyebrow").textContent = `Unit ${DATA.unit} · Exam`;
+  $("#foot").textContent = "Nothing tells you whether an answer is right until you submit, and submitted answers cannot be changed. Open the work area to write your steps. Solution videos use an AI-generated voice.";
+  const dots = $("#dots");
+  dots.hidden = !(S && S.phase === "taking");
+  if (!S || S.phase === "intro") return showIntro(app);
+  if (S.phase === "review") return showReview(app);
+  if (S.confirm) return showConfirm(app);
+  showQuestion(app);
+}
+
+function showIntro(app) {
+  const past = attempts();
+  const best = past.length ? Math.max(...past.map((a) => a.score / a.total)) : null;
+  const card = el("section", { class: "card intro" });
+  card.append(el("div", { class: "meta" }, el("span", {}, "Unit exam")));
+  card.append(el("p", {}, `${DATA.draw.total} questions covering every topic of the unit, at a challenging level. Every attempt draws new questions from a bank of ${DATA.questions.length}.`));
+  card.append(el("ul", {},
+    el("li", {}, "No feedback while you answer: you see the score and every solution once you submit."),
+    el("li", {}, "Submitted answers are final. You can change an answer any time before you submit."),
+    el("li", {}, `You pass with ${Math.round(DATA.pass * 100)}% or more, which opens the next unit.`)));
+  if (best !== null) card.append(el("p", { class: "hint" }, `Attempts so far: ${past.length}. Best score: ${Math.round(best * 100)}%.`));
+  card.append(el("div", { class: "actions" }, el("button", { type: "button", class: "btn", onclick: start }, past.length ? "Start a new attempt" : "Start the exam")));
+  app.append(card);
+}
+
+function showQuestion(app) {
+  const N = S.ids.length, q = byId[S.ids[S.i]];
+  const dots = $("#dots"); dots.innerHTML = "";
+  S.ids.forEach((id, i) => {
+    const b = el("button", { type: "button", "data-a": answered(byId[id], S.answers[id]) ? "1" : "", "aria-label": `Question ${i + 1}` + (answered(byId[id], S.answers[id]) ? ", answered" : ", not answered"), onclick: () => { S.i = i; save(); show(); } }, String(i + 1));
+    if (i === S.i) b.setAttribute("aria-current", "step");
+    dots.append(el("li", {}, b));
+  });
+  const card = el("section", { class: "card", "aria-labelledby": "qtitle" });
+  card.append(el("div", { class: "meta" }, el("span", {}, "Question ", el("b", {}, String(S.i + 1)), ` of ${N}`),
+    el("span", { class: "level", "data-l": q.level }, DATA.levels[q.level])));
+  card.append(el("p", { class: "prompt", html: q.prompt ? promptHtml(q.prompt) : "What is the value of this expression?" }));
+  const qq = el("div", { class: "q", id: "qtitle", role: "img", "aria-label": q.aria, tabindex: "-1", html: q.q });
+  if (!q.q) { qq.removeAttribute("role"); qq.removeAttribute("aria-label"); qq.style.display = "none"; }
+  card.append(qq);
+  card.append(makePad(q));
+  card.append(q.input ? makeTyped(q) : q.pick === "multi" ? makeMulti(q) : q.pick === "match" ? makeMatch(q) : makeSingle(q));
+  const last = S.i === N - 1;
+  card.append(el("div", { class: "nav" },
+    el("button", { type: "button", class: "btn ghost", onclick: () => { S.i--; save(); show(); window.scrollTo({ top: 0 }); }, ...(S.i ? {} : { disabled: "" }) }, "← Previous"),
+    last ? el("button", { type: "button", class: "btn", onclick: () => { S.confirm = true; save(); show(); window.scrollTo({ top: 0 }); } }, "Review and submit")
+         : el("button", { type: "button", class: "btn", onclick: () => { S.i++; save(); show(); window.scrollTo({ top: 0 }); } }, "Next →")));
+  app.append(card);
+  qq.focus({ preventScroll: true });
+}
+
+function setAnswer(q, v) {
+  S.answers[q.id] = v; save();
+  const i = S.ids.indexOf(q.id), d = $("#dots").children[i] && $("#dots").children[i].firstChild;
+  if (d) d.setAttribute("data-a", answered(q, v) ? "1" : "");
+}
+function shuf(q, kind, n) { const k = q.id + kind; return S.orders[k] || (S.orders[k] = rnd([...Array(n).keys()])); }
+
+function makeTyped(q) {
+  const ed = document.createElement("equation-editor");
+  ed.id = "ans";
+  ed.setAttribute("placeholder", q.input === "num" ? "Type a number" : "Type the expression");
+  ed.setAttribute("label", "Your answer");
+  const saved = S.answers[q.id];
+  if (saved && saved.l) customElements.whenDefined("equation-editor").then(() => { ed.value = saved.l; });
+  ed.addEventListener("input", () => setAnswer(q, ed.isEmpty ? null : { l: ed.value, a: ed.getValue("ascii-math") }));
+  const hint = q.input === "num" ? "One number: 17, −5, a fraction like 3/4, or a decimal like 0.75."
+    : q.anyForm ? "Type the expression, e.g. 3x − 12 or 2(x + 5). Any form that means the same is fine. Use ^ for powers: x^2."
+    : "Write it with no parentheses and like terms combined, e.g. 3x − 12. Use ^ for powers: x^2.";
+  return el("div", { class: "answer" }, el("label", { for: "ans" }, "Your answer"), ed, el("p", { class: "hint", style: "margin:0" }, hint));
+}
+function makeSingle(q) {
+  const box = el("div", { class: "options", role: "group", "aria-label": "Answer choices" });
+  shuf(q, "o", q.options.length).forEach((oi, pos) => {
+    const b = el("button", { type: "button", class: "opt", "data-pick": S.answers[q.id] === oi ? "1" : "0", "aria-pressed": String(S.answers[q.id] === oi) },
+      el("span", { class: "k", "aria-hidden": "true" }, "ABCDEF"[pos]), el("span", { html: q.options[oi].v }));
+    b.addEventListener("click", () => {
+      setAnswer(q, oi);
+      box.querySelectorAll(".opt").forEach((x) => { x.dataset.pick = "0"; x.setAttribute("aria-pressed", "false"); });
+      b.dataset.pick = "1"; b.setAttribute("aria-pressed", "true");
+    });
+    box.append(b);
+  });
+  return box;
+}
+function makeMulti(q) {
+  const cur = new Set(Array.isArray(S.answers[q.id]) ? S.answers[q.id] : []);
+  const box = el("div", { class: "options", role: "group", "aria-label": "Choose all that apply" });
+  shuf(q, "o", q.options.length).forEach((oi) => {
+    const b = el("button", { type: "button", class: "opt choice", "aria-pressed": String(cur.has(oi)) },
+      el("span", { class: "box", "aria-hidden": "true" }), el("span", { html: q.options[oi].v }));
+    b.addEventListener("click", () => {
+      cur.has(oi) ? cur.delete(oi) : cur.add(oi);
+      b.setAttribute("aria-pressed", String(cur.has(oi)));
+      setAnswer(q, [...cur].sort((a, b) => a - b));
+    });
+    box.append(b);
+  });
+  return el("div", {}, el("p", { class: "hint", style: "margin:0 0 10px" }, "Choose all that apply."), box);
+}
+function makeMatch(q) {
+  const cur = Array.isArray(S.answers[q.id]) ? [...S.answers[q.id]] : q.pairs.map(() => "");
+  const rows = el("div", { class: "pairs" });
+  const rorder = shuf(q, "r", q.rights.length);
+  shuf(q, "p", q.pairs.length).forEach((pi) => {
+    const sel = el("select", { "aria-label": "Match for item" }, el("option", { value: "" }, "Choose…"),
+      ...rorder.map((ri) => el("option", { value: ri }, asText(q.rights[ri]))));
+    sel.value = cur[pi] === "" || cur[pi] == null ? "" : String(cur[pi]);
+    const row = el("div", { class: "pair", "data-set": sel.value === "" ? "0" : "1" }, el("span", { class: "l", html: q.pairs[pi].l }), sel);
+    sel.addEventListener("change", () => { cur[pi] = sel.value === "" ? "" : +sel.value; row.dataset.set = sel.value === "" ? "0" : "1"; setAnswer(q, [...cur]); });
+    rows.append(row);
+  });
+  return el("div", {}, el("p", { class: "hint", style: "margin:0 0 10px" }, "Choose the match for every item."), rows);
+}
+
+function showConfirm(app) {
+  const open = S.ids.map((id, i) => (answered(byId[id], S.answers[id]) ? -1 : i)).filter((i) => i >= 0);
+  const card = el("section", { class: "card" });
+  card.append(el("div", { class: "meta" }, el("span", {}, "Ready to submit?")));
+  card.append(el("p", {}, open.length
+    ? `${open.length} question${open.length === 1 ? " has" : "s have"} no answer yet (${open.map((i) => i + 1).join(", ")}). An empty question counts as wrong.`
+    : "Every question has an answer."));
+  card.append(el("p", { class: "hint" }, "Once you submit, your answers are final."));
+  card.append(el("div", { class: "actions" },
+    el("button", { type: "button", class: "btn", onclick: submit }, "Submit the exam"),
+    el("button", { type: "button", class: "btn ghost", onclick: () => { S.confirm = false; S.i = open.length ? open[0] : S.ids.length - 1; save(); show(); } }, open.length ? "Go to the first empty question" : "Keep checking")));
+  app.append(card);
+}
+
+function submit() {
+  flushNotes();
+  const results = S.ids.map((id) => grade(byId[id], S.answers[id]));
+  const score = results.filter((r) => r.ok).length;
+  S.phase = "review"; S.confirm = false; S.result = { score, total: S.ids.length, date: new Date().toISOString() };
+  recordAttempt({ date: S.result.date, score, total: S.ids.length, questions: [...S.ids], answers: S.ids.map((id) => S.answers[id] == null ? null : S.answers[id]) });
+  save(); show(); window.scrollTo({ top: 0 });
+}
+
+function showReview(app) {
+  const { score, total } = S.result, pct = score / total, pass = pct >= DATA.pass - 1e-9;
+  const res = S.ids.map((id) => grade(byId[id], S.answers[id]));
+  const card = el("section", { class: "card" });
+  card.append(el("div", { class: "meta" }, el("span", {}, "Results")));
+  card.append(el("div", { class: "score" }, String(score), el("small", {}, ` / ${total} · ${Math.round(pct * 100)}%`)));
+  card.append(el("div", { class: "note verdict " + (pass ? "pass" : "fail") }, el("strong", {}, pass ? "You passed!" : `Not yet — you need ${Math.round(DATA.pass * 100)}% to pass.`),
+    pass ? "The next unit is open." : "Read the solutions below, then take a new attempt: it draws new questions."));
+  const ul = el("ul", { class: "blocks" });
+  DATA.blocks.forEach((b) => {
+    const idx = S.ids.map((id, i) => (byId[id].block === b.id ? i : -1)).filter((i) => i >= 0);
+    ul.append(el("li", {}, el("span", {}, `${b.id} · ${b.name}`), el("b", {}, `${idx.filter((i) => res[i].ok).length} / ${idx.length}`)));
+  });
+  card.append(ul);
+  card.append(el("div", { class: "actions" },
+    el("button", { type: "button", class: pass ? "btn ghost" : "btn", onclick: start }, "Take a new attempt"),
+    el("a", { class: "btn ghost", href: "../../", style: "text-decoration:none" }, "Back to the lessons")));
+  app.append(card);
+  app.append(el("h2", { style: "font:700 22px var(--display);margin:28px 0 0" }, "Review"));
+  S.ids.forEach((id, i) => app.append(reviewItem(byId[id], i, S.answers[id], res[i])));
+}
+
+function givenHtml(q, a) {
+  if (q.input) return a && a.a ? pretty(a.a) : "(no answer)";
+  if (q.pick === "multi") { const p = Array.isArray(a) ? a : []; return p.length ? p.map((i) => q.options[i].v).join(" &nbsp;·&nbsp; ") : "(nothing chosen)"; }
+  if (q.pick === "match") { const c = Array.isArray(a) ? a : []; return q.pairs.map((p, i) => `${p.l} → ${c[i] === "" || c[i] == null ? "(none)" : q.rights[c[i]]}`).join("<br>"); }
+  return typeof a === "number" ? q.options[a].v : "(no answer)";
+}
+function rightHtml(q) {
+  if (q.input) return q.aHtml;
+  if (q.pick === "multi") return q.options.filter((o) => o.ok).map((o) => o.v).join(" &nbsp;·&nbsp; ");
+  if (q.pick === "match") return q.pairs.map((p) => `${p.l} → ${q.rights[p.r]}`).join("<br>");
+  return q.options.find((o) => o.ok).v;
+}
+function reviewItem(q, i, a, r) {
+  const d = el("details", { class: "rv", "data-ok": r.ok ? "1" : "0" });
+  if (!r.ok) d.open = true;
+  d.append(el("summary", {}, el("span", { class: "mark", "aria-hidden": "true" }, r.ok ? "✓" : "✗"),
+    el("b", {}, `Question ${i + 1}`), el("span", { class: "hint", style: "margin:0" }, `${q.blockName} · ${DATA.levels[q.level]}`),
+    el("span", { class: "sr" }, r.ok ? "right" : "wrong")));
+  const body = el("div", { class: "body" });
+  body.append(el("p", { class: "prompt", style: "margin:0", html: promptHtml(q.prompt) }));
+  if (q.q) body.append(el("div", { class: "qline", html: q.q }));
+  const kv = el("dl", { class: "kv" });
+  kv.append(el("dt", {}, "Your answer"), el("dd", { class: r.ok ? "good" : "bad", html: givenHtml(q, a) }));
+  if (!r.ok) {
+    kv.append(el("dt", {}, "Correct answer"), el("dd", { class: "good", html: rightHtml(q) }));
+    if (r.why) kv.append(el("dt", {}, "What went wrong"), el("dd", { style: "font-weight:400" }, r.why));
+  }
+  body.append(kv);
+  if (!r.ok) {
+    if (q.video) {
+      const slot = el("div");
+      body.append(el("div", { class: "vidhead" }, "Solution video"), slot,
+        el("button", { type: "button", class: "btn", onclick: (e) => {
+          e.target.remove();
+          slot.append(el("div", { class: "vid" }, el("iframe", { src: `../../videos/${q.video}/video.html?autoplay=1`, title: `Solution video for question ${i + 1}`, allow: "autoplay; fullscreen", allowfullscreen: "", referrerpolicy: "no-referrer" })));
+        } }, "Watch the solution"));
+    }
+    body.append(el("div", { class: "vidhead" }, "Step by step"));
+    const s = q.solution;
+    if (s.steps) body.append(el("ol", { class: "steps" }, ...s.steps.map((st) => el("li", {}, el("div", { class: "ln", html: st.line }), st.say ? el("div", { class: "sy" }, st.say) : ""))));
+    else {
+      if (s.say) body.append(el("p", { style: "margin:4px 0" }, s.say));
+      body.append(el("ul", { class: "steps" }, ...s.items.map((it) => el("li", { "data-ok": it.ok ? "1" : "0" }, el("div", { class: "ln", html: it.t }), el("div", { class: "sy" }, it.note)))));
+    }
+  }
+  d.append(body);
+  return d;
+}
+
+if (S && S.phase === "taking" && !(S.ids && S.ids.length && S.ids.every((id) => byId[id]))) S = null;   // bank changed under an old attempt
+show();
+</script>
+</body>
+</html>

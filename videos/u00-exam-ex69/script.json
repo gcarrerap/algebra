@@ -1,0 +1,63 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-exam-ex69",
+  "title": "Solution · Translating words into expressions",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. A pizza costs twelve dollars plus two dollars for each topping. Three friends share the cost equally. Write an expression for what each friend pays when there are x toppings.",
+          "display": "A pizza costs 12 dollars plus 2 dollars for each topping. Three friends share the cost equally. Write an expression for what each friend pays when there are x toppings.",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "The pizza costs twelve plus two for each topping, so with x toppings that is twelve plus two x.",
+          "display": "12 + 2x, shared by 3",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "That whole cost is shared equally by three friends, so the sum goes on top.",
+          "display": "(12 + 2x) ÷ 3",
+          "cue": "step-2"
+        },
+        {
+          "id": "b04",
+          "text": "Dividing the whole sum by three gives the share of each friend.",
+          "display": "(12 + 2x) over (3)",
+          "cue": "step-3"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b05",
+          "text": "So the answer is twelve plus two x three. Test it. If x is six, the expression gives eight.",
+          "display": "= (12 + 2x) over (3)",
+          "cue": "answer"
+        },
+        {
+          "id": "b06",
+          "text": "Watch out for these traps. If you divide only the toppings, you get twelve plus two x over three. If you forget the sharing, you get twelve plus two x.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

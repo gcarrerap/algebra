@@ -1,0 +1,57 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-exam-ex30",
+  "title": "Solution · Commutative and associative properties",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's look at this one. The quantity two plus five, plus x, equals x plus the quantity two plus five. Which property does it show?",
+          "display": "(2 + 5) + x = x + (2 + 5)",
+          "cue": "show-problem",
+          "pause_after_s": 1.5
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "What changed",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "There are parentheses, so associative is tempting. But look: the group 2 plus 5 never changes. It stays together.",
+          "display": "(2 + 5) + x = x + (2 + 5)",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "The whole group and x simply traded places. Swapping the order is the commutative property.",
+          "display": "7 + x = x + 7",
+          "cue": "step-2"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b04",
+          "text": "So the answer is the commutative property.",
+          "display": "Commutative",
+          "cue": "answer"
+        },
+        {
+          "id": "b05",
+          "text": "Watch out for these traps. It isn't the associative property, because the grouping does not change. It isn't the distributive property, because nothing multiplies a sum.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

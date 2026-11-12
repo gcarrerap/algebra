@@ -1,0 +1,57 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-exam-ex39",
+  "title": "Solution · Distributive property",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Negative two times the quantity three x squared minus four x plus five.",
+          "display": "−2(3x^2 − 4x + 5)",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Negative two multiplies every term inside the parentheses. Negative two times three x squared, negative two times negative four x, and negative two times five.",
+          "display": "(−2)(3x^2) + (−2)(−4x) + (−2)(5)",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Negative two times three x squared is negative six x squared. Negative times negative is positive, so negative two times negative four x is eight x. And negative two times five is negative ten.",
+          "display": "−6x^2 + 8x − 10",
+          "cue": "step-2"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b04",
+          "text": "So the answer is negative six x squared plus eight x minus ten.",
+          "display": "= −6x^2 + 8x − 10",
+          "cue": "answer"
+        },
+        {
+          "id": "b05",
+          "text": "Watch out for these traps. If you make the middle term negative, you get negative six x squared minus eight x minus ten. If you forget to multiply the five, you get negative six x squared plus eight x plus five.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

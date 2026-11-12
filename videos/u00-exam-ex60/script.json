@@ -1,0 +1,57 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-exam-ex60",
+  "title": "Solution · Combining like terms",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. x times the quantity x plus three, minus two times the quantity x squared minus four x, plus five x.",
+          "display": "x(x + 3) − 2(x^2 − 4x) + 5x",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Distribute first. x times x plus three is x squared plus three x. Negative two times x squared minus four x is negative two x squared plus eight x, since negative times negative is positive.",
+          "display": "x^2 + 3x − 2x^2 + 8x + 5x",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Now combine like terms. x squared minus two x squared is negative x squared. Three x plus eight x plus five x is sixteen x.",
+          "display": "−x^2 + 16x",
+          "cue": "step-2"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b04",
+          "text": "So the answer is negative x squared plus sixteen x.",
+          "display": "= −x^2 + 16x",
+          "cue": "answer"
+        },
+        {
+          "id": "b05",
+          "text": "Watch out for these traps. If you make negative two times negative four x negative, you get negative x squared. If you turn negative two x squared into positive, you get three x squared plus sixteen x.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

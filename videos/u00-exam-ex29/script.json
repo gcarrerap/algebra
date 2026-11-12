@@ -1,0 +1,69 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-exam-ex29",
+  "title": "Solution · Commutative and associative properties",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Eight times seventeen times one hundred twenty-five.",
+          "display": "8 × 17 × 125",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Eight and one hundred twenty-five make one thousand, so let's put them together. The commutative property lets us swap the seventeen and the one hundred twenty-five.",
+          "display": "8 × 125 × 17",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "The associative property lets us group the eight with the one hundred twenty-five.",
+          "display": "(8 × 125) × 17",
+          "cue": "step-2"
+        },
+        {
+          "id": "b04",
+          "text": "Eight times one hundred twenty-five is one thousand.",
+          "display": "1000 × 17",
+          "cue": "step-3"
+        },
+        {
+          "id": "b05",
+          "text": "One thousand times seventeen is seventeen thousand.",
+          "display": "17000",
+          "cue": "step-4"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b06",
+          "text": "So the answer is seventeen thousand.",
+          "display": "= 17000",
+          "cue": "answer"
+        },
+        {
+          "id": "b07",
+          "text": "Watch out for these traps. If you add the one hundred twenty-five, you get two hundred sixty-one. If you add eight and one hundred twenty-five, you get two thousand two hundred sixty-one.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}
