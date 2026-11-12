@@ -4,7 +4,7 @@ Interactive HTML lessons and animated videos for learning Algebra 1 (Grade 9, Ke
 
 - [`SYLLABUS.md`](SYLLABUS.md) — units and lessons.
 - [`docs/course-design.md`](docs/course-design.md) — design rules: structure, videos, exercise types, unit exams and progression.
-- [`index.html`](index.html) — home page: the whole course (14 units, 70 lessons) with what is ready and what is still to do. To publish a lesson, add its `video` / `practice` link in the `COURSE` list at the bottom of the page.
+- [`index.html`](index.html) — home page: the whole course by chapter, unit, topic and subtopic (all collapsible), what is ready, unit locks and Export/Import of progress. To publish something, add its `video` / `practice` link (or a unit's `exam`) in the `COURSE` list at the bottom of the page.
 - [`docs/audio-production.md`](docs/audio-production.md) — how video narration is written, generated and assembled.
 - [`docs/exercises.md`](docs/exercises.md) — multiple-choice practice sets with a solution video for every exercise.
 - [`components/equation-editor/`](components/equation-editor/README.md) — reusable Word-style equation editor (`<equation-editor>`, `<equation-notebook>`) for any page.

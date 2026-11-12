@@ -132,6 +132,11 @@ Chapters only group units for navigation; locking stays per unit. Unit numbers d
 - It is not tamper-proof: someone who knows how can edit it. Accepted for a family course.
 - An exam attempt is recorded as: unit, date, questions drawn, answers, score. A unit is unlocked
   when any attempt of the previous unit scored 90% or more.
+- Exam pages append each attempt to the key `algebra.exams.v1`, which the home page reads:
+  `{ "<unit>": [{ "date": "...", "score": 18, "total": 20, "questions": [...], "answers": [...] }] }`.
+  `score` and `total` are required; the rest is for the review screen.
+- Every progress key starts with `algebra.`; that prefix is what Export/Import carries. Interface
+  state that should not travel (which sections are open) uses `algebra-ui.`.
 
 ## Gaps in the current pages
 
@@ -142,5 +147,5 @@ What already exists and does not follow these rules yet:
 | Find-the-value is typed, not multiple choice | 0.1 and 0.2 practice sets are multiple choice (`kind: num` shows options). |
 | Single choice, multiple select, matching | Only single choice exists. |
 | Unit exam with question bank, ≥90% to unlock | No exams, no question banks, no locking. |
-| Collapsible chapters / units / topics / subtopics | Home page lists units and lessons; no chapters or subtopics, not collapsible. |
+| Own exercise set per learning block | 0.2's two subtopics share one practice set. |
 | Work area on every find-the-value exercise | Present in 0.1; missing in 0.2. |

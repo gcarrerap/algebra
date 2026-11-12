@@ -39,11 +39,6 @@
   .toc a:hover, .toc a:focus-visible { border-color: var(--yellow); color: var(--ink); outline: none; }
   .toc a.done { border-color: var(--green); color: var(--green); }
   .toc a.part { border-color: var(--yellow); color: var(--yellow); }
-  .unit { margin-top: 40px; scroll-margin-top: 16px; }
-  .unit h2 { font: 600 20px var(--display); margin: 0 0 4px; display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap; }
-  .unit h2 .n { font: 600 13px var(--text); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
-  .unit .meta { color: var(--muted); font-size: 14px; margin: 0 0 14px; }
-  .unit .meta .count { color: var(--ink); font-weight: 600; }
   .lesson { flex-wrap: wrap; }
   .lesson .name { flex: 1 1 220px; }
   .items { display: flex; flex-wrap: wrap; gap: 6px; }
@@ -64,9 +59,42 @@
     background: var(--card); border: 1px solid var(--line); color: inherit; text-decoration: none;
   }
   .lesson .num { font: 600 15px var(--display); color: var(--muted); min-width: 2.2em; font-variant-numeric: tabular-nums; }
-  .lesson .name { flex: 1; min-width: 0; font-weight: 500; }
+  .lesson .name { flex: 1 1 180px; min-width: 0; font-weight: 500; }
   .key { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 52px; color: var(--muted); font-size: 14px; align-items: center; }
   .chip { font: 700 13px var(--display); color: var(--bg); padding: 4px 9px; border-radius: 8px; }
+  .tools { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 4px; }
+  .tools .sp { flex: 1; }
+  .tools button { font: 600 13px var(--text); color: var(--ink); background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 7px 12px; cursor: pointer; }
+  .tools button:hover, .tools button:focus-visible { border-color: var(--yellow); outline: none; }
+  .toc a.lockd { opacity: .55; }
+  details > summary { list-style: none; cursor: pointer; }
+  details > summary::-webkit-details-marker { display: none; }
+  summary:focus-visible { outline: 2px solid var(--yellow); outline-offset: 3px; border-radius: 12px; }
+  .chev { width: 10px; height: 10px; flex: none; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: rotate(-45deg); transition: transform .15s; margin-left: auto; }
+  details[open] > summary > .chev { transform: rotate(45deg); }
+  .chapter { margin-top: 36px; }
+  .chapter > summary { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; padding: 6px 0 10px; border-bottom: 1px solid var(--line); }
+  .chapter > summary .h { font: 700 24px var(--display); display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap; }
+  .chapter > summary .meta { color: var(--muted); font-size: 14px; flex-basis: 100%; order: 3; }
+  .chapter > summary .h .n, .unit .h .n { font: 600 13px var(--text); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  .unit { margin: 18px 0 0 0; padding-left: 14px; border-left: 2px solid var(--line); scroll-margin-top: 16px; }
+  .unit > summary { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 12px; padding: 4px 0 8px; }
+  .unit > summary .h { font: 600 20px var(--display); display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap; }
+  .unit > summary .meta { color: var(--muted); font-size: 14px; flex-basis: 100%; order: 3; }
+  .unit .meta .count { color: var(--ink); font-weight: 600; }
+  .unit > ol { margin-bottom: 8px; }
+  .lock, .ok { font: 600 12px var(--text); letter-spacing: .06em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; }
+  .lock { border: 1px solid var(--line); color: var(--muted); }
+  .ok { background: var(--green); color: var(--bg); }
+  .is-locked > summary .h, .is-locked .lesson { opacity: .7; }
+  .why { display: block; color: var(--muted); font-size: 14px; font-weight: 400; margin: 0 0 10px; }
+  .lesson .why { margin: 2px 0 0; }
+  .subs { margin: 10px 0 0 26px; }
+  .subs .lesson { padding: 12px 16px; }
+  .lesson.exam { border-style: dashed; }
+  .lesson.exam.done { border-style: solid; }
+  span.item.locked { border: 1px solid var(--line); color: var(--muted); }
+  span.item.locked::before { content: "🔒 "; }
   footer { margin-top: 28px; color: var(--muted); font-size: 14px; }
 </style>
 </head>
@@ -74,14 +102,23 @@
 <main>
   <div class="eyebrow">Grade 9 · Kentucky Academic Standards</div>
   <h1>Algebra 1, <span class="y">one idea at a time</span></h1>
-  <p class="lede">Short animated lessons with narration. The full Algebra&nbsp;1 course is listed below; yellow buttons are ready to open, dashed ones are still to be made. In a video, tap the screen to pause and the bar at the bottom to jump back.</p>
+  <p class="lede">Short animated lessons with narration. The course is split into chapters, units and topics; every topic (or subtopic) has a video and practice, and every unit ends with an exam. Pass it with 90% or more to open the next unit. Yellow buttons are ready to open, dashed ones are still to be made.</p>
 
   <div class="progress" id="progress"></div>
   <nav class="toc" id="toc" aria-label="Units"></nav>
+  <div class="tools">
+    <button type="button" id="expand">Expand all</button>
+    <button type="button" id="collapse">Collapse all</button>
+    <span class="sp"></span>
+    <button type="button" id="export">Export progress</button>
+    <button type="button" id="import">Import progress</button>
+    <input type="file" id="importFile" accept="application/json,.json" hidden>
+  </div>
   <div class="legend">
-    <span><i class="dot" style="background: var(--green)"></i>Video + practice ready</span>
+    <span><i class="dot" style="background: var(--green)"></i>Video + practice ready / exam passed</span>
     <span><i class="dot" style="background: var(--yellow)"></i>In progress</span>
     <span><i class="dot"></i>Not started</span>
+    <span>🔒 Locked until the previous exam is passed</span>
   </div>
   <div id="units"></div>
   <noscript><p>The full syllabus is in <a href="SYLLABUS.md" style="color: var(--yellow)">SYLLABUS.md</a>.</p></noscript>
@@ -100,20 +137,30 @@
   <footer>Lessons use an AI-generated voice.</footer>
 </main>
 <script>
-/* The whole course (mirrors SYLLABUS.md). To publish something, add its link to the lesson:
-   video: "path" or [["Label", "path"], ...]   ·   practice: "path"                          */
+/* The whole course (mirrors SYLLABUS.md and docs/course-design.md).
+   Chapter > unit > topic > subtopic. A learning block is a topic, or each of its subtopics.
+   To publish something, add its link to the block:  video: "path"  ·  practice: "path".
+   A subtopic without its own practice uses its topic's (legacy: 0.2 shares one set).
+   A unit's exam:  exam: "path"  on the unit.                                              */
+const CHAPTERS = [
+  { n: 1, title: "Foundations", units: [0, 1] },
+  { n: 2, title: "Functions and Linear Models", units: [2, 3, 4] },
+  { n: 3, title: "Systems and Data", units: [5, 6] },
+  { n: 4, title: "Exponents and Exponential Functions", units: [7, 8] },
+  { n: 5, title: "Polynomials and Quadratics", units: [9, 10, 11, 12] },
+  { n: 6, title: "Modeling", units: [13] },
+];
 const COURSE = [
-  { n: 0, title: "Foundations and Expressions", kas: "KY.HS.A.1, A.2", lessons: [
+  { n: 0, title: "Foundations and Expressions", kas: "KY.HS.A.1, A.2", topics: [
     { name: "Order of operations and signed numbers",
       video: "videos/u00-l01-order-of-operations/video.html", practice: "exercises/u00-l01/" },
-    { name: "Properties: commutative, associative, distributive",
-      video: [["Video: comm. & assoc.", "videos/u00-l02-commutative-associative/video.html"],
-              ["Video: distributive", "videos/u00-l02-distributive/video.html"]],
-      practice: "exercises/u00-l02/" },
+    { name: "Properties: commutative, associative, distributive", practice: "exercises/u00-l02/", subtopics: [
+      { name: "Commutative and associative properties", video: "videos/u00-l02-commutative-associative/video.html" },
+      { name: "Distributive property", video: "videos/u00-l02-distributive/video.html" } ] },
     { name: "Parts of an expression: terms, factors, coefficients, constants" },
     { name: "Combining like terms and simplifying" },
     { name: "Translating words into algebraic expressions" } ] },
-  { n: 1, title: "Linear Equations and Inequalities", kas: "KY.HS.A.12, A.15, A.16, A.18, N.4–N.6", lessons: [
+  { n: 1, title: "Linear Equations and Inequalities", kas: "KY.HS.A.12, A.15, A.16, A.18, N.4–N.6", topics: [
     { name: "One-step and multi-step equations" },
     { name: "Variables on both sides; no solution and infinitely many solutions" },
     { name: "Justifying each step (properties of equality)" },
@@ -121,13 +168,13 @@ const COURSE = [
     { name: "Compound inequalities (and / or)" },
     { name: "Literal equations: solving formulas for a variable" },
     { name: "Problems with units and dimensional analysis" } ] },
-  { n: 2, title: "Functions", kas: "KY.HS.F.1, A.23", lessons: [
+  { n: 2, title: "Functions", kas: "KY.HS.F.1, A.23", topics: [
     { name: "Relations vs. functions (tables, mapping diagrams, vertical line test)" },
     { name: "Function notation f(x) and evaluating functions" },
     { name: "Domain and range (in context and from graphs)" },
     { name: "Reading and interpreting graphs: increasing, decreasing, intercepts" },
     { name: "A graph as the set of all solutions of an equation" } ] },
-  { n: 3, title: "Linear Functions", kas: "KY.HS.F.3, F.4, F.12, F.14, A.13, A.24", lessons: [
+  { n: 3, title: "Linear Functions", kas: "KY.HS.F.3, F.4, F.12, F.14, A.13, A.24", topics: [
     { name: "Rate of change and slope" },
     { name: "Slope-intercept form y = mx + b" },
     { name: "Point-slope form and standard form" },
@@ -135,89 +182,177 @@ const COURSE = [
     { name: "Parallel and perpendicular lines" },
     { name: "Interpreting slope and intercept in context" },
     { name: "Solving f(x) = g(x) with graphs and tables" } ] },
-  { n: 4, title: "Sequences", kas: "KY.HS.F.2, F.7", lessons: [
+  { n: 4, title: "Sequences", kas: "KY.HS.F.2, F.7", topics: [
     { name: "Arithmetic sequences: explicit and recursive formulas" },
     { name: "Geometric sequences: explicit and recursive formulas" },
     { name: "Sequences as functions defined on the integers" },
     { name: "Modeling real situations with sequences" } ] },
-  { n: 5, title: "Systems of Equations and Inequalities", kas: "KY.HS.A.14, A.20, A.25", lessons: [
+  { n: 5, title: "Systems of Equations and Inequalities", kas: "KY.HS.A.14, A.20, A.25", topics: [
     { name: "Solving by graphing" },
     { name: "Solving by substitution" },
     { name: "Solving by elimination (and why it works)" },
     { name: "Number of solutions: one, none, infinitely many" },
     { name: "Linear inequalities in two variables (half-planes)" },
     { name: "Systems of inequalities and constraint problems" } ] },
-  { n: 6, title: "Statistics: Two-Variable Data", kas: "KY.HS.SP.6, SP.7, SP.8", lessons: [
+  { n: 6, title: "Statistics: Two-Variable Data", kas: "KY.HS.SP.6, SP.7, SP.8", topics: [
     { name: "Scatter plots and types of association" },
     { name: "Line of best fit and residuals" },
     { name: "Interpreting the slope and intercept of a model" },
     { name: "Correlation coefficient r" },
     { name: "Correlation is not causation" } ] },
-  { n: 7, title: "Exponents and Radicals", kas: "KY.HS.N.1, N.2", lessons: [
+  { n: 7, title: "Exponents and Radicals", kas: "KY.HS.N.1, N.2", topics: [
     { name: "Exponent rules (product, quotient, power)" },
     { name: "Zero and negative exponents" },
     { name: "Roots and radicals; simplifying radicals" },
     { name: "Rational exponents: a^(1/n) and a^(m/n)" } ] },
-  { n: 8, title: "Exponential Functions", kas: "KY.HS.F.5, F.11, F.12, F.13, F.14", lessons: [
+  { n: 8, title: "Exponential Functions", kas: "KY.HS.F.5, F.11, F.12, F.13, F.14", topics: [
     { name: "Linear vs. exponential: constant differences vs. constant factors" },
     { name: "Exponential growth and decay y = a·bˣ" },
     { name: "Percent change and compound interest" },
     { name: "Building exponential functions from tables and two points" },
     { name: "Why exponential growth eventually beats linear and quadratic growth" } ] },
-  { n: 9, title: "Polynomials", kas: "KY.HS.A.3, A.5", lessons: [
+  { n: 9, title: "Polynomials", kas: "KY.HS.A.3, A.5", topics: [
     { name: "Vocabulary: degree, standard form, monomial, binomial, trinomial" },
     { name: "Adding and subtracting polynomials" },
     { name: "Multiplying polynomials (distributive property, area model)" },
     { name: "Special products: (a+b)², (a−b)², (a+b)(a−b)" } ] },
-  { n: 10, title: "Factoring", kas: "KY.HS.A.2, A.3, A.7", lessons: [
+  { n: 10, title: "Factoring", kas: "KY.HS.A.2, A.3, A.7", topics: [
     { name: "Greatest common factor (GCF)" },
     { name: "Trinomials x² + bx + c" },
     { name: "Trinomials ax² + bx + c" },
     { name: "Difference of squares and perfect-square trinomials" },
     { name: "Factoring to find zeros (roots)" } ] },
-  { n: 11, title: "Quadratic Functions", kas: "KY.HS.F.4, F.5, A.7", lessons: [
+  { n: 11, title: "Quadratic Functions", kas: "KY.HS.F.4, F.5, A.7", topics: [
     { name: "The parabola: vertex, axis of symmetry, intercepts" },
     { name: "Standard form, vertex form, and factored form" },
     { name: "What each form reveals (zeros, maximum/minimum, symmetry)" },
     { name: "Transformations of y = x²" },
     { name: "Quadratic models (projectiles, area)" } ] },
-  { n: 12, title: "Solving Quadratic Equations", kas: "KY.HS.A.19", lessons: [
+  { n: 12, title: "Solving Quadratic Equations", kas: "KY.HS.A.19", topics: [
     { name: "Solving by factoring" },
     { name: "Solving with square roots" },
     { name: "Completing the square" },
     { name: "The quadratic formula and the discriminant" },
     { name: "Choosing the best method" } ] },
-  { n: 13, title: "Modeling and Final Review", kas: "KY.HS.F.6, F.13, N.4", lessons: [
+  { n: 13, title: "Modeling and Final Review", kas: "KY.HS.F.6, F.13, N.4", topics: [
     { name: "Choosing a model: linear, exponential, or quadratic" },
     { name: "Combining functions with operations" },
     { name: "Capstone project with real data" } ] },
 ];
 
-const esc = t => t.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-const status = l => (l.video && l.practice) ? "done" : (l.video || l.practice) ? "part" : "todo";
-const pill = (label, href) => href ? `<a class="item" href="${href}">${esc(label)}</a>` : `<span class="item">${esc(label)} · to do</span>`;
-const videos = l => !l.video ? [pill("Video")] : typeof l.video === "string" ? [pill("Video", l.video)] : l.video.map(([t, h]) => pill(t, h));
+const PASS = 0.9;
+const $ = id => document.getElementById(id);
+const esc = t => String(t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const read = (k, d) => { try { const v = JSON.parse(localStorage.getItem(k)); return v == null ? d : v; } catch (e) { return d; } };
+const write = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
+
+/* Exam attempts, written by the exam pages: { "<unit>": [{ date, score, total }, ...] } */
+const EXAMS = read("algebra.exams.v1", {});
+const best = n => (EXAMS[n] || []).reduce((b, a) => Math.max(b, a.total ? a.score / a.total : 0), -1);
+const passed = n => best(n) >= PASS;
+const unlocked = n => n === COURSE[0].n || passed(n - 1);
+
+const blocksOf = t => t.subtopics ? t.subtopics.map(s => ({ ...s, practice: s.practice || t.practice })) : [t];
+const status = b => (b.video && b.practice) ? "done" : (b.video || b.practice) ? "part" : "todo";
+const pill = (label, href, locked) => locked && href ? `<span class="item locked">${esc(label)}</span>`
+  : href ? `<a class="item" href="${href}">${esc(label)}</a>` : `<span class="item">${esc(label)} · to do</span>`;
+const row = (num, b, locked) => `<div class="lesson ${status(b)}"><i class="dot" aria-hidden="true"></i>` +
+  `<span class="num">${num}</span><span class="name">${esc(b.name)}</span>` +
+  `<span class="items">${pill("Video", b.video, locked)}${pill("Practice", b.practice, locked)}</span></div>`;
+const tally = bs => { const st = bs.map(status); return { n: st.length, d: st.filter(x => x === "done").length, p: st.filter(x => x === "part").length }; };
+const cls = t => t.d === t.n ? "done" : (t.d || t.p) ? "part" : "todo";
+
+/* Which sections are open is a per-device convenience, kept outside the exported progress. */
+const OPEN_KEY = "algebra-ui.open";
+const unitBy = Object.fromEntries(COURSE.map(u => [u.n, u]));
+const current = COURSE.find(u => unlocked(u.n) && !passed(u.n)) || COURSE[COURSE.length - 1];
+const chapterOf = n => CHAPTERS.find(c => c.units.includes(n));
+let open = read(OPEN_KEY, null);
+if (!Array.isArray(open)) open = [`ch-${chapterOf(current.n).n}`, `unit-${current.n}`];
+const isOpen = id => open.includes(id) ? " open" : "";
 
 let total = 0, done = 0, part = 0;
 const toc = [], html = [];
-for (const u of COURSE) {
-  const st = u.lessons.map(status);
-  const d = st.filter(s => s === "done").length, p = st.filter(s => s === "part").length;
-  total += st.length; done += d; part += p;
-  const cls = d === st.length ? "done" : (d || p) ? "part" : "";
-  toc.push(`<a class="${cls}" href="#unit-${u.n}">${u.n}</a>`);
-  const rows = u.lessons.map((l, i) => `<li><div class="lesson ${st[i]}"><i class="dot" aria-hidden="true"></i>` +
-    `<span class="num">${u.n}.${i + 1}</span><span class="name">${esc(l.name)}</span>` +
-    `<span class="items">${[...videos(l), pill("Practice", l.practice)].join("")}</span></div></li>`).join("\n");
-  html.push(`<section class="unit" id="unit-${u.n}"><h2><span class="n">Unit ${u.n}</span>${esc(u.title)}</h2>` +
-    `<p class="meta"><span class="count">${d} of ${st.length}</span> lessons ready${p ? ` · ${p} in progress` : ""} · ${esc(u.kas)}</p><ol>${rows}</ol></section>`);
+for (const c of CHAPTERS) {
+  const units = c.units.map(n => unitBy[n]);
+  const cBlocks = units.flatMap(u => u.topics.flatMap(blocksOf)), ct = tally(cBlocks);
+  const cPassed = units.filter(u => passed(u.n)).length;
+  const uHtml = [];
+  for (const u of units) {
+    const locked = !unlocked(u.n);
+    const ut = tally(u.topics.flatMap(blocksOf));
+    total += ut.n; done += ut.d; part += ut.p;
+    toc.push(`<a class="${locked ? "lockd" : passed(u.n) ? "done" : cls(ut) === "todo" ? "" : "part"}" href="#unit-${u.n}"` +
+      ` aria-label="Unit ${u.n}${locked ? ", locked" : passed(u.n) ? ", passed" : ""}">${locked ? "🔒 " : ""}${u.n}</a>`);
+    const topics = u.topics.map((t, i) => {
+      const num = `${u.n}.${i + 1}`;
+      if (!t.subtopics) return `<li>${row(num, t, locked)}</li>`;
+      const tt = tally(blocksOf(t)), id = `topic-${u.n}-${i + 1}`;
+      const subs = blocksOf(t).map((b, k) => `<li>${row(`${num}.${k + 1}`, b, locked)}</li>`).join("");
+      return `<li><details class="topic" id="${id}"${isOpen(id)}><summary class="lesson ${cls(tt)}"><i class="dot" aria-hidden="true"></i>` +
+        `<span class="num">${num}</span><span class="name">${esc(t.name)}<span class="why">${tt.n} subtopics · ${tt.d} ready</span></span><i class="chev" aria-hidden="true"></i></summary><ol class="subs">${subs}</ol></details></li>`;
+    }).join("\n");
+    const tries = (EXAMS[u.n] || []).length, b = best(u.n);
+    const examState = passed(u.n) ? `Passed · best ${Math.round(b * 100)}%`
+      : tries ? `Best ${Math.round(b * 100)}% · ${tries} attempt${tries > 1 ? "s" : ""} · needs 90%` : "Needs 90% to unlock the next unit";
+    const exam = `<li><div class="lesson exam ${passed(u.n) ? "done" : u.exam ? "part" : "todo"}"><i class="dot" aria-hidden="true"></i>` +
+      `<span class="num">✎</span><span class="name">Unit ${u.n} exam<span class="why">${examState}</span></span>` +
+      `<span class="items">${pill("Exam", u.exam, locked)}</span></div></li>`;
+    const id = `unit-${u.n}`;
+    uHtml.push(`<details class="unit${locked ? " is-locked" : ""}" id="${id}"${isOpen(id)}><summary>` +
+      `<span class="h"><span class="n">Unit ${u.n}</span>${esc(u.title)}${locked ? `<span class="lock">🔒 Locked</span>` : passed(u.n) ? `<span class="ok">✓ Passed</span>` : ""}</span>` +
+      `<span class="meta"><span class="count">${ut.d} of ${ut.n}</span> blocks ready${ut.p ? ` · ${ut.p} in progress` : ""} · ${esc(u.kas)}</span>` +
+      `<i class="chev" aria-hidden="true"></i></summary>` +
+      (locked ? `<p class="why">Pass the Unit ${u.n - 1} exam with 90% or more to open this unit.</p>` : "") +
+      `<ol>${topics}\n${exam}</ol></details>`);
+  }
+  const id = `ch-${c.n}`;
+  html.push(`<details class="chapter" id="${id}"${isOpen(id)}><summary><span class="h"><span class="n">Chapter ${c.n}</span>${esc(c.title)}</span>` +
+    `<span class="meta">${c.units.length > 1 ? `Units ${c.units[0]}–${c.units[c.units.length - 1]}` : `Unit ${c.units[0]}`} · ${cPassed} of ${units.length} passed · ${ct.d} of ${ct.n} blocks ready</span>` +
+    `<i class="chev" aria-hidden="true"></i></summary>${uHtml.join("\n")}</details>`);
 }
-document.getElementById("units").innerHTML = html.join("\n");
-document.getElementById("toc").innerHTML = toc.join("");
+$("units").innerHTML = html.join("\n");
+$("toc").innerHTML = toc.join("");
+const passedAll = COURSE.filter(u => passed(u.n)).length;
 const pc = n => (100 * n / total).toFixed(1) + "%";
-document.getElementById("progress").innerHTML =
-  `<div class="row"><span><b>${done}</b> of ${total} lessons ready</span><span>${part} in progress · ${total - done - part} not started · ${COURSE.length} units</span></div>` +
-  `<div class="bar" role="img" aria-label="${done} of ${total} lessons ready"><i style="width:${pc(done)};background:var(--green)"></i><i style="width:${pc(part)};background:var(--yellow)"></i></div>`;
+$("progress").innerHTML =
+  `<div class="row"><span><b>${done}</b> of ${total} learning blocks ready</span><span>${part} in progress · ${total - done - part} not started</span></div>` +
+  `<div class="bar" role="img" aria-label="${done} of ${total} learning blocks ready"><i style="width:${pc(done)};background:var(--green)"></i><i style="width:${pc(part)};background:var(--yellow)"></i></div>` +
+  `<div class="row" style="margin-top:12px"><span><b>${passedAll}</b> of ${COURSE.length} unit exams passed</span><span>Now: Unit ${current.n} · ${esc(current.title)}</span></div>`;
+
+/* ---- collapsing: remember what is open; open the parents of a linked unit */
+const all = () => [...document.querySelectorAll("#units details")];
+const saveOpen = () => { open = all().filter(d => d.open).map(d => d.id); write(OPEN_KEY, open); };
+all().forEach(d => d.addEventListener("toggle", saveOpen));
+const reveal = id => { let d = $(id); while (d) { if (d.tagName === "DETAILS") d.open = true; d = d.parentElement; } saveOpen(); $(id) && $(id).scrollIntoView({ block: "start" }); };
+document.querySelectorAll("#toc a").forEach(a => a.addEventListener("click", e => { e.preventDefault(); history.replaceState(null, "", a.hash); reveal(a.hash.slice(1)); }));
+if (location.hash && $(location.hash.slice(1))) reveal(location.hash.slice(1));
+$("expand").addEventListener("click", () => { all().forEach(d => d.open = true); saveOpen(); });
+$("collapse").addEventListener("click", () => { all().forEach(d => d.open = false); saveOpen(); });
+
+/* ---- export / import: every "algebra." key (practice results, work areas, exam attempts) */
+const FORMAT = "algebra-progress";
+$("export").addEventListener("click", () => {
+  const data = {};
+  for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (k.startsWith("algebra.")) data[k] = localStorage.getItem(k); }
+  const file = new Blob([JSON.stringify({ format: FORMAT, version: 1, exported: new Date().toISOString(), data }, null, 1)], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(file); a.download = `algebra-progress-${new Date().toISOString().slice(0, 10)}.json`;
+  document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+});
+$("import").addEventListener("click", () => $("importFile").click());
+$("importFile").addEventListener("change", async e => {
+  const f = e.target.files[0]; e.target.value = ""; if (!f) return;
+  let j; try { j = JSON.parse(await f.text()); } catch (err) { alert("That file is not a progress file."); return; }
+  if (!j || j.format !== FORMAT || typeof j.data !== "object") { alert("That file is not a progress file."); return; }
+  const keys = Object.keys(j.data).filter(k => k.startsWith("algebra.") && typeof j.data[k] === "string");
+  if (!confirm(`Replace the progress on this device with the one saved on ${String(j.exported || "").slice(0, 10) || "an unknown date"}? (${keys.length} items)`)) return;
+  try {
+    for (let i = localStorage.length - 1; i >= 0; i--) { const k = localStorage.key(i); if (k.startsWith("algebra.")) localStorage.removeItem(k); }
+    keys.forEach(k => localStorage.setItem(k, j.data[k]));
+  } catch (err) { alert("This browser would not save the progress."); return; }
+  location.reload();
+});
 </script>
 </body>
 </html>
