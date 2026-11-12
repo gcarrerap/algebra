@@ -70,7 +70,8 @@ Every unit ends with an exam.
   Each draw must still cover every topic of the unit.
 - Same exercise types as the practice sets; find-the-value questions are typed and have the work
   area.
-- After each answer the exam says **what was wrong**, but the answer **cannot be changed**.
+- **No feedback during the exam.** Nothing says whether an answer is right until the whole exam
+  is submitted. Once submitted, answers **cannot be changed**.
 - **Passing score: 90% or more.**
 
 ## Progression
@@ -101,10 +102,12 @@ Chapters only group units for navigation; locking stays per unit. Unit numbers d
 
 ## Exam feedback and solution videos
 
-- **During the exam**, a wrong answer shows only the feedback: that it was wrong, the correct
-  answer, and the mistake when it is a known one. No video, so the exam keeps its pace.
-- **After the exam**, a review screen lists every question with the student's answer, the correct
-  one and, for each wrong answer, its **solution video**.
+- **During the exam** there is no feedback of any kind: no right/wrong marks, no correct answers,
+  no videos. The student answers every question and submits the exam.
+- **After submitting**, the exam shows the **score** and a review of every question: the
+  student's answer, the correct one, what was wrong (the mistake, when it is a known one) and,
+  for each wrong answer, its **solution video**.
+- Submitted answers are final; to improve the score the student takes a new attempt.
 - Every question in the bank therefore has a solution video, as practice exercises do.
 
 ## Where progress is stored
