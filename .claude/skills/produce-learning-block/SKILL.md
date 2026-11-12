@@ -27,5 +27,22 @@ document and `docs/course-design.md` before starting, and follow the linked docs
 8. **Publish and commit** (steps 8–9), then report in a few lines: what was made, real vs.
    estimated length, credit spent (runs and characters), anything left open.
 
+## When you get stuck, report it
+
+Guillermo wants to know every place where the docs or tools were not enough, so the repo can be
+fixed. Being stuck means any of these:
+
+- a step the docs don't explain, or explain wrongly, and you had to guess or work it out;
+- a command or tool that fails, or a workaround you had to use;
+- a missing capability (a diagram with no component, an answer kind the checker can't check);
+- access or credit problems (`gh` refused, a failed audio run);
+- a rule you could not meet (length, pauses, an overlap you could not fix).
+
+For each one, **tell him explicitly**, in a section of your final message titled
+**"Where I got stuck"**: what happened, at which step, what you did about it (resolved, worked
+around, or left open), and which doc or tool should change so the next agent doesn't hit it. If
+something blocks the work entirely, stop and report it right away instead of guessing. If nothing
+went wrong, say so in one line ("Nothing blocked me"); never leave the section out.
+
 Never type numbers from memory into a video or an exercise: compute them, or let the build
 validate them. Keep everything the learner sees in English.
