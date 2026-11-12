@@ -199,10 +199,92 @@ def validate_name(ex, problems):
             problems.append(f"{i}: wrong option {w['a']!r} needs 'why' and 'say'")
 
 
+def check_claim(ex, item_text, claim, problems, what):
+    """kind multi/match with "check": verify one statement with code.
+    claim "property:<Name>" → item is a true identity showing that property;
+    claim "equals:<expr>"   → item equals <expr> for every value of the variables."""
+    i = ex["id"]
+    kind, _, arg = claim.partition(":")
+    try:
+        if kind == "property":
+            left, right = item_text.split("=")
+            if not same(left, right):
+                problems.append(f"{i}: {what} {item_text!r} is not a true identity")
+                return None
+            return classify(item_text) == arg
+        if kind == "equals":
+            return same(item_text, arg)
+    except Exception as e:  # noqa: BLE001
+        problems.append(f"{i}: {what} {item_text!r} cannot be evaluated: {e}")
+        return None
+    problems.append(f"{i}: unknown check {claim!r}")
+    return None
+
+
+def validate_multi(ex, problems):
+    """kind "multi": select ALL that apply. 4–6 options, at least one right and one wrong. With
+    "check" ("property:<Name>" or "equals:<expr>") every option's ok flag is verified by code."""
+    i, opts = ex["id"], ex.get("options", [])
+    if not 4 <= len(opts) <= 6:
+        problems.append(f"{i}: a multi exercise needs 4–6 options")
+    if not any(o.get("ok") for o in opts) or all(o.get("ok") for o in opts):
+        problems.append(f"{i}: needs at least one right and one wrong option")
+    if len({o.get("t") for o in opts}) != len(opts):
+        problems.append(f"{i}: two options are the same")
+    for o in opts:
+        for f in ("t", "why", "say"):
+            if not o.get(f):
+                problems.append(f"{i}: option {o.get('t')!r} has no {f!r}")
+        if ex.get("check") and o.get("t"):
+            truth = check_claim(ex, o["t"], ex["check"], problems, "option")
+            if truth is not None and truth != bool(o.get("ok")):
+                problems.append(f"{i}: option {o['t']!r} is marked ok={bool(o.get('ok'))}, but the check says {truth}")
+    for f in ("prompt", "read", "say_answer"):
+        if not ex.get(f):
+            problems.append(f"{i}: needs {f!r}")
+
+
+def validate_match(ex, problems):
+    """kind "match": match every left item with a right item. 3–6 pairs; right items may repeat
+    (sorting into categories). With "check": "property" (left = identity, right = its property) or
+    "equal" (left and right are equal expressions) every pair is verified by code."""
+    i, pairs = ex["id"], ex.get("pairs", [])
+    if not 3 <= len(pairs) <= 6:
+        problems.append(f"{i}: a match exercise needs 3–6 pairs")
+    if len({p.get("l") for p in pairs}) != len(pairs):
+        problems.append(f"{i}: two left items are the same")
+    if len({p.get("r") for p in pairs}) < 2:
+        problems.append(f"{i}: needs at least two different right items")
+    for p in pairs:
+        for f in ("l", "r", "why", "say"):
+            if not p.get(f):
+                problems.append(f"{i}: pair {p.get('l')!r} has no {f!r}")
+        chk = ex.get("check")
+        if chk and p.get("l") and p.get("r"):
+            claim = f"property:{p['r']}" if chk == "property" else f"equals:{p['r']}" if chk == "equal" else chk
+            if check_claim(ex, p["l"], claim, problems, "pair") is False:
+                problems.append(f"{i}: pair {p['l']!r} → {p['r']!r} is not right")
+    if chk := ex.get("check"):
+        if chk == "equal":   # no left item may also equal another pair's right item
+            for p in pairs:
+                for q in pairs:
+                    if q is not p and q["r"] != p["r"] and same(p["l"], q["r"]):
+                        problems.append(f"{i}: {p['l']!r} also equals {q['r']!r}")
+    for f in ("prompt", "read", "say_answer"):
+        if not ex.get(f):
+            problems.append(f"{i}: needs {f!r}")
+
+
 def validate(data):
     problems = []
     for ex in data["exercises"]:
         kind = ex.setdefault("kind", "num")
+        if kind == "multi":
+            validate_multi(ex, problems)
+            continue
+        if kind == "match":
+            validate_match(ex, problems)
+            continue
         if kind == "expr":
             validate_expr(ex, problems)
             continue
@@ -297,6 +379,10 @@ def pick_size(lines, sizes, max_h, max_w=1600):
 def video_files(data, ex, num, set_id):
     if ex["kind"] == "name":
         return name_video(data, ex, num, set_id)
+    if ex["kind"] == "multi":
+        return multi_video(data, ex, num, set_id)
+    if ex["kind"] == "match":
+        return match_video(data, ex, num, set_id)
     vid = f"{set_id}-{ex['id']}"
     n, lv = len(ex["chips"]), data["levels"][str(ex["level"])]
     wrong = ex["wrong"]
@@ -537,6 +623,166 @@ def name_video(data, ex, num, set_id):
     return vid, script, page(f"Exercise {num} — step by step", unit_label, num, style, scenes)
 
 
+CHOICE_STYLE = """
+  .hl { padding: 0 10px; margin: 0 -10px; }
+  sup { font-size: 0.6em; vertical-align: 0.55em; line-height: 0; }
+  .frac { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; margin: 0 0.12em; }
+  .frac .top { padding: 0.04em 0.25em 0.2em; border-bottom: 0.07em solid currentColor; }
+  .frac .bot { padding: 0.2em 0.25em 0.04em; }
+  .prompt-l { font: 600 40px/1.3 Inter, sans-serif; color: var(--muted); text-align: center; max-width: 1500px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 26px 40px; width: 1500px; }
+  .opt { position: relative; display: flex; align-items: center; justify-content: center; min-height: 130px; padding: 18px 30px;
+    border-radius: 26px; border: 3px solid #2a3a5c; background: #18243d; font: 600 52px Poppins, sans-serif; }
+  .opt .mark { position: absolute; top: -22px; right: -18px; width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center;
+    font: 700 40px Poppins, sans-serif; color: #101a2e; }
+  .opt .mark.ok { background: var(--green); } .opt .mark.no { background: var(--red); }
+  .pairs { display: grid; grid-template-columns: auto 120px auto; gap: 26px 10px; align-items: center; justify-content: center; }
+  .pairs .l { justify-self: end; } .pairs .r { justify-self: start; }
+  .pairs .arrow { font: 700 56px Poppins, sans-serif; color: var(--yellow); text-align: center; }
+  .side { padding: 14px 30px; border-radius: 22px; border: 3px solid #2a3a5c; background: #18243d; font: 600 46px Poppins, sans-serif; }
+  .why-l { font: 500 32px/1.3 Inter, sans-serif; color: var(--muted); text-align: center; max-width: 1400px; }
+"""
+
+
+def choice_text(t):
+    """Option or matching item: math gets the usual markup, words stay as they are."""
+    return markup(t)
+
+
+def multi_video(data, ex, num, set_id):
+    """Select all that apply: the options, then one block per option that says why it is in or out."""
+    vid = f"{set_id}-{ex['id']}"
+    lv = data["levels"][str(ex["level"])]
+    opts = ex["options"]
+    nb = len(opts)
+    b_ans = f"b{nb + 2:02d}"
+    script = {
+        "format": "algebra-video-script", "version": 1, "video": vid, "title": f"Exercise {num}", "voice": "narrator",
+        "scenes": [
+            {"id": "s01", "title": "The problem", "blocks": [
+                {"id": "b01", "text": "Let's look at this one. " + ex["read"], "display": ex["prompt"],
+                 "cue": "show-problem", "pause_after_s": 1.5}]},
+            {"id": "s02", "title": "One by one", "blocks": [
+                {"id": f"b{k + 2:02d}", "text": o["say"], "display": plain(o["t"]), "cue": f"option-{k + 1}"}
+                for k, o in enumerate(opts)]},
+            {"id": "s03", "title": "The answer", "blocks": [
+                {"id": b_ans, "text": ex["say_answer"], "cue": "answer"}]},
+        ],
+    }
+    cells = []
+    for k, o in enumerate(opts):
+        blk = f"b{k + 2:02d}"
+        color = "green" if o["ok"] else "red"
+        mark = (f'<span class="mark ok pop" data-at="{blk}.end-0.6">✓</span>' if o["ok"]
+                else f'<span class="mark no pop" data-at="{blk}.end-0.6">✗</span>')
+        inner = choice_text(o["t"])
+        if not o["ok"]:
+            inner = f'<span class="strike" data-at="{blk}.end-0.6" data-dur="0.4">{inner}</span>'
+        cells.append(f'      <div class="opt glow c-{color}" data-at="{blk}">{mark}'
+                     f'<span>{inner}</span></div>')
+    plain_cells = "\n".join(f'      <div class="opt">{choice_text(o["t"])}</div>' for o in opts)
+    whys = "\n".join(
+        f'      <div class="why-l fade" data-at="b{k + 2:02d}+0.2"{f" data-out=\"b{k + 3:02d}\"" if k < nb - 1 else ""}>{o["why"]}</div>'
+        for k, o in enumerate(opts))
+    right = "\n".join(f'      <div class="opt glow c-green pop" data-at="{b_ans}+{0.2 + 0.2 * k:.1f}">{choice_text(o["t"])}</div>'
+                      for k, o in enumerate(x for x in opts if x["ok"]))
+    scenes = f"""
+  <section class="scene" data-scene="s01">
+    <div class="label yellow fade" data-at="b01">Exercise {num} · {lv}</div>
+    <div class="prompt-l fade" data-at="b01">{ex["prompt"]}</div>
+    <div class="grid fade" data-at="b01+0.6">
+{plain_cells}
+    </div>
+  </section>
+
+  <section class="scene" data-scene="s02">
+    <div class="grid">
+{chr(10).join(cells)}
+    </div>
+    <div class="stack">
+{whys}
+    </div>
+  </section>
+
+  <section class="scene" data-scene="s03">
+    <div class="label green fade" data-at="{b_ans}">All that apply</div>
+    <div class="row" style="flex-wrap: wrap; gap: 26px; max-width: 1600px; justify-content: center">
+{right}
+    </div>
+    <div class="label muted fade" data-at="{b_ans}+1.5" style="font-size: 22px; font-weight: 500">This video uses an AI-generated voice.</div>
+  </section>
+"""
+    unit_label = f"Unit {data['unit'].split('.')[0]} · Practice {data['unit']}"
+    return vid, script, page(f"Exercise {num} — step by step", unit_label, num, CHOICE_STYLE, scenes)
+
+
+def match_video(data, ex, num, set_id):
+    """Matching: the items, then one block per pair that joins it and says why."""
+    vid = f"{set_id}-{ex['id']}"
+    lv = data["levels"][str(ex["level"])]
+    pairs = ex["pairs"]
+    nb = len(pairs)
+    b_ans = f"b{nb + 2:02d}"
+    script = {
+        "format": "algebra-video-script", "version": 1, "video": vid, "title": f"Exercise {num}", "voice": "narrator",
+        "scenes": [
+            {"id": "s01", "title": "The problem", "blocks": [
+                {"id": "b01", "text": "Let's look at this one. " + ex["read"], "display": ex["prompt"],
+                 "cue": "show-problem", "pause_after_s": 1.5}]},
+            {"id": "s02", "title": "Pair by pair", "blocks": [
+                {"id": f"b{k + 2:02d}", "text": p["say"], "display": f"{plain(p['l'])} → {plain(p['r'])}", "cue": f"pair-{k + 1}"}
+                for k, p in enumerate(pairs)]},
+            {"id": "s03", "title": "The answer", "blocks": [
+                {"id": b_ans, "text": ex["say_answer"], "cue": "answer"}]},
+        ],
+    }
+    rights = list(dict.fromkeys(p["r"] for p in pairs))
+    lefts = "\n".join(f'      <div class="side">{choice_text(p["l"])}</div>' for p in pairs)
+    rlist = "\n".join(f'      <div class="side">{choice_text(r)}</div>' for r in rights)
+    rows = []
+    for k, p in enumerate(pairs):
+        blk = f"b{k + 2:02d}"
+        rows.append(f'      <div class="side l fade" data-at="{blk}">{choice_text(p["l"])}</div>'
+                    f'<div class="arrow pop" data-at="{blk}.end-0.8">→</div>'
+                    f'<div class="side r glow c-green pop" data-at="{blk}.end-0.8">{choice_text(p["r"])}</div>')
+    whys = "\n".join(
+        f'      <div class="why-l fade" data-at="b{k + 2:02d}+0.2"{f" data-out=\"b{k + 3:02d}\"" if k < nb - 1 else ""}>{p["why"]}</div>'
+        for k, p in enumerate(pairs))
+    scenes = f"""
+  <section class="scene" data-scene="s01">
+    <div class="label yellow fade" data-at="b01">Exercise {num} · {lv}</div>
+    <div class="prompt-l fade" data-at="b01">{ex["prompt"]}</div>
+    <div class="row fade" data-at="b01+0.6" style="gap: 120px; align-items: center">
+      <div class="col" style="gap: 20px">
+{lefts}
+      </div>
+      <div class="col" style="gap: 20px">
+{rlist}
+      </div>
+    </div>
+  </section>
+
+  <section class="scene" data-scene="s02">
+    <div class="pairs">
+{chr(10).join(rows)}
+    </div>
+    <div class="stack">
+{whys}
+    </div>
+  </section>
+
+  <section class="scene" data-scene="s03">
+    <div class="label green fade" data-at="{b_ans}">Every pair</div>
+    <div class="pairs fade" data-at="{b_ans}+0.2">
+{chr(10).join(f'      <div class="side l">{choice_text(p["l"])}</div><div class="arrow">→</div><div class="side r glow c-green">{choice_text(p["r"])}</div>' for p in pairs)}
+    </div>
+    <div class="label muted fade" data-at="{b_ans}+1.5" style="font-size: 22px; font-weight: 500">This video uses an AI-generated voice.</div>
+  </section>
+"""
+    unit_label = f"Unit {data['unit'].split('.')[0]} · Practice {data['unit']}"
+    return vid, script, page(f"Exercise {num} — step by step", unit_label, num, CHOICE_STYLE, scenes)
+
+
 # ---------------------------------------------------------------- quiz page
 def plain_math(expr):
     """An expression in the plain form components/answer-check reads: * / - ( ) ^, implied products."""
@@ -550,7 +796,7 @@ def quiz_data(data):
     out = []
     for k, ex in enumerate(data["exercises"], 1):
         base = {"id": ex["id"], "n": k, "level": ex["level"], "prompt": ex.get("prompt", ""),
-                "q": markup(ex["q"]), "aria": plain(ex["q"]).replace("^", " to the power of ")}
+                "q": markup(ex.get("q", "")), "aria": plain(ex.get("q", "")).replace("^", " to the power of ")}
         # "find the value" and "expand": the student types the answer (docs/course-design.md)
         if ex["kind"] == "num":
             out.append({**base, "input": "num", "answer": str(ex["_answer"]), "aHtml": money(ex["_answer"]),
@@ -559,6 +805,15 @@ def quiz_data(data):
         if ex["kind"] == "expr":
             out.append({**base, "input": "expr", "answer": plain_math(ex["a"]), "aHtml": markup(ex["a"]),
                         "mistakes": [{"e": plain_math(w["e"]), "why": w["why"]} for w in ex["wrong"]]})
+            continue
+        if ex["kind"] == "multi":
+            out.append({**base, "q": "", "pick": "multi",
+                        "options": [{"v": choice_text(o["t"]), "ok": bool(o["ok"]), "why": o["why"]} for o in ex["options"]]})
+            continue
+        if ex["kind"] == "match":
+            rights = list(dict.fromkeys(p["r"] for p in ex["pairs"]))
+            out.append({**base, "q": "", "pick": "match", "rights": [choice_text(r) for r in rights],
+                        "pairs": [{"l": choice_text(p["l"]), "r": rights.index(p["r"]), "why": p["why"]} for p in ex["pairs"]]})
             continue
         if ex["kind"] == "num":
             opts = [{"v": money(ex["_answer"]), "ok": True, "why": ""}]
@@ -581,6 +836,13 @@ def build(set_dir, check_only):
         sys.exit(f"{len(problems)} problem(s) found")
     print(f"✓ {len(data['exercises'])} exercises: every answer, every step line and every wrong option checked")
     for ex in data["exercises"]:
+        if ex["kind"] in ("multi", "match"):
+            if ex["kind"] == "multi":
+                desc = "select all: " + ", ".join(o["t"] for o in ex["options"] if o["ok"])
+            else:
+                desc = "match: " + "; ".join(f"{p['l']} → {p['r']}" for p in ex["pairs"])
+            print(f"  {ex['id']}  {ex['prompt'][:34]:<34} → {desc}")
+            continue
         if ex["kind"] == "num":
             ans, wr = ex["_answer"], [w["_value"] for w in ex["wrong"]]
         elif ex["kind"] == "expr":

@@ -43,6 +43,8 @@ The type depends on the topic. Available types:
 | **Matching** | relates concepts in two columns | e.g. property ↔ identity, term ↔ definition. |
 | Others | as the topic needs | Add a row here when a new type is created. |
 
+How each type is written and checked: [exercises.md](exercises.md).
+
 ### Solve / find-the-value exercises
 
 - The student **types the value**; there are no options to pick from.
@@ -144,7 +146,6 @@ What already exists and does not follow these rules yet:
 
 | Rule | Today |
 |---|---|
-| Single choice, multiple select, matching | Only single choice exists. |
 | Unit exam with question bank, ≥90% to unlock | No exams, no question banks, no locking. |
 | Own exercise set per learning block | 0.2's two subtopics share one practice set. |
 | Work area on every find-the-value exercise | Present in 0.1; missing in 0.2. |

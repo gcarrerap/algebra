@@ -12,6 +12,8 @@ adds two kinds of exercise besides "find the value" (see the `_notes` in its `ex
 | `num` (default) | Find the value. | Exact fractions, as in 0.1. |
 | `expr` | Expand an expression, e.g. `−3(x + 4)`. | Every line, the answer and every wrong option are evaluated at six sets of values of the variables (`x`, `y`…); lines must match the question at all of them, wrong options must not match the answer or each other. |
 | `name` | Which property does an identity show? | Both sides must be equal, and the stated property must match the identity's shape (same order and same numbers = associative; same numbers in another order = commutative; otherwise distributive). The two other properties are the wrong options. |
+| `multi` | Select **all** that apply (4–6 options, at least one right and one wrong). | With `"check": "property:<Name>"` or `"equals:<expr>"`, every option's `ok` is verified with code. Each option has `t` (shown), `ok`, `why` (shown when it is picked wrongly) and `say` (narration in the video); the exercise has `prompt`, `read` and `say_answer`. |
+| `match` | Match every left item with a right item (3–6 pairs; right items may repeat, to sort items into groups). | With `"check": "property"` (left = identity, right = its property) or `"equal"` (left equals right, and equals no other right item), every pair is verified with code. Each pair has `l`, `r`, `why`, `say`; the exercise has `prompt`, `read` and `say_answer`. |
 
 Property chips: **COMM blue · ASSOC purple · DIST yellow · CALC green · REWRITE white**.
 
@@ -28,6 +30,12 @@ How it behaves:
   step-by-step video plays and the student can fix the answer.
 - **Picked answers** (`name`): options are shuffled every time; every wrong option is the result of
   one named mistake, and choosing it says which and plays the video; the student can pick again.
+- **Select all that apply** (`multi`): the student ticks options and presses Check. It is right only
+  when the ticked set is exactly the right set. Wrong ticks are marked with their `why`; missed
+  answers are only counted ("one more answer applies"), so the student still has to find them.
+- **Matching** (`match`): a drop-down per left item. Every item must be matched before Check. Wrong
+  rows are marked with their `why`. Both kinds play the video on a wrong check; their videos go
+  through the options or pairs one block each and end with the full answer.
 - The score counts exercises right on the first try; progress is kept in the browser.
 
 ## Files

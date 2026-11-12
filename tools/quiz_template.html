@@ -90,6 +90,23 @@
   .answer .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
   .answer[data-r="right"] equation-editor { outline: 2px solid var(--green); border-radius: 12px; }
   .answer[data-r="wrong"] equation-editor { outline: 2px solid var(--red); border-radius: 12px; }
+  /* select all that apply */
+  .opt[aria-pressed="true"] { border-color: var(--yellow); background: rgba(255,204,77,.10); }
+  .opt .box { width: 24px; height: 24px; border-radius: 7px; border: 2px solid var(--muted); flex: none; display: grid; place-items: center; font: 700 15px var(--text); color: var(--bg); }
+  .opt[aria-pressed="true"] .box { background: var(--yellow); border-color: var(--yellow); }
+  .opt[aria-pressed="true"] .box::after { content: "✓"; }
+  .opt.choice { font-size: 20px; }
+  [hidden] { display: none !important; }
+  .opt .why { display: block; font: 400 14px/1.35 var(--text); color: var(--red); margin-top: 4px; }
+  /* matching */
+  .pairs { display: grid; gap: 10px; margin: 0 0 4px; }
+  .pair { display: grid; grid-template-columns: 1fr minmax(0, 1fr); gap: 12px; align-items: center; padding: 10px 12px; border-radius: 14px; border: 2px solid var(--line); background: #101a2e; }
+  @media (max-width: 520px) { .pair { grid-template-columns: 1fr; } }
+  .pair .l { font: 600 20px var(--display); }
+  .pair select { width: 100%; font: 600 16px var(--text); color: var(--ink); background: var(--card); border: 2px solid var(--line); border-radius: 10px; padding: 10px; }
+  .pair select:focus-visible { outline: none; border-color: var(--yellow); }
+  .pair[data-r="wrong"] { border-color: var(--red); } .pair[data-r="right"] { border-color: var(--green); }
+  .pair .why { grid-column: 1 / -1; color: var(--red); font-size: 14px; }
   .note.warn { border-color: var(--yellow); } .note.warn strong { color: var(--yellow); }
   .fb { margin-top: 18px; }
   .note { border-radius: 14px; padding: 14px 16px; margin: 0 0 14px; border: 1px solid var(--line); background: #101a2e; }
@@ -220,9 +237,18 @@ function show() {
   if (ex.prompt) card.append(el("p", { class: "prompt" }, ex.prompt));
   else card.append(el("p", { class: "prompt" }, "What is the value of this expression?"));
   const q = el("div", { class: "q", id: "qtitle", role: "img", "aria-label": ex.aria, tabindex: "-1", html: ex.q });
+  if (!ex.q) { q.removeAttribute("role"); q.removeAttribute("aria-label"); q.style.display = "none"; }
   card.append(q);
   card.append(makePad(ex));
 
+  if (ex.pick === "multi" || ex.pick === "match") {
+    card.append(ex.pick === "multi" ? makeMulti(ex) : makeMatch(ex));
+    card.append(el("div", { class: "actions" }, el("button", { type: "button", class: "btn", id: "check", onclick: ex.pick === "multi" ? checkMulti : checkMatch }, "Check")));
+    card.append(el("div", { class: "fb", id: "fb", "aria-live": "polite" }));
+    app.append(card);
+    q.focus({ preventScroll: true });
+    return;
+  }
   if (ex.input) {
     card.append(makeAnswer(ex));
     card.append(el("div", { class: "fb", id: "fb", "aria-live": "polite" }));
@@ -331,6 +357,100 @@ function check() {
   fb.scrollIntoView({ behavior: "smooth", block: "nearest" });
 }
 
+// ---- select all that apply / matching: answer, Check, feedback per item, video on a wrong check
+function solvedRight(fb) {
+  solved = true;
+  const ex = DATA.exercises[state.i];
+  $("#check").disabled = true;
+  if (!state.results[state.i]) state.results[state.i] = tries ? "retry" : "first";
+  save(); renderDots();
+  fb.append(el("div", { class: "note good" },
+    el("strong", {}, tries ? "Right — and now you know why." : "Right on the first try!"),
+    state.i < N - 1 ? "Ready for the next one?" : "That was the last one."));
+  if (!videoOpen) fb.append(el("button", { type: "button", class: "link", onclick: (e) => { e.target.remove(); showVideo(false); } }, "Watch the step-by-step solution"));
+  fb.append(el("div", { class: "actions" },
+    el("button", { type: "button", class: "btn", id: "next", onclick: next }, state.i < N - 1 ? "Next exercise →" : "See my results")));
+  $("#next").focus({ preventScroll: false });
+}
+function wrongTry(fb, title, text, key) {
+  if (key !== lastWrong) tries++;
+  lastWrong = key;
+  if (!state.results[state.i]) { state.results[state.i] = "retry"; save(); renderDots(); }
+  fb.append(el("div", { class: "note bad", role: "status" }, el("strong", {}, title), text));
+  showVideo(true);
+  fb.append(el("p", { class: "hint" }, "Watch how it is solved, then fix your answer and check again."));
+  fb.scrollIntoView({ behavior: "smooth", block: "nearest" });
+}
+
+function makeMulti(ex) {
+  tries = 0; lastWrong = "";
+  const box = el("div", { class: "options", role: "group", "aria-label": "Choose all that apply", id: "multi" });
+  order.forEach((oi) => {
+    const o = ex.options[oi];
+    const b = el("button", { type: "button", class: "opt choice", "aria-pressed": "false", "data-oi": oi },
+      el("span", { class: "box", "aria-hidden": "true" }), el("span", {}, el("span", { html: o.v }), el("span", { class: "why", hidden: "" }, o.why)));
+    b.addEventListener("click", () => {
+      if (solved) return;
+      b.setAttribute("aria-pressed", String(b.getAttribute("aria-pressed") !== "true"));
+      delete b.dataset.r; b.querySelector(".why").hidden = true;
+    });
+    box.append(b);
+  });
+  return el("div", {}, el("p", { class: "hint", style: "margin:0 0 10px" }, "Choose all that apply, then press Check."), box);
+}
+function checkMulti() {
+  if (solved) return;
+  const ex = DATA.exercises[state.i], fb = $("#fb");
+  const btns = [...document.querySelectorAll("#multi .opt")];
+  const picked = btns.filter((b) => b.getAttribute("aria-pressed") === "true").map((b) => +b.dataset.oi);
+  fb.innerHTML = ""; videoOpen = false;
+  if (!picked.length) { fb.append(el("div", { class: "note warn", role: "status" }, el("strong", {}, "Nothing chosen yet."), "Choose every answer that applies.")); return; }
+  const wrongPicked = picked.filter((oi) => !ex.options[oi].ok);
+  const missed = ex.options.map((o, oi) => (o.ok && !picked.includes(oi) ? oi : -1)).filter((oi) => oi >= 0);
+  btns.forEach((b) => { delete b.dataset.r; b.querySelector(".why").hidden = true; });
+  if (!wrongPicked.length && !missed.length) {
+    btns.forEach((b) => { if (b.getAttribute("aria-pressed") === "true") b.dataset.r = "right"; b.disabled = true; });
+    return solvedRight(fb);
+  }
+  wrongPicked.forEach((oi) => { const b = btns.find((x) => +x.dataset.oi === oi); b.dataset.r = "wrong"; b.querySelector(".why").hidden = false; });
+  const parts = [];
+  if (wrongPicked.length) parts.push(`${wrongPicked.length} of your choices ${wrongPicked.length === 1 ? "does" : "do"} not apply (marked in red).`);
+  if (missed.length) parts.push(`${missed.length === 1 ? "One more answer applies" : missed.length + " more answers apply"} that you did not choose.`);
+  wrongTry(fb, "Not quite.", parts.join(" "), picked.sort().join(","));
+}
+
+const SUPS = "⁰¹²³⁴⁵⁶⁷⁸⁹";
+const asText = (html) => html.replace(/<sup>(\d+)<\/sup>/g, (m, d) => [...d].map((c) => SUPS[c]).join("")).replace(/<[^>]+>/g, "");
+function makeMatch(ex) {
+  tries = 0; lastWrong = "";
+  const rows = el("div", { class: "pairs", id: "match" });
+  const rorder = shuffled(ex.rights.length);
+  shuffled(ex.pairs.length).forEach((pi) => {
+    const p = ex.pairs[pi];
+    const sel = el("select", { "aria-label": "Match for item", "data-pi": pi },
+      el("option", { value: "" }, "Choose…"), ...rorder.map((ri) => el("option", { value: ri }, asText(ex.rights[ri]))));
+    sel.addEventListener("change", () => { const row = sel.closest(".pair"); delete row.dataset.r; row.querySelector(".why").hidden = true; });
+    rows.append(el("div", { class: "pair", "data-pi": pi }, el("span", { class: "l", html: p.l }), sel, el("span", { class: "why", hidden: "" }, p.why)));
+  });
+  return el("div", {}, el("p", { class: "hint", style: "margin:0 0 10px" }, "Choose the match for every item, then press Check."), rows);
+}
+function checkMatch() {
+  if (solved) return;
+  const ex = DATA.exercises[state.i], fb = $("#fb");
+  const rows = [...document.querySelectorAll("#match .pair")];
+  fb.innerHTML = ""; videoOpen = false;
+  const chosen = rows.map((r) => r.querySelector("select").value);
+  if (chosen.some((v) => v === "")) { fb.append(el("div", { class: "note warn", role: "status" }, el("strong", {}, "Not finished."), "Choose a match for every item.")); return; }
+  let bad = 0;
+  rows.forEach((r, k) => {
+    const ok = +chosen[k] === ex.pairs[+r.dataset.pi].r;
+    r.dataset.r = ok ? "right" : "wrong"; r.querySelector(".why").hidden = ok;
+    if (!ok) bad++;
+  });
+  if (!bad) { rows.forEach((r) => { r.querySelector("select").disabled = true; }); return solvedRight(fb); }
+  wrongTry(fb, "Not quite.", `${rows.length - bad} of ${rows.length} are matched right. Look at the ones in red.`, chosen.join(","));
+}
+
 function showVideo(autoplay) {
   if (videoOpen) return;
   videoOpen = true;
@@ -371,7 +491,7 @@ function showResults(app) {
 }
 
 document.addEventListener("keydown", (e) => {
-  if (state.done || solved || DATA.exercises[state.i].input || e.ctrlKey || e.metaKey || e.altKey) return;
+  if (state.done || solved || DATA.exercises[state.i].input || DATA.exercises[state.i].pick || e.ctrlKey || e.metaKey || e.altKey) return;
   const k = "abcd1234".indexOf(e.key.toLowerCase());
   if (k < 0 || (e.target.closest && e.target.closest("textarea, input, math-field, equation-notebook, iframe"))) return;
   const oi = order[k % 4];
