@@ -116,8 +116,8 @@ Chapters only group units for navigation; locking stays per unit. Unit numbers d
 - **Every exam includes at least one Boss-level question from every learning block** of the
   unit, chosen at random from its two. These questions will repeat often across attempts; that
   is accepted. The rest of the exam is drawn from levels 1–3.
-- A unit can therefore have at most 20 learning blocks (the exam maximum). If an exam has fewer
-  than 10 learning blocks, the remaining questions up to the exam size come from the bank at
+- A unit can therefore have at most 20 learning blocks (the exam maximum). If a unit has fewer
+  than 10 learning blocks, the rest of the exam (up to 10–20 questions) comes from the bank at
   random.
 - Questions of levels 1–3 have a **written step-by-step solution** instead, shown in the review.
 - This only applies to exams. Every practice exercise keeps its solution video.
