@@ -59,6 +59,30 @@
   .frac .top { padding: .04em .25em .2em; border-bottom: .07em solid currentColor; }
   .frac .bot { padding: .2em .25em .04em; }
 
+
+  /* scratchpad */
+  .pad { margin: 0 0 18px; }
+  .padbtn { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 14px; cursor: pointer;
+    background: transparent; color: var(--yellow); border: 2px dashed var(--line); font: 600 16px var(--text); text-align: left; }
+  .padbtn:hover, .padbtn:focus-visible { border-color: var(--yellow); outline: none; }
+  .padbtn .chev { transition: transform .15s; } .padbtn[aria-expanded="true"] .chev { transform: rotate(180deg); }
+  .padbody { margin-top: 10px; border: 1px solid var(--line); border-radius: 14px; background: #101a2e; padding: 10px; }
+  .padbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 10px; }
+  .padbar .sp { flex: 1; }
+  .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  .seg button, .tool { font: 600 14px var(--text); padding: 8px 12px; border: 0; background: transparent; color: var(--muted); cursor: pointer; min-height: 38px; }
+  .seg button[aria-selected="true"] { background: var(--yellow); color: var(--bg); }
+  .tool { border: 1px solid var(--line); border-radius: 10px; }
+  .tool[aria-pressed="true"] { border-color: var(--yellow); color: var(--yellow); }
+  .tool:focus-visible, .seg button:focus-visible, .sw:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+  .sw { width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--line); cursor: pointer; padding: 0; }
+  .sw[aria-pressed="true"] { border-color: var(--ink); box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--ink); }
+  .canvas { display: block; width: 100%; aspect-ratio: 5 / 3; border-radius: 10px; touch-action: none; cursor: crosshair;
+    background: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px) 0 0 / 24px 24px, linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px) 0 0 / 24px 24px, #0b1325; }
+  .typed { width: 100%; min-height: 220px; resize: vertical; border-radius: 10px; border: 0; padding: 12px; background: #0b1325; color: var(--ink);
+    font: 500 20px/1.5 var(--text); }
+  .typed:focus-visible { outline: 2px solid var(--yellow); }
+
   .options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   @media (max-width: 520px) { .options { grid-template-columns: 1fr; } }
   .opt {
@@ -106,7 +130,7 @@
   <h1>Order of operations, <span class="y">with signs</span></h1>
   <ol class="dots" id="dots" aria-label="Exercises"></ol>
   <div id="app"></div>
-  <footer>Pick the answer you think is right. A wrong answer shows you the mistake and plays a step-by-step video. Solution videos use an AI-generated voice.</footer>
+  <footer>Open the scratchpad to work a problem out by hand. Pick the answer you think is right: a wrong answer shows you the mistake and plays a step-by-step video. Solution videos use an AI-generated voice.</footer>
 </main>
 
 <script>
@@ -145,6 +169,85 @@ function shuffled(n) {
   return a;
 }
 
+
+// ---- scratchpad: draw with finger / pen / mouse, or type. Kept per exercise, on this device.
+let notes = {};
+try { notes = JSON.parse(localStorage.getItem(KEY + ".notes")) || {}; } catch (e) {}
+let saveTimer = 0;
+function saveNotes() { clearTimeout(saveTimer); saveTimer = setTimeout(() => { try { localStorage.setItem(KEY + ".notes", JSON.stringify(notes)); } catch (e) {} }, 300); }
+function flushNotes() { clearTimeout(saveTimer); try { localStorage.setItem(KEY + ".notes", JSON.stringify(notes)); } catch (e) {} }
+addEventListener("pagehide", flushNotes);
+document.addEventListener("visibilitychange", () => { if (document.hidden) flushNotes(); });
+let padOpen = false, padTab = "draw", padColor = "#f5f1e8", padTool = "pen";
+
+function makePad(ex) {
+  const n = notes[ex.id] || (notes[ex.id] = { strokes: [], text: "" });
+  const W = 1200, H = 720;
+  const toggle = el("button", { type: "button", class: "padbtn", "aria-expanded": String(padOpen), "aria-controls": "padbody" },
+    el("span", {}, "✏️ Scratchpad — work it out by hand"), el("span", { class: "chev", "aria-hidden": "true" }, "▾"));
+  const body = el("div", { class: "padbody", id: "padbody" });
+  body.hidden = !padOpen;
+
+  // drawing
+  const canvas = el("canvas", { class: "canvas", width: W, height: H, role: "img", "aria-label": "Drawing area for your notes" });
+  const ctx = canvas.getContext("2d");
+  ctx.lineCap = ctx.lineJoin = "round";
+  const seg = (s, a, b) => {
+    ctx.globalCompositeOperation = s.e ? "destination-out" : "source-over";
+    ctx.strokeStyle = s.c; ctx.lineWidth = s.w;
+    ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke();
+  };
+  const drawStroke = (s) => { if (s.p.length === 1) seg(s, s.p[0], [s.p[0][0] + 0.1, s.p[0][1]]); for (let i = 1; i < s.p.length; i++) seg(s, s.p[i - 1], s.p[i]); };
+  const redraw = () => { ctx.clearRect(0, 0, W, H); n.strokes.forEach(drawStroke); };
+  const pos = (e) => { const r = canvas.getBoundingClientRect(); return [Math.round((e.clientX - r.left) * W / r.width), Math.round((e.clientY - r.top) * H / r.height)]; };
+  let cur = null;
+  canvas.addEventListener("pointerdown", (e) => {
+    if (e.pointerType === "mouse" && e.button !== 0) return;
+    e.preventDefault(); canvas.setPointerCapture(e.pointerId);
+    cur = { c: padColor, w: padTool === "erase" ? 56 : 8, e: padTool === "erase" ? 1 : 0, p: [pos(e)] };
+    n.strokes.push(cur); drawStroke(cur);
+  });
+  canvas.addEventListener("pointermove", (e) => {
+    if (!cur) return;
+    const evs = e.getCoalescedEvents ? e.getCoalescedEvents() : [e];
+    for (const ev of (evs.length ? evs : [e])) { const q = pos(ev), prev = cur.p[cur.p.length - 1]; cur.p.push(q); seg(cur, prev, q); }
+  });
+  const end = () => { if (cur) { cur = null; saveNotes(); updateTools(); } };
+  canvas.addEventListener("pointerup", end); canvas.addEventListener("pointercancel", end);
+  redraw();
+
+  const swatches = [["#f5f1e8", "White"], ["#ffcc4d", "Yellow"], ["#60a5fa", "Blue"], ["#4ade80", "Green"], ["#f87171", "Red"]];
+  const swBtns = swatches.map(([c, name]) => el("button", { type: "button", class: "sw", style: `background:${c}`, "aria-label": `${name} pen`, "aria-pressed": "false",
+    onclick: () => { padColor = c; padTool = "pen"; updateTools(); } }));
+  const eraser = el("button", { type: "button", class: "tool", "aria-pressed": "false", onclick: () => { padTool = padTool === "erase" ? "pen" : "erase"; updateTools(); } }, "Eraser");
+  const undo = el("button", { type: "button", class: "tool", onclick: () => { n.strokes.pop(); redraw(); saveNotes(); updateTools(); } }, "Undo");
+  const clear = el("button", { type: "button", class: "tool", onclick: () => { if (n.strokes.length && confirm("Clear your drawing?")) { n.strokes.length = 0; redraw(); saveNotes(); updateTools(); } } }, "Clear");
+  function updateTools() {
+    swBtns.forEach((b, i) => b.setAttribute("aria-pressed", String(padTool === "pen" && swatches[i][0] === padColor)));
+    eraser.setAttribute("aria-pressed", String(padTool === "erase"));
+    undo.disabled = clear.disabled = !n.strokes.length;
+  }
+  const drawBar = el("div", { class: "padbar" }, ...swBtns, eraser, el("span", { class: "sp" }), undo, clear);
+  const drawPane = el("div", {}, drawBar, canvas);
+
+  // typing
+  const area = el("textarea", { class: "typed", placeholder: "Type your steps here, one per line…", "aria-label": "Typed notes", spellcheck: "false", autocapitalize: "off" });
+  area.value = n.text;
+  area.addEventListener("input", () => { n.text = area.value; saveNotes(); });
+  const typePane = el("div", {}, area);
+
+  // tabs
+  const tabs = ["draw", "type"].map((t) => el("button", { type: "button", role: "tab", "aria-selected": String(padTab === t), onclick: () => { padTab = t; setTab(); } }, t === "draw" ? "Draw" : "Type"));
+  function setTab() {
+    tabs.forEach((b, i) => b.setAttribute("aria-selected", String(padTab === ["draw", "type"][i])));
+    drawPane.hidden = padTab !== "draw"; typePane.hidden = padTab !== "type";
+  }
+  body.append(el("div", { class: "padbar" }, el("div", { class: "seg", role: "tablist", "aria-label": "Notes mode" }, ...tabs)), drawPane, typePane);
+  setTab(); updateTools();
+  toggle.addEventListener("click", () => { padOpen = !padOpen; toggle.setAttribute("aria-expanded", String(padOpen)); body.hidden = !padOpen; });
+  return el("div", { class: "pad" }, toggle, body);
+}
+
 function renderDots() {
   const ul = $("#dots"); ul.innerHTML = "";
   DATA.exercises.forEach((ex, i) => {
@@ -176,6 +279,7 @@ function show() {
   else card.append(el("p", { class: "prompt" }, "What is the value of this expression?"));
   const q = el("div", { class: "q", id: "qtitle", role: "img", "aria-label": ex.aria, tabindex: "-1", html: ex.q });
   card.append(q);
+  card.append(makePad(ex));
 
   const opts = el("div", { class: "options", role: "group", "aria-label": "Answer choices" });
   order.forEach((oi, pos) => {
@@ -263,7 +367,7 @@ function showResults(app) {
 document.addEventListener("keydown", (e) => {
   if (state.done || solved || e.ctrlKey || e.metaKey || e.altKey) return;
   const k = "abcd1234".indexOf(e.key.toLowerCase());
-  if (k < 0 || e.target.closest && e.target.closest("iframe")) return;
+  if (k < 0 || (e.target.closest && e.target.closest("textarea, input, iframe"))) return;
   const oi = order[k % 4];
   if (oi !== undefined) pick(oi);
 });
