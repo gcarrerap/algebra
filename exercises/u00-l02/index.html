@@ -59,6 +59,16 @@
   .frac .top { padding: .04em .25em .2em; border-bottom: .07em solid currentColor; }
   .frac .bot { padding: .2em .25em .04em; }
 
+
+  /* work area (equation editor) */
+  .pad { margin: 0 0 18px; }
+  .padbtn { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 14px; cursor: pointer;
+    background: transparent; color: var(--yellow); border: 2px dashed var(--line); font: 600 16px var(--text); text-align: left; }
+  .padbtn:hover, .padbtn:focus-visible { border-color: var(--yellow); outline: none; }
+  .padbtn .chev { transition: transform .15s; } .padbtn[aria-expanded="true"] .chev { transform: rotate(180deg); }
+  .padbody { margin-top: 10px; }
+  equation-notebook { --eq-panel: #101a2e; --eq-bg: #0b1325; --eq-size: clamp(22px, 5.5vw, 30px); }
+
   .options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   @media (max-width: 520px) { .options { grid-template-columns: 1fr; } }
   .opt {
@@ -74,6 +84,13 @@
   .opt[data-r="right"] .k { background: var(--green); color: var(--bg); }
   .opt:disabled:not([data-r]) { opacity: .45; cursor: default; }
 
+  .answer { display: grid; gap: 10px; }
+  .answer label { font: 600 14px var(--text); color: var(--muted); letter-spacing: .04em; }
+  .answer equation-editor { --eq-panel: #101a2e; --eq-bg: #0b1325; --eq-size: clamp(24px, 6vw, 32px); }
+  .answer .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .answer[data-r="right"] equation-editor { outline: 2px solid var(--green); border-radius: 12px; }
+  .answer[data-r="wrong"] equation-editor { outline: 2px solid var(--red); border-radius: 12px; }
+  .note.warn { border-color: var(--yellow); } .note.warn strong { color: var(--yellow); }
   .fb { margin-top: 18px; }
   .note { border-radius: 14px; padding: 14px 16px; margin: 0 0 14px; border: 1px solid var(--line); background: #101a2e; }
   .note.bad { border-color: var(--red); } .note.good { border-color: var(--green); }
@@ -100,17 +117,19 @@
 </style>
 </head>
 <body>
+<script type="module" src="../../components/equation-editor/equation-editor.js"></script>
+<script src="../../components/answer-check/answer-check.js"></script>
 <main>
   <a class="back" href="../../">← All lessons</a>
   <div class="eyebrow" id="eyebrow"></div>
   <h1>Properties, <span class="y">put to work</span></h1>
   <ol class="dots" id="dots" aria-label="Exercises"></ol>
   <div id="app"></div>
-  <footer>Pick the answer you think is right. A wrong answer shows you the mistake and plays a step-by-step video. Solution videos use an AI-generated voice.</footer>
+  <footer>Open the work area to write your steps with fractions, powers and roots. When you are asked for a value or an expression, type it in the answer box; otherwise pick the answer you think is right. A wrong answer shows you the mistake and plays a step-by-step video. Solution videos use an AI-generated voice.</footer>
 </main>
 
 <script>
-const DATA = {"unit":"0.2","title":"Properties of Operations","setId":"u00-l02","levels":{"1":"Warm-up","2":"Tricky","3":"Challenging","4":"Boss level"},"exercises":[{"id":"ex01","n":1,"level":1,"prompt":"Which property is shown?","q":"7 + 9 = 9 + 7","aria":"7 + 9 = 9 + 7","options":[{"v":"Commutative","ok":true,"why":""},{"v":"Associative","ok":false,"why":"Associative is about grouping with parentheses. There are no parentheses here."},{"v":"Distributive","ok":false,"why":"Distributive needs a number multiplied by a sum, like 3(x + 2)."}]},{"id":"ex02","n":2,"level":1,"prompt":"Which property is shown?","q":"(6 × 5) × 2 = 6 × (5 × 2)","aria":"(6 × 5) × 2 = 6 × (5 × 2)","options":[{"v":"Associative","ok":true,"why":""},{"v":"Commutative","ok":false,"why":"The numbers did not trade places: 6, 5, 2 is the same order on both sides."},{"v":"Distributive","ok":false,"why":"Distributive spreads a multiplication over a sum. Here everything is multiplication."}]},{"id":"ex03","n":3,"level":1,"prompt":"Which property is shown?","q":"4(x + 3) = 4x + 12","aria":"4(x + 3) = 4x + 12","options":[{"v":"Distributive","ok":true,"why":""},{"v":"Commutative","ok":false,"why":"Nothing just traded places: the 4 multiplied each term of a sum."},{"v":"Associative","ok":false,"why":"Associative only moves parentheses. Here they disappear because the 4 multiplied each term."}]},{"id":"ex04","n":4,"level":1,"prompt":"Use the properties to find the value.","q":"25 × 13 × 4","aria":"25 × 13 × 4","options":[{"v":"1300","ok":true,"why":""},{"v":"377","ok":false,"why":"You added 25 and 4 instead of multiplying them."},{"v":"113","ok":false,"why":"You added the 13 instead of multiplying by it."},{"v":"325","ok":false,"why":"You forgot to multiply by 4."}]},{"id":"ex05","n":5,"level":1,"prompt":"Use the distributive property to expand.","q":"5(x + 2)","aria":"5(x + 2)","options":[{"v":"5x + 10","ok":true,"why":""},{"v":"5x + 2","ok":false,"why":"You multiplied only the x by 5. The 2 needs it too."},{"v":"5x + 7","ok":false,"why":"You added 5 + 2 instead of multiplying."},{"v":"x + 10","ok":false,"why":"You multiplied only the 2 by 5."}]},{"id":"ex06","n":6,"level":2,"prompt":"Which property is shown?","q":"x · 8 = 8x","aria":"x · 8 = 8x","options":[{"v":"Commutative","ok":true,"why":""},{"v":"Associative","ok":false,"why":"There is only one multiplication, so there is nothing to regroup."},{"v":"Distributive","ok":false,"why":"There is no sum for the 8 to be spread over."}]},{"id":"ex07","n":7,"level":2,"prompt":"Which property is shown?","q":"3 + (x + 7) = (3 + x) + 7","aria":"3 + (x + 7) = (3 + x) + 7","options":[{"v":"Associative","ok":true,"why":""},{"v":"Commutative","ok":false,"why":"It looks like something moved, but the order is the same: 3, x, 7. Only the parentheses moved."},{"v":"Distributive","ok":false,"why":"Nothing multiplies the parentheses; it's all addition."}]},{"id":"ex08","n":8,"level":2,"prompt":"Use the distributive property to expand.","q":"−3(x + 4)","aria":"−3(x + 4)","options":[{"v":"−3x − 12","ok":true,"why":""},{"v":"−3x + 12","ok":false,"why":"−3 · 4 is −12, not +12. The negative sign goes along."},{"v":"−3x + 4","ok":false,"why":"You multiplied only the x by −3."},{"v":"3x + 12","ok":false,"why":"You dropped the negative sign completely."}]},{"id":"ex09","n":9,"level":2,"prompt":"Use the distributive property to expand.","q":"7(2x − 1)","aria":"7(2x − 1)","options":[{"v":"14x − 7","ok":true,"why":""},{"v":"14x − 1","ok":false,"why":"You multiplied only the 2x by 7."},{"v":"9x − 7","ok":false,"why":"You added 7 + 2 instead of multiplying 7 · 2x."},{"v":"14x + 7","ok":false,"why":"7 · (−1) is −7. The minus sign stays."}]},{"id":"ex10","n":10,"level":2,"prompt":"Use the distributive property to find the value.","q":"8 × 102","aria":"8 × 102","options":[{"v":"816","ok":true,"why":""},{"v":"802","ok":false,"why":"You multiplied only the 100 by 8."},{"v":"1600","ok":false,"why":"You multiplied 100 by 2 instead of adding the parts."},{"v":"96","ok":false,"why":"102 is 100 + 2, not 10 + 2."}]},{"id":"ex11","n":11,"level":3,"prompt":"Use the distributive property to expand.","q":"−(x − 6)","aria":"−(x − 6)","options":[{"v":"−x + 6","ok":true,"why":""},{"v":"−x − 6","ok":false,"why":"(−1) · (−6) is +6. The negative flips both signs."},{"v":"x − 6","ok":false,"why":"You ignored the negative sign in front."},{"v":"x + 6","ok":false,"why":"You flipped the 6 but not the x."}]},{"id":"ex12","n":12,"level":3,"prompt":"Use the distributive property to expand.","q":"2(3x + 4y − 5)","aria":"2(3x + 4y − 5)","options":[{"v":"6x + 8y − 10","ok":true,"why":""},{"v":"6x + 4y − 5","ok":false,"why":"You multiplied only the first term by 2."},{"v":"6x + 8y − 5","ok":false,"why":"The 2 must reach the last term too: 2 · 5 = 10."},{"v":"6x + 8y + 10","ok":false,"why":"2 · (−5) is −10. The minus sign stays."}]},{"id":"ex13","n":13,"level":3,"prompt":"Use the distributive property backwards to find the value.","q":"17 × 6 + 17 × 4","aria":"17 × 6 + 17 × 4","options":[{"v":"170","ok":true,"why":""},{"v":"106","ok":false,"why":"You dropped the second 17."},{"v":"476","ok":false,"why":"You went straight left to right, so the 4 multiplied everything."},{"v":"44","ok":false,"why":"You added instead of multiplying."}]},{"id":"ex14","n":14,"level":3,"prompt":"Which property is shown?","q":"5(2 · x) = (5 · 2)x","aria":"5(2 · x) = (5 · 2)x","options":[{"v":"Associative","ok":true,"why":""},{"v":"Distributive","ok":false,"why":"Distributive needs a sum inside, like 5(2 + x). Here it's 2 · x, a product."},{"v":"Commutative","ok":false,"why":"The order is the same on both sides: 5, 2, x."}]},{"id":"ex15","n":15,"level":3,"prompt":"Use the distributive property to expand.","q":"−4(−2x + 3)","aria":"−4(−2x + 3)","options":[{"v":"8x − 12","ok":true,"why":""},{"v":"−8x − 12","ok":false,"why":"(−4) · (−2x) is +8x: negative times negative is positive."},{"v":"8x + 12","ok":false,"why":"(−4) · 3 is −12, not +12."},{"v":"8x + 3","ok":false,"why":"You multiplied only the first term by −4."}]},{"id":"ex16","n":16,"level":4,"prompt":"Use the properties to find the value.","q":"4 × 37 × 25","aria":"4 × 37 × 25","options":[{"v":"3700","ok":true,"why":""},{"v":"1073","ok":false,"why":"You added 4 and 25 instead of multiplying them."},{"v":"137","ok":false,"why":"You added the 37 instead of multiplying by it."},{"v":"148","ok":false,"why":"You forgot to multiply by 25."}]},{"id":"ex17","n":17,"level":4,"prompt":"Use the distributive property to find the value.","q":"9 × 99 + 9","aria":"9 × 99 + 9","options":[{"v":"900","ok":true,"why":""},{"v":"972","ok":false,"why":"You added 99 + 9 first, but multiplication comes before addition."},{"v":"891","ok":false,"why":"You left out the + 9 at the end."},{"v":"909","ok":false,"why":"Once the last 9 helps make 9 × 100, it is already counted."}]},{"id":"ex18","n":18,"level":4,"prompt":"Use the distributive property to expand.","q":"x(x + 5)","aria":"x(x + 5)","options":[{"v":"x<sup>2</sup> + 5x","ok":true,"why":""},{"v":"x<sup>2</sup> + 5","ok":false,"why":"You multiplied only the first term by x."},{"v":"2x + 5x","ok":false,"why":"x · x is x², not 2x. 2x means x + x."},{"v":"2x + 5","ok":false,"why":"x · x is x², and the 5 must be multiplied by x too."}]},{"id":"ex19","n":19,"level":4,"prompt":"Use the distributive property to expand.","q":"−5(2x − 3y + 1)","aria":"−5(2x − 3y + 1)","options":[{"v":"−10x + 15y − 5","ok":true,"why":""},{"v":"−10x − 15y − 5","ok":false,"why":"(−5) · (−3y) is +15y: negative times negative is positive."},{"v":"−10x − 3y + 1","ok":false,"why":"You multiplied only the first term by −5."},{"v":"−10x + 15y + 1","ok":false,"why":"−5 must reach the last term too: (−5) · 1 = −5."}]},{"id":"ex20","n":20,"level":4,"prompt":"Which property is shown?","q":"(x + 3) · 2 = 2 · (x + 3)","aria":"(x + 3) · 2 = 2 · (x + 3)","options":[{"v":"Commutative","ok":true,"why":""},{"v":"Distributive","ok":false,"why":"Distributing would give 2x + 6. Here the parentheses stay; the 2 just moved to the front."},{"v":"Associative","ok":false,"why":"Associative regroups three or more things. Here two factors just swapped."}]}]};
+const DATA = {"unit":"0.2","title":"Properties of Operations","setId":"u00-l02","levels":{"1":"Warm-up","2":"Tricky","3":"Challenging","4":"Boss level"},"exercises":[{"id":"ex01","n":1,"level":1,"prompt":"Which property is shown?","q":"7 + 9 = 9 + 7","aria":"7 + 9 = 9 + 7","options":[{"v":"Commutative","ok":true,"why":""},{"v":"Associative","ok":false,"why":"Associative is about grouping with parentheses. There are no parentheses here."},{"v":"Distributive","ok":false,"why":"Distributive needs a number multiplied by a sum, like 3(x + 2)."}]},{"id":"ex02","n":2,"level":1,"prompt":"Which property is shown?","q":"(6 × 5) × 2 = 6 × (5 × 2)","aria":"(6 × 5) × 2 = 6 × (5 × 2)","options":[{"v":"Associative","ok":true,"why":""},{"v":"Commutative","ok":false,"why":"The numbers did not trade places: 6, 5, 2 is the same order on both sides."},{"v":"Distributive","ok":false,"why":"Distributive spreads a multiplication over a sum. Here everything is multiplication."}]},{"id":"ex03","n":3,"level":1,"prompt":"Which property is shown?","q":"4(x + 3) = 4x + 12","aria":"4(x + 3) = 4x + 12","options":[{"v":"Distributive","ok":true,"why":""},{"v":"Commutative","ok":false,"why":"Nothing just traded places: the 4 multiplied each term of a sum."},{"v":"Associative","ok":false,"why":"Associative only moves parentheses. Here they disappear because the 4 multiplied each term."}]},{"id":"ex04","n":4,"level":1,"prompt":"Use the properties to find the value.","q":"25 × 13 × 4","aria":"25 × 13 × 4","input":"num","answer":"1300","aHtml":"1300","mistakes":[{"v":"377","why":"You added 25 and 4 instead of multiplying them."},{"v":"113","why":"You added the 13 instead of multiplying by it."},{"v":"325","why":"You forgot to multiply by 4."}]},{"id":"ex05","n":5,"level":1,"prompt":"Use the distributive property to expand.","q":"5(x + 2)","aria":"5(x + 2)","input":"expr","answer":"5x + 10","aHtml":"5x + 10","mistakes":[{"e":"5x + 2","why":"You multiplied only the x by 5. The 2 needs it too."},{"e":"5x + 7","why":"You added 5 + 2 instead of multiplying."},{"e":"x + 10","why":"You multiplied only the 2 by 5."}]},{"id":"ex06","n":6,"level":2,"prompt":"Which property is shown?","q":"x · 8 = 8x","aria":"x · 8 = 8x","options":[{"v":"Commutative","ok":true,"why":""},{"v":"Associative","ok":false,"why":"There is only one multiplication, so there is nothing to regroup."},{"v":"Distributive","ok":false,"why":"There is no sum for the 8 to be spread over."}]},{"id":"ex07","n":7,"level":2,"prompt":"Which property is shown?","q":"3 + (x + 7) = (3 + x) + 7","aria":"3 + (x + 7) = (3 + x) + 7","options":[{"v":"Associative","ok":true,"why":""},{"v":"Commutative","ok":false,"why":"It looks like something moved, but the order is the same: 3, x, 7. Only the parentheses moved."},{"v":"Distributive","ok":false,"why":"Nothing multiplies the parentheses; it's all addition."}]},{"id":"ex08","n":8,"level":2,"prompt":"Use the distributive property to expand.","q":"−3(x + 4)","aria":"−3(x + 4)","input":"expr","answer":"-3x - 12","aHtml":"−3x − 12","mistakes":[{"e":"-3x + 12","why":"−3 · 4 is −12, not +12. The negative sign goes along."},{"e":"-3x + 4","why":"You multiplied only the x by −3."},{"e":"3x + 12","why":"You dropped the negative sign completely."}]},{"id":"ex09","n":9,"level":2,"prompt":"Use the distributive property to expand.","q":"7(2x − 1)","aria":"7(2x − 1)","input":"expr","answer":"14x - 7","aHtml":"14x − 7","mistakes":[{"e":"14x - 1","why":"You multiplied only the 2x by 7."},{"e":"9x - 7","why":"You added 7 + 2 instead of multiplying 7 · 2x."},{"e":"14x + 7","why":"7 · (−1) is −7. The minus sign stays."}]},{"id":"ex10","n":10,"level":2,"prompt":"Use the distributive property to find the value.","q":"8 × 102","aria":"8 × 102","input":"num","answer":"816","aHtml":"816","mistakes":[{"v":"802","why":"You multiplied only the 100 by 8."},{"v":"1600","why":"You multiplied 100 by 2 instead of adding the parts."},{"v":"96","why":"102 is 100 + 2, not 10 + 2."}]},{"id":"ex11","n":11,"level":3,"prompt":"Use the distributive property to expand.","q":"−(x − 6)","aria":"−(x − 6)","input":"expr","answer":"-x + 6","aHtml":"−x + 6","mistakes":[{"e":"-x - 6","why":"(−1) · (−6) is +6. The negative flips both signs."},{"e":"x - 6","why":"You ignored the negative sign in front."},{"e":"x + 6","why":"You flipped the 6 but not the x."}]},{"id":"ex12","n":12,"level":3,"prompt":"Use the distributive property to expand.","q":"2(3x + 4y − 5)","aria":"2(3x + 4y − 5)","input":"expr","answer":"6x + 8y - 10","aHtml":"6x + 8y − 10","mistakes":[{"e":"6x + 4y - 5","why":"You multiplied only the first term by 2."},{"e":"6x + 8y - 5","why":"The 2 must reach the last term too: 2 · 5 = 10."},{"e":"6x + 8y + 10","why":"2 · (−5) is −10. The minus sign stays."}]},{"id":"ex13","n":13,"level":3,"prompt":"Use the distributive property backwards to find the value.","q":"17 × 6 + 17 × 4","aria":"17 × 6 + 17 × 4","input":"num","answer":"170","aHtml":"170","mistakes":[{"v":"106","why":"You dropped the second 17."},{"v":"476","why":"You went straight left to right, so the 4 multiplied everything."},{"v":"44","why":"You added instead of multiplying."}]},{"id":"ex14","n":14,"level":3,"prompt":"Which property is shown?","q":"5(2 · x) = (5 · 2)x","aria":"5(2 · x) = (5 · 2)x","options":[{"v":"Associative","ok":true,"why":""},{"v":"Distributive","ok":false,"why":"Distributive needs a sum inside, like 5(2 + x). Here it's 2 · x, a product."},{"v":"Commutative","ok":false,"why":"The order is the same on both sides: 5, 2, x."}]},{"id":"ex15","n":15,"level":3,"prompt":"Use the distributive property to expand.","q":"−4(−2x + 3)","aria":"−4(−2x + 3)","input":"expr","answer":"8x - 12","aHtml":"8x − 12","mistakes":[{"e":"-8x - 12","why":"(−4) · (−2x) is +8x: negative times negative is positive."},{"e":"8x + 12","why":"(−4) · 3 is −12, not +12."},{"e":"8x + 3","why":"You multiplied only the first term by −4."}]},{"id":"ex16","n":16,"level":4,"prompt":"Use the properties to find the value.","q":"4 × 37 × 25","aria":"4 × 37 × 25","input":"num","answer":"3700","aHtml":"3700","mistakes":[{"v":"1073","why":"You added 4 and 25 instead of multiplying them."},{"v":"137","why":"You added the 37 instead of multiplying by it."},{"v":"148","why":"You forgot to multiply by 25."}]},{"id":"ex17","n":17,"level":4,"prompt":"Use the distributive property to find the value.","q":"9 × 99 + 9","aria":"9 × 99 + 9","input":"num","answer":"900","aHtml":"900","mistakes":[{"v":"972","why":"You added 99 + 9 first, but multiplication comes before addition."},{"v":"891","why":"You left out the + 9 at the end."},{"v":"909","why":"Once the last 9 helps make 9 × 100, it is already counted."}]},{"id":"ex18","n":18,"level":4,"prompt":"Use the distributive property to expand.","q":"x(x + 5)","aria":"x(x + 5)","input":"expr","answer":"x^2 + 5x","aHtml":"x<sup>2</sup> + 5x","mistakes":[{"e":"x^2 + 5","why":"You multiplied only the first term by x."},{"e":"2x + 5x","why":"x · x is x², not 2x. 2x means x + x."},{"e":"2x + 5","why":"x · x is x², and the 5 must be multiplied by x too."}]},{"id":"ex19","n":19,"level":4,"prompt":"Use the distributive property to expand.","q":"−5(2x − 3y + 1)","aria":"−5(2x − 3y + 1)","input":"expr","answer":"-10x + 15y - 5","aHtml":"−10x + 15y − 5","mistakes":[{"e":"-10x - 15y - 5","why":"(−5) · (−3y) is +15y: negative times negative is positive."},{"e":"-10x - 3y + 1","why":"You multiplied only the first term by −5."},{"e":"-10x + 15y + 1","why":"−5 must reach the last term too: (−5) · 1 = −5."}]},{"id":"ex20","n":20,"level":4,"prompt":"Which property is shown?","q":"(x + 3) · 2 = 2 · (x + 3)","aria":"(x + 3) · 2 = 2 · (x + 3)","options":[{"v":"Commutative","ok":true,"why":""},{"v":"Distributive","ok":false,"why":"Distributing would give 2x + 6. Here the parentheses stay; the 2 just moved to the front."},{"v":"Associative","ok":false,"why":"Associative regroups three or more things. Here two factors just swapped."}]}]};
 const KEY = "algebra." + DATA.setId + ".v1";
 const N = DATA.exercises.length;
 const $ = (s) => document.querySelector(s);
@@ -145,6 +164,32 @@ function shuffled(n) {
   return a;
 }
 
+
+// ---- work area: the reusable equation editor (components/equation-editor), one notebook per exercise, kept on this device
+let notes = {};
+try { notes = JSON.parse(localStorage.getItem(KEY + ".work")) || {}; } catch (e) {}
+let saveTimer = 0;
+function flushNotes() { clearTimeout(saveTimer); try { localStorage.setItem(KEY + ".work", JSON.stringify(notes)); } catch (e) {} }
+function saveNotes() { clearTimeout(saveTimer); saveTimer = setTimeout(flushNotes, 300); }
+addEventListener("pagehide", flushNotes);
+document.addEventListener("visibilitychange", () => { if (document.hidden) flushNotes(); });
+let padOpen = false;
+
+function makePad(ex) {
+  const n = notes[ex.id] || (notes[ex.id] = { lines: [""] });
+  const toggle = el("button", { type: "button", class: "padbtn", "aria-expanded": String(padOpen), "aria-controls": "padbody" },
+    el("span", {}, "✏️ Work area — write your steps"), el("span", { class: "chev", "aria-hidden": "true" }, "▾"));
+  const body = el("div", { class: "padbody", id: "padbody" });
+  body.hidden = !padOpen;
+  const nb = document.createElement("equation-notebook");
+  nb.setAttribute("placeholder", "Write a step…");
+  customElements.whenDefined("equation-notebook").then(() => { nb.value = n.lines; });
+  nb.addEventListener("input", () => { n.lines = nb.value; saveNotes(); });
+  body.append(nb);
+  toggle.addEventListener("click", () => { padOpen = !padOpen; toggle.setAttribute("aria-expanded", String(padOpen)); body.hidden = !padOpen; });
+  return el("div", { class: "pad" }, toggle, body);
+}
+
 function renderDots() {
   const ul = $("#dots"); ul.innerHTML = "";
   DATA.exercises.forEach((ex, i) => {
@@ -165,7 +210,7 @@ function show() {
   $("#eyebrow").textContent = `Unit ${DATA.unit.split(".")[0]} · Lesson ${DATA.unit.split(".")[1]} · Practice`;
   if (state.done) return showResults(app);
   const ex = DATA.exercises[state.i];
-  order = shuffled(ex.options.length);
+  order = ex.options ? shuffled(ex.options.length) : [];
   wrongPicks = []; solved = false; videoOpen = false;
 
   const card = el("section", { class: "card", "aria-labelledby": "qtitle" });
@@ -176,7 +221,15 @@ function show() {
   else card.append(el("p", { class: "prompt" }, "What is the value of this expression?"));
   const q = el("div", { class: "q", id: "qtitle", role: "img", "aria-label": ex.aria, tabindex: "-1", html: ex.q });
   card.append(q);
+  card.append(makePad(ex));
 
+  if (ex.input) {
+    card.append(makeAnswer(ex));
+    card.append(el("div", { class: "fb", id: "fb", "aria-live": "polite" }));
+    app.append(card);
+    q.focus({ preventScroll: true });
+    return;
+  }
   const opts = el("div", { class: "options", role: "group", "aria-label": "Answer choices" });
   order.forEach((oi, pos) => {
     const o = ex.options[oi];
@@ -201,7 +254,7 @@ function pick(oi) {
     document.querySelectorAll(".opt").forEach((b) => { b.disabled = true; });
     if (!state.results[state.i]) state.results[state.i] = wrongPicks.length ? "retry" : "first";
     save(); renderDots();
-    fb.innerHTML = "";
+    fb.innerHTML = ""; videoOpen = false;
     fb.append(el("div", { class: "note good" },
       el("strong", {}, wrongPicks.length ? "Right — and now you know why." : "Right on the first try!"),
       state.i < N - 1 ? "Ready for the next one?" : "That was the last one."));
@@ -213,12 +266,69 @@ function pick(oi) {
     wrongPicks.push(oi);
     btn.dataset.r = "wrong"; btn.disabled = true;
     if (!state.results[state.i]) { state.results[state.i] = "retry"; save(); renderDots(); }
-    fb.innerHTML = "";
+    fb.innerHTML = ""; videoOpen = false;
     fb.append(el("div", { class: "note bad", role: "status" }, el("strong", {}, "Not quite."), o.why));
     showVideo(true);
     fb.append(el("p", { class: "hint" }, "Watch how it is solved, then pick again."));
     fb.scrollIntoView({ behavior: "smooth", block: "nearest" });
   }
+}
+
+// ---- typed answers ("find the value" and "expand"): no options, an exact check (components/answer-check)
+let tries = 0, lastWrong = "";
+function makeAnswer(ex) {
+  tries = 0; lastWrong = "";
+  const ed = document.createElement("equation-editor");
+  ed.id = "ans";
+  ed.setAttribute("placeholder", ex.input === "num" ? "Type a number" : "Type the expression");
+  ed.setAttribute("label", "Your answer");
+  ed.addEventListener("equation-enter", check);
+  const hint = ex.input === "num" ? "One number: 17, −5, a fraction like 3/4, or a decimal like 0.75."
+    : "Write it with no parentheses and like terms combined, e.g. 3x − 12. Use ^ for powers: x^2.";
+  return el("div", { class: "answer", id: "answer" },
+    el("label", { for: "ans" }, "Your answer"), ed,
+    el("p", { class: "hint", style: "margin:0" }, hint),
+    el("div", { class: "row" }, el("button", { type: "button", class: "btn", id: "check", onclick: check }, "Check")));
+}
+
+function check() {
+  if (solved) return;
+  const ex = DATA.exercises[state.i];
+  const ed = $("#ans"), fb = $("#fb"), box = $("#answer");
+  const typed = ed.isEmpty ? "" : ed.getValue("ascii-math");
+  const r = ex.input === "num" ? AnswerCheck.number(typed, ex.answer) : AnswerCheck.expression(typed, ex.answer);
+  fb.innerHTML = ""; videoOpen = false;
+  if (r.error) { fb.append(el("div", { class: "note warn", role: "status" }, el("strong", {}, "I can't check that yet."), r.error)); return; }
+  if (ex.input === "expr" && r.equal && !r.expanded) {
+    fb.append(el("div", { class: "note warn", role: "status" }, el("strong", {}, "Equal — but not finished."),
+      "Write it with no parentheses and combine like terms."));
+    return;
+  }
+  if (r.ok) {
+    solved = true; box.dataset.r = "right";
+    $("#check").disabled = true;
+    if (!state.results[state.i]) state.results[state.i] = tries ? "retry" : "first";
+    save(); renderDots();
+    fb.append(el("div", { class: "note good" },
+      el("strong", {}, tries ? "Right — and now you know why." : "Right on the first try!"),
+      el("span", { html: `The answer is <b>${ex.aHtml}</b>. ` }), state.i < N - 1 ? "Ready for the next one?" : "That was the last one."));
+    if (!videoOpen) fb.append(el("button", { type: "button", class: "link", onclick: (e) => { e.target.remove(); showVideo(false); } }, "Watch the step-by-step solution"));
+    fb.append(el("div", { class: "actions" },
+      el("button", { type: "button", class: "btn", id: "next", onclick: next }, state.i < N - 1 ? "Next exercise →" : "See my results")));
+    $("#next").focus({ preventScroll: false });
+    return;
+  }
+  box.dataset.r = "wrong";
+  if (typed !== lastWrong) tries++;
+  lastWrong = typed;
+  if (!state.results[state.i]) { state.results[state.i] = "retry"; save(); renderDots(); }
+  const same = ex.input === "num" ? (m) => AnswerCheck.sameNumber(typed, m.v) : (m) => AnswerCheck.sameExpression(typed, m.e);
+  const known = (ex.mistakes || []).find(same);
+  fb.append(el("div", { class: "note bad", role: "status" }, el("strong", {}, "Not quite."),
+    known ? known.why : (ex.input === "num" ? "That is not the value. Watch the solution to find where it went off." : "That is not equal to the answer. Watch the solution to find where it went off.")));
+  showVideo(true);
+  fb.append(el("p", { class: "hint" }, "Watch how it is solved, then fix your answer and check again."));
+  fb.scrollIntoView({ behavior: "smooth", block: "nearest" });
 }
 
 function showVideo(autoplay) {
@@ -261,9 +371,9 @@ function showResults(app) {
 }
 
 document.addEventListener("keydown", (e) => {
-  if (state.done || solved || e.ctrlKey || e.metaKey || e.altKey) return;
+  if (state.done || solved || DATA.exercises[state.i].input || e.ctrlKey || e.metaKey || e.altKey) return;
   const k = "abcd1234".indexOf(e.key.toLowerCase());
-  if (k < 0 || e.target.closest && e.target.closest("iframe")) return;
+  if (k < 0 || (e.target.closest && e.target.closest("textarea, input, math-field, equation-notebook, iframe"))) return;
   const oi = order[k % 4];
   if (oi !== undefined) pick(oi);
 });

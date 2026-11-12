@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Build a practice set: check every number with code, then generate the videos' scripts + pages
-and the multiple-choice page.
+and the practice page.
 
     python3 tools/build_exercises.py exercises/u00-l01            # validate + generate everything
     python3 tools/build_exercises.py exercises/u00-l01 --check    # validate only (writes nothing)
@@ -11,7 +11,9 @@ Source of truth: <set>/exercises.json (see its _notes). For each exercise this s
   * evaluates every wrong option, so each distractor is the real result of its named mistake;
   * writes videos/<set-id>-exNN/script.json and video.html (narration still comes from
     plan_audio.py / assemble_audio.py, see docs/audio-production.md);
-  * writes <set>/index.html from tools/quiz_template.html (options shuffled in the browser).
+  * writes <set>/index.html from tools/quiz_template.html. "num" and "expr" exercises are typed
+    (checked exactly in the browser by components/answer-check; the wrong options become the
+    known mistakes that get named feedback); other kinds are picked from shuffled options.
 """
 import argparse
 import json
@@ -536,9 +538,28 @@ def name_video(data, ex, num, set_id):
 
 
 # ---------------------------------------------------------------- quiz page
+def plain_math(expr):
+    """An expression in the plain form components/answer-check reads: * / - ( ) ^, implied products."""
+    s = expr.replace("⟨", "").replace("⟩", "")
+    s = re.sub(r"\[\[(.+?) \| (.+?)\]\]", r"((\1)/(\2))", s)
+    s = s.replace("×", "*").replace("·", "*").replace("÷", "/").replace("−", "-")
+    return s.replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+
+
 def quiz_data(data):
     out = []
     for k, ex in enumerate(data["exercises"], 1):
+        base = {"id": ex["id"], "n": k, "level": ex["level"], "prompt": ex.get("prompt", ""),
+                "q": markup(ex["q"]), "aria": plain(ex["q"]).replace("^", " to the power of ")}
+        # "find the value" and "expand": the student types the answer (docs/course-design.md)
+        if ex["kind"] == "num":
+            out.append({**base, "input": "num", "answer": str(ex["_answer"]), "aHtml": money(ex["_answer"]),
+                        "mistakes": [{"v": str(w["_value"]), "why": w["why"]} for w in ex["wrong"]]})
+            continue
+        if ex["kind"] == "expr":
+            out.append({**base, "input": "expr", "answer": plain_math(ex["a"]), "aHtml": markup(ex["a"]),
+                        "mistakes": [{"e": plain_math(w["e"]), "why": w["why"]} for w in ex["wrong"]]})
+            continue
         if ex["kind"] == "num":
             opts = [{"v": money(ex["_answer"]), "ok": True, "why": ""}]
             opts += [{"v": money(w["_value"]), "ok": False, "why": w["why"]} for w in ex["wrong"]]
@@ -548,9 +569,7 @@ def quiz_data(data):
         else:
             opts = [{"v": ex["a"], "ok": True, "why": ""}]
             opts += [{"v": w["a"], "ok": False, "why": w["why"]} for w in ex["wrong"]]
-        out.append({"id": ex["id"], "n": k, "level": ex["level"], "prompt": ex.get("prompt", ""),
-                    "q": markup(ex["q"]), "aria": plain(ex["q"]).replace("^", " to the power of "),
-                    "options": opts})
+        out.append({**base, "options": opts})
     return out
 
 

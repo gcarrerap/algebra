@@ -144,7 +144,6 @@ What already exists and does not follow these rules yet:
 
 | Rule | Today |
 |---|---|
-| Find-the-value is typed, not multiple choice | 0.1 and 0.2 practice sets are multiple choice (`kind: num` shows options). |
 | Single choice, multiple select, matching | Only single choice exists. |
 | Unit exam with question bank, ≥90% to unlock | No exams, no question banks, no locking. |
 | Own exercise set per learning block | 0.2's two subtopics share one practice set. |

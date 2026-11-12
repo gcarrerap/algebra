@@ -1,6 +1,6 @@
 # Practice sets
 
-Each lesson can have a multiple-choice practice set. The first one is
+Each lesson can have a practice set. The first one is
 [`exercises/u00-l01/`](../exercises/u00-l01/) (lesson 0.1, order of operations and signed numbers):
 20 exercises in four levels (Warm-up, Tricky, Challenging, Boss level).
 
@@ -17,10 +17,17 @@ Property chips: **COMM blue · ASSOC purple · DIST yellow · CALC green · REWR
 
 How it behaves:
 
-- Options are shuffled every time an exercise is shown.
-- Every wrong option is the real result of one named mistake (adding first, dropping a sign,
-  reading `−3²` as `(−3)²`…). Choosing it says which mistake it was and plays that exercise's
-  step-by-step video; the student can then pick again.
+- **Typed answers** (`num` and `expr`): there are no options. The student types the answer in an
+  `<equation-editor>` and it is checked exactly by
+  [`components/answer-check/`](../components/answer-check/answer-check.js): a number must be one
+  number (`17`, `−5`, `3/4`, `0.75` are read exactly, so `6/8 = 3/4`); an expression must equal the
+  answer at the six test points **and** be finished (no parentheses, like terms combined). Something
+  equal but unfinished, or unreadable, gets a hint and does not count as a try.
+- The three `wrong` entries of a typed exercise are its **known mistakes**: typing one of their
+  values names the mistake. Any other wrong value gets a general message. Either way the
+  step-by-step video plays and the student can fix the answer.
+- **Picked answers** (`name`): options are shuffled every time; every wrong option is the result of
+  one named mistake, and choosing it says which and plays the video; the student can pick again.
 - The score counts exercises right on the first try; progress is kept in the browser.
 
 ## Files

@@ -84,6 +84,13 @@
   .opt[data-r="right"] .k { background: var(--green); color: var(--bg); }
   .opt:disabled:not([data-r]) { opacity: .45; cursor: default; }
 
+  .answer { display: grid; gap: 10px; }
+  .answer label { font: 600 14px var(--text); color: var(--muted); letter-spacing: .04em; }
+  .answer equation-editor { --eq-panel: #101a2e; --eq-bg: #0b1325; --eq-size: clamp(24px, 6vw, 32px); }
+  .answer .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .answer[data-r="right"] equation-editor { outline: 2px solid var(--green); border-radius: 12px; }
+  .answer[data-r="wrong"] equation-editor { outline: 2px solid var(--red); border-radius: 12px; }
+  .note.warn { border-color: var(--yellow); } .note.warn strong { color: var(--yellow); }
   .fb { margin-top: 18px; }
   .note { border-radius: 14px; padding: 14px 16px; margin: 0 0 14px; border: 1px solid var(--line); background: #101a2e; }
   .note.bad { border-color: var(--red); } .note.good { border-color: var(--green); }
@@ -111,17 +118,18 @@
 </head>
 <body>
 <script type="module" src="../../components/equation-editor/equation-editor.js"></script>
+<script src="../../components/answer-check/answer-check.js"></script>
 <main>
   <a class="back" href="../../">← All lessons</a>
   <div class="eyebrow" id="eyebrow"></div>
   <h1>Order of operations, <span class="y">with signs</span></h1>
   <ol class="dots" id="dots" aria-label="Exercises"></ol>
   <div id="app"></div>
-  <footer>Open the work area to write your steps with fractions, powers and roots. Pick the answer you think is right: a wrong answer shows you the mistake and plays a step-by-step video. Solution videos use an AI-generated voice.</footer>
+  <footer>Open the work area to write your steps with fractions, powers and roots. When you are asked for a value or an expression, type it in the answer box; otherwise pick the answer you think is right. A wrong answer shows you the mistake and plays a step-by-step video. Solution videos use an AI-generated voice.</footer>
 </main>
 
 <script>
-const DATA = {"unit":"0.1","title":"Order of Operations and Signed Numbers","setId":"u00-l01","levels":{"1":"Warm-up","2":"Tricky","3":"Challenging","4":"Boss level"},"exercises":[{"id":"ex01","n":1,"level":1,"prompt":"","q":"8 + 6 ÷ 2 × 3","aria":"8 + 6 ÷ 2 × 3","options":[{"v":"17","ok":true,"why":""},{"v":"21","ok":false,"why":"You added 8 + 6 first, but addition comes last."},{"v":"9","ok":false,"why":"You multiplied 2 × 3 before dividing. Same level means left to right."},{"v":"33","ok":false,"why":"You added 8 + 3 before the last multiplication."}]},{"id":"ex02","n":2,"level":1,"prompt":"","q":"20 − 4 × 3 + 2","aria":"20 − 4 × 3 + 2","options":[{"v":"10","ok":true,"why":""},{"v":"50","ok":false,"why":"You worked straight left to right and ignored that multiplication comes first."},{"v":"6","ok":false,"why":"You turned the + 2 into − 2."},{"v":"0","ok":false,"why":"You added 3 + 2 first, but there are no parentheses."}]},{"id":"ex03","n":3,"level":1,"prompt":"","q":"3 × 2<sup>3</sup> − 4<sup>2</sup>","aria":"3 × 2 to the power of 3 − 4 to the power of 2","options":[{"v":"8","ok":true,"why":""},{"v":"200","ok":false,"why":"You multiplied 3 × 2 before applying the exponent."},{"v":"10","ok":false,"why":"You multiplied by the exponent instead of using it as a power."},{"v":"400","ok":false,"why":"You squared the whole expression instead of only the 4."}]},{"id":"ex04","n":4,"level":2,"prompt":"","q":"(−3)<sup>2</sup> − 3<sup>2</sup>","aria":"(−3) to the power of 2 − 3 to the power of 2","options":[{"v":"0","ok":true,"why":""},{"v":"−18","ok":false,"why":"You read (−3)² as −3², which is −9."},{"v":"18","ok":false,"why":"You turned the minus between the terms into a plus."},{"v":"36","ok":false,"why":"You subtracted first, then squared."}]},{"id":"ex05","n":5,"level":2,"prompt":"","q":"−5 − (−2) × 4","aria":"−5 − (−2) × 4","options":[{"v":"3","ok":true,"why":""},{"v":"−12","ok":false,"why":"You subtracted before multiplying."},{"v":"−13","ok":false,"why":"You dropped the negative sign on the −2."},{"v":"1","ok":false,"why":"You added the 4 instead of multiplying by it."}]},{"id":"ex06","n":6,"level":2,"prompt":"","q":"12 ÷ (−3) + 6 × (−2)","aria":"12 ÷ (−3) + 6 × (−2)","options":[{"v":"−16","ok":true,"why":""},{"v":"8","ok":false,"why":"You dropped the negative sign on the −2."},{"v":"−4","ok":false,"why":"You added before multiplying."},{"v":"−8","ok":false,"why":"You added −3 + 6 first, as if it were in parentheses."}]},{"id":"ex07","n":7,"level":2,"prompt":"","q":"3 + 4 × (2 − 5)<sup>2</sup>","aria":"3 + 4 × (2 − 5) to the power of 2","options":[{"v":"39","ok":true,"why":""},{"v":"63","ok":false,"why":"You added 3 + 4 first."},{"v":"−89","ok":false,"why":"You squared only the 5."},{"v":"−21","ok":false,"why":"You doubled instead of squaring."}]},{"id":"ex08","n":8,"level":2,"prompt":"","q":"−2<sup>4</sup> + (−2)<sup>4</sup>","aria":"−2 to the power of 4 + (−2) to the power of 4","options":[{"v":"0","ok":true,"why":""},{"v":"32","ok":false,"why":"You read −2⁴ as (−2)⁴."},{"v":"−32","ok":false,"why":"You turned the plus into a minus."},{"v":"8","ok":false,"why":"You multiplied 2 × 4 instead of raising 2 to the fourth power."}]},{"id":"ex09","n":9,"level":3,"prompt":"","q":"18 − 2 × 3<sup>2</sup> ÷ 6","aria":"18 − 2 × 3 to the power of 2 ÷ 6","options":[{"v":"15","ok":true,"why":""},{"v":"24","ok":false,"why":"You subtracted 18 − 2 first."},{"v":"16","ok":false,"why":"You doubled the 3 instead of squaring it."},{"v":"12","ok":false,"why":"You multiplied 2 × 3 before squaring."}]},{"id":"ex10","n":10,"level":3,"prompt":"","q":"(6 + 2 × 5) ÷ 2<sup>2</sup> − 1","aria":"(6 + 2 × 5) ÷ 2 to the power of 2 − 1","options":[{"v":"3","ok":true,"why":""},{"v":"9","ok":false,"why":"You added inside the parentheses before multiplying."},{"v":"15","ok":false,"why":"You doubled instead of squaring."},{"v":"8","ok":false,"why":"You pulled the −1 into the exponent."}]},{"id":"ex11","n":11,"level":3,"prompt":"","q":"<span class=\"frac\"><span class=\"top\">18 − 3 × 4</span><span class=\"bot\">2 + 1</span></span>","aria":"(18 − 3 × 4) over (2 + 1)","options":[{"v":"2","ok":true,"why":""},{"v":"13","ok":false,"why":"You ignored the fraction bar, so nothing was grouped."},{"v":"20","ok":false,"why":"You subtracted before multiplying on top."},{"v":"14","ok":false,"why":"You divided only the 12 by the bottom and left the 18 outside."}]},{"id":"ex12","n":12,"level":3,"prompt":"Evaluate the expression when x = −4.","q":"x<sup>2</sup> − 3x + 2","aria":"x to the power of 2 − 3x + 2","options":[{"v":"30","ok":true,"why":""},{"v":"−2","ok":false,"why":"You wrote −4² and got −16 instead of (−4)² = 16."},{"v":"6","ok":false,"why":"You lost the negative sign on x in the 3x term."},{"v":"11","ok":false,"why":"You read 3x as 3 − 4."}]},{"id":"ex13","n":13,"level":3,"prompt":"","q":"−3(−2 + 5) − 4(1 − 3)","aria":"−3(−2 + 5) − 4(1 − 3)","options":[{"v":"−1","ok":true,"why":""},{"v":"19","ok":false,"why":"You multiplied −3 by only the first term inside."},{"v":"−17","ok":false,"why":"You changed the minus before the 4 into a plus."},{"v":"−16","ok":false,"why":"You multiplied 4 by only the first term inside."}]},{"id":"ex14","n":14,"level":3,"prompt":"","q":"6 − 2|3 − 8|","aria":"6 − 2|3 − 8|","options":[{"v":"−4","ok":true,"why":""},{"v":"20","ok":false,"why":"You subtracted 6 − 2 first."},{"v":"16","ok":false,"why":"You ignored the absolute value bars."},{"v":"−8","ok":false,"why":"You put the bars around only the 3."}]},{"id":"ex15","n":15,"level":4,"prompt":"","q":"−4<sup>2</sup> ÷ (−2)<sup>2</sup> + 6 × (−1)<sup>3</sup>","aria":"−4 to the power of 2 ÷ (−2) to the power of 2 + 6 × (−1) to the power of 3","options":[{"v":"−10","ok":true,"why":""},{"v":"−2","ok":false,"why":"You read −4² as (−4)²."},{"v":"−22","ok":false,"why":"You multiplied by 3 instead of cubing."},{"v":"2","ok":false,"why":"You subtracted instead of adding."}]},{"id":"ex16","n":16,"level":4,"prompt":"","q":"3[2 + 4(5 − 3<sup>2</sup>)] − 7","aria":"3[2 + 4(5 − 3 to the power of 2)] − 7","options":[{"v":"−49","ok":true,"why":""},{"v":"47","ok":false,"why":"You squared (5 − 3) instead of only the 3."},{"v":"−79","ok":false,"why":"You split the bracket into separate pieces."},{"v":"−17","ok":false,"why":"You multiplied the 3 by only the 2."}]},{"id":"ex17","n":17,"level":4,"prompt":"","q":"(−6)<sup>2</sup> − 4(2)(−3)","aria":"(−6) to the power of 2 − 4(2)(−3)","options":[{"v":"60","ok":true,"why":""},{"v":"−12","ok":false,"why":"You read (−6)² as −6², which is −36."},{"v":"12","ok":false,"why":"You lost the negative sign on the −3."},{"v":"−192","ok":false,"why":"You subtracted 36 − 4 before multiplying."}]},{"id":"ex18","n":18,"level":4,"prompt":"","q":"<span class=\"frac\"><span class=\"top\">−8 − 4 × (−1)</span><span class=\"bot\">2 − 6</span></span>","aria":"(−8 − 4 × (−1)) over (2 − 6)","options":[{"v":"1","ok":true,"why":""},{"v":"−3","ok":false,"why":"You subtracted before multiplying on top."},{"v":"−12","ok":false,"why":"You ignored the fraction bar, so nothing was grouped."},{"v":"3","ok":false,"why":"You dropped the negative sign on the −1."}]},{"id":"ex19","n":19,"level":4,"prompt":"Evaluate the expression when x = −3.","q":"5 − 2x<sup>2</sup> + 3x","aria":"5 − 2x to the power of 2 + 3x","options":[{"v":"−22","ok":true,"why":""},{"v":"−40","ok":false,"why":"You squared 2x instead of only x."},{"v":"−4","ok":false,"why":"You changed +3x into −3x."},{"v":"14","ok":false,"why":"You changed −2x² into +2x²."}]},{"id":"ex20","n":20,"level":4,"prompt":"","q":"{4 − [2 − (−3)<sup>2</sup>]} × 2 − (−1)<sup>3</sup> × 6 ÷ 3","aria":"{4 − [2 − (−3) to the power of 2]} × 2 − (−1) to the power of 3 × 6 ÷ 3","options":[{"v":"24","ok":true,"why":""},{"v":"−40","ok":false,"why":"You squared the whole bracket instead of only −3."},{"v":"−12","ok":false,"why":"You removed the brackets without changing the signs."},{"v":"20","ok":false,"why":"You turned the last minus into a plus."}]}]};
+const DATA = {"unit":"0.1","title":"Order of Operations and Signed Numbers","setId":"u00-l01","levels":{"1":"Warm-up","2":"Tricky","3":"Challenging","4":"Boss level"},"exercises":[{"id":"ex01","n":1,"level":1,"prompt":"","q":"8 + 6 ÷ 2 × 3","aria":"8 + 6 ÷ 2 × 3","input":"num","answer":"17","aHtml":"17","mistakes":[{"v":"21","why":"You added 8 + 6 first, but addition comes last."},{"v":"9","why":"You multiplied 2 × 3 before dividing. Same level means left to right."},{"v":"33","why":"You added 8 + 3 before the last multiplication."}]},{"id":"ex02","n":2,"level":1,"prompt":"","q":"20 − 4 × 3 + 2","aria":"20 − 4 × 3 + 2","input":"num","answer":"10","aHtml":"10","mistakes":[{"v":"50","why":"You worked straight left to right and ignored that multiplication comes first."},{"v":"6","why":"You turned the + 2 into − 2."},{"v":"0","why":"You added 3 + 2 first, but there are no parentheses."}]},{"id":"ex03","n":3,"level":1,"prompt":"","q":"3 × 2<sup>3</sup> − 4<sup>2</sup>","aria":"3 × 2 to the power of 3 − 4 to the power of 2","input":"num","answer":"8","aHtml":"8","mistakes":[{"v":"200","why":"You multiplied 3 × 2 before applying the exponent."},{"v":"10","why":"You multiplied by the exponent instead of using it as a power."},{"v":"400","why":"You squared the whole expression instead of only the 4."}]},{"id":"ex04","n":4,"level":2,"prompt":"","q":"(−3)<sup>2</sup> − 3<sup>2</sup>","aria":"(−3) to the power of 2 − 3 to the power of 2","input":"num","answer":"0","aHtml":"0","mistakes":[{"v":"-18","why":"You read (−3)² as −3², which is −9."},{"v":"18","why":"You turned the minus between the terms into a plus."},{"v":"36","why":"You subtracted first, then squared."}]},{"id":"ex05","n":5,"level":2,"prompt":"","q":"−5 − (−2) × 4","aria":"−5 − (−2) × 4","input":"num","answer":"3","aHtml":"3","mistakes":[{"v":"-12","why":"You subtracted before multiplying."},{"v":"-13","why":"You dropped the negative sign on the −2."},{"v":"1","why":"You added the 4 instead of multiplying by it."}]},{"id":"ex06","n":6,"level":2,"prompt":"","q":"12 ÷ (−3) + 6 × (−2)","aria":"12 ÷ (−3) + 6 × (−2)","input":"num","answer":"-16","aHtml":"−16","mistakes":[{"v":"8","why":"You dropped the negative sign on the −2."},{"v":"-4","why":"You added before multiplying."},{"v":"-8","why":"You added −3 + 6 first, as if it were in parentheses."}]},{"id":"ex07","n":7,"level":2,"prompt":"","q":"3 + 4 × (2 − 5)<sup>2</sup>","aria":"3 + 4 × (2 − 5) to the power of 2","input":"num","answer":"39","aHtml":"39","mistakes":[{"v":"63","why":"You added 3 + 4 first."},{"v":"-89","why":"You squared only the 5."},{"v":"-21","why":"You doubled instead of squaring."}]},{"id":"ex08","n":8,"level":2,"prompt":"","q":"−2<sup>4</sup> + (−2)<sup>4</sup>","aria":"−2 to the power of 4 + (−2) to the power of 4","input":"num","answer":"0","aHtml":"0","mistakes":[{"v":"32","why":"You read −2⁴ as (−2)⁴."},{"v":"-32","why":"You turned the plus into a minus."},{"v":"8","why":"You multiplied 2 × 4 instead of raising 2 to the fourth power."}]},{"id":"ex09","n":9,"level":3,"prompt":"","q":"18 − 2 × 3<sup>2</sup> ÷ 6","aria":"18 − 2 × 3 to the power of 2 ÷ 6","input":"num","answer":"15","aHtml":"15","mistakes":[{"v":"24","why":"You subtracted 18 − 2 first."},{"v":"16","why":"You doubled the 3 instead of squaring it."},{"v":"12","why":"You multiplied 2 × 3 before squaring."}]},{"id":"ex10","n":10,"level":3,"prompt":"","q":"(6 + 2 × 5) ÷ 2<sup>2</sup> − 1","aria":"(6 + 2 × 5) ÷ 2 to the power of 2 − 1","input":"num","answer":"3","aHtml":"3","mistakes":[{"v":"9","why":"You added inside the parentheses before multiplying."},{"v":"15","why":"You doubled instead of squaring."},{"v":"8","why":"You pulled the −1 into the exponent."}]},{"id":"ex11","n":11,"level":3,"prompt":"","q":"<span class=\"frac\"><span class=\"top\">18 − 3 × 4</span><span class=\"bot\">2 + 1</span></span>","aria":"(18 − 3 × 4) over (2 + 1)","input":"num","answer":"2","aHtml":"2","mistakes":[{"v":"13","why":"You ignored the fraction bar, so nothing was grouped."},{"v":"20","why":"You subtracted before multiplying on top."},{"v":"14","why":"You divided only the 12 by the bottom and left the 18 outside."}]},{"id":"ex12","n":12,"level":3,"prompt":"Evaluate the expression when x = −4.","q":"x<sup>2</sup> − 3x + 2","aria":"x to the power of 2 − 3x + 2","input":"num","answer":"30","aHtml":"30","mistakes":[{"v":"-2","why":"You wrote −4² and got −16 instead of (−4)² = 16."},{"v":"6","why":"You lost the negative sign on x in the 3x term."},{"v":"11","why":"You read 3x as 3 − 4."}]},{"id":"ex13","n":13,"level":3,"prompt":"","q":"−3(−2 + 5) − 4(1 − 3)","aria":"−3(−2 + 5) − 4(1 − 3)","input":"num","answer":"-1","aHtml":"−1","mistakes":[{"v":"19","why":"You multiplied −3 by only the first term inside."},{"v":"-17","why":"You changed the minus before the 4 into a plus."},{"v":"-16","why":"You multiplied 4 by only the first term inside."}]},{"id":"ex14","n":14,"level":3,"prompt":"","q":"6 − 2|3 − 8|","aria":"6 − 2|3 − 8|","input":"num","answer":"-4","aHtml":"−4","mistakes":[{"v":"20","why":"You subtracted 6 − 2 first."},{"v":"16","why":"You ignored the absolute value bars."},{"v":"-8","why":"You put the bars around only the 3."}]},{"id":"ex15","n":15,"level":4,"prompt":"","q":"−4<sup>2</sup> ÷ (−2)<sup>2</sup> + 6 × (−1)<sup>3</sup>","aria":"−4 to the power of 2 ÷ (−2) to the power of 2 + 6 × (−1) to the power of 3","input":"num","answer":"-10","aHtml":"−10","mistakes":[{"v":"-2","why":"You read −4² as (−4)²."},{"v":"-22","why":"You multiplied by 3 instead of cubing."},{"v":"2","why":"You subtracted instead of adding."}]},{"id":"ex16","n":16,"level":4,"prompt":"","q":"3[2 + 4(5 − 3<sup>2</sup>)] − 7","aria":"3[2 + 4(5 − 3 to the power of 2)] − 7","input":"num","answer":"-49","aHtml":"−49","mistakes":[{"v":"47","why":"You squared (5 − 3) instead of only the 3."},{"v":"-79","why":"You split the bracket into separate pieces."},{"v":"-17","why":"You multiplied the 3 by only the 2."}]},{"id":"ex17","n":17,"level":4,"prompt":"","q":"(−6)<sup>2</sup> − 4(2)(−3)","aria":"(−6) to the power of 2 − 4(2)(−3)","input":"num","answer":"60","aHtml":"60","mistakes":[{"v":"-12","why":"You read (−6)² as −6², which is −36."},{"v":"12","why":"You lost the negative sign on the −3."},{"v":"-192","why":"You subtracted 36 − 4 before multiplying."}]},{"id":"ex18","n":18,"level":4,"prompt":"","q":"<span class=\"frac\"><span class=\"top\">−8 − 4 × (−1)</span><span class=\"bot\">2 − 6</span></span>","aria":"(−8 − 4 × (−1)) over (2 − 6)","input":"num","answer":"1","aHtml":"1","mistakes":[{"v":"-3","why":"You subtracted before multiplying on top."},{"v":"-12","why":"You ignored the fraction bar, so nothing was grouped."},{"v":"3","why":"You dropped the negative sign on the −1."}]},{"id":"ex19","n":19,"level":4,"prompt":"Evaluate the expression when x = −3.","q":"5 − 2x<sup>2</sup> + 3x","aria":"5 − 2x to the power of 2 + 3x","input":"num","answer":"-22","aHtml":"−22","mistakes":[{"v":"-40","why":"You squared 2x instead of only x."},{"v":"-4","why":"You changed +3x into −3x."},{"v":"14","why":"You changed −2x² into +2x²."}]},{"id":"ex20","n":20,"level":4,"prompt":"","q":"{4 − [2 − (−3)<sup>2</sup>]} × 2 − (−1)<sup>3</sup> × 6 ÷ 3","aria":"{4 − [2 − (−3) to the power of 2]} × 2 − (−1) to the power of 3 × 6 ÷ 3","input":"num","answer":"24","aHtml":"24","mistakes":[{"v":"-40","why":"You squared the whole bracket instead of only −3."},{"v":"-12","why":"You removed the brackets without changing the signs."},{"v":"20","why":"You turned the last minus into a plus."}]}]};
 const KEY = "algebra." + DATA.setId + ".v1";
 const N = DATA.exercises.length;
 const $ = (s) => document.querySelector(s);
@@ -202,7 +210,7 @@ function show() {
   $("#eyebrow").textContent = `Unit ${DATA.unit.split(".")[0]} · Lesson ${DATA.unit.split(".")[1]} · Practice`;
   if (state.done) return showResults(app);
   const ex = DATA.exercises[state.i];
-  order = shuffled(ex.options.length);
+  order = ex.options ? shuffled(ex.options.length) : [];
   wrongPicks = []; solved = false; videoOpen = false;
 
   const card = el("section", { class: "card", "aria-labelledby": "qtitle" });
@@ -215,6 +223,13 @@ function show() {
   card.append(q);
   card.append(makePad(ex));
 
+  if (ex.input) {
+    card.append(makeAnswer(ex));
+    card.append(el("div", { class: "fb", id: "fb", "aria-live": "polite" }));
+    app.append(card);
+    q.focus({ preventScroll: true });
+    return;
+  }
   const opts = el("div", { class: "options", role: "group", "aria-label": "Answer choices" });
   order.forEach((oi, pos) => {
     const o = ex.options[oi];
@@ -239,7 +254,7 @@ function pick(oi) {
     document.querySelectorAll(".opt").forEach((b) => { b.disabled = true; });
     if (!state.results[state.i]) state.results[state.i] = wrongPicks.length ? "retry" : "first";
     save(); renderDots();
-    fb.innerHTML = "";
+    fb.innerHTML = ""; videoOpen = false;
     fb.append(el("div", { class: "note good" },
       el("strong", {}, wrongPicks.length ? "Right — and now you know why." : "Right on the first try!"),
       state.i < N - 1 ? "Ready for the next one?" : "That was the last one."));
@@ -251,12 +266,69 @@ function pick(oi) {
     wrongPicks.push(oi);
     btn.dataset.r = "wrong"; btn.disabled = true;
     if (!state.results[state.i]) { state.results[state.i] = "retry"; save(); renderDots(); }
-    fb.innerHTML = "";
+    fb.innerHTML = ""; videoOpen = false;
     fb.append(el("div", { class: "note bad", role: "status" }, el("strong", {}, "Not quite."), o.why));
     showVideo(true);
     fb.append(el("p", { class: "hint" }, "Watch how it is solved, then pick again."));
     fb.scrollIntoView({ behavior: "smooth", block: "nearest" });
   }
+}
+
+// ---- typed answers ("find the value" and "expand"): no options, an exact check (components/answer-check)
+let tries = 0, lastWrong = "";
+function makeAnswer(ex) {
+  tries = 0; lastWrong = "";
+  const ed = document.createElement("equation-editor");
+  ed.id = "ans";
+  ed.setAttribute("placeholder", ex.input === "num" ? "Type a number" : "Type the expression");
+  ed.setAttribute("label", "Your answer");
+  ed.addEventListener("equation-enter", check);
+  const hint = ex.input === "num" ? "One number: 17, −5, a fraction like 3/4, or a decimal like 0.75."
+    : "Write it with no parentheses and like terms combined, e.g. 3x − 12. Use ^ for powers: x^2.";
+  return el("div", { class: "answer", id: "answer" },
+    el("label", { for: "ans" }, "Your answer"), ed,
+    el("p", { class: "hint", style: "margin:0" }, hint),
+    el("div", { class: "row" }, el("button", { type: "button", class: "btn", id: "check", onclick: check }, "Check")));
+}
+
+function check() {
+  if (solved) return;
+  const ex = DATA.exercises[state.i];
+  const ed = $("#ans"), fb = $("#fb"), box = $("#answer");
+  const typed = ed.isEmpty ? "" : ed.getValue("ascii-math");
+  const r = ex.input === "num" ? AnswerCheck.number(typed, ex.answer) : AnswerCheck.expression(typed, ex.answer);
+  fb.innerHTML = ""; videoOpen = false;
+  if (r.error) { fb.append(el("div", { class: "note warn", role: "status" }, el("strong", {}, "I can't check that yet."), r.error)); return; }
+  if (ex.input === "expr" && r.equal && !r.expanded) {
+    fb.append(el("div", { class: "note warn", role: "status" }, el("strong", {}, "Equal — but not finished."),
+      "Write it with no parentheses and combine like terms."));
+    return;
+  }
+  if (r.ok) {
+    solved = true; box.dataset.r = "right";
+    $("#check").disabled = true;
+    if (!state.results[state.i]) state.results[state.i] = tries ? "retry" : "first";
+    save(); renderDots();
+    fb.append(el("div", { class: "note good" },
+      el("strong", {}, tries ? "Right — and now you know why." : "Right on the first try!"),
+      el("span", { html: `The answer is <b>${ex.aHtml}</b>. ` }), state.i < N - 1 ? "Ready for the next one?" : "That was the last one."));
+    if (!videoOpen) fb.append(el("button", { type: "button", class: "link", onclick: (e) => { e.target.remove(); showVideo(false); } }, "Watch the step-by-step solution"));
+    fb.append(el("div", { class: "actions" },
+      el("button", { type: "button", class: "btn", id: "next", onclick: next }, state.i < N - 1 ? "Next exercise →" : "See my results")));
+    $("#next").focus({ preventScroll: false });
+    return;
+  }
+  box.dataset.r = "wrong";
+  if (typed !== lastWrong) tries++;
+  lastWrong = typed;
+  if (!state.results[state.i]) { state.results[state.i] = "retry"; save(); renderDots(); }
+  const same = ex.input === "num" ? (m) => AnswerCheck.sameNumber(typed, m.v) : (m) => AnswerCheck.sameExpression(typed, m.e);
+  const known = (ex.mistakes || []).find(same);
+  fb.append(el("div", { class: "note bad", role: "status" }, el("strong", {}, "Not quite."),
+    known ? known.why : (ex.input === "num" ? "That is not the value. Watch the solution to find where it went off." : "That is not equal to the answer. Watch the solution to find where it went off.")));
+  showVideo(true);
+  fb.append(el("p", { class: "hint" }, "Watch how it is solved, then fix your answer and check again."));
+  fb.scrollIntoView({ behavior: "smooth", block: "nearest" });
 }
 
 function showVideo(autoplay) {
@@ -299,7 +371,7 @@ function showResults(app) {
 }
 
 document.addEventListener("keydown", (e) => {
-  if (state.done || solved || e.ctrlKey || e.metaKey || e.altKey) return;
+  if (state.done || solved || DATA.exercises[state.i].input || e.ctrlKey || e.metaKey || e.altKey) return;
   const k = "abcd1234".indexOf(e.key.toLowerCase());
   if (k < 0 || (e.target.closest && e.target.closest("textarea, input, math-field, equation-notebook, iframe"))) return;
   const oi = order[k % 4];

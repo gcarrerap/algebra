@@ -84,6 +84,13 @@
   .opt[data-r="right"] .k { background: var(--green); color: var(--bg); }
   .opt:disabled:not([data-r]) { opacity: .45; cursor: default; }
 
+  .answer { display: grid; gap: 10px; }
+  .answer label { font: 600 14px var(--text); color: var(--muted); letter-spacing: .04em; }
+  .answer equation-editor { --eq-panel: #101a2e; --eq-bg: #0b1325; --eq-size: clamp(24px, 6vw, 32px); }
+  .answer .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .answer[data-r="right"] equation-editor { outline: 2px solid var(--green); border-radius: 12px; }
+  .answer[data-r="wrong"] equation-editor { outline: 2px solid var(--red); border-radius: 12px; }
+  .note.warn { border-color: var(--yellow); } .note.warn strong { color: var(--yellow); }
   .fb { margin-top: 18px; }
   .note { border-radius: 14px; padding: 14px 16px; margin: 0 0 14px; border: 1px solid var(--line); background: #101a2e; }
   .note.bad { border-color: var(--red); } .note.good { border-color: var(--green); }
@@ -111,13 +118,14 @@
 </head>
 <body>
 <script type="module" src="../../components/equation-editor/equation-editor.js"></script>
+<script src="../../components/answer-check/answer-check.js"></script>
 <main>
   <a class="back" href="../../">← All lessons</a>
   <div class="eyebrow" id="eyebrow"></div>
   <h1>__H1__</h1>
   <ol class="dots" id="dots" aria-label="Exercises"></ol>
   <div id="app"></div>
-  <footer>Open the work area to write your steps with fractions, powers and roots. Pick the answer you think is right: a wrong answer shows you the mistake and plays a step-by-step video. Solution videos use an AI-generated voice.</footer>
+  <footer>Open the work area to write your steps with fractions, powers and roots. When you are asked for a value or an expression, type it in the answer box; otherwise pick the answer you think is right. A wrong answer shows you the mistake and plays a step-by-step video. Solution videos use an AI-generated voice.</footer>
 </main>
 
 <script>
@@ -202,7 +210,7 @@ function show() {
   $("#eyebrow").textContent = `Unit ${DATA.unit.split(".")[0]} · Lesson ${DATA.unit.split(".")[1]} · Practice`;
   if (state.done) return showResults(app);
   const ex = DATA.exercises[state.i];
-  order = shuffled(ex.options.length);
+  order = ex.options ? shuffled(ex.options.length) : [];
   wrongPicks = []; solved = false; videoOpen = false;
 
   const card = el("section", { class: "card", "aria-labelledby": "qtitle" });
@@ -215,6 +223,13 @@ function show() {
   card.append(q);
   card.append(makePad(ex));
 
+  if (ex.input) {
+    card.append(makeAnswer(ex));
+    card.append(el("div", { class: "fb", id: "fb", "aria-live": "polite" }));
+    app.append(card);
+    q.focus({ preventScroll: true });
+    return;
+  }
   const opts = el("div", { class: "options", role: "group", "aria-label": "Answer choices" });
   order.forEach((oi, pos) => {
     const o = ex.options[oi];
@@ -239,7 +254,7 @@ function pick(oi) {
     document.querySelectorAll(".opt").forEach((b) => { b.disabled = true; });
     if (!state.results[state.i]) state.results[state.i] = wrongPicks.length ? "retry" : "first";
     save(); renderDots();
-    fb.innerHTML = "";
+    fb.innerHTML = ""; videoOpen = false;
     fb.append(el("div", { class: "note good" },
       el("strong", {}, wrongPicks.length ? "Right — and now you know why." : "Right on the first try!"),
       state.i < N - 1 ? "Ready for the next one?" : "That was the last one."));
@@ -251,12 +266,69 @@ function pick(oi) {
     wrongPicks.push(oi);
     btn.dataset.r = "wrong"; btn.disabled = true;
     if (!state.results[state.i]) { state.results[state.i] = "retry"; save(); renderDots(); }
-    fb.innerHTML = "";
+    fb.innerHTML = ""; videoOpen = false;
     fb.append(el("div", { class: "note bad", role: "status" }, el("strong", {}, "Not quite."), o.why));
     showVideo(true);
     fb.append(el("p", { class: "hint" }, "Watch how it is solved, then pick again."));
     fb.scrollIntoView({ behavior: "smooth", block: "nearest" });
   }
+}
+
+// ---- typed answers ("find the value" and "expand"): no options, an exact check (components/answer-check)
+let tries = 0, lastWrong = "";
+function makeAnswer(ex) {
+  tries = 0; lastWrong = "";
+  const ed = document.createElement("equation-editor");
+  ed.id = "ans";
+  ed.setAttribute("placeholder", ex.input === "num" ? "Type a number" : "Type the expression");
+  ed.setAttribute("label", "Your answer");
+  ed.addEventListener("equation-enter", check);
+  const hint = ex.input === "num" ? "One number: 17, −5, a fraction like 3/4, or a decimal like 0.75."
+    : "Write it with no parentheses and like terms combined, e.g. 3x − 12. Use ^ for powers: x^2.";
+  return el("div", { class: "answer", id: "answer" },
+    el("label", { for: "ans" }, "Your answer"), ed,
+    el("p", { class: "hint", style: "margin:0" }, hint),
+    el("div", { class: "row" }, el("button", { type: "button", class: "btn", id: "check", onclick: check }, "Check")));
+}
+
+function check() {
+  if (solved) return;
+  const ex = DATA.exercises[state.i];
+  const ed = $("#ans"), fb = $("#fb"), box = $("#answer");
+  const typed = ed.isEmpty ? "" : ed.getValue("ascii-math");
+  const r = ex.input === "num" ? AnswerCheck.number(typed, ex.answer) : AnswerCheck.expression(typed, ex.answer);
+  fb.innerHTML = ""; videoOpen = false;
+  if (r.error) { fb.append(el("div", { class: "note warn", role: "status" }, el("strong", {}, "I can't check that yet."), r.error)); return; }
+  if (ex.input === "expr" && r.equal && !r.expanded) {
+    fb.append(el("div", { class: "note warn", role: "status" }, el("strong", {}, "Equal — but not finished."),
+      "Write it with no parentheses and combine like terms."));
+    return;
+  }
+  if (r.ok) {
+    solved = true; box.dataset.r = "right";
+    $("#check").disabled = true;
+    if (!state.results[state.i]) state.results[state.i] = tries ? "retry" : "first";
+    save(); renderDots();
+    fb.append(el("div", { class: "note good" },
+      el("strong", {}, tries ? "Right — and now you know why." : "Right on the first try!"),
+      el("span", { html: `The answer is <b>${ex.aHtml}</b>. ` }), state.i < N - 1 ? "Ready for the next one?" : "That was the last one."));
+    if (!videoOpen) fb.append(el("button", { type: "button", class: "link", onclick: (e) => { e.target.remove(); showVideo(false); } }, "Watch the step-by-step solution"));
+    fb.append(el("div", { class: "actions" },
+      el("button", { type: "button", class: "btn", id: "next", onclick: next }, state.i < N - 1 ? "Next exercise →" : "See my results")));
+    $("#next").focus({ preventScroll: false });
+    return;
+  }
+  box.dataset.r = "wrong";
+  if (typed !== lastWrong) tries++;
+  lastWrong = typed;
+  if (!state.results[state.i]) { state.results[state.i] = "retry"; save(); renderDots(); }
+  const same = ex.input === "num" ? (m) => AnswerCheck.sameNumber(typed, m.v) : (m) => AnswerCheck.sameExpression(typed, m.e);
+  const known = (ex.mistakes || []).find(same);
+  fb.append(el("div", { class: "note bad", role: "status" }, el("strong", {}, "Not quite."),
+    known ? known.why : (ex.input === "num" ? "That is not the value. Watch the solution to find where it went off." : "That is not equal to the answer. Watch the solution to find where it went off.")));
+  showVideo(true);
+  fb.append(el("p", { class: "hint" }, "Watch how it is solved, then fix your answer and check again."));
+  fb.scrollIntoView({ behavior: "smooth", block: "nearest" });
 }
 
 function showVideo(autoplay) {
@@ -299,7 +371,7 @@ function showResults(app) {
 }
 
 document.addEventListener("keydown", (e) => {
-  if (state.done || solved || e.ctrlKey || e.metaKey || e.altKey) return;
+  if (state.done || solved || DATA.exercises[state.i].input || e.ctrlKey || e.metaKey || e.altKey) return;
   const k = "abcd1234".indexOf(e.key.toLowerCase());
   if (k < 0 || (e.target.closest && e.target.closest("textarea, input, math-field, equation-notebook, iframe"))) return;
   const oi = order[k % 4];
