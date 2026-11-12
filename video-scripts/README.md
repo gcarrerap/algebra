@@ -39,5 +39,19 @@
 | 5.4 | [How many solutions?](u05.md) | `u05-l04-number-of-solutions` | script | 2:49 | 42 s |
 | 5.5 | [Linear inequalities in two variables](u05.md) | `u05-l05-inequalities-two-variables` | script | 3:01 | 42 s |
 | 5.6 | [Systems of inequalities and constraints](u05.md) | `u05-l06-systems-of-inequalities` | script | 2:52 | 44 s |
-| | **36 videos** | | | **127:52** (≈ 2.1 h) | |
+| 6.1 | [Scatter plots and association](u06.md) | `u06-l01-scatter-plots` | script | 2:48 | 42 s |
+| 6.2 | [Line of best fit and residuals](u06.md) | `u06-l02-best-fit-and-residuals` | script | 3:31 | 44 s |
+| 6.3 | [Interpreting a linear model](u06.md) | `u06-l03-interpreting-models` | script | 2:49 | 44 s |
+| 6.4 | [The correlation coefficient](u06.md) | `u06-l04-correlation-coefficient` | script | 2:55 | 37 s |
+| 6.5 | [Correlation is not causation](u06.md) | `u06-l05-correlation-not-causation` | script | 3:00 | 44 s |
+| 7.1 | [Exponent rules](u07.md) | `u07-l01-exponent-rules` | script | 3:37 | 42 s |
+| 7.2 | [Zero and negative exponents](u07.md) | `u07-l02-zero-and-negative-exponents` | script | 3:26 | 40 s |
+| 7.3 | [Roots and simplifying radicals](u07.md) | `u07-l03-roots-and-radicals` | script | 3:23 | 42 s |
+| 7.4 | [Rational exponents](u07.md) | `u07-l04-rational-exponents` | script | 3:20 | 44 s |
+| 8.1 | [Linear vs. exponential](u08.md) | `u08-l01-linear-vs-exponential` | script | 2:57 | 42 s |
+| 8.2 | [Exponential growth and decay](u08.md) | `u08-l02-growth-and-decay` | script | 3:20 | 42 s |
+| 8.3 | [Percent change and compound interest](u08.md) | `u08-l03-percent-change-and-interest` | script | 3:13 | 44 s |
+| 8.4 | [Building exponential functions](u08.md) | `u08-l04-building-exponentials` | script | 3:03 | 47 s |
+| 8.5 | [Exponential growth wins](u08.md) | `u08-l05-exponential-wins` | script | 3:03 | 44 s |
+| | **50 videos** | | | **172:19** (≈ 2.9 h) | |
 <!-- estimates:end -->
