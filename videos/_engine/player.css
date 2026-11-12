@@ -126,3 +126,22 @@ body { position: relative; }
 #play:focus-visible .play-btn { outline: 6px solid var(--ink); outline-offset: 8px; }
 #seek { position: absolute; left: 0; right: 0; bottom: 0; height: 44px; z-index: 6; cursor: pointer; }
 .render #play, .render #seek { display: none; }
+
+/* ---------- number line (numberline.js) ---------- */
+.nl { overflow: visible; display: block; }
+.nl .axis { stroke: var(--muted); stroke-width: 4; }
+.nl .axis-head { fill: var(--muted); }
+.nl .tick { stroke: var(--muted); stroke-width: 3; }
+.nl .tick.zero { stroke: var(--ink); stroke-width: 5; }
+.nl .num { fill: var(--muted); font: 600 30px Inter, sans-serif; text-anchor: middle; }
+.nl .num.z { fill: var(--ink); }
+.nl .mark.pop { transform-box: fill-box; transform-origin: center; }
+.nl .dot { fill: var(--c); stroke: var(--bg); stroke-width: 5; }
+.nl .dot.open { fill: var(--bg); stroke: var(--c); stroke-width: 6; }
+.nl .dl { fill: var(--c); font: 700 36px Poppins, sans-serif; text-anchor: middle; }
+/* a hop draws its arc as --p goes 0 → 1; the head shows up at the end */
+.nl .arc { fill: none; stroke: var(--c); stroke-width: 7; stroke-linecap: round;
+           stroke-dasharray: 1; stroke-dashoffset: calc(1 - var(--p)); opacity: calc(var(--p) * 4); }
+.nl .head { fill: var(--c); opacity: clamp(0, calc((var(--p) - 0.85) * 7), 1); }
+.nl .brace { fill: none; stroke: var(--c); stroke-width: 5; }
+.nl .ray-line { stroke: var(--c); stroke-width: 12; stroke-linecap: round; }

@@ -15,6 +15,7 @@ video-scripts/uNN.md ─► script.json ─► narration.mp3 + timeline.json ─
 |---|---|
 | `videos/_engine/player.js` | Draws the video at any time `t` from `timeline.json`. Shared by all videos. |
 | `videos/_engine/player.css` | Shared look: 1920×1080 stage, colors, type, effects. |
+| `videos/_engine/numberline.js` | Number-line component (below). Load it before `player.js`. |
 | `videos/<video>/video.html` | The scenes of one video, with timing anchors. |
 | `tools/render_video.py` | Takes stills or films the full MP4. |
 
@@ -63,6 +64,43 @@ The class decides what the element does when it appears:
 
 Layout helpers: `math` (`md`, `sm`, `xs`), `say`, `label`, `card`, `chip`, `row`, `col`,
 `stack` (children share one spot, for swapping content in place), `layer`.
+
+### Shared components
+
+Draw recurring diagrams with the shared components instead of new SVG in each video, so every
+video looks the same and fixes reach all of them.
+
+**Number line** (`numberline.js`, styles in `player.css`). Marks are `<i>` children; each one
+animates with the usual `data-at` / `data-out` / `data-dur`, and its color comes from `c-<color>`:
+
+```html
+<div class="numberline" data-from="-10" data-to="10" data-unit="80">
+  <i class="dot c-blue"    data-n="3" data-label="3°" data-at="b01@three"></i>
+  <i class="hop c-red"     data-a="3" data-b="-5" data-lift="60" data-at="b01@drops" data-dur="1.6"></i>
+  <i class="span c-purple" data-a="-5" data-b="0" data-at="b04@absolute"></i>
+  <i class="ray c-green"   data-n="2" data-dir="right" data-open data-at="b09"></i>
+</div>
+```
+
+`dot` is a point (`data-open` for an open circle), `hop` an arrow drawn over `data-dur` seconds,
+`span` a bracket under the labels, `ray` a shaded ray for inequality graphs. Width is
+`(to − from) × unit + 120` px: keep it under ~1750. First used in `u00-l01-signed-numbers`.
+
+Still to build, before the units that need them: a coordinate plane (points, lines, parabolas,
+shaded half-planes; units 2–13), a table with difference/ratio arrows (units 4, 8, 13) and an
+area model (units 9–10). Add each one as an `_engine/*.js` component documented here.
+
+### Pitfalls
+
+- **Repeated words.** `b21@two` matches the *first* "two" in the block, even at the start of a
+  sentence ("Two times…"). Count the occurrences in the block's text and use `#2`, `#3`.
+- **One offset only.** `b14@jumps+0.7` works; `b14@jumps+0.7+0.6` is an error. Compute the sum.
+- **Pauses.** A timer during a pause goes from `bNN.end` to the next block (`data-out="bMM"`).
+- **Caption zone.** The caption covers the bottom ~170 px of the stage; keep content above it.
+- **Changing in place.** To swap one value for another in the same spot (`?` → `4`), put both in a
+  `stack` and fade one out on the word the other fades in.
+- **CSS inheritance.** `--p` is set on the element with `data-at` and inherits to its children,
+  so a group can animate several parts (like a hop's arc and head) from one anchor.
 
 ### Reflection pauses
 
