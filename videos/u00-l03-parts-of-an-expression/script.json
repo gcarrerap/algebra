@@ -1,0 +1,139 @@
+{
+ "format": "algebra-video-script",
+ "version": 1,
+ "video": "u00-l03-parts-of-an-expression",
+ "title": "Parts of an expression",
+ "voice": "narrator",
+ "source": "video-scripts/u00.md#0.3",
+ "scenes": [
+  {
+   "id": "s01",
+   "title": "A recipe made of pieces",
+   "blocks": [
+    {
+     "id": "b01",
+     "text": "This is an algebraic expression. It has numbers, a variable, and operations, but no equals sign.",
+     "display": "4x² − x + 7"
+    },
+    {
+     "id": "b02",
+     "text": "With an equals sign, it would be an equation, a statement that two things are equal. An expression is just a quantity. It doesn't claim anything.",
+     "display": "4x² − x + 7 = 10"
+    },
+    {
+     "id": "b03",
+     "text": "Knowing the names of its parts lets us talk about it clearly. Let's take it apart."
+    }
+   ]
+  },
+  {
+   "id": "s02",
+   "title": "Terms",
+   "blocks": [
+    {
+     "id": "b04",
+     "text": "Terms are the pieces that are added or subtracted. This expression has three terms: four x squared, negative x, and seven.",
+     "display": "4x²"
+    },
+    {
+     "id": "b05",
+     "text": "Notice the minus sign. It belongs to the term after it. The second term is not x. It is negative x.",
+     "display": "x"
+    },
+    {
+     "id": "b06",
+     "text": "How many terms does this expression have, and what is the third one?",
+     "display": "3a + 2b − 5c + 1",
+     "pause_after_s": 5.0
+    },
+    {
+     "id": "b07",
+     "text": "Four terms. The third term is negative five c, with its sign.",
+     "display": "−5c"
+    }
+   ]
+  },
+  {
+   "id": "s03",
+   "title": "Factors and coefficients",
+   "blocks": [
+    {
+     "id": "b08",
+     "text": "Inside a term, the things being multiplied are factors. Four x squared is four times x times x.",
+     "display": "4x²"
+    },
+    {
+     "id": "b09",
+     "text": "The number factor in front of a variable is the coefficient. The coefficient of four x squared is four.",
+     "display": "4"
+    },
+    {
+     "id": "b10",
+     "text": "Now, what is the coefficient of negative x? There's no number written there.",
+     "display": "−x",
+     "pause_after_s": 10.0
+    },
+    {
+     "id": "b11",
+     "text": "The coefficient is negative one. A variable with no number in front has a coefficient of one, and a minus sign makes it negative one.",
+     "display": "1"
+    },
+    {
+     "id": "b12",
+     "text": "A term with no variable is a constant. Seven is the constant term. Its value never changes, whatever x is.",
+     "display": "+7"
+    }
+   ]
+  },
+  {
+   "id": "s04",
+   "title": "Groups count as one factor",
+   "blocks": [
+    {
+     "id": "b13",
+     "text": "One more case. In five times the quantity x plus two, minus three y, how many terms are there?",
+     "display": "5(x + 2) − 3y",
+     "pause_after_s": 10.0
+    },
+    {
+     "id": "b14",
+     "text": "Two. The parentheses act as one group, so five times the quantity x plus two is a single term with two factors: five, and the quantity x plus two.",
+     "display": "5(x + 2)"
+    },
+    {
+     "id": "b15",
+     "text": "Inside the parentheses there are two more terms, x and two. Parts can contain parts."
+    }
+   ]
+  },
+  {
+   "id": "s05",
+   "title": "Your turn",
+   "blocks": [
+    {
+     "id": "b16",
+     "text": "Your turn. For negative two m cubed plus m minus nine, list the terms, the coefficient of each variable term, and the constant. Pause the video and try it.",
+     "display": "−2m³ + m − 9",
+     "pause_after_s": 15.0
+    },
+    {
+     "id": "b17",
+     "text": "Three terms: negative two m cubed, m, and negative nine. The coefficients are negative two and one. The constant is negative nine, sign included.",
+     "display": "−2m³, m, −9"
+    },
+    {
+     "id": "b18",
+     "text": "Remember: terms are separated by plus and minus and keep their sign, factors are multiplied, and every variable term has a coefficient, even when you can't see it."
+    },
+    {
+     "id": "b19",
+     "text": "Next, combining like terms."
+    },
+    {
+     "id": "b20",
+     "text": "This video uses an AI-generated voice."
+    }
+   ]
+  }
+ ]
+}

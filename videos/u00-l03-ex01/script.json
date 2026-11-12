@@ -1,0 +1,57 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l03-ex01",
+  "title": "Exercise 1",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. How many terms does six x plus four have?",
+          "display": "6x + 4",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Terms are the pieces that are added or subtracted. The first term is six x.",
+          "display": "6x + 4",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "After the plus sign comes the second term, four. Nothing else is added.",
+          "display": "2 terms",
+          "cue": "step-2"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b04",
+          "text": "So the answer is two.",
+          "display": "2",
+          "cue": "answer"
+        },
+        {
+          "id": "b05",
+          "text": "Watch out for these traps. If you counted the whole expression as one term, you get one. If you counted the six, the x and the four separately, you get three.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l03-ex12",
+  "title": "Exercise 12",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's look at this one. Match each term with its coefficient.",
+          "display": "Match each term with its coefficient.",
+          "cue": "show-problem",
+          "pause_after_s": 1.5
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Pair by pair",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Negative six a. The number in front is six, and the minus sign belongs to the term. The coefficient is negative six.",
+          "display": "−6a → −6",
+          "cue": "pair-1"
+        },
+        {
+          "id": "b03",
+          "text": "b. No number is written, so the coefficient is one.",
+          "display": "b → 1",
+          "cue": "pair-2"
+        },
+        {
+          "id": "b04",
+          "text": "Negative c. The hidden coefficient is one, and the minus sign makes it negative one.",
+          "display": "−c → −1",
+          "cue": "pair-3"
+        },
+        {
+          "id": "b05",
+          "text": "Nine y cubed. The exponent is not the coefficient. The coefficient is nine.",
+          "display": "9y^3 → 9",
+          "cue": "pair-4"
+        },
+        {
+          "id": "b06",
+          "text": "Negative d squared. The hidden coefficient is one, and the minus sign makes it negative one.",
+          "display": "−d^2 → −1",
+          "cue": "pair-5"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b07",
+          "text": "Every term now has its coefficient. The sign belongs to the coefficient, a hidden coefficient is one, and an exponent is never the coefficient.",
+          "cue": "answer"
+        }
+      ]
+    }
+  ]
+}

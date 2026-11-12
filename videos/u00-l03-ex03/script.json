@@ -1,0 +1,57 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l03-ex03",
+  "title": "Exercise 3",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. What is the constant term of x squared plus five x plus eight?",
+          "display": "x^2 + 5x + 8",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "The expression has three terms. Two of them, x squared and five x, have a variable.",
+          "display": "x^2 + 5x + 8",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "The term with no variable is eight. That is the constant.",
+          "display": "8",
+          "cue": "step-2"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b04",
+          "text": "So the answer is eight.",
+          "display": "8",
+          "cue": "answer"
+        },
+        {
+          "id": "b05",
+          "text": "Watch out for these traps. If you picked the five, the coefficient of five x, you get five. If you picked the hidden one in front of x squared, you get one.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

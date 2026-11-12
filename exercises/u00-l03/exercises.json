@@ -1,0 +1,638 @@
+{
+ "unit": "0.3",
+ "title": "Parts of an Expression",
+ "h1": "Terms, factors and coefficients, <span class=\"y\">named</span>",
+ "levels": {
+  "1": "Warm-up",
+  "2": "Tricky",
+  "3": "Challenging",
+  "4": "Boss level"
+ },
+ "_notes": "Source of truth for the 0.3 practice set. Typed answers (kind \"num\") carry \"derive\": terms · constant · coef:<term> · factors:<term>, so the answer is computed from q, never typed; every wrong value names its mistake \"m\" (one, pieces, tokens, flat, variable-terms, distinct-vars, drop-sign, hidden-zero, constant, coef-of:<term>, sum-numbers) and the build recomputes it. \"multi\" uses check term-of:<expr> · terms:<n> · coefficient:<n>; \"match\" uses check \"coefficient\". Chips: TERM blue, FACTOR purple, COEF yellow, CONST green. See docs/exercises.md.",
+ "exercises": [
+  {
+   "id": "ex01",
+   "level": 1,
+   "kind": "num",
+   "prompt": "How many terms does this expression have?",
+   "q": "6x + 4",
+   "read": "How many terms does six x plus four have?",
+   "derive": "terms",
+   "lines": [
+    "⟨6x⟩ + 4",
+    "6x ⟨+ 4⟩",
+    "2 terms"
+   ],
+   "chips": [
+    "TERM",
+    "TERM"
+   ],
+   "say": [
+    "Terms are the pieces that are added or subtracted. The first term is six x.",
+    "After the plus sign comes the second term, four. Nothing else is added."
+   ],
+   "at": [
+    "six",
+    "four"
+   ],
+   "wrong": [
+    {
+     "v": 1,
+     "m": "one",
+     "why": "The plus sign separates two pieces, so there is more than one term.",
+     "say": "counted the whole expression as one term"
+    },
+    {
+     "v": 3,
+     "m": "pieces",
+     "why": "6, x and 4 are numbers and letters, not pieces separated by + or −. 6x is a single term.",
+     "say": "counted the six, the x and the four separately"
+    },
+    {
+     "v": 4,
+     "m": "tokens",
+     "why": "The plus sign separates terms; it is not a term itself.",
+     "say": "counted the plus sign as a term too"
+    }
+   ]
+  },
+  {
+   "id": "ex02",
+   "level": 1,
+   "kind": "num",
+   "prompt": "What is the coefficient of the x term?",
+   "q": "9x + 4",
+   "read": "What is the coefficient of the x term in nine x plus four?",
+   "derive": "coef:9x",
+   "lines": [
+    "⟨9x⟩ + 4",
+    "⟨9⟩x + 4",
+    "9"
+   ],
+   "chips": [
+    "TERM",
+    "COEF"
+   ],
+   "say": [
+    "First find the term with x. It is nine x, which means nine times x.",
+    "The number multiplied by the variable is the coefficient. It is nine. The four is a constant, not a coefficient."
+   ],
+   "at": [
+    "nine",
+    "coefficient"
+   ],
+   "wrong": [
+    {
+     "v": 4,
+     "m": "constant",
+     "why": "4 has no variable, so it is the constant term, not a coefficient.",
+     "say": "used the constant term, four"
+    },
+    {
+     "v": 13,
+     "m": "sum-numbers",
+     "why": "The coefficient belongs to one term. Do not add the numbers of different terms.",
+     "say": "added the nine and the four"
+    },
+    {
+     "v": 1,
+     "m": "one",
+     "why": "The term is 9x, not just x. The 9 is the number multiplied by x.",
+     "say": "looked at the x alone"
+    }
+   ]
+  },
+  {
+   "id": "ex03",
+   "level": 1,
+   "kind": "num",
+   "prompt": "What is the constant term?",
+   "q": "x^2 + 5x + 8",
+   "read": "What is the constant term of x squared plus five x plus eight?",
+   "derive": "constant",
+   "lines": [
+    "⟨x^2 + 5x⟩ + 8",
+    "x^2 + 5x + ⟨8⟩",
+    "8"
+   ],
+   "chips": [
+    "TERM",
+    "CONST"
+   ],
+   "say": [
+    "The expression has three terms. Two of them, x squared and five x, have a variable.",
+    "The term with no variable is eight. That is the constant."
+   ],
+   "at": [
+    "variable",
+    "eight"
+   ],
+   "wrong": [
+    {
+     "v": 5,
+     "m": "coef-of:5x",
+     "why": "5 is the coefficient of 5x. It goes with a variable, so it is not the constant.",
+     "say": "picked the five, the coefficient of five x"
+    },
+    {
+     "v": 1,
+     "m": "coef-of:x^2",
+     "why": "1 is the hidden coefficient of x². The constant has no variable at all.",
+     "say": "picked the hidden one in front of x squared"
+    },
+    {
+     "v": 14,
+     "m": "sum-numbers",
+     "why": "The constant is one term. Adding the numbers of different terms gives a number that is not in the expression.",
+     "say": "added every number you could see, and the hidden one"
+    }
+   ]
+  },
+  {
+   "id": "ex04",
+   "level": 1,
+   "kind": "multi",
+   "prompt": "Select all the terms of 3x² − 5x + 7.",
+   "read": "Which of these are terms of three x squared minus five x plus seven? Choose all that apply.",
+   "check": "term-of:3x^2 − 5x + 7",
+   "say_answer": "Three of them are terms: three x squared, negative five x, and seven. Terms are the pieces separated by plus and minus signs, and each keeps its sign.",
+   "options": [
+    {
+     "t": "3x^2",
+     "ok": true,
+     "why": "It is the first piece, before any plus or minus.",
+     "say": "Three x squared. It is the first piece of the expression, so it is a term."
+    },
+    {
+     "t": "−5x",
+     "ok": true,
+     "why": "The minus sign belongs to the term after it.",
+     "say": "Negative five x. The minus sign travels with the term after it, so this is a term."
+    },
+    {
+     "t": "5x",
+     "ok": false,
+     "why": "This leaves out the minus sign. The term is −5x.",
+     "say": "Five x. This leaves out the minus sign. The term is negative five x. Not a term of this expression."
+    },
+    {
+     "t": "7",
+     "ok": true,
+     "why": "It is the last piece, added at the end.",
+     "say": "Seven. It is the last piece, added at the end. A term with no variable is still a term."
+    },
+    {
+     "t": "x^2",
+     "ok": false,
+     "why": "x² is only part of the term 3x². It is a factor, not a term.",
+     "say": "x squared. This is only part of three x squared. It is a factor inside the first term, not a term by itself."
+    }
+   ]
+  },
+  {
+   "id": "ex05",
+   "level": 2,
+   "kind": "num",
+   "prompt": "What is the coefficient of −x?",
+   "q": "4x^2 − x + 7",
+   "read": "What is the coefficient of negative x in four x squared minus x plus seven?",
+   "derive": "coef:-x",
+   "lines": [
+    "4x^2 ⟨− x⟩ + 7",
+    "⟨−x⟩ = −1 · x",
+    "−1"
+   ],
+   "chips": [
+    "TERM",
+    "COEF"
+   ],
+   "say": [
+    "The second term is negative x. The minus sign belongs to it.",
+    "There is no number written, but a variable alone has a coefficient of one, and the minus sign makes it negative one."
+   ],
+   "at": [
+    "negative",
+    "one"
+   ],
+   "wrong": [
+    {
+     "v": 1,
+     "m": "drop-sign",
+     "why": "The minus sign belongs to the term, so the coefficient is −1, not 1.",
+     "say": "dropped the minus sign"
+    },
+    {
+     "v": 0,
+     "m": "hidden-zero",
+     "why": "No number written does not mean zero. It means one.",
+     "say": "thought no number means zero"
+    },
+    {
+     "v": 4,
+     "m": "coef-of:4x^2",
+     "why": "4 is the coefficient of 4x², the first term, not of −x.",
+     "say": "used the four from the first term"
+    }
+   ]
+  },
+  {
+   "id": "ex06",
+   "level": 2,
+   "kind": "num",
+   "prompt": "How many terms are there?",
+   "q": "3a + 2b − 5c + 1",
+   "read": "How many terms are in three a plus two b minus five c plus one?",
+   "derive": "terms",
+   "lines": [
+    "⟨3a + 2b⟩ − 5c + 1",
+    "3a + 2b ⟨− 5c + 1⟩",
+    "4 terms"
+   ],
+   "chips": [
+    "TERM",
+    "TERM"
+   ],
+   "say": [
+    "Break it at each plus and minus. Three a is the first term and two b is the second.",
+    "Then negative five c, with its sign, is the third term, and one is the fourth."
+   ],
+   "at": [
+    "second",
+    "fourth"
+   ],
+   "wrong": [
+    {
+     "v": 3,
+     "m": "variable-terms",
+     "why": "The constant 1 is a term too, even though it has no variable.",
+     "say": "counted only the terms with a variable"
+    },
+    {
+     "v": 7,
+     "m": "pieces",
+     "why": "Numbers and letters inside one term are factors, not separate terms.",
+     "say": "counted every number and letter"
+    },
+    {
+     "v": 10,
+     "m": "tokens",
+     "why": "The plus and minus signs separate terms; they are not terms themselves.",
+     "say": "counted every number, letter and sign"
+    }
+   ]
+  },
+  {
+   "id": "ex07",
+   "level": 2,
+   "kind": "num",
+   "prompt": "What is the coefficient of m?",
+   "q": "−2m^3 + m − 9",
+   "read": "What is the coefficient of m in negative two m cubed plus m minus nine?",
+   "derive": "coef:m",
+   "lines": [
+    "−2m^3 + ⟨m⟩ − 9",
+    "⟨m⟩ = 1 · m",
+    "1"
+   ],
+   "chips": [
+    "TERM",
+    "COEF"
+   ],
+   "say": [
+    "The term we want is m, the middle one.",
+    "No number is written in front of m, so its coefficient is one."
+   ],
+   "at": [
+    "middle",
+    "one"
+   ],
+   "wrong": [
+    {
+     "v": 0,
+     "m": "hidden-zero",
+     "why": "No number written does not mean zero. It means one.",
+     "say": "thought no number means zero"
+    },
+    {
+     "v": -2,
+     "m": "coef-of:-2m^3",
+     "why": "−2 belongs to the term −2m³, not to the term m.",
+     "say": "used the coefficient of the first term"
+    },
+    {
+     "v": -9,
+     "m": "constant",
+     "why": "−9 is the constant term. It has no variable, so it is not a coefficient.",
+     "say": "used the constant, negative nine"
+    }
+   ]
+  },
+  {
+   "id": "ex08",
+   "level": 3,
+   "kind": "num",
+   "prompt": "How many terms does this expression have?",
+   "q": "5(x + 2) − 3y",
+   "read": "How many terms are in five times the quantity x plus two, minus three y?",
+   "derive": "terms",
+   "lines": [
+    "⟨5(x + 2)⟩ − 3y",
+    "5(x + 2) ⟨− 3y⟩",
+    "2 terms"
+   ],
+   "chips": [
+    "TERM",
+    "TERM"
+   ],
+   "say": [
+    "The parentheses hold a group together, so five times the quantity x plus two is one term.",
+    "The second term is negative three y. Two terms in all."
+   ],
+   "at": [
+    "parentheses",
+    "second"
+   ],
+   "wrong": [
+    {
+     "v": 1,
+     "m": "one",
+     "why": "The minus sign outside the parentheses separates 5(x + 2) from −3y.",
+     "say": "counted everything as one term"
+    },
+    {
+     "v": 3,
+     "m": "flat",
+     "why": "The + inside the parentheses does not split the term 5(x + 2).",
+     "say": "counted the terms inside the parentheses as well"
+    },
+    {
+     "v": 5,
+     "m": "pieces",
+     "why": "Numbers and letters inside a term are factors, not terms.",
+     "say": "counted every number and letter"
+    }
+   ]
+  },
+  {
+   "id": "ex09",
+   "level": 3,
+   "kind": "num",
+   "prompt": "How many factors are multiplied in this term?",
+   "q": "6x^2y",
+   "read": "How many factors are multiplied in the term six x squared y?",
+   "derive": "factors:6x^2y",
+   "lines": [
+    "⟨6x^2y⟩ = 6 · x^2 · y",
+    "⟨6⟩ · ⟨x⟩ · ⟨x⟩ · ⟨y⟩",
+    "4 factors"
+   ],
+   "chips": [
+    "FACTOR",
+    "FACTOR"
+   ],
+   "say": [
+    "Factors are the things multiplied inside a term. Start by writing the term as a product: six times x squared times y.",
+    "Now x squared means x times x. So the factors are six, x, x and y. That is four."
+   ],
+   "at": [
+    "product",
+    "squared"
+   ],
+   "wrong": [
+    {
+     "v": 3,
+     "m": "pieces",
+     "why": "x² means x · x, so it is two factors, not one.",
+     "say": "counted x squared as one factor"
+    },
+    {
+     "v": 2,
+     "m": "distinct-vars",
+     "why": "The 6 is a factor too, and x appears twice.",
+     "say": "counted only the letters x and y"
+    },
+    {
+     "v": 1,
+     "m": "one",
+     "why": "A term is a product of several factors; this one has more than one.",
+     "say": "counted the whole term as one factor"
+    }
+   ]
+  },
+  {
+   "id": "ex10",
+   "level": 3,
+   "kind": "multi",
+   "prompt": "Select all the expressions with exactly three terms.",
+   "read": "Which of these expressions have exactly three terms? Choose all that apply.",
+   "check": "terms:3",
+   "say_answer": "Three expressions have exactly three terms. Count the pieces separated by plus and minus, and treat each group in parentheses as one piece.",
+   "options": [
+    {
+     "t": "2x^2 − 5x + 1",
+     "ok": true,
+     "why": "Three pieces: 2x², −5x and 1.",
+     "say": "Two x squared minus five x plus one. Three pieces separated by signs. Three terms."
+    },
+    {
+     "t": "a − b + c",
+     "ok": true,
+     "why": "Three pieces: a, −b and c.",
+     "say": "A minus b plus c. The pieces are a, negative b and c. Three terms."
+    },
+    {
+     "t": "4(x + 1) − 7",
+     "ok": false,
+     "why": "The group 4(x + 1) is one term, so there are only two terms.",
+     "say": "Four times the quantity x plus one, minus seven. The group counts as one term, so there are only two terms."
+    },
+    {
+     "t": "3xy + 2",
+     "ok": false,
+     "why": "Two terms: 3xy and 2. The x and the y are factors inside one term.",
+     "say": "Three x y plus two. Two terms. The x and the y are factors, not separate terms."
+    },
+    {
+     "t": "−x + 6 − 4y",
+     "ok": true,
+     "why": "Three pieces: −x, 6 and −4y.",
+     "say": "Negative x plus six minus four y. The first term starts with a minus sign, but it is still one term. Three terms in all."
+    }
+   ]
+  },
+  {
+   "id": "ex11",
+   "level": 4,
+   "kind": "multi",
+   "prompt": "Select all the terms whose coefficient is −1.",
+   "read": "Which of these terms have a coefficient of negative one? Choose all that apply.",
+   "check": "coefficient:-1",
+   "say_answer": "Three of them have a coefficient of negative one: negative x, negative y squared, and the negative group. A minus sign with no number means negative one.",
+   "options": [
+    {
+     "t": "−x",
+     "ok": true,
+     "why": "No number is written, so the coefficient is 1, and the minus sign makes it −1.",
+     "say": "Negative x. No number is written, so the coefficient is one, and the minus sign makes it negative one. Yes."
+    },
+    {
+     "t": "x",
+     "ok": false,
+     "why": "Its coefficient is +1: there is no minus sign.",
+     "say": "x. The coefficient is positive one, because there is no minus sign. No."
+    },
+    {
+     "t": "−4x",
+     "ok": false,
+     "why": "Its coefficient is −4.",
+     "say": "Negative four x. The coefficient is negative four, not negative one. No."
+    },
+    {
+     "t": "−y^2",
+     "ok": true,
+     "why": "Hidden coefficient 1 with a minus sign: −1.",
+     "say": "Negative y squared. The coefficient is hidden. It is one, with the minus sign, negative one. Yes."
+    },
+    {
+     "t": "−(x + 2)",
+     "ok": true,
+     "why": "A minus sign in front of a group means −1 times the group.",
+     "say": "Negative the quantity x plus two. The minus sign in front of the group means negative one times the group. The coefficient is negative one. Yes."
+    }
+   ]
+  },
+  {
+   "id": "ex12",
+   "level": 4,
+   "kind": "match",
+   "prompt": "Match each term with its coefficient.",
+   "read": "Match each term with its coefficient.",
+   "check": "coefficient",
+   "say_answer": "Every term now has its coefficient. The sign belongs to the coefficient, a hidden coefficient is one, and an exponent is never the coefficient.",
+   "pairs": [
+    {
+     "l": "−6a",
+     "r": "−6",
+     "why": "The number factor is 6, and the minus sign belongs to the term.",
+     "say": "Negative six a. The number in front is six, and the minus sign belongs to the term. The coefficient is negative six."
+    },
+    {
+     "l": "b",
+     "r": "1",
+     "why": "No number is written, so the coefficient is 1.",
+     "say": "b. No number is written, so the coefficient is one."
+    },
+    {
+     "l": "−c",
+     "r": "−1",
+     "why": "Hidden coefficient 1, made negative by the minus sign.",
+     "say": "Negative c. The hidden coefficient is one, and the minus sign makes it negative one."
+    },
+    {
+     "l": "9y^3",
+     "r": "9",
+     "why": "The exponent 3 is not the coefficient. The coefficient is the 9.",
+     "say": "Nine y cubed. The exponent is not the coefficient. The coefficient is nine."
+    },
+    {
+     "l": "−d^2",
+     "r": "−1",
+     "why": "Hidden coefficient 1, made negative by the minus sign.",
+     "say": "Negative d squared. The hidden coefficient is one, and the minus sign makes it negative one."
+    }
+   ]
+  },
+  {
+   "id": "ex13",
+   "level": 4,
+   "kind": "num",
+   "prompt": "How many terms does this expression have?",
+   "q": "2(3x − 1) − x + 9",
+   "read": "How many terms are in two times the quantity three x minus one, minus x, plus nine?",
+   "derive": "terms",
+   "lines": [
+    "⟨2(3x − 1)⟩ − x + 9",
+    "2(3x − 1) ⟨− x⟩ ⟨+ 9⟩",
+    "3 terms"
+   ],
+   "chips": [
+    "TERM",
+    "TERM"
+   ],
+   "say": [
+    "The first term is two times the quantity three x minus one. The parentheses keep it together, so the minus sign inside does not split it.",
+    "Then negative x is the second term and nine is the third."
+   ],
+   "at": [
+    "parentheses",
+    "second"
+   ],
+   "wrong": [
+    {
+     "v": 4,
+     "m": "flat",
+     "why": "The minus inside the parentheses is part of the first term. It does not make a new term.",
+     "say": "counted the terms inside the parentheses as well"
+    },
+    {
+     "v": 2,
+     "m": "variable-terms",
+     "why": "The constant 9 is a term too.",
+     "say": "counted only the terms with a variable"
+    },
+    {
+     "v": 6,
+     "m": "pieces",
+     "why": "Numbers and letters inside a term are factors, not terms.",
+     "say": "counted every number and letter"
+    }
+   ]
+  },
+  {
+   "id": "ex14",
+   "level": 4,
+   "kind": "num",
+   "prompt": "What is the constant term?",
+   "q": "−x^2 + 6x − 8",
+   "read": "What is the constant term of negative x squared plus six x minus eight?",
+   "derive": "constant",
+   "lines": [
+    "⟨−x^2⟩ + ⟨6x⟩ − 8",
+    "−x^2 + 6x ⟨− 8⟩",
+    "−8"
+   ],
+   "chips": [
+    "TERM",
+    "CONST"
+   ],
+   "say": [
+    "Two of the terms, negative x squared and six x, have a variable.",
+    "The term with no variable is negative eight. The sign goes with it."
+   ],
+   "at": [
+    "squared",
+    "eight"
+   ],
+   "wrong": [
+    {
+     "v": 8,
+     "m": "drop-sign",
+     "why": "The minus sign belongs to the term, so the constant is −8.",
+     "say": "dropped the minus sign"
+    },
+    {
+     "v": 6,
+     "m": "coef-of:6x",
+     "why": "6 is the coefficient of 6x. It goes with a variable.",
+     "say": "picked the six, the coefficient of six x"
+    },
+    {
+     "v": -1,
+     "m": "coef-of:-x^2",
+     "why": "−1 is the hidden coefficient of −x². The constant has no variable.",
+     "say": "picked the hidden negative one in front of x squared"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Exercise 11 — step by step</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="../_engine/player.css">
+<style>
+  .hl { padding: 0 10px; margin: 0 -10px; }
+  sup { font-size: 0.6em; vertical-align: 0.55em; line-height: 0; }
+  .frac { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; margin: 0 0.12em; }
+  .frac .top { padding: 0.04em 0.25em 0.2em; border-bottom: 0.07em solid currentColor; }
+  .frac .bot { padding: 0.2em 0.25em 0.04em; }
+  .prompt-l { font: 600 40px/1.3 Inter, sans-serif; color: var(--muted); text-align: center; max-width: 1500px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 26px 40px; width: 1500px; }
+  .opt { position: relative; display: flex; align-items: center; justify-content: center; min-height: 130px; padding: 18px 30px;
+    border-radius: 26px; border: 3px solid #2a3a5c; background: #18243d; font: 600 52px Poppins, sans-serif; }
+  .opt .mark { position: absolute; top: -22px; right: -18px; width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center;
+    font: 700 40px Poppins, sans-serif; color: #101a2e; }
+  .opt .mark.ok { background: var(--green); } .opt .mark.no { background: var(--red); }
+  .pairs { display: grid; grid-template-columns: auto 120px auto; gap: 26px 10px; align-items: center; justify-content: center; }
+  .pairs .l { justify-self: end; } .pairs .r { justify-self: start; }
+  .pairs .arrow { font: 700 56px Poppins, sans-serif; color: var(--yellow); text-align: center; }
+  .side { padding: 14px 30px; border-radius: 22px; border: 3px solid #2a3a5c; background: #18243d; font: 600 46px Poppins, sans-serif; }
+  .why-l { font: 500 32px/1.3 Inter, sans-serif; color: var(--muted); text-align: center; max-width: 1400px; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="header"><span class="unit">Unit 0 · Practice 0.3</span><span class="title">Exercise 11</span></div>
+
+  <section class="scene" data-scene="s01">
+    <div class="label yellow fade" data-at="b01">Exercise 11 · Boss level</div>
+    <div class="prompt-l fade" data-at="b01">Select all the terms whose coefficient is −1.</div>
+    <div class="grid fade" data-at="b01+0.6">
+      <div class="opt">−x</div>
+      <div class="opt">x</div>
+      <div class="opt">−4x</div>
+      <div class="opt">−y<sup>2</sup></div>
+      <div class="opt">−(x + 2)</div>
+    </div>
+  </section>
+
+  <section class="scene" data-scene="s02">
+    <div class="grid">
+      <div class="opt glow c-green" data-at="b02"><span class="mark ok pop" data-at="b02.end-0.6">✓</span><span>−x</span></div>
+      <div class="opt glow c-red" data-at="b03"><span class="mark no pop" data-at="b03.end-0.6">✗</span><span><span class="strike" data-at="b03.end-0.6" data-dur="0.4">x</span></span></div>
+      <div class="opt glow c-red" data-at="b04"><span class="mark no pop" data-at="b04.end-0.6">✗</span><span><span class="strike" data-at="b04.end-0.6" data-dur="0.4">−4x</span></span></div>
+      <div class="opt glow c-green" data-at="b05"><span class="mark ok pop" data-at="b05.end-0.6">✓</span><span>−y<sup>2</sup></span></div>
+      <div class="opt glow c-green" data-at="b06"><span class="mark ok pop" data-at="b06.end-0.6">✓</span><span>−(x + 2)</span></div>
+    </div>
+    <div class="stack">
+      <div class="why-l fade" data-at="b02+0.2" data-out="b03">No number is written, so the coefficient is 1, and the minus sign makes it −1.</div>
+      <div class="why-l fade" data-at="b03+0.2" data-out="b04">Its coefficient is +1: there is no minus sign.</div>
+      <div class="why-l fade" data-at="b04+0.2" data-out="b05">Its coefficient is −4.</div>
+      <div class="why-l fade" data-at="b05+0.2" data-out="b06">Hidden coefficient 1 with a minus sign: −1.</div>
+      <div class="why-l fade" data-at="b06+0.2">A minus sign in front of a group means −1 times the group.</div>
+    </div>
+  </section>
+
+  <section class="scene" data-scene="s03">
+    <div class="label green fade" data-at="b07">All that apply</div>
+    <div class="row" style="flex-wrap: wrap; gap: 26px; max-width: 1600px; justify-content: center">
+      <div class="opt glow c-green pop" data-at="b07+0.2">−x</div>
+      <div class="opt glow c-green pop" data-at="b07+0.4">−y<sup>2</sup></div>
+      <div class="opt glow c-green pop" data-at="b07+0.6">−(x + 2)</div>
+    </div>
+    <div class="label muted fade" data-at="b07+1.5" style="font-size: 22px; font-weight: 500">This video uses an AI-generated voice.</div>
+  </section>
+
+  <div class="caption"></div>
+  <div class="progress"></div>
+  <div id="seek" title="Jump to a moment"></div>
+  <button id="play" type="button" aria-label="Play"><span class="play-btn">▶</span><span class="play-label">Watch the solution</span></button>
+</div>
+<script src="../_engine/player.js"></script>
+</body>
+</html>

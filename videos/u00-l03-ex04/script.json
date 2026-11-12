@@ -1,0 +1,69 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l03-ex04",
+  "title": "Exercise 4",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's look at this one. Which of these are terms of three x squared minus five x plus seven? Choose all that apply.",
+          "display": "Select all the terms of 3x² − 5x + 7.",
+          "cue": "show-problem",
+          "pause_after_s": 1.5
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "One by one",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Three x squared. It is the first piece of the expression, so it is a term.",
+          "display": "3x^2",
+          "cue": "option-1"
+        },
+        {
+          "id": "b03",
+          "text": "Negative five x. The minus sign travels with the term after it, so this is a term.",
+          "display": "−5x",
+          "cue": "option-2"
+        },
+        {
+          "id": "b04",
+          "text": "Five x. This leaves out the minus sign. The term is negative five x. Not a term of this expression.",
+          "display": "5x",
+          "cue": "option-3"
+        },
+        {
+          "id": "b05",
+          "text": "Seven. It is the last piece, added at the end. A term with no variable is still a term.",
+          "display": "7",
+          "cue": "option-4"
+        },
+        {
+          "id": "b06",
+          "text": "x squared. This is only part of three x squared. It is a factor inside the first term, not a term by itself.",
+          "display": "x^2",
+          "cue": "option-5"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b07",
+          "text": "Three of them are terms: three x squared, negative five x, and seven. Terms are the pieces separated by plus and minus signs, and each keeps its sign.",
+          "cue": "answer"
+        }
+      ]
+    }
+  ]
+}

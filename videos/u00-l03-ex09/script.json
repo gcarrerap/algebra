@@ -1,0 +1,57 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l03-ex09",
+  "title": "Exercise 9",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. How many factors are multiplied in the term six x squared y?",
+          "display": "6x^2y",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Factors are the things multiplied inside a term. Start by writing the term as a product: six times x squared times y.",
+          "display": "6 · x · x · y",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Now x squared means x times x. So the factors are six, x, x and y. That is four.",
+          "display": "4 factors",
+          "cue": "step-2"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b04",
+          "text": "So the answer is four.",
+          "display": "4",
+          "cue": "answer"
+        },
+        {
+          "id": "b05",
+          "text": "Watch out for these traps. If you counted x squared as one factor, you get three. If you counted only the letters x and y, you get two.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

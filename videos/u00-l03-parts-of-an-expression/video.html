@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parts of an Expression</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="../_engine/player.css">
+<style>
+  /* Lesson 0.3 colors: terms blue · factors purple · coefficients yellow · constants green · mistakes red. */
+  .tag { font: 700 30px Inter, sans-serif; letter-spacing: 0.1em; text-transform: uppercase; }
+  .eqn { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .tbl { display: grid; grid-template-columns: auto auto auto; gap: 18px 56px; align-items: center; justify-items: center; }
+  .tbl .head { font: 700 28px Inter, sans-serif; letter-spacing: 0.12em; text-transform: uppercase; }
+  .tbl .cell { font: 600 54px Poppins, sans-serif; white-space: nowrap; }
+  .recap .card { width: 1300px; padding: 36px 56px; gap: 18px; align-items: stretch; }
+  .recap .line { display: grid; grid-template-columns: 300px 1fr; gap: 28px; align-items: baseline; }
+  .recap .name { font: 700 44px Poppins, sans-serif; }
+  .recap .what { font: 500 34px Inter, sans-serif; color: var(--ink); }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="header"><span class="unit">Unit 0 · Lesson 3</span><span class="title">Parts of an Expression</span></div>
+
+  <!-- s01: expression vs. equation -->
+  <section class="scene" data-scene="s01">
+    <div class="eqn fade" data-at="b01">
+      <div class="math">4x² − x + 7</div>
+      <div class="tag blue fade" data-at="b01@expression">expression</div>
+    </div>
+    <div class="eqn fade" data-at="b02">
+      <div class="math">4x² − x + 7 <span class="yellow">= 10</span></div>
+      <div class="tag yellow fade" data-at="b02@equation">equation</div>
+    </div>
+    <div class="say fade muted" data-at="b02@quantity">An expression is just a quantity. It claims nothing.</div>
+  </section>
+
+  <!-- s02: terms -->
+  <section class="scene" data-scene="s02">
+    <div class="stack">
+      <div class="col fade" data-at="b04" data-out="b06" style="gap: 48px">
+        <div class="math">
+          <span class="hl c-blue" data-at="b04@four">4x²</span>
+          <span class="hl c-blue" data-at="b04@negative"><span class="tint c-red" data-at="b05@minus">−</span> x</span>
+          <span class="hl c-blue" data-at="b04@seven">+ 7</span>
+        </div>
+        <div class="tag blue fade" data-at="b04@seven">3 terms</div>
+        <div class="say fade" data-at="b05@minus" data-out="b06">The <span class="red">minus sign</span> belongs to the term after it.</div>
+        <div class="math md fade" data-at="b05@negative" data-out="b06">second term: <span class="blue">−x</span></div>
+      </div>
+      <div class="col fade" data-at="b06">
+        <div class="math">
+          <span class="hl c-blue" data-at="b07">3a</span>
+          <span class="hl c-blue" data-at="b07">+ 2b</span>
+          <span class="hl c-blue" data-at="b07"><span class="tint c-yellow" data-at="b07@negative">− 5c</span></span>
+          <span class="hl c-blue" data-at="b07">+ 1</span>
+        </div>
+        <div class="row" style="gap: 40px">
+          <div class="say fade yellow" data-at="b06.end" data-out="b07">How many terms? Which one is the third?</div>
+          <div class="timer" data-at="b06.end" data-out="b07"></div>
+        </div>
+        <div class="tag blue fade" data-at="b07">4 terms · third: <span class="yellow">−5c</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- s03: factors, coefficients, constants -->
+  <section class="scene" data-scene="s03">
+    <div class="stack">
+      <!-- factors and coefficient of 4x² -->
+      <div class="col fade" data-at="b08" data-out="b10">
+        <div class="math"><span class="tint c-yellow" data-at="b09@coefficient">4</span>x²</div>
+        <div class="math md fade" data-at="b08@squared">= <span class="hl c-purple">4</span> · <span class="hl c-purple">x</span> · <span class="hl c-purple">x</span></div>
+        <div class="tag purple fade" data-at="b08@factors">factors</div>
+        <div class="chip c-yellow fade" data-at="b09@coefficient">coefficient: 4</div>
+      </div>
+      <!-- coefficient of -x -->
+      <div class="col fade" data-at="b10" data-out="b12">
+        <div class="math yellow fade" data-at="b10.end" data-out="b11">?</div>
+        <div class="stack">
+          <div class="math fade" data-at="b10" data-out="b11@negative">−x</div>
+          <div class="math fade" data-at="b11@negative">−<span class="yellow">1</span>x</div>
+        </div>
+        <div class="row" style="gap: 40px">
+          <div class="say fade yellow" data-at="b10.end" data-out="b11">What is the coefficient of −x?</div>
+          <div class="timer" data-at="b10.end" data-out="b11"></div>
+        </div>
+        <div class="chip c-yellow fade" data-at="b11@negative">coefficient: −1</div>
+      </div>
+      <!-- constant -->
+      <div class="col fade" data-at="b12">
+        <div class="math">4x² − x <span class="hl c-green" data-at="b12@constant">+ 7</span></div>
+        <div class="chip c-green fade" data-at="b12@constant">constant</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- s04: a group is one factor -->
+  <section class="scene" data-scene="s04">
+    <div class="math fade" data-at="b13">
+      <span class="hl c-blue" data-at="b14">5(x + 2)</span>
+      <span class="hl c-blue" data-at="b14">− 3y</span>
+    </div>
+    <div class="row" style="gap: 40px">
+      <div class="say fade yellow" data-at="b13.end" data-out="b14">How many terms are there?</div>
+      <div class="timer" data-at="b13.end" data-out="b14"></div>
+    </div>
+    <div class="row fade" data-at="b14@factors" style="gap: 24px">
+      <span class="tag purple">2 factors in the first term</span>
+      <span class="chip c-purple">5</span>
+      <span class="chip c-purple">(x + 2)</span>
+    </div>
+    <div class="math sm fade" data-at="b15">inside:
+      <span class="hl c-blue" data-at="b15@x">x</span>
+      <span class="hl c-blue" data-at="b15@two#2">+ 2</span>
+    </div>
+  </section>
+
+  <!-- s05: your turn + recap -->
+  <section class="scene" data-scene="s05">
+    <div class="layer fade" data-at="b16-0.5" data-out="b18">
+      <div class="label yellow pop" data-at="b16" style="font-size: 34px">★ Your turn</div>
+      <div class="row" style="gap: 48px">
+        <div class="math md pop" data-at="b16">−2m³ + m − 9</div>
+        <div class="timer" data-at="b16.end" data-out="b17"></div>
+      </div>
+      <div class="say fade muted" data-at="b16@pause" data-out="b17">⏸ Pause the video and try it</div>
+      <div class="tbl">
+        <div class="head blue fade" data-at="b16">terms</div>
+        <div class="head yellow fade" data-at="b16">coefficients</div>
+        <div class="head green fade" data-at="b16">constant</div>
+        <div class="cell fade" data-at="b17@terms">−2m³, m, −9</div>
+        <div class="cell fade" data-at="b17@coefficients">−2, 1</div>
+        <div class="cell fade" data-at="b17@constant">−9</div>
+      </div>
+    </div>
+    <div class="layer fade recap" data-at="b18">
+      <div class="card pop c-blue glow" data-at="b18">
+        <div class="line"><div class="name blue">Terms</div><div class="what">separated by + and −; each keeps its sign</div></div>
+        <div class="line"><div class="name purple">Factors</div><div class="what">the things multiplied inside a term</div></div>
+        <div class="line"><div class="name yellow">Coefficient</div><div class="what">the number factor, even a hidden 1 or −1</div></div>
+        <div class="line"><div class="name green">Constant</div><div class="what">a term with no variable</div></div>
+      </div>
+      <div class="say fade muted" data-at="b19" style="font-size: 38px">Next: <span style="color: var(--ink)">Combining Like Terms</span></div>
+      <div class="label fade muted" data-at="b20" style="font-size: 22px; font-weight: 500">This video uses an AI-generated voice.</div>
+    </div>
+  </section>
+
+  <div class="caption"></div>
+  <div class="progress"></div>
+  <div id="seek" title="Jump to a moment"></div>
+  <button id="play" type="button" aria-label="Play"><span class="play-btn">▶</span><span class="play-label">Watch the lesson</span></button>
+</div>
+<script src="../_engine/player.js"></script>
+</body>
+</html>

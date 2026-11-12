@@ -25,11 +25,14 @@ from fractions import Fraction as F
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 CHIP_COLOR = {"P": "blue", "E": "purple", "MD": "yellow", "AS": "green", "SUB": "ink",
               # lesson 0.2: one color per property (commutative = order, associative = grouping)
-              "COMM": "blue", "ASSOC": "purple", "DIST": "yellow", "CALC": "green", "REWRITE": "ink"}
+              "COMM": "blue", "ASSOC": "purple", "DIST": "yellow", "CALC": "green", "REWRITE": "ink",
+              # lesson 0.3: the parts of an expression
+              "TERM": "blue", "FACTOR": "purple", "COEF": "yellow", "CONST": "green"}
 CHIP_NAME = {"P": "parentheses and groups", "E": "exponents", "MD": "multiply and divide",
              "AS": "add and subtract", "SUB": "substitute", "COMM": "commutative property",
              "ASSOC": "associative property", "DIST": "distributive property", "CALC": "calculate",
-             "REWRITE": "rewrite"}
+             "REWRITE": "rewrite", "TERM": "terms", "FACTOR": "factors", "COEF": "coefficient",
+             "CONST": "constant"}
 PROPERTIES = {"Commutative": "blue", "Associative": "purple", "Distributive": "yellow"}
 # exact test points for expressions with variables: two expressions are treated as equal when they
 # agree at every point (all exercises are low-degree polynomials, so this cannot be fooled)
@@ -199,10 +202,162 @@ def validate_name(ex, problems):
             problems.append(f"{i}: wrong option {w['a']!r} needs 'why' and 'say'")
 
 
+# ---------------------------------------------------------------- parts of an expression (topic 0.3)
+def _norm(s):
+    """An expression as plain text without spaces: - * ^ ( ), no ⟨⟩, no unicode minus or powers."""
+    s = s.replace("⟨", "").replace("⟩", "").replace("−", "-").replace("·", "*").replace("×", "*")
+    s = s.replace("²", "^2").replace("³", "^3")
+    return re.sub(r"\s+", "", s)
+
+
+def split_terms(expr):
+    """The terms of an expression: pieces separated by + and − outside parentheses; the sign stays with
+    the term that follows it (a leading minus belongs to the first term)."""
+    s, terms, depth, cur = _norm(expr), [], 0, ""
+    for k, ch in enumerate(s):
+        if ch in "([":
+            depth += 1
+        elif ch in ")]":
+            depth -= 1
+        if ch in "+-" and depth == 0 and k > 0 and s[k - 1] not in "*^(+-":
+            terms.append(cur)
+            cur = ch
+        else:
+            cur += ch
+    terms.append(cur)
+    return terms
+
+
+GROUP = r"\([^()]*\)|\[[^\[\]]*\]"
+
+
+def term_parts(t):
+    sign = -1 if t.startswith("-") else 1
+    body = t.lstrip("+-")
+    m = re.match(r"\d+", body)
+    num = int(m.group(0)) if m else None
+    return {"text": t.lstrip("+"), "sign": sign, "body": body, "num": num,
+            "var": bool(re.search(r"[a-z]", body)), "group": bool(re.search(GROUP, body)),
+            "coef": sign * (num if num is not None else 1)}
+
+
+def all_parts(expr):
+    return [term_parts(t) for t in split_terms(expr)]
+
+
+def find_term(parts, target, what):
+    want = _norm(target).lstrip("+")
+    for p in parts:
+        if p["text"] == want:
+            return p
+    raise ValueError(f"{what}: {target!r} is not a term of the expression")
+
+
+def factor_count(body):
+    """Things multiplied inside one term: the number, every letter (x² is two factors), each group."""
+    rest = re.sub(GROUP, "", body)
+    n = len(re.findall(GROUP, body)) + (1 if re.match(r"\d+", rest) else 0)
+    return n + sum(int(e or 1) for _, e in re.findall(r"([a-z])(?:\^(\d+))?", rest))
+
+
+def derive(q, spec):
+    """The answer of a structural question, computed from the expression: terms · constant ·
+    coef:<term> · factors:<term>."""
+    parts = all_parts(q)
+    kind, _, arg = spec.partition(":")
+    if kind == "terms":
+        return len(parts)
+    if kind == "constant":
+        cs = [p for p in parts if not p["var"]]
+        if len(cs) != 1:
+            raise ValueError("needs exactly one constant term")
+        return cs[0]["coef"]
+    if kind == "coef":
+        return find_term(parts, arg, "coef")["coef"]
+    if kind == "factors":
+        return factor_count(find_term(parts, arg, "factors")["body"])
+    raise ValueError(f"unknown derive {spec!r}")
+
+
+def mistake_value(code, q, spec, ans):
+    """The number a named mistake gives, so a wrong option can be checked against its description."""
+    parts = all_parts(q)
+    kind, _, arg = code.partition(":")
+    flat = re.sub(r"\^\d+", "", _norm(q))
+    pieces = len(re.findall(r"\d+|[a-z]", flat))
+    if kind == "one":                                   # the whole thing taken as one piece
+        return 1
+    if kind == "pieces":                                # every number and letter counted
+        return pieces
+    if kind == "tokens":                                # every number, letter and sign counted
+        return pieces + len(re.findall(r"[+-]", flat))
+    if kind == "flat":                                  # terms inside groups counted as well
+        return sum(len(split_terms(re.search(GROUP, p["body"]).group(0)[1:-1])) if p["group"] else 1 for p in parts)
+    if kind == "variable-terms":                        # only terms with a variable
+        return sum(1 for p in parts if p["var"])
+    if kind == "distinct-vars":
+        return len(set(re.findall(r"[a-z]", flat)))
+    if kind == "drop-sign":
+        return abs(ans)
+    if kind == "hidden-zero":                           # "no number written" read as zero
+        t = find_term(parts, spec.partition(":")[2], "hidden-zero")
+        if t["num"] is not None:
+            raise ValueError("hidden-zero needs a term with no written number")
+        return 0
+    if kind == "constant":
+        return derive(q, "constant")
+    if kind == "coef-of":                               # the coefficient of another term
+        return find_term(parts, arg, "coef-of")["coef"]
+    if kind == "sum-numbers":                           # every coefficient and constant added
+        return sum(p["coef"] for p in parts)
+    raise ValueError(f"unknown mistake {code!r}")
+
+
+def validate_derive(ex, problems):
+    """kind "num" with "derive": the answer is read from the expression's structure (terms, coefficient,
+    constant, factors), never typed; every wrong value is checked against the named mistake "m"."""
+    i, q = ex["id"], ex["q"]
+    try:
+        ans = derive(q, ex["derive"])
+    except Exception as e:  # noqa: BLE001
+        problems.append(f"{i}: cannot derive {ex['derive']!r}: {e}")
+        return
+    ex["_answer"] = ans
+    check_steps(ex, problems)
+    for f in ("prompt", "read"):
+        if not ex.get(f):
+            problems.append(f"{i}: needs {f!r}")
+    if len(ex["wrong"]) != 3:
+        problems.append(f"{i}: needs exactly 3 wrong options")
+    seen = {}
+    for w in ex["wrong"]:
+        for f in ("v", "why", "say", "m"):
+            if w.get(f) is None:
+                problems.append(f"{i}: wrong option {w.get('v')!r} has no {f!r}")
+        if w.get("v") is None or not w.get("m"):
+            continue
+        w["_value"] = int(w["v"])
+        try:
+            got = mistake_value(w["m"], q, ex["derive"], ans)
+        except Exception as e:  # noqa: BLE001
+            problems.append(f"{i}: mistake {w['m']!r} cannot be computed: {e}")
+            continue
+        if got != w["_value"]:
+            problems.append(f"{i}: mistake {w['m']!r} gives {got}, but the option says {w['v']}")
+        if w["_value"] == ans:
+            problems.append(f"{i}: wrong option {w['v']} equals the right answer")
+        if w["_value"] in seen:
+            problems.append(f"{i}: two wrong options give {w['_value']}")
+        seen[w["_value"]] = w["m"]
+
+
 def check_claim(ex, item_text, claim, problems, what):
     """kind multi/match with "check": verify one statement with code.
     claim "property:<Name>" → item is a true identity showing that property;
-    claim "equals:<expr>"   → item equals <expr> for every value of the variables."""
+    claim "equals:<expr>"   → item equals <expr> for every value of the variables;
+    claim "term-of:<expr>"  → item is one of the terms of <expr> (sign included);
+    claim "terms:<n>"       → item has exactly <n> terms;
+    claim "coefficient:<n>" → item is one term whose coefficient is <n>."""
     i = ex["id"]
     kind, _, arg = claim.partition(":")
     try:
@@ -214,6 +369,16 @@ def check_claim(ex, item_text, claim, problems, what):
             return classify(item_text) == arg
         if kind == "equals":
             return same(item_text, arg)
+        if kind == "term-of":
+            return _norm(item_text).lstrip("+") in [t.lstrip("+") for t in split_terms(arg)]
+        if kind == "terms":
+            return len(split_terms(item_text)) == int(arg)
+        if kind == "coefficient":
+            ts = split_terms(item_text)
+            if len(ts) != 1:
+                problems.append(f"{i}: {what} {item_text!r} is not a single term")
+                return None
+            return term_parts(ts[0])["coef"] == int(_norm(arg))
     except Exception as e:  # noqa: BLE001
         problems.append(f"{i}: {what} {item_text!r} cannot be evaluated: {e}")
         return None
@@ -261,7 +426,8 @@ def validate_match(ex, problems):
                 problems.append(f"{i}: pair {p.get('l')!r} has no {f!r}")
         chk = ex.get("check")
         if chk and p.get("l") and p.get("r"):
-            claim = f"property:{p['r']}" if chk == "property" else f"equals:{p['r']}" if chk == "equal" else chk
+            claim = f"property:{p['r']}" if chk == "property" else f"equals:{p['r']}" if chk == "equal" \
+                else f"coefficient:{p['r']}" if chk == "coefficient" else chk
             if check_claim(ex, p["l"], claim, problems, "pair") is False:
                 problems.append(f"{i}: pair {p['l']!r} → {p['r']!r} is not right")
     if chk := ex.get("check"):
@@ -290,6 +456,9 @@ def validate(data):
             continue
         if kind == "name":
             validate_name(ex, problems)
+            continue
+        if ex.get("derive"):
+            validate_derive(ex, problems)
             continue
         i, sub = ex["id"], ex.get("sub")
         try:
@@ -415,7 +584,7 @@ def video_files(data, ex, num, set_id):
                  "cue": "show-problem", "pause_after_s": 1.2}]},
             {"id": "s02", "title": "Step by step", "blocks": blocks_s2},
             {"id": "s03", "title": "The answer", "blocks": [
-                {"id": b_ans, "text": f"So the answer is {ans_say}.", "display": f"= {ans_plain}", "cue": "answer"},
+                {"id": b_ans, "text": f"So the answer is {ans_say}.", "display": ans_plain if ex.get("derive") else f"= {ans_plain}", "cue": "answer"},
                 {"id": b_trap, "text": trap_text, "cue": "traps"}]},
         ],
     }
@@ -447,6 +616,13 @@ def video_files(data, ex, num, set_id):
             f'        <div class="card trap fade c-red" data-at="{b_trap}+{0.15 + 0.25 * k:.2f}">'
             f'<div class="math {trap_size} red"><span class="strike" data-at="{b_trap}+{0.9 + 0.25 * k:.2f}" data-dur="0.5">{trap_html[k]}</span></div>'
             f'<div class="why">{w["why"]}</div></div>')
+    if ex.get("derive"):    # a question about the parts, not an equation: show the question, then the answer
+        answer_line = (f'<div class="col" style="gap: 14px"><div class="math sm fade" data-at="{b_ans}-0.5">{markup(ex["q"])}</div>'
+                       f'<div class="say fade muted" style="font-size: 40px" data-at="{b_ans}-0.5">{ex["prompt"]}</div>'
+                       f'<div class="math sm green pop" data-at="{b_ans}@{last_word}">{ans_html}</div></div>')
+    else:
+        answer_line = (f'<div class="math sm fade" data-at="{b_ans}-0.5">{markup(ex["q"])} '
+                       f'<span class="green pop" data-at="{b_ans}@{last_word}">= {ans_html}</span></div>')
     prompt = f'\n    <div class="say fade muted" data-at="b01+0.4" style="font-size: 40px">{ex["prompt"]}</div>' if ex.get("prompt") else ""
     html = f"""<!doctype html>
 <html lang="en">
@@ -466,7 +642,7 @@ def video_files(data, ex, num, set_id):
   /* highlight boxes reach past the text but take no room, so lines never shift when they appear */
   .hl {{ padding: 0 10px; margin: 0 -10px; }}
   sup {{ font-size: 0.6em; vertical-align: 0.55em; line-height: 0; }}
-  .deriv {{ display: grid; grid-template-columns: auto auto; align-items: center; justify-content: center; gap: {"30px" if any("[[" in x for x in ex["lines"]) else "10px"} 28px; }}
+  .deriv {{ display: grid; grid-template-columns: auto auto; align-items: center; justify-content: center; gap: {"30px" if any("[[" in x for x in ex["lines"]) or ex.get("derive") else "10px"} 28px; }}
   .deriv .chip {{ justify-self: end; }}
   .deriv:has(.md) .chip {{ min-width: 84px; height: 72px; font-size: 38px; }}
   .deriv:has(.sm) .chip {{ min-width: 70px; height: 60px; font-size: 32px; border-radius: 18px; }}
@@ -494,7 +670,7 @@ def video_files(data, ex, num, set_id):
 
   <!-- s03: the answer and the traps -->
   <section class="scene" data-scene="s03">
-    <div class="math sm fade" data-at="{b_ans}-0.5">{markup(ex["q"])} <span class="green pop" data-at="{b_ans}@{last_word}">= {ans_html}</span></div>
+    {answer_line}
     <div class="label red fade" data-at="{b_trap}">Common traps</div>
     <div class="row" style="align-items: stretch; gap: 36px">
 {chr(10).join(cards)}

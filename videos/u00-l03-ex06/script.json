@@ -1,0 +1,57 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l03-ex06",
+  "title": "Exercise 6",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. How many terms are in three a plus two b minus five c plus one?",
+          "display": "3a + 2b − 5c + 1",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Break it at each plus and minus. Three a is the first term and two b is the second.",
+          "display": "3a + 2b − 5c + 1",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Then negative five c, with its sign, is the third term, and one is the fourth.",
+          "display": "4 terms",
+          "cue": "step-2"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b04",
+          "text": "So the answer is four.",
+          "display": "4",
+          "cue": "answer"
+        },
+        {
+          "id": "b05",
+          "text": "Watch out for these traps. If you counted only the terms with a variable, you get three. If you counted every number and letter, you get seven.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

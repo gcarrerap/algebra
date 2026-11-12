@@ -1,0 +1,57 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l03-ex13",
+  "title": "Exercise 13",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. How many terms are in two times the quantity three x minus one, minus x, plus nine?",
+          "display": "2(3x − 1) − x + 9",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "The first term is two times the quantity three x minus one. The parentheses keep it together, so the minus sign inside does not split it.",
+          "display": "2(3x − 1) − x + 9",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Then negative x is the second term and nine is the third.",
+          "display": "3 terms",
+          "cue": "step-2"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b04",
+          "text": "So the answer is three.",
+          "display": "3",
+          "cue": "answer"
+        },
+        {
+          "id": "b05",
+          "text": "Watch out for these traps. If you counted the terms inside the parentheses as well, you get four. If you counted only the terms with a variable, you get two.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

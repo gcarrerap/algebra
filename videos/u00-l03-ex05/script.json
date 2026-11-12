@@ -1,0 +1,57 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l03-ex05",
+  "title": "Exercise 5",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. What is the coefficient of negative x in four x squared minus x plus seven?",
+          "display": "4x^2 − x + 7",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "The second term is negative x. The minus sign belongs to it.",
+          "display": "−x = −1 · x",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "There is no number written, but a variable alone has a coefficient of one, and the minus sign makes it negative one.",
+          "display": "−1",
+          "cue": "step-2"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b04",
+          "text": "So the answer is negative one.",
+          "display": "−1",
+          "cue": "answer"
+        },
+        {
+          "id": "b05",
+          "text": "Watch out for these traps. If you dropped the minus sign, you get one. If you thought no number means zero, you get zero.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

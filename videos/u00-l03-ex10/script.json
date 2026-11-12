@@ -1,0 +1,69 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l03-ex10",
+  "title": "Exercise 10",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's look at this one. Which of these expressions have exactly three terms? Choose all that apply.",
+          "display": "Select all the expressions with exactly three terms.",
+          "cue": "show-problem",
+          "pause_after_s": 1.5
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "One by one",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Two x squared minus five x plus one. Three pieces separated by signs. Three terms.",
+          "display": "2x^2 − 5x + 1",
+          "cue": "option-1"
+        },
+        {
+          "id": "b03",
+          "text": "A minus b plus c. The pieces are a, negative b and c. Three terms.",
+          "display": "a − b + c",
+          "cue": "option-2"
+        },
+        {
+          "id": "b04",
+          "text": "Four times the quantity x plus one, minus seven. The group counts as one term, so there are only two terms.",
+          "display": "4(x + 1) − 7",
+          "cue": "option-3"
+        },
+        {
+          "id": "b05",
+          "text": "Three x y plus two. Two terms. The x and the y are factors, not separate terms.",
+          "display": "3xy + 2",
+          "cue": "option-4"
+        },
+        {
+          "id": "b06",
+          "text": "Negative x plus six minus four y. The first term starts with a minus sign, but it is still one term. Three terms in all.",
+          "display": "−x + 6 − 4y",
+          "cue": "option-5"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b07",
+          "text": "Three expressions have exactly three terms. Count the pieces separated by plus and minus, and treat each group in parentheses as one piece.",
+          "cue": "answer"
+        }
+      ]
+    }
+  ]
+}

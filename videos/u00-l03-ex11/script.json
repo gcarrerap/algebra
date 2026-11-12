@@ -1,0 +1,69 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l03-ex11",
+  "title": "Exercise 11",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's look at this one. Which of these terms have a coefficient of negative one? Choose all that apply.",
+          "display": "Select all the terms whose coefficient is −1.",
+          "cue": "show-problem",
+          "pause_after_s": 1.5
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "One by one",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Negative x. No number is written, so the coefficient is one, and the minus sign makes it negative one. Yes.",
+          "display": "−x",
+          "cue": "option-1"
+        },
+        {
+          "id": "b03",
+          "text": "x. The coefficient is positive one, because there is no minus sign. No.",
+          "display": "x",
+          "cue": "option-2"
+        },
+        {
+          "id": "b04",
+          "text": "Negative four x. The coefficient is negative four, not negative one. No.",
+          "display": "−4x",
+          "cue": "option-3"
+        },
+        {
+          "id": "b05",
+          "text": "Negative y squared. The coefficient is hidden. It is one, with the minus sign, negative one. Yes.",
+          "display": "−y^2",
+          "cue": "option-4"
+        },
+        {
+          "id": "b06",
+          "text": "Negative the quantity x plus two. The minus sign in front of the group means negative one times the group. The coefficient is negative one. Yes.",
+          "display": "−(x + 2)",
+          "cue": "option-5"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b07",
+          "text": "Three of them have a coefficient of negative one: negative x, negative y squared, and the negative group. A minus sign with no number means negative one.",
+          "cue": "answer"
+        }
+      ]
+    }
+  ]
+}
