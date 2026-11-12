@@ -8,6 +8,8 @@ Mathematics. Each unit lists the standards it covers.
 
 ---
 
+# Chapter 1 — Foundations
+
 ## Unit 0 — Foundations and Expressions
 *KY.HS.A.1, A.2*
 
@@ -27,6 +29,8 @@ Mathematics. Each unit lists the standards it covers.
 5. Compound inequalities (*and / or*)
 6. Literal equations: solving formulas for a variable (e.g. `A = ½bh` for `h`)
 7. Problems with units and dimensional analysis
+
+# Chapter 2 — Functions and Linear Models
 
 ## Unit 2 — Functions
 *KY.HS.F.1, A.23*
@@ -56,6 +60,8 @@ Mathematics. Each unit lists the standards it covers.
 3. Sequences as functions defined on the integers
 4. Modeling real situations with sequences
 
+# Chapter 3 — Systems and Data
+
 ## Unit 5 — Systems of Equations and Inequalities
 *KY.HS.A.14, A.20, A.25*
 
@@ -75,6 +81,8 @@ Mathematics. Each unit lists the standards it covers.
 4. Correlation coefficient `r`
 5. Correlation is not causation
 
+# Chapter 4 — Exponents and Exponential Functions
+
 ## Unit 7 — Exponents and Radicals
 *KY.HS.N.1, N.2*
 
@@ -91,6 +99,8 @@ Mathematics. Each unit lists the standards it covers.
 3. Percent change and compound interest
 4. Building exponential functions from tables and two points
 5. Why exponential growth eventually beats linear and quadratic growth
+
+# Chapter 5 — Polynomials and Quadratics
 
 ## Unit 9 — Polynomials
 *KY.HS.A.3, A.5*
@@ -127,6 +137,8 @@ Mathematics. Each unit lists the standards it covers.
 4. The quadratic formula and the discriminant
 5. Choosing the best method
 
+# Chapter 6 — Modeling
+
 ## Unit 13 — Modeling and Final Review
 *KY.HS.F.6, F.13, N.4*
 
@@ -138,13 +150,8 @@ Mathematics. Each unit lists the standards it covers.
 
 ## Lesson Format
 
-Each lesson is a self-contained HTML page with:
-
-1. **Key idea** — a short, plain-language explanation.
-2. **Interactive visual** — an animation or manipulative (balance scale, draggable graph, area model…).
-3. **Worked examples** — revealed step by step.
-4. **Practice** — randomly generated problems with instant feedback.
-5. **Challenge** — a problem in context or a reasoning question.
+See [docs/course-design.md](docs/course-design.md): topics and subtopics, one video and one exercise
+set per learning block, and an exam at the end of every unit.
 
 ## Mathematical Practices (throughout)
 

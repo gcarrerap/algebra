@@ -84,13 +84,39 @@ Every unit ends with an exam.
   subtopics.
 - Locked units are shown as locked.
 
-## Open points
+## Chapters
 
-- **Chapters** are not defined yet: [SYLLABUS.md](../SYLLABUS.md) goes straight to units (0–13).
-  The grouping of units into chapters has to be decided before the home page uses it.
-- Whether exam questions that are failed also play the solution video, or only show the feedback.
-- Where exam attempts and unit unlocks are stored (today progress lives in the browser's
-  `localStorage`, so it is per device and can be cleared).
+The 14 units of [SYLLABUS.md](../SYLLABUS.md) are grouped into six chapters:
+
+| Chapter | Units |
+|---|---|
+| 1. Foundations | 0 Foundations and Expressions · 1 Linear Equations and Inequalities |
+| 2. Functions and Linear Models | 2 Functions · 3 Linear Functions · 4 Sequences |
+| 3. Systems and Data | 5 Systems of Equations and Inequalities · 6 Statistics: Two-Variable Data |
+| 4. Exponents and Exponential Functions | 7 Exponents and Radicals · 8 Exponential Functions |
+| 5. Polynomials and Quadratics | 9 Polynomials · 10 Factoring · 11 Quadratic Functions · 12 Solving Quadratic Equations |
+| 6. Modeling | 13 Modeling and Final Review |
+
+Chapters only group units for navigation; locking stays per unit. Unit numbers do not change.
+
+## Exam feedback and solution videos
+
+- **During the exam**, a wrong answer shows only the feedback: that it was wrong, the correct
+  answer, and the mistake when it is a known one. No video, so the exam keeps its pace.
+- **After the exam**, a review screen lists every question with the student's answer, the correct
+  one and, for each wrong answer, its **solution video**.
+- Every question in the bank therefore has a solution video, as practice exercises do.
+
+## Where progress is stored
+
+- Progress (practice results, work areas, exam attempts, unlocked units) stays in the browser's
+  `localStorage`, under one key per course. The site is static on GitHub Pages, so there is no
+  server to keep it.
+- To move it to another device or protect it from a cleared browser, the home page has
+  **Export progress** (downloads a `.json` file) and **Import progress** (loads one).
+- It is not tamper-proof: someone who knows how can edit it. Accepted for a family course.
+- An exam attempt is recorded as: unit, date, questions drawn, answers, score. A unit is unlocked
+  when any attempt of the previous unit scored 90% or more.
 
 ## Gaps in the current pages
 
