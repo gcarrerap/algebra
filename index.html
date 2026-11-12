@@ -28,22 +28,43 @@
   .eyebrow { font: 600 13px var(--text); letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
   h1 { font: 700 clamp(36px, 7vw, 56px)/1.1 var(--display); margin: 10px 0 14px; text-wrap: balance; }
   h1 .y { color: var(--yellow); }
-  .lede { color: var(--muted); max-width: 60ch; margin: 0 0 44px; }
-  .unit { margin-top: 36px; }
-  .unit h2 { font: 600 20px var(--display); margin: 0 0 14px; display: flex; gap: 12px; align-items: baseline; }
+  .lede { color: var(--muted); max-width: 60ch; margin: 0 0 28px; }
+  .progress { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 18px 20px; margin-bottom: 20px; }
+  .progress .row { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 15px; }
+  .progress b { font: 600 22px var(--display); color: var(--yellow); }
+  .bar { height: 8px; border-radius: 999px; background: var(--line); margin-top: 12px; overflow: hidden; display: flex; }
+  .bar i { display: block; height: 100%; }
+  .toc { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+  .toc a { font: 600 13px var(--text); color: var(--muted); text-decoration: none; border: 1px solid var(--line); border-radius: 999px; padding: 5px 11px; font-variant-numeric: tabular-nums; }
+  .toc a:hover, .toc a:focus-visible { border-color: var(--yellow); color: var(--ink); outline: none; }
+  .toc a.done { border-color: var(--green); color: var(--green); }
+  .toc a.part { border-color: var(--yellow); color: var(--yellow); }
+  .unit { margin-top: 40px; scroll-margin-top: 16px; }
+  .unit h2 { font: 600 20px var(--display); margin: 0 0 4px; display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap; }
   .unit h2 .n { font: 600 13px var(--text); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  .unit .meta { color: var(--muted); font-size: 14px; margin: 0 0 14px; }
+  .unit .meta .count { color: var(--ink); font-weight: 600; }
+  .lesson { flex-wrap: wrap; }
+  .lesson .name { flex: 1 1 220px; }
+  .items { display: flex; flex-wrap: wrap; gap: 6px; }
+  .item { font: 600 12px var(--text); letter-spacing: .06em; text-transform: uppercase; padding: 6px 10px; border-radius: 999px; text-decoration: none; white-space: nowrap; }
+  a.item { background: var(--yellow); color: var(--bg); }
+  a.item:hover, a.item:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+  span.item { border: 1px dashed var(--line); color: var(--muted); }
+  .lesson.todo .num, .lesson.todo .name { opacity: .55; }
+  .lesson.done { border-color: color-mix(in srgb, var(--green) 45%, var(--line)); }
+  .dot { width: 10px; height: 10px; border-radius: 50%; flex: none; background: var(--line); }
+  .done .dot { background: var(--green); }
+  .part .dot { background: var(--yellow); }
+  .legend { display: flex; flex-wrap: wrap; gap: 16px; color: var(--muted); font-size: 14px; margin-top: 12px; }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
   ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
   .lesson {
     display: flex; align-items: center; gap: 16px; padding: 16px 20px; border-radius: 16px;
     background: var(--card); border: 1px solid var(--line); color: inherit; text-decoration: none;
   }
-  a.lesson:hover, a.lesson:focus-visible { border-color: var(--yellow); outline: none; }
   .lesson .num { font: 600 15px var(--display); color: var(--muted); min-width: 2.2em; font-variant-numeric: tabular-nums; }
   .lesson .name { flex: 1; min-width: 0; font-weight: 500; }
-  .lesson .tag { font: 600 12px var(--text); letter-spacing: .1em; text-transform: uppercase; padding: 6px 10px; border-radius: 999px; }
-  a.lesson .tag { background: var(--yellow); color: var(--bg); }
-  .lesson.soon { opacity: .5; }
-  .lesson.soon .tag { border: 1px solid var(--line); color: var(--muted); }
   .key { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 52px; color: var(--muted); font-size: 14px; align-items: center; }
   .chip { font: 700 13px var(--display); color: var(--bg); padding: 4px 9px; border-radius: 8px; }
   footer { margin-top: 28px; color: var(--muted); font-size: 14px; }
@@ -53,21 +74,17 @@
 <main>
   <div class="eyebrow">Grade 9 · Kentucky Academic Standards</div>
   <h1>Algebra 1, <span class="y">one idea at a time</span></h1>
-  <p class="lede">Short animated lessons with narration. Tap a lesson to watch it; tap the screen to pause, and the bar at the bottom to jump back.</p>
+  <p class="lede">Short animated lessons with narration. The full Algebra&nbsp;1 course is listed below; yellow buttons are ready to open, dashed ones are still to be made. In a video, tap the screen to pause and the bar at the bottom to jump back.</p>
 
-  <section class="unit">
-    <h2><span class="n">Unit 0</span>Foundations and Expressions</h2>
-    <ol>
-      <li><a class="lesson" href="videos/u00-l01-order-of-operations/video.html"><span class="num">0.1</span><span class="name">Order of Operations</span><span class="tag">Watch</span></a></li>
-      <li><a class="lesson" href="exercises/u00-l01/"><span class="num">0.1</span><span class="name">Practice: 20 exercises with video solutions</span><span class="tag">Practice</span></a></li>
-      <li><a class="lesson" href="videos/u00-l02-commutative-associative/video.html"><span class="num">0.2</span><span class="name">Commutative and Associative Properties</span><span class="tag">Watch</span></a></li>
-      <li><a class="lesson" href="videos/u00-l02-distributive/video.html"><span class="num">0.2</span><span class="name">The Distributive Property</span><span class="tag">Watch</span></a></li>
-      <li><a class="lesson" href="exercises/u00-l02/"><span class="num">0.2</span><span class="name">Practice: 20 exercises with video solutions</span><span class="tag">Practice</span></a></li>
-      <li><div class="lesson soon"><span class="num">0.3</span><span class="name">Parts of an Expression</span><span class="tag">Soon</span></div></li>
-      <li><div class="lesson soon"><span class="num">0.4</span><span class="name">Combining Like Terms</span><span class="tag">Soon</span></div></li>
-      <li><div class="lesson soon"><span class="num">0.5</span><span class="name">Words into Expressions</span><span class="tag">Soon</span></div></li>
-    </ol>
-  </section>
+  <div class="progress" id="progress"></div>
+  <nav class="toc" id="toc" aria-label="Units"></nav>
+  <div class="legend">
+    <span><i class="dot" style="background: var(--green)"></i>Video + practice ready</span>
+    <span><i class="dot" style="background: var(--yellow)"></i>In progress</span>
+    <span><i class="dot"></i>Not started</span>
+  </div>
+  <div id="units"></div>
+  <noscript><p>The full syllabus is in <a href="SYLLABUS.md" style="color: var(--yellow)">SYLLABUS.md</a>.</p></noscript>
 
   <div class="key">Order of operations:
     <span class="chip" style="background: var(--blue)">P</span>
@@ -82,5 +99,125 @@
   </div>
   <footer>Lessons use an AI-generated voice.</footer>
 </main>
+<script>
+/* The whole course (mirrors SYLLABUS.md). To publish something, add its link to the lesson:
+   video: "path" or [["Label", "path"], ...]   ·   practice: "path"                          */
+const COURSE = [
+  { n: 0, title: "Foundations and Expressions", kas: "KY.HS.A.1, A.2", lessons: [
+    { name: "Order of operations and signed numbers",
+      video: "videos/u00-l01-order-of-operations/video.html", practice: "exercises/u00-l01/" },
+    { name: "Properties: commutative, associative, distributive",
+      video: [["Video: comm. & assoc.", "videos/u00-l02-commutative-associative/video.html"],
+              ["Video: distributive", "videos/u00-l02-distributive/video.html"]],
+      practice: "exercises/u00-l02/" },
+    { name: "Parts of an expression: terms, factors, coefficients, constants" },
+    { name: "Combining like terms and simplifying" },
+    { name: "Translating words into algebraic expressions" } ] },
+  { n: 1, title: "Linear Equations and Inequalities", kas: "KY.HS.A.12, A.15, A.16, A.18, N.4–N.6", lessons: [
+    { name: "One-step and multi-step equations" },
+    { name: "Variables on both sides; no solution and infinitely many solutions" },
+    { name: "Justifying each step (properties of equality)" },
+    { name: "Linear inequalities and graphing them on a number line" },
+    { name: "Compound inequalities (and / or)" },
+    { name: "Literal equations: solving formulas for a variable" },
+    { name: "Problems with units and dimensional analysis" } ] },
+  { n: 2, title: "Functions", kas: "KY.HS.F.1, A.23", lessons: [
+    { name: "Relations vs. functions (tables, mapping diagrams, vertical line test)" },
+    { name: "Function notation f(x) and evaluating functions" },
+    { name: "Domain and range (in context and from graphs)" },
+    { name: "Reading and interpreting graphs: increasing, decreasing, intercepts" },
+    { name: "A graph as the set of all solutions of an equation" } ] },
+  { n: 3, title: "Linear Functions", kas: "KY.HS.F.3, F.4, F.12, F.14, A.13, A.24", lessons: [
+    { name: "Rate of change and slope" },
+    { name: "Slope-intercept form y = mx + b" },
+    { name: "Point-slope form and standard form" },
+    { name: "Writing equations from a graph, two points, a table, or a description" },
+    { name: "Parallel and perpendicular lines" },
+    { name: "Interpreting slope and intercept in context" },
+    { name: "Solving f(x) = g(x) with graphs and tables" } ] },
+  { n: 4, title: "Sequences", kas: "KY.HS.F.2, F.7", lessons: [
+    { name: "Arithmetic sequences: explicit and recursive formulas" },
+    { name: "Geometric sequences: explicit and recursive formulas" },
+    { name: "Sequences as functions defined on the integers" },
+    { name: "Modeling real situations with sequences" } ] },
+  { n: 5, title: "Systems of Equations and Inequalities", kas: "KY.HS.A.14, A.20, A.25", lessons: [
+    { name: "Solving by graphing" },
+    { name: "Solving by substitution" },
+    { name: "Solving by elimination (and why it works)" },
+    { name: "Number of solutions: one, none, infinitely many" },
+    { name: "Linear inequalities in two variables (half-planes)" },
+    { name: "Systems of inequalities and constraint problems" } ] },
+  { n: 6, title: "Statistics: Two-Variable Data", kas: "KY.HS.SP.6, SP.7, SP.8", lessons: [
+    { name: "Scatter plots and types of association" },
+    { name: "Line of best fit and residuals" },
+    { name: "Interpreting the slope and intercept of a model" },
+    { name: "Correlation coefficient r" },
+    { name: "Correlation is not causation" } ] },
+  { n: 7, title: "Exponents and Radicals", kas: "KY.HS.N.1, N.2", lessons: [
+    { name: "Exponent rules (product, quotient, power)" },
+    { name: "Zero and negative exponents" },
+    { name: "Roots and radicals; simplifying radicals" },
+    { name: "Rational exponents: a^(1/n) and a^(m/n)" } ] },
+  { n: 8, title: "Exponential Functions", kas: "KY.HS.F.5, F.11, F.12, F.13, F.14", lessons: [
+    { name: "Linear vs. exponential: constant differences vs. constant factors" },
+    { name: "Exponential growth and decay y = a·bˣ" },
+    { name: "Percent change and compound interest" },
+    { name: "Building exponential functions from tables and two points" },
+    { name: "Why exponential growth eventually beats linear and quadratic growth" } ] },
+  { n: 9, title: "Polynomials", kas: "KY.HS.A.3, A.5", lessons: [
+    { name: "Vocabulary: degree, standard form, monomial, binomial, trinomial" },
+    { name: "Adding and subtracting polynomials" },
+    { name: "Multiplying polynomials (distributive property, area model)" },
+    { name: "Special products: (a+b)², (a−b)², (a+b)(a−b)" } ] },
+  { n: 10, title: "Factoring", kas: "KY.HS.A.2, A.3, A.7", lessons: [
+    { name: "Greatest common factor (GCF)" },
+    { name: "Trinomials x² + bx + c" },
+    { name: "Trinomials ax² + bx + c" },
+    { name: "Difference of squares and perfect-square trinomials" },
+    { name: "Factoring to find zeros (roots)" } ] },
+  { n: 11, title: "Quadratic Functions", kas: "KY.HS.F.4, F.5, A.7", lessons: [
+    { name: "The parabola: vertex, axis of symmetry, intercepts" },
+    { name: "Standard form, vertex form, and factored form" },
+    { name: "What each form reveals (zeros, maximum/minimum, symmetry)" },
+    { name: "Transformations of y = x²" },
+    { name: "Quadratic models (projectiles, area)" } ] },
+  { n: 12, title: "Solving Quadratic Equations", kas: "KY.HS.A.19", lessons: [
+    { name: "Solving by factoring" },
+    { name: "Solving with square roots" },
+    { name: "Completing the square" },
+    { name: "The quadratic formula and the discriminant" },
+    { name: "Choosing the best method" } ] },
+  { n: 13, title: "Modeling and Final Review", kas: "KY.HS.F.6, F.13, N.4", lessons: [
+    { name: "Choosing a model: linear, exponential, or quadratic" },
+    { name: "Combining functions with operations" },
+    { name: "Capstone project with real data" } ] },
+];
+
+const esc = t => t.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const status = l => (l.video && l.practice) ? "done" : (l.video || l.practice) ? "part" : "todo";
+const pill = (label, href) => href ? `<a class="item" href="${href}">${esc(label)}</a>` : `<span class="item">${esc(label)} · to do</span>`;
+const videos = l => !l.video ? [pill("Video")] : typeof l.video === "string" ? [pill("Video", l.video)] : l.video.map(([t, h]) => pill(t, h));
+
+let total = 0, done = 0, part = 0;
+const toc = [], html = [];
+for (const u of COURSE) {
+  const st = u.lessons.map(status);
+  const d = st.filter(s => s === "done").length, p = st.filter(s => s === "part").length;
+  total += st.length; done += d; part += p;
+  const cls = d === st.length ? "done" : (d || p) ? "part" : "";
+  toc.push(`<a class="${cls}" href="#unit-${u.n}">${u.n}</a>`);
+  const rows = u.lessons.map((l, i) => `<li><div class="lesson ${st[i]}"><i class="dot" aria-hidden="true"></i>` +
+    `<span class="num">${u.n}.${i + 1}</span><span class="name">${esc(l.name)}</span>` +
+    `<span class="items">${[...videos(l), pill("Practice", l.practice)].join("")}</span></div></li>`).join("\n");
+  html.push(`<section class="unit" id="unit-${u.n}"><h2><span class="n">Unit ${u.n}</span>${esc(u.title)}</h2>` +
+    `<p class="meta"><span class="count">${d} of ${st.length}</span> lessons ready${p ? ` · ${p} in progress` : ""} · ${esc(u.kas)}</p><ol>${rows}</ol></section>`);
+}
+document.getElementById("units").innerHTML = html.join("\n");
+document.getElementById("toc").innerHTML = toc.join("");
+const pc = n => (100 * n / total).toFixed(1) + "%";
+document.getElementById("progress").innerHTML =
+  `<div class="row"><span><b>${done}</b> of ${total} lessons ready</span><span>${part} in progress · ${total - done - part} not started · ${COURSE.length} units</span></div>` +
+  `<div class="bar" role="img" aria-label="${done} of ${total} lessons ready"><i style="width:${pc(done)};background:var(--green)"></i><i style="width:${pc(part)};background:var(--yellow)"></i></div>`;
+</script>
 </body>
 </html>
