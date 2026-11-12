@@ -1,0 +1,57 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l02-ex12",
+  "title": "Exercise 12",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Two times the quantity three x plus four y minus five.",
+          "display": "2(3x + 4y − 5)",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "There are three terms inside, so the two multiplies all three of them.",
+          "display": "2 · 3x + 2 · 4y − 2 · 5",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Two times three x is six x. Two times four y is eight y. Two times five is ten, and the minus sign stays.",
+          "display": "6x + 8y − 10",
+          "cue": "step-2"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b04",
+          "text": "So the answer is six x plus eight y minus ten.",
+          "display": "= 6x + 8y − 10",
+          "cue": "answer"
+        },
+        {
+          "id": "b05",
+          "text": "Watch out for these traps. If you multiply only the first term, you get six x plus four y minus five. If you skip the last term, you get six x plus eight y minus five.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

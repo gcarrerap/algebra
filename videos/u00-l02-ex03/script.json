@@ -1,0 +1,57 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l02-ex03",
+  "title": "Exercise 3",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's look at this one. Four times the quantity x plus three equals four x plus twelve. Which property does it show?",
+          "display": "4(x + 3) = 4x + 12",
+          "cue": "show-problem",
+          "pause_after_s": 1.5
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "What changed",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "The four outside is multiplied by each term inside: four times x, and four times three.",
+          "display": "4(x + 3) = 4x + 4 · 3",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Four times three is twelve. Multiplying across a sum is the distributive property.",
+          "display": "4(x + 3) = 4x + 12",
+          "cue": "step-2"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b04",
+          "text": "So the answer is the distributive property.",
+          "display": "Distributive",
+          "cue": "answer"
+        },
+        {
+          "id": "b05",
+          "text": "Watch out for these traps. It isn't the commutative property, because no two terms just trade places. It isn't the associative property, because the parentheses don't just move.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

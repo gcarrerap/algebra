@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Commutative and Associative Properties</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="../_engine/player.css">
+<style>
+  /* Lesson 0.2 colors: commutative (order) blue · associative (grouping) purple · results green. */
+  .title-row { display: flex; align-items: center; gap: 28px; }
+  .title-row .chip { font-size: 44px; padding: 0 30px; }
+  .title-row .label { font-size: 30px; }
+  /* tokens of equal width, so two of them can trade places exactly */
+  .tk { display: inline-block; width: 0.78em; text-align: center; }
+  .swap-r { display: inline-block; transform: translate(calc(var(--p) * 1.56em), calc(sin(var(--p) * 180deg) * -0.45em)); }
+  .swap-l { display: inline-block; transform: translate(calc(var(--p) * -1.56em), calc(sin(var(--p) * 180deg) * 0.45em)); }
+  .rule { gap: 10px; padding: 30px 56px; }
+  .rule .math { font-size: 60px; }
+  .ne { color: var(--red); padding: 0 0.3em; }
+  .pair { width: 760px; gap: 14px; padding: 34px 40px; }
+  .deriv { display: grid; grid-template-columns: auto auto; align-items: center; justify-content: center; gap: 10px 28px; }
+  .deriv .chip { justify-self: end; min-width: 84px; height: 72px; font-size: 32px; }
+  .recap { display: flex; gap: 36px; }
+  .recap .card { width: 780px; padding: 36px 40px; gap: 14px; }
+  .recap .name { font: 700 44px Poppins, sans-serif; }
+  .recap .what { font: 500 30px Inter, sans-serif; color: var(--muted); }
+  .recap .math { font-size: 52px; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="header"><span class="unit">Unit 0 · Lesson 2</span><span class="title">Commutative and Associative Properties</span></div>
+
+  <!-- s01: the shortcut -->
+  <section class="scene" data-scene="s01">
+    <div class="math pop" data-at="b01">25 × 7 × 4<span class="fade yellow" data-at="b01.end-0.3" data-out="b03"> = ?</span></div>
+    <div class="row" style="align-items: stretch">
+      <div class="dim" data-at="b03">
+        <div class="card fade" data-at="b02" style="height: 100%; width: 640px">
+          <div class="label muted">The long way</div>
+          <div class="math sm fade" data-at="b02@seventy-five">25 × 7 = 175</div>
+          <div class="math sm fade" data-at="b02@four">175 × 4 = <span class="red">?!</span></div>
+        </div>
+      </div>
+      <div class="card fade c-green glow" data-at="b03" style="width: 640px">
+        <div class="label green">The shortcut</div>
+        <div class="math sm fade" data-at="b03@hundred">25 × 4 = 100</div>
+        <div class="math sm fade" data-at="b03@seven">100 × 7 = <span class="green pop" data-at="b03@hundred#3">700</span></div>
+      </div>
+    </div>
+    <div class="say fade" data-at="b04">Why can we <span class="yellow">move the numbers around</span>?</div>
+  </section>
+
+  <!-- s02: commutative = order -->
+  <section class="scene" data-scene="s02">
+    <div class="title-row pop" data-at="b05"><span class="chip c-blue">Commutative</span><span class="label blue fade" data-at="b05@order">= order</span></div>
+    <div class="math md fade" data-at="b06"><span class="tk swap-r" data-at="b06@five#2" data-dur="0.9">3</span><span class="tk">+</span><span class="tk swap-l" data-at="b06@five#2" data-dur="0.9">5</span><span class="fade green" data-at="b06@eight"> = 8</span></div>
+    <div class="math md fade" data-at="b07@multiplication"><span class="tk swap-r" data-at="b07@six#2" data-dur="0.9">4</span><span class="tk">×</span><span class="tk swap-l" data-at="b07@six#2" data-dur="0.9">6</span><span class="fade green" data-at="b07@twenty-four"> = 24</span></div>
+    <div class="card rule fade c-blue glow" data-at="b08">
+      <div class="math">a + b = b + a</div>
+      <div class="math fade" data-at="b08@times">a · b = b · a</div>
+    </div>
+    <div class="say fade muted" data-at="b09" style="font-size: 38px">com<b class="blue">mute</b> → numbers move around and trade places</div>
+  </section>
+
+  <!-- s03: not for subtraction or division -->
+  <section class="scene" data-scene="s03">
+    <div class="card pair fade c-red" data-at="b10">
+      <div class="label red">Subtraction</div>
+      <div class="math sm">8 − 3 = <span class="fade" data-at="b10@five">5</span></div>
+      <div class="math sm fade" data-at="b10@three#2">3 − 8 = <span class="fade red" data-at="b10@negative">−5</span></div>
+    </div>
+    <div class="card pair fade c-red" data-at="b11@twelve">
+      <div class="label red">Division</div>
+      <div class="math sm">12 ÷ 4 = <span class="fade" data-at="b11@three">3</span></div>
+      <div class="math sm fade" data-at="b11@four#2">4 ÷ 12 = <span class="fade red" data-at="b11@third">⅓</span></div>
+    </div>
+    <div class="say fade red" data-at="b12">− and ÷ are <b>not</b> commutative: order matters.</div>
+  </section>
+
+  <!-- s04: associative = grouping -->
+  <section class="scene" data-scene="s04">
+    <div class="title-row pop" data-at="b13"><span class="chip c-purple">Associative</span><span class="label purple fade" data-at="b13@grouping">= grouping</span></div>
+    <div class="math md fade" data-at="b14@take"><span class="hl c-purple" data-at="b14@group" data-out="b15">(2 + 3)</span> + 4<span class="fade" data-at="b14@five#2"> = 5 + 4</span><span class="fade green" data-at="b14@nine"> = 9</span></div>
+    <div class="math md fade" data-at="b15">2 + <span class="hl c-purple" data-at="b15@group" data-out="b16">(3 + 4)</span><span class="fade" data-at="b15@seven"> = 2 + 7</span><span class="fade green" data-at="b15@nine"> = 9</span></div>
+    <div class="stack">
+      <div class="say fade" data-at="b16" data-out="b17">Same order. <span class="purple">Only the parentheses move.</span></div>
+      <div class="card rule fade c-purple glow" data-at="b17">
+        <div class="math">(a + b) + c = a + (b + c)</div>
+        <div class="math fade" data-at="b17@multiplication">(a · b) · c = a · (b · c)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- s05: not for subtraction either -->
+  <section class="scene" data-scene="s05">
+    <div class="row">
+      <div class="card fade c-red" data-at="b19@ten" style="width: 680px">
+        <div class="math sm">(10 − 4) − 3</div>
+        <div class="math sm fade" data-at="b19@six">= 6 − 3</div>
+        <div class="math md fade" data-at="b19@three#3">= 3</div>
+      </div>
+      <div class="math md red pop" data-at="b20">≠</div>
+      <div class="card fade c-red" data-at="b20" style="width: 680px">
+        <div class="math sm">10 − (4 − 3)</div>
+        <div class="math sm fade" data-at="b20@one">= 10 − 1</div>
+        <div class="math md fade" data-at="b20@nine">= 9</div>
+      </div>
+    </div>
+    <div class="say fade red" data-at="b20@nine">Subtraction is <b>not</b> associative either.</div>
+  </section>
+
+  <!-- s06: the shortcut, explained -->
+  <section class="scene" data-scene="s06">
+    <div class="deriv">
+      <span></span>
+      <div class="math md pop" data-at="b21">25 × <span class="hl c-blue" data-at="b22" data-out="b23">7 × 4</span></div>
+      <span class="chip c-blue pop" data-at="b22@four">COMM</span>
+      <div class="math md fade" data-at="b22@four">= <span class="hl c-purple" data-at="b23" data-out="b24">25 × 4</span> × 7</div>
+      <span class="chip c-purple pop" data-at="b23@four">ASSOC</span>
+      <div class="math md fade" data-at="b23@four">= <span class="hl c-green" data-at="b24" data-out="b24@seven">(25 × 4)</span> × 7</div>
+      <span class="chip c-green pop" data-at="b24@hundred">×</span>
+      <div class="math md fade" data-at="b24@hundred">= 100 × 7</div>
+      <span></span>
+      <div class="math md pop green" data-at="b24@hundred#3">= 700</div>
+    </div>
+    <div class="say fade muted" data-at="b25" style="font-size: 40px">Look for pairs that make <span class="yellow">10, 100, 1000…</span></div>
+  </section>
+
+  <!-- s07: your turn + recap -->
+  <section class="scene" data-scene="s07">
+    <div class="layer fade" data-at="b26-0.5" data-out="b28">
+      <div class="label yellow pop" data-at="b26" style="font-size: 34px">★ Your turn</div>
+      <div class="row" style="gap: 48px">
+        <div class="math md pop" data-at="b26"><span class="hl c-purple" data-at="b27@thirty-eight" data-out="b27@seventeen">38</span> + 17 + <span class="hl c-purple" data-at="b27@thirty-eight" data-out="b27@seventeen">62</span><span class="fade yellow" data-at="b26.end" data-out="b27"> = ?</span></div>
+        <div class="timer" data-at="b26.end" data-out="b27"></div>
+      </div>
+      <div class="say fade muted" data-at="b26@pause" data-out="b27">⏸ Pause the video and try it</div>
+      <div class="col" style="gap: 8px">
+        <div class="math sm fade" data-at="b27@sixty-two">= (38 + 62) + 17</div>
+        <div class="math sm fade" data-at="b27@hundred">= 100 + 17</div>
+        <div class="math md pop green" data-at="b27@seventeen#2">= 117</div>
+      </div>
+    </div>
+    <div class="layer fade" data-at="b28">
+      <div class="recap">
+        <div class="card pop c-blue glow" data-at="b28@commutative">
+          <div class="name blue">Commutative</div><div class="what">changes the <b>order</b></div>
+          <div class="math">a + b = b + a</div>
+        </div>
+        <div class="card pop c-purple glow" data-at="b28@associative">
+          <div class="name purple">Associative</div><div class="what">changes the <b>grouping</b></div>
+          <div class="math">(a + b) + c = a + (b + c)</div>
+        </div>
+      </div>
+      <div class="say fade" data-at="b28@both" style="font-size: 40px"><span class="green">✓ + and ×</span> &nbsp;&nbsp; <span class="red">✗ − and ÷</span></div>
+      <div class="say fade muted" data-at="b29" style="font-size: 38px">Next: <span style="color: var(--ink)">The Distributive Property</span></div>
+      <div class="label fade muted" data-at="b30" style="font-size: 22px; font-weight: 500">This video uses an AI-generated voice.</div>
+    </div>
+  </section>
+
+  <div class="caption"></div>
+  <div class="progress"></div>
+  <div id="seek" title="Jump to a moment"></div>
+  <button id="play" type="button" aria-label="Play"><span class="play-btn">▶</span><span class="play-label">Watch the lesson</span></button>
+</div>
+<script src="../_engine/player.js"></script>
+</body>
+</html>

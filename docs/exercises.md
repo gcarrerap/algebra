@@ -4,6 +4,17 @@ Each lesson can have a multiple-choice practice set. The first one is
 [`exercises/u00-l01/`](../exercises/u00-l01/) (lesson 0.1, order of operations and signed numbers):
 20 exercises in four levels (Warm-up, Tricky, Challenging, Boss level).
 
+The second is [`exercises/u00-l02/`](../exercises/u00-l02/) (lesson 0.2, properties of operations), which
+adds two kinds of exercise besides "find the value" (see the `_notes` in its `exercises.json`):
+
+| `kind` | The question | How it is checked |
+|---|---|---|
+| `num` (default) | Find the value. | Exact fractions, as in 0.1. |
+| `expr` | Expand an expression, e.g. `−3(x + 4)`. | Every line, the answer and every wrong option are evaluated at six sets of values of the variables (`x`, `y`…); lines must match the question at all of them, wrong options must not match the answer or each other. |
+| `name` | Which property does an identity show? | Both sides must be equal, and the stated property must match the identity's shape (same order and same numbers = associative; same numbers in another order = commutative; otherwise distributive). The two other properties are the wrong options. |
+
+Property chips: **COMM blue · ASSOC purple · DIST yellow · CALC green · REWRITE white**.
+
 How it behaves:
 
 - Options are shuffled every time an exercise is shown.
@@ -49,4 +60,5 @@ git -C ../api-access fetch --depth 1 origin audio-temp
 for d in videos/u00-l01-ex*; do python3 tools/plan_audio.py $d --fetch ../api-access; python3 tools/assemble_audio.py $d; done
 ```
 
-The 20 videos of 0.1 are 133 blocks, about 11,300 characters, in a single run.
+The 20 videos of 0.1 are 133 blocks, about 11,300 characters, in a single run. All 22 videos of 0.2
+(two lessons + 20 solutions) are 162 blocks, about 14,500 characters, also in one run.

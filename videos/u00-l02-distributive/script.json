@@ -1,0 +1,172 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l02-distributive",
+  "title": "The Distributive Property",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "Mental math",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Try this one in your head. What is six times ninety-eight?",
+          "display": "6 × 98",
+          "cue": "show-problem",
+          "pause_after_s": 2.5
+        },
+        {
+          "id": "b02",
+          "text": "Here's a trick. Ninety-eight is one hundred minus two.",
+          "display": "6 × (100 − 2)",
+          "cue": "split"
+        },
+        {
+          "id": "b03",
+          "text": "Six times one hundred is six hundred. Six times two is twelve.",
+          "display": "600 − 12",
+          "cue": "share"
+        },
+        {
+          "id": "b04",
+          "text": "And six hundred minus twelve is five hundred eighty-eight. You just used the distributive property.",
+          "display": "588",
+          "cue": "result",
+          "tone": "excited"
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Why it works",
+      "blocks": [
+        {
+          "id": "b05",
+          "text": "Here's why it works. Picture a rectangle three units tall. Its width is four plus two.",
+          "display": "3 × (4 + 2)",
+          "cue": "area-setup"
+        },
+        {
+          "id": "b06",
+          "text": "One way to find the area is to add first. Four plus two is six, and three times six is eighteen.",
+          "display": "3 × 6 = 18",
+          "cue": "area-add-first"
+        },
+        {
+          "id": "b07",
+          "text": "Another way is to split it into two rectangles. Three times four is twelve, and three times two is six. Twelve plus six is eighteen.",
+          "display": "3 × 4 + 3 × 2 = 12 + 6 = 18",
+          "cue": "area-split"
+        },
+        {
+          "id": "b08",
+          "text": "Same rectangle, same area. Multiplying a sum gives the same result as multiplying each part and adding.",
+          "cue": "area-same"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "With a variable",
+      "blocks": [
+        {
+          "id": "b09",
+          "text": "This is what makes it so useful in algebra. What is three times the quantity x plus four?",
+          "display": "3(x + 4)",
+          "cue": "var-setup",
+          "pause_after_s": 1.5
+        },
+        {
+          "id": "b10",
+          "text": "We can't add x and four, because we don't know what x is. But we can still split the rectangle.",
+          "cue": "var-cant-add"
+        },
+        {
+          "id": "b11",
+          "text": "Three times x is three x. Three times four is twelve.",
+          "display": "3x + 12",
+          "cue": "var-split"
+        },
+        {
+          "id": "b12",
+          "text": "So three times the quantity x plus four equals three x plus twelve. The number outside multiplies every term inside.",
+          "display": "3(x + 4) = 3x + 12",
+          "cue": "var-result"
+        },
+        {
+          "id": "b13",
+          "text": "With letters, a times the quantity b plus c equals a b plus a c.",
+          "display": "a(b + c) = ab + ac",
+          "cue": "rule"
+        }
+      ]
+    },
+    {
+      "id": "s04",
+      "title": "Watch the signs",
+      "blocks": [
+        {
+          "id": "b14",
+          "text": "Now watch the signs. What is negative two times the quantity x minus five?",
+          "display": "−2(x − 5)",
+          "cue": "neg-setup",
+          "pause_after_s": 2.0
+        },
+        {
+          "id": "b15",
+          "text": "Negative two times x is negative two x.",
+          "display": "−2x",
+          "cue": "neg-first"
+        },
+        {
+          "id": "b16",
+          "text": "Negative two times negative five is positive ten. So the answer is negative two x plus ten.",
+          "display": "−2x + 10",
+          "cue": "neg-second"
+        },
+        {
+          "id": "b17",
+          "text": "A very common mistake is to multiply only the first term, and write negative two x minus five. The arrows must reach every term, and the sign goes along.",
+          "display": "−2x − 5 ✗",
+          "cue": "neg-trap"
+        }
+      ]
+    },
+    {
+      "id": "s05",
+      "title": "Your turn",
+      "blocks": [
+        {
+          "id": "b18",
+          "text": "Your turn. Expand four times the quantity two x plus three. Pause the video and try it.",
+          "display": "4(2x + 3)",
+          "cue": "challenge",
+          "pause_after_s": 4.0
+        },
+        {
+          "id": "b19",
+          "text": "Four times two x is eight x. Four times three is twelve. The answer is eight x plus twelve.",
+          "display": "8x + 12",
+          "cue": "challenge-answer"
+        },
+        {
+          "id": "b20",
+          "text": "Remember: the number outside is shared with every term inside, and its sign goes along.",
+          "cue": "recap"
+        },
+        {
+          "id": "b21",
+          "text": "Next, the parts of an expression.",
+          "cue": "next"
+        },
+        {
+          "id": "b22",
+          "text": "This video uses an AI-generated voice.",
+          "cue": "disclosure",
+          "tone": "calm"
+        }
+      ]
+    }
+  ]
+}

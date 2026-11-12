@@ -1,0 +1,866 @@
+{
+ "unit": "0.2",
+ "title": "Properties of Operations",
+ "h1": "Properties, <span class=\"y\">put to work</span>",
+ "levels": {
+  "1": "Warm-up",
+  "2": "Tricky",
+  "3": "Challenging",
+  "4": "Boss level"
+ },
+ "_notes": "Source of truth for the 0.2 practice set. Three kinds: \"num\" (default; same as 0.1, the answer is a number), \"expr\" (the answer is an expression: a = answer, a_read = how it is said; every line and option is checked at several values of the variables; each wrong option has read = how it is said) and \"name\" (which property an identity shows: show/say/notes are one block each, ⟨…⟩ in show is highlighted; wrong = the other two properties). Implied multiplication (3x, 2(x + 1), x(x + 5)) and · are allowed. Chips: COMM blue, ASSOC purple, DIST yellow, CALC green, REWRITE white.",
+ "exercises": [
+  {
+   "id": "ex01",
+   "level": 1,
+   "kind": "name",
+   "prompt": "Which property is shown?",
+   "q": "7 + 9 = 9 + 7",
+   "read": "Seven plus nine equals nine plus seven.",
+   "a": "Commutative",
+   "show": [
+    "⟨7⟩ + ⟨9⟩ = ⟨9⟩ + ⟨7⟩",
+    "16 = 16"
+   ],
+   "say": [
+    "The same two numbers are on both sides. Only their order changed: the seven and the nine traded places.",
+    "Both sides equal sixteen. Changing the order is the commutative property."
+   ],
+   "notes": [
+    "Same numbers, <b>new order</b>",
+    "Both sides are 16"
+   ],
+   "wrong": [
+    {
+     "a": "Associative",
+     "why": "Associative is about grouping with parentheses. There are no parentheses here.",
+     "say": "there are no parentheses being moved"
+    },
+    {
+     "a": "Distributive",
+     "why": "Distributive needs a number multiplied by a sum, like 3(x + 2).",
+     "say": "nothing multiplies a sum"
+    }
+   ]
+  },
+  {
+   "id": "ex02",
+   "level": 1,
+   "kind": "name",
+   "prompt": "Which property is shown?",
+   "q": "(6 × 5) × 2 = 6 × (5 × 2)",
+   "read": "The quantity six times five, times two, equals six times the quantity five times two.",
+   "a": "Associative",
+   "show": [
+    "⟨(6 × 5)⟩ × 2 = 6 × ⟨(5 × 2)⟩",
+    "30 × 2 = 6 × 10"
+   ],
+   "say": [
+    "The numbers are in the same order on both sides: six, five, two. What moved are the parentheses.",
+    "Thirty times two is sixty, and six times ten is also sixty. Regrouping is the associative property."
+   ],
+   "notes": [
+    "Same order, <b>new grouping</b>",
+    "Both sides are 60"
+   ],
+   "wrong": [
+    {
+     "a": "Commutative",
+     "why": "The numbers did not trade places: 6, 5, 2 is the same order on both sides.",
+     "say": "the numbers stay in the same order"
+    },
+    {
+     "a": "Distributive",
+     "why": "Distributive spreads a multiplication over a sum. Here everything is multiplication.",
+     "say": "there is no sum inside the parentheses"
+    }
+   ]
+  },
+  {
+   "id": "ex03",
+   "level": 1,
+   "kind": "name",
+   "prompt": "Which property is shown?",
+   "q": "4(x + 3) = 4x + 12",
+   "read": "Four times the quantity x plus three equals four x plus twelve.",
+   "a": "Distributive",
+   "show": [
+    "⟨4⟩(x + 3) = ⟨4⟩x + ⟨4⟩ · 3",
+    "4(x + 3) = 4x + 12"
+   ],
+   "say": [
+    "The four outside is multiplied by each term inside: four times x, and four times three.",
+    "Four times three is twelve. Multiplying across a sum is the distributive property."
+   ],
+   "notes": [
+    "The 4 reaches <b>every term</b>",
+    "4 · 3 = 12"
+   ],
+   "wrong": [
+    {
+     "a": "Commutative",
+     "why": "Nothing just traded places: the 4 multiplied each term of a sum.",
+     "say": "no two terms just trade places"
+    },
+    {
+     "a": "Associative",
+     "why": "Associative only moves parentheses. Here they disappear because the 4 multiplied each term.",
+     "say": "the parentheses don't just move"
+    }
+   ]
+  },
+  {
+   "id": "ex04",
+   "level": 1,
+   "prompt": "Use the properties to find the value.",
+   "q": "25 × 13 × 4",
+   "read": "Twenty-five times thirteen times four.",
+   "lines": [
+    "25 × ⟨13 × 4⟩",
+    "⟨25 × 4⟩ × 13",
+    "⟨(25 × 4)⟩ × 13",
+    "⟨100 × 13⟩",
+    "1300"
+   ],
+   "chips": [
+    "COMM",
+    "ASSOC",
+    "CALC",
+    "CALC"
+   ],
+   "say": [
+    "Twenty-five and four make one hundred, so let's put them together. The commutative property lets us swap the thirteen and the four.",
+    "The associative property lets us group the twenty-five with the four.",
+    "Twenty-five times four is one hundred.",
+    "One hundred times thirteen is one thousand three hundred."
+   ],
+   "at": [
+    "four#2",
+    "four",
+    "hundred",
+    "hundred#2"
+   ],
+   "wrong": [
+    {
+     "e": "(25 + 4) × 13",
+     "why": "You added 25 and 4 instead of multiplying them.",
+     "say": "add twenty-five and four"
+    },
+    {
+     "e": "25 × 4 + 13",
+     "why": "You added the 13 instead of multiplying by it.",
+     "say": "add the thirteen at the end"
+    },
+    {
+     "e": "25 × 13",
+     "why": "You forgot to multiply by 4.",
+     "say": "forget the four"
+    }
+   ]
+  },
+  {
+   "id": "ex05",
+   "level": 1,
+   "kind": "expr",
+   "prompt": "Use the distributive property to expand.",
+   "q": "5(x + 2)",
+   "read": "Five times the quantity x plus two.",
+   "a": "5x + 10",
+   "a_read": "five x plus ten",
+   "lines": [
+    "⟨5(x + 2)⟩",
+    "⟨5 · x + 5 · 2⟩",
+    "5x + 10"
+   ],
+   "chips": [
+    "DIST",
+    "CALC"
+   ],
+   "say": [
+    "The five outside multiplies every term inside. Five times x, plus five times two.",
+    "Five times x is five x, and five times two is ten."
+   ],
+   "at": [
+    "two",
+    "ten"
+   ],
+   "wrong": [
+    {
+     "e": "5x + 2",
+     "why": "You multiplied only the x by 5. The 2 needs it too.",
+     "say": "multiply only the x",
+     "read": "five x plus two"
+    },
+    {
+     "e": "5x + 7",
+     "why": "You added 5 + 2 instead of multiplying.",
+     "say": "add five and two",
+     "read": "five x plus seven"
+    },
+    {
+     "e": "x + 10",
+     "why": "You multiplied only the 2 by 5.",
+     "say": "multiply only the two",
+     "read": "x plus ten"
+    }
+   ]
+  },
+  {
+   "id": "ex06",
+   "level": 2,
+   "kind": "name",
+   "prompt": "Which property is shown?",
+   "q": "x · 8 = 8x",
+   "read": "x times eight equals eight x.",
+   "a": "Commutative",
+   "show": [
+    "⟨x⟩ · ⟨8⟩ = ⟨8⟩⟨x⟩",
+    "x · 8 = 8 · x"
+   ],
+   "say": [
+    "Eight x means eight times x. So both sides multiply the same two things, in a different order.",
+    "Swapping the order of a multiplication is the commutative property. That's why we can always write the number first."
+   ],
+   "notes": [
+    "8x means 8 · x",
+    "Same factors, <b>new order</b>"
+   ],
+   "wrong": [
+    {
+     "a": "Associative",
+     "why": "There is only one multiplication, so there is nothing to regroup.",
+     "say": "there is nothing to regroup"
+    },
+    {
+     "a": "Distributive",
+     "why": "There is no sum for the 8 to be spread over.",
+     "say": "there is no sum to spread over"
+    }
+   ]
+  },
+  {
+   "id": "ex07",
+   "level": 2,
+   "kind": "name",
+   "prompt": "Which property is shown?",
+   "q": "3 + (x + 7) = (3 + x) + 7",
+   "read": "Three plus the quantity x plus seven equals the quantity three plus x, plus seven.",
+   "a": "Associative",
+   "show": [
+    "3 + ⟨(x + 7)⟩ = ⟨(3 + x)⟩ + 7",
+    "3 + (x + 7) = (3 + x) + 7"
+   ],
+   "say": [
+    "Read each side from left to right: three, x, seven. The order didn't change.",
+    "Only the parentheses moved. Changing the grouping is the associative property."
+   ],
+   "notes": [
+    "Same order: 3, x, 7",
+    "Only the <b>grouping</b> changed"
+   ],
+   "wrong": [
+    {
+     "a": "Commutative",
+     "why": "It looks like something moved, but the order is the same: 3, x, 7. Only the parentheses moved.",
+     "say": "the terms stay in the same order"
+    },
+    {
+     "a": "Distributive",
+     "why": "Nothing multiplies the parentheses; it's all addition.",
+     "say": "everything here is addition"
+    }
+   ]
+  },
+  {
+   "id": "ex08",
+   "level": 2,
+   "kind": "expr",
+   "prompt": "Use the distributive property to expand.",
+   "q": "−3(x + 4)",
+   "read": "Negative three times the quantity x plus four.",
+   "a": "−3x − 12",
+   "a_read": "negative three x minus twelve",
+   "lines": [
+    "⟨−3(x + 4)⟩",
+    "⟨(−3) · x + (−3) · 4⟩",
+    "−3x − 12"
+   ],
+   "chips": [
+    "DIST",
+    "CALC"
+   ],
+   "say": [
+    "Distribute the negative three to both terms, sign included. Negative three times x, plus negative three times four.",
+    "Negative three times x is negative three x. Negative three times four is negative twelve, so we subtract twelve."
+   ],
+   "at": [
+    "four",
+    "twelve"
+   ],
+   "wrong": [
+    {
+     "e": "−3x + 12",
+     "why": "−3 · 4 is −12, not +12. The negative sign goes along.",
+     "say": "lose the sign on the twelve",
+     "read": "negative three x plus twelve"
+    },
+    {
+     "e": "−3x + 4",
+     "why": "You multiplied only the x by −3.",
+     "say": "multiply only the x",
+     "read": "negative three x plus four"
+    },
+    {
+     "e": "3x + 12",
+     "why": "You dropped the negative sign completely.",
+     "say": "drop the negative sign",
+     "read": "three x plus twelve"
+    }
+   ]
+  },
+  {
+   "id": "ex09",
+   "level": 2,
+   "kind": "expr",
+   "prompt": "Use the distributive property to expand.",
+   "q": "7(2x − 1)",
+   "read": "Seven times the quantity two x minus one.",
+   "a": "14x − 7",
+   "a_read": "fourteen x minus seven",
+   "lines": [
+    "⟨7(2x − 1)⟩",
+    "⟨7 · 2x − 7 · 1⟩",
+    "14x − 7"
+   ],
+   "chips": [
+    "DIST",
+    "CALC"
+   ],
+   "say": [
+    "Seven multiplies both terms: seven times two x, minus seven times one.",
+    "Seven times two x is fourteen x. Seven times one is seven."
+   ],
+   "at": [
+    "one",
+    "seven#3"
+   ],
+   "wrong": [
+    {
+     "e": "14x − 1",
+     "why": "You multiplied only the 2x by 7.",
+     "say": "multiply only the two x",
+     "read": "fourteen x minus one"
+    },
+    {
+     "e": "9x − 7",
+     "why": "You added 7 + 2 instead of multiplying 7 · 2x.",
+     "say": "add seven and two",
+     "read": "nine x minus seven"
+    },
+    {
+     "e": "14x + 7",
+     "why": "7 · (−1) is −7. The minus sign stays.",
+     "say": "turn the minus into a plus",
+     "read": "fourteen x plus seven"
+    }
+   ]
+  },
+  {
+   "id": "ex10",
+   "level": 2,
+   "prompt": "Use the distributive property to find the value.",
+   "q": "8 × 102",
+   "read": "Eight times one hundred two.",
+   "lines": [
+    "8 × ⟨102⟩",
+    "⟨8 × (100 + 2)⟩",
+    "⟨8 × 100 + 8 × 2⟩",
+    "⟨800 + 16⟩",
+    "816"
+   ],
+   "chips": [
+    "REWRITE",
+    "DIST",
+    "CALC",
+    "CALC"
+   ],
+   "say": [
+    "One hundred two is one hundred plus two.",
+    "Eight multiplies both parts: eight times one hundred, plus eight times two.",
+    "Eight times one hundred is eight hundred. Eight times two is sixteen.",
+    "Eight hundred plus sixteen is eight hundred sixteen."
+   ],
+   "at": [
+    "two#2",
+    "two",
+    "sixteen",
+    "sixteen#2"
+   ],
+   "wrong": [
+    {
+     "e": "8 × 100 + 2",
+     "why": "You multiplied only the 100 by 8.",
+     "say": "multiply only the hundred"
+    },
+    {
+     "e": "8 × 100 × 2",
+     "why": "You multiplied 100 by 2 instead of adding the parts.",
+     "say": "multiply the parts instead of adding them"
+    },
+    {
+     "e": "8 × 10 + 8 × 2",
+     "why": "102 is 100 + 2, not 10 + 2.",
+     "say": "split one hundred two into ten and two"
+    }
+   ]
+  },
+  {
+   "id": "ex11",
+   "level": 3,
+   "kind": "expr",
+   "prompt": "Use the distributive property to expand.",
+   "q": "−(x − 6)",
+   "read": "Negative the quantity x minus six.",
+   "a": "−x + 6",
+   "a_read": "negative x plus six",
+   "lines": [
+    "⟨−(x − 6)⟩",
+    "⟨−1 · (x − 6)⟩",
+    "⟨(−1) · x + (−1) · (−6)⟩",
+    "−x + 6"
+   ],
+   "chips": [
+    "REWRITE",
+    "DIST",
+    "CALC"
+   ],
+   "say": [
+    "A negative sign in front of parentheses means negative one times them.",
+    "Distribute the negative one. Negative one times x, plus negative one times negative six.",
+    "Negative one times x is negative x. Negative one times negative six is positive six."
+   ],
+   "at": [
+    "them",
+    "six",
+    "six#2"
+   ],
+   "wrong": [
+    {
+     "e": "−x − 6",
+     "why": "(−1) · (−6) is +6. The negative flips both signs.",
+     "say": "flip only the first sign",
+     "read": "negative x minus six"
+    },
+    {
+     "e": "x − 6",
+     "why": "You ignored the negative sign in front.",
+     "say": "ignore the negative in front",
+     "read": "x minus six"
+    },
+    {
+     "e": "x + 6",
+     "why": "You flipped the 6 but not the x.",
+     "say": "flip only the six",
+     "read": "x plus six"
+    }
+   ]
+  },
+  {
+   "id": "ex12",
+   "level": 3,
+   "kind": "expr",
+   "prompt": "Use the distributive property to expand.",
+   "q": "2(3x + 4y − 5)",
+   "read": "Two times the quantity three x plus four y minus five.",
+   "a": "6x + 8y − 10",
+   "a_read": "six x plus eight y minus ten",
+   "lines": [
+    "⟨2(3x + 4y − 5)⟩",
+    "⟨2 · 3x + 2 · 4y − 2 · 5⟩",
+    "6x + 8y − 10"
+   ],
+   "chips": [
+    "DIST",
+    "CALC"
+   ],
+   "say": [
+    "There are three terms inside, so the two multiplies all three of them.",
+    "Two times three x is six x. Two times four y is eight y. Two times five is ten, and the minus sign stays."
+   ],
+   "at": [
+    "three#2",
+    "ten"
+   ],
+   "wrong": [
+    {
+     "e": "6x + 4y − 5",
+     "why": "You multiplied only the first term by 2.",
+     "say": "multiply only the first term",
+     "read": "six x plus four y minus five"
+    },
+    {
+     "e": "6x + 8y − 5",
+     "why": "The 2 must reach the last term too: 2 · 5 = 10.",
+     "say": "skip the last term",
+     "read": "six x plus eight y minus five"
+    },
+    {
+     "e": "6x + 8y + 10",
+     "why": "2 · (−5) is −10. The minus sign stays.",
+     "say": "turn the last minus into a plus",
+     "read": "six x plus eight y plus ten"
+    }
+   ]
+  },
+  {
+   "id": "ex13",
+   "level": 3,
+   "prompt": "Use the distributive property backwards to find the value.",
+   "q": "17 × 6 + 17 × 4",
+   "read": "Seventeen times six, plus seventeen times four.",
+   "lines": [
+    "⟨17 × 6 + 17 × 4⟩",
+    "17 × ⟨(6 + 4)⟩",
+    "⟨17 × 10⟩",
+    "170"
+   ],
+   "chips": [
+    "DIST",
+    "CALC",
+    "CALC"
+   ],
+   "say": [
+    "Both products have a seventeen. The distributive property works backwards too: seventeen times the quantity six plus four.",
+    "Six plus four is ten.",
+    "Seventeen times ten is one hundred seventy."
+   ],
+   "at": [
+    "four",
+    "ten",
+    "seventy"
+   ],
+   "wrong": [
+    {
+     "e": "17 × 6 + 4",
+     "why": "You dropped the second 17.",
+     "say": "drop the second seventeen"
+    },
+    {
+     "e": "(17 × 6 + 17) × 4",
+     "why": "You went straight left to right, so the 4 multiplied everything.",
+     "say": "work straight left to right"
+    },
+    {
+     "e": "17 + 6 + 17 + 4",
+     "why": "You added instead of multiplying.",
+     "say": "add instead of multiplying"
+    }
+   ]
+  },
+  {
+   "id": "ex14",
+   "level": 3,
+   "kind": "name",
+   "prompt": "Which property is shown?",
+   "q": "5(2 · x) = (5 · 2)x",
+   "read": "Five times the quantity two times x equals the quantity five times two, times x.",
+   "a": "Associative",
+   "show": [
+    "5⟨(2 · x)⟩ = ⟨(5 · 2)⟩x",
+    "10x = 10x"
+   ],
+   "say": [
+    "There are parentheses next to a number, but look inside. There is no sum, only multiplication.",
+    "The factors keep their order: five, two, x. Only the grouping changed. That's the associative property, and both sides are ten x."
+   ],
+   "notes": [
+    "No sum inside: only ×",
+    "Same order, <b>new grouping</b>"
+   ],
+   "wrong": [
+    {
+     "a": "Distributive",
+     "why": "Distributive needs a sum inside, like 5(2 + x). Here it's 2 · x, a product.",
+     "say": "there is no sum inside the parentheses"
+    },
+    {
+     "a": "Commutative",
+     "why": "The order is the same on both sides: 5, 2, x.",
+     "say": "the factors stay in the same order"
+    }
+   ]
+  },
+  {
+   "id": "ex15",
+   "level": 3,
+   "kind": "expr",
+   "prompt": "Use the distributive property to expand.",
+   "q": "−4(−2x + 3)",
+   "read": "Negative four times the quantity negative two x plus three.",
+   "a": "8x − 12",
+   "a_read": "eight x minus twelve",
+   "lines": [
+    "⟨−4(−2x + 3)⟩",
+    "⟨(−4)(−2x) + (−4)(3)⟩",
+    "8x − 12"
+   ],
+   "chips": [
+    "DIST",
+    "CALC"
+   ],
+   "say": [
+    "Negative four multiplies both terms: negative four times negative two x, plus negative four times three.",
+    "A negative times a negative is positive, so the first part is eight x. Negative four times three is negative twelve."
+   ],
+   "at": [
+    "three",
+    "twelve"
+   ],
+   "wrong": [
+    {
+     "e": "−8x − 12",
+     "why": "(−4) · (−2x) is +8x: negative times negative is positive.",
+     "say": "keep the first term negative",
+     "read": "negative eight x minus twelve"
+    },
+    {
+     "e": "8x + 12",
+     "why": "(−4) · 3 is −12, not +12.",
+     "say": "make both terms positive",
+     "read": "eight x plus twelve"
+    },
+    {
+     "e": "8x + 3",
+     "why": "You multiplied only the first term by −4.",
+     "say": "multiply only the first term",
+     "read": "eight x plus three"
+    }
+   ]
+  },
+  {
+   "id": "ex16",
+   "level": 4,
+   "prompt": "Use the properties to find the value.",
+   "q": "4 × 37 × 25",
+   "read": "Four times thirty-seven times twenty-five.",
+   "lines": [
+    "4 × ⟨37 × 25⟩",
+    "⟨4 × 25⟩ × 37",
+    "⟨(4 × 25)⟩ × 37",
+    "⟨100 × 37⟩",
+    "3700"
+   ],
+   "chips": [
+    "COMM",
+    "ASSOC",
+    "CALC",
+    "CALC"
+   ],
+   "say": [
+    "Four and twenty-five make one hundred, but they're far apart. Swap the thirty-seven and the twenty-five.",
+    "Now group the four with the twenty-five.",
+    "Four times twenty-five is one hundred.",
+    "One hundred times thirty-seven is three thousand seven hundred."
+   ],
+   "at": [
+    "twenty-five#2",
+    "twenty-five",
+    "hundred",
+    "hundred#2"
+   ],
+   "wrong": [
+    {
+     "e": "(4 + 25) × 37",
+     "why": "You added 4 and 25 instead of multiplying them.",
+     "say": "add four and twenty-five"
+    },
+    {
+     "e": "4 × 25 + 37",
+     "why": "You added the 37 instead of multiplying by it.",
+     "say": "add the thirty-seven"
+    },
+    {
+     "e": "4 × 37",
+     "why": "You forgot to multiply by 25.",
+     "say": "forget the twenty-five"
+    }
+   ]
+  },
+  {
+   "id": "ex17",
+   "level": 4,
+   "prompt": "Use the distributive property to find the value.",
+   "q": "9 × 99 + 9",
+   "read": "Nine times ninety-nine, plus nine.",
+   "lines": [
+    "9 × 99 + ⟨9⟩",
+    "⟨9 × 99 + 9 × 1⟩",
+    "9 × ⟨(99 + 1)⟩",
+    "⟨9 × 100⟩",
+    "900"
+   ],
+   "chips": [
+    "REWRITE",
+    "DIST",
+    "CALC",
+    "CALC"
+   ],
+   "say": [
+    "The last nine is nine times one.",
+    "Now both parts have a nine, so we can pull it out: nine times the quantity ninety-nine plus one.",
+    "Ninety-nine plus one is one hundred.",
+    "Nine times one hundred is nine hundred."
+   ],
+   "at": [
+    "one",
+    "one",
+    "hundred",
+    "hundred#2"
+   ],
+   "wrong": [
+    {
+     "e": "9 × (99 + 9)",
+     "why": "You added 99 + 9 first, but multiplication comes before addition.",
+     "say": "add ninety-nine and nine first"
+    },
+    {
+     "e": "9 × 99",
+     "why": "You left out the + 9 at the end.",
+     "say": "leave out the last nine"
+    },
+    {
+     "e": "9 × 100 + 9",
+     "why": "Once the last 9 helps make 9 × 100, it is already counted.",
+     "say": "count the last nine twice"
+    }
+   ]
+  },
+  {
+   "id": "ex18",
+   "level": 4,
+   "kind": "expr",
+   "prompt": "Use the distributive property to expand.",
+   "q": "x(x + 5)",
+   "read": "x times the quantity x plus five.",
+   "a": "x^2 + 5x",
+   "a_read": "x squared plus five x",
+   "lines": [
+    "⟨x(x + 5)⟩",
+    "⟨x · x + x · 5⟩",
+    "x^2 + 5x"
+   ],
+   "chips": [
+    "DIST",
+    "CALC"
+   ],
+   "say": [
+    "The number outside can be a variable too. x multiplies both terms: x times x, plus x times five.",
+    "x times x is x squared. x times five is five x, with the number written first."
+   ],
+   "at": [
+    "five",
+    "first"
+   ],
+   "wrong": [
+    {
+     "e": "x^2 + 5",
+     "why": "You multiplied only the first term by x.",
+     "say": "multiply only the first term",
+     "read": "x squared plus five"
+    },
+    {
+     "e": "2x + 5x",
+     "why": "x · x is x², not 2x. 2x means x + x.",
+     "say": "write x times x as two x",
+     "read": "two x plus five x"
+    },
+    {
+     "e": "2x + 5",
+     "why": "x · x is x², and the 5 must be multiplied by x too.",
+     "say": "make both mistakes",
+     "read": "two x plus five"
+    }
+   ]
+  },
+  {
+   "id": "ex19",
+   "level": 4,
+   "kind": "expr",
+   "prompt": "Use the distributive property to expand.",
+   "q": "−5(2x − 3y + 1)",
+   "read": "Negative five times the quantity two x minus three y plus one.",
+   "a": "−10x + 15y − 5",
+   "a_read": "negative ten x plus fifteen y minus five",
+   "lines": [
+    "⟨−5(2x − 3y + 1)⟩",
+    "⟨(−5)(2x) + (−5)(−3y) + (−5)(1)⟩",
+    "−10x + 15y − 5"
+   ],
+   "chips": [
+    "DIST",
+    "CALC"
+   ],
+   "say": [
+    "Negative five multiplies all three terms, and each sign goes along.",
+    "Negative five times two x is negative ten x. Negative five times negative three y is positive fifteen y. And negative five times one is negative five."
+   ],
+   "at": [
+    "along",
+    "five#4"
+   ],
+   "wrong": [
+    {
+     "e": "−10x − 15y − 5",
+     "why": "(−5) · (−3y) is +15y: negative times negative is positive.",
+     "say": "keep the middle term negative",
+     "read": "negative ten x minus fifteen y minus five"
+    },
+    {
+     "e": "−10x − 3y + 1",
+     "why": "You multiplied only the first term by −5.",
+     "say": "multiply only the first term",
+     "read": "negative ten x minus three y plus one"
+    },
+    {
+     "e": "−10x + 15y + 1",
+     "why": "−5 must reach the last term too: (−5) · 1 = −5.",
+     "say": "skip the last term",
+     "read": "negative ten x plus fifteen y plus one"
+    }
+   ]
+  },
+  {
+   "id": "ex20",
+   "level": 4,
+   "kind": "name",
+   "prompt": "Which property is shown?",
+   "q": "(x + 3) · 2 = 2 · (x + 3)",
+   "read": "The quantity x plus three, times two, equals two times the quantity x plus three.",
+   "a": "Commutative",
+   "show": [
+    "⟨(x + 3)⟩ · ⟨2⟩ = ⟨2⟩ · ⟨(x + 3)⟩",
+    "(x + 3) · 2 = 2 · (x + 3)"
+   ],
+   "say": [
+    "There is a sum in parentheses, so distributive is tempting. But the two is not multiplied into the terms.",
+    "Two factors, the quantity and the two, just traded places. That's the commutative property."
+   ],
+   "notes": [
+    "Nothing was distributed",
+    "Two factors <b>traded places</b>"
+   ],
+   "wrong": [
+    {
+     "a": "Distributive",
+     "why": "Distributing would give 2x + 6. Here the parentheses stay; the 2 just moved to the front.",
+     "say": "the two is not multiplied into the parentheses"
+    },
+    {
+     "a": "Associative",
+     "why": "Associative regroups three or more things. Here two factors just swapped.",
+     "say": "two factors just trade places"
+    }
+   ]
+  }
+ ]
+}

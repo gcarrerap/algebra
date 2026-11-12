@@ -1,0 +1,227 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l02-commutative-associative",
+  "title": "Commutative and Associative Properties",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The shortcut",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Here's a quick one. What is twenty-five times seven times four?",
+          "display": "25 × 7 × 4",
+          "cue": "show-problem",
+          "pause_after_s": 2.5
+        },
+        {
+          "id": "b02",
+          "text": "Most people start with twenty-five times seven, which is one hundred seventy-five. Then they multiply that by four. That's a lot of work.",
+          "display": "25 × 7 = 175,  175 × 4 = ?",
+          "cue": "slow-path"
+        },
+        {
+          "id": "b03",
+          "text": "Here's a shortcut. Twenty-five times four is one hundred, and one hundred times seven is seven hundred.",
+          "display": "25 × 4 = 100,  100 × 7 = 700",
+          "cue": "fast-path",
+          "tone": "excited"
+        },
+        {
+          "id": "b04",
+          "text": "But why are we allowed to move numbers around like that? Two properties say we can.",
+          "cue": "why"
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Commutative: order",
+      "blocks": [
+        {
+          "id": "b05",
+          "text": "The first one is the commutative property. It's about order.",
+          "display": "Commutative",
+          "cue": "comm-title"
+        },
+        {
+          "id": "b06",
+          "text": "Three plus five is eight. Five plus three is also eight.",
+          "display": "3 + 5 = 5 + 3",
+          "cue": "comm-add"
+        },
+        {
+          "id": "b07",
+          "text": "Swapping the order doesn't change the sum. Multiplication works the same way. Four times six and six times four are both twenty-four.",
+          "display": "4 × 6 = 6 × 4",
+          "cue": "comm-mult"
+        },
+        {
+          "id": "b08",
+          "text": "With letters, a plus b equals b plus a, and a times b equals b times a.",
+          "display": "a + b = b + a,  a · b = b · a",
+          "cue": "comm-rule"
+        },
+        {
+          "id": "b09",
+          "text": "Think of the word commute. The numbers move around and trade places.",
+          "cue": "comm-word"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "Not for subtraction",
+      "blocks": [
+        {
+          "id": "b10",
+          "text": "But careful. Does it work for subtraction? Eight minus three is five. Three minus eight is negative five.",
+          "display": "8 − 3 = 5,  3 − 8 = −5",
+          "cue": "comm-sub"
+        },
+        {
+          "id": "b11",
+          "text": "Not the same. And twelve divided by four is three, but four divided by twelve is only one third.",
+          "display": "12 ÷ 4 = 3,  4 ÷ 12 = 1/3",
+          "cue": "comm-div"
+        },
+        {
+          "id": "b12",
+          "text": "Subtraction and division are not commutative. With them, order matters.",
+          "cue": "comm-not"
+        }
+      ]
+    },
+    {
+      "id": "s04",
+      "title": "Associative: grouping",
+      "blocks": [
+        {
+          "id": "b13",
+          "text": "The second one is the associative property. It's about grouping.",
+          "display": "Associative",
+          "cue": "assoc-title"
+        },
+        {
+          "id": "b14",
+          "text": "Take two plus three, plus four. Group the first two. Two plus three is five, and five plus four is nine.",
+          "display": "(2 + 3) + 4 = 5 + 4 = 9",
+          "cue": "assoc-left"
+        },
+        {
+          "id": "b15",
+          "text": "Now group the last two instead. Three plus four is seven, and two plus seven is nine.",
+          "display": "2 + (3 + 4) = 2 + 7 = 9",
+          "cue": "assoc-right"
+        },
+        {
+          "id": "b16",
+          "text": "Same answer. The numbers stay in the same order. Only the parentheses move.",
+          "cue": "assoc-same"
+        },
+        {
+          "id": "b17",
+          "text": "With letters, the quantity a plus b, plus c, equals a plus the quantity b plus c. It works for multiplication too.",
+          "display": "(a + b) + c = a + (b + c),  (a · b) · c = a · (b · c)",
+          "cue": "assoc-rule"
+        },
+        {
+          "id": "b18",
+          "text": "Think of the word associate, like the friends you hang out with. Each number keeps its place in line, but it changes who it's grouped with.",
+          "cue": "assoc-word"
+        }
+      ]
+    },
+    {
+      "id": "s05",
+      "title": "Not for subtraction either",
+      "blocks": [
+        {
+          "id": "b19",
+          "text": "Subtraction breaks this rule too. Ten minus four, minus three, is six minus three, which is three.",
+          "display": "(10 − 4) − 3 = 3",
+          "cue": "assoc-sub-left"
+        },
+        {
+          "id": "b20",
+          "text": "But ten minus the quantity four minus three is ten minus one, which is nine.",
+          "display": "10 − (4 − 3) = 9",
+          "cue": "assoc-sub-right",
+          "pause_after_s": 1.8
+        }
+      ]
+    },
+    {
+      "id": "s06",
+      "title": "The shortcut, explained",
+      "blocks": [
+        {
+          "id": "b21",
+          "text": "Now we can explain the shortcut. Start with twenty-five times seven times four.",
+          "display": "25 × 7 × 4",
+          "cue": "explain-start"
+        },
+        {
+          "id": "b22",
+          "text": "The commutative property lets us swap the seven and the four.",
+          "display": "25 × 4 × 7",
+          "cue": "explain-swap"
+        },
+        {
+          "id": "b23",
+          "text": "The associative property lets us group the twenty-five with the four.",
+          "display": "(25 × 4) × 7",
+          "cue": "explain-group"
+        },
+        {
+          "id": "b24",
+          "text": "Twenty-five times four is one hundred, and one hundred times seven is seven hundred.",
+          "display": "100 × 7 = 700",
+          "cue": "explain-result"
+        },
+        {
+          "id": "b25",
+          "text": "The trick is to look for pairs that make tens or hundreds.",
+          "cue": "explain-tip"
+        }
+      ]
+    },
+    {
+      "id": "s07",
+      "title": "Your turn",
+      "blocks": [
+        {
+          "id": "b26",
+          "text": "Your turn. What is thirty-eight plus seventeen plus sixty-two? Pause the video and try it.",
+          "display": "38 + 17 + 62",
+          "cue": "challenge",
+          "pause_after_s": 4.0
+        },
+        {
+          "id": "b27",
+          "text": "Swap and group so that thirty-eight and sixty-two go together. That makes one hundred. Then one hundred plus seventeen is one hundred seventeen.",
+          "display": "(38 + 62) + 17 = 100 + 17 = 117",
+          "cue": "challenge-answer"
+        },
+        {
+          "id": "b28",
+          "text": "Remember: commutative changes the order, and associative changes the grouping. Both work for adding and multiplying, but not for subtracting or dividing.",
+          "cue": "recap"
+        },
+        {
+          "id": "b29",
+          "text": "Next, the distributive property.",
+          "cue": "next"
+        },
+        {
+          "id": "b30",
+          "text": "This video uses an AI-generated voice.",
+          "cue": "disclosure",
+          "tone": "calm"
+        }
+      ]
+    }
+  ]
+}

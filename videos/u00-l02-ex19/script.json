@@ -1,0 +1,57 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u00-l02-ex19",
+  "title": "Exercise 19",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Negative five times the quantity two x minus three y plus one.",
+          "display": "−5(2x − 3y + 1)",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Negative five multiplies all three terms, and each sign goes along.",
+          "display": "(−5)(2x) + (−5)(−3y) + (−5)(1)",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Negative five times two x is negative ten x. Negative five times negative three y is positive fifteen y. And negative five times one is negative five.",
+          "display": "−10x + 15y − 5",
+          "cue": "step-2"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b04",
+          "text": "So the answer is negative ten x plus fifteen y minus five.",
+          "display": "= −10x + 15y − 5",
+          "cue": "answer"
+        },
+        {
+          "id": "b05",
+          "text": "Watch out for these traps. If you keep the middle term negative, you get negative ten x minus fifteen y minus five. If you multiply only the first term, you get negative ten x minus three y plus one.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

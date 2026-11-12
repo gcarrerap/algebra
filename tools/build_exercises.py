@@ -21,16 +21,32 @@ import sys
 from fractions import Fraction as F
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-CHIP_COLOR = {"P": "blue", "E": "purple", "MD": "yellow", "AS": "green", "SUB": "ink"}
+CHIP_COLOR = {"P": "blue", "E": "purple", "MD": "yellow", "AS": "green", "SUB": "ink",
+              # lesson 0.2: one color per property (commutative = order, associative = grouping)
+              "COMM": "blue", "ASSOC": "purple", "DIST": "yellow", "CALC": "green", "REWRITE": "ink"}
 CHIP_NAME = {"P": "parentheses and groups", "E": "exponents", "MD": "multiply and divide",
-             "AS": "add and subtract", "SUB": "substitute"}
+             "AS": "add and subtract", "SUB": "substitute", "COMM": "commutative property",
+             "ASSOC": "associative property", "DIST": "distributive property", "CALC": "calculate",
+             "REWRITE": "rewrite"}
+PROPERTIES = {"Commutative": "blue", "Associative": "purple", "Distributive": "yellow"}
+# exact test points for expressions with variables: two expressions are treated as equal when they
+# agree at every point (all exercises are low-degree polynomials, so this cannot be fooled)
+POINTS = [{"x": "2", "y": "3", "z": "5", "a": "4", "b": "-3", "c": "6"},
+          {"x": "-5", "y": "7", "z": "-2", "a": "-1", "b": "8", "c": "3"},
+          {"x": "7/3", "y": "-1/2", "z": "4", "a": "5/2", "b": "2", "c": "-7"},
+          {"x": "11", "y": "-6", "z": "1/5", "a": "3", "b": "-2/3", "c": "10"},
+          {"x": "-3/4", "y": "13", "z": "-9", "a": "-6", "b": "5", "c": "1/2"},
+          {"x": "17", "y": "1/3", "z": "8", "a": "7", "b": "-11", "c": "-4/5"}]
 
 
 # ---------------------------------------------------------------- math checking
-def to_py(expr, sub=None):
+def to_py(expr, sub=None, point=None):
     s = expr.replace("⟨", "").replace("⟩", "")
     for k, v in (sub or {}).items():
         s = re.sub(rf"(?<![A-Za-z]){k}(?![A-Za-z])", v, s)
+    if point is not None:                                    # every single letter is a variable
+        s = re.sub(r"[a-z]", lambda m: f"({point[m.group(0)]})", s)
+    s = s.replace("·", "×")
     s = re.sub(r"\[\[(.+?) \| (.+?)\]\]", r"((\1)/(\2))", s)
     s = s.replace("×", "*").replace("÷", "/").replace("−", "-").replace("^", "**")
     s = s.replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
@@ -46,8 +62,29 @@ def to_py(expr, sub=None):
     return re.sub(r"\d+", lambda m: f"F({m.group(0)})", s)
 
 
-def ev(expr, sub=None):
-    return eval(to_py(expr, sub), {"F": F, "abs": abs, "__builtins__": {}})
+def ev(expr, sub=None, point=None):
+    return eval(to_py(expr, sub, point), {"F": F, "abs": abs, "__builtins__": {}})
+
+
+def same(e1, e2):
+    """True when two expressions with variables agree at every test point."""
+    return all(ev(e1, point=pt) == ev(e2, point=pt) for pt in POINTS)
+
+
+def classify(eq):
+    """Which property an identity shows, read from its shape (a sanity check of the stated answer)."""
+    left, right = (x.strip() for x in eq.split("="))
+    bare = lambda t: re.sub(r"[()\s×·]", "", t)            # written multiplication = implied
+    toks = lambda t: sorted(re.findall(r"\d+|[a-z]|[+−]", t))
+    if bare(left) == bare(right):
+        return "Associative"
+    if toks(left) == toks(right):
+        return "Commutative"
+    return "Distributive"
+
+
+def spoken_last(text):
+    return clean(text.split()[-1])
 
 
 ONES = "zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen".split()
@@ -64,6 +101,8 @@ def words(n):
         return TENS[n // 10] + ("-" + ONES[n % 10] if n % 10 else "")
     if n < 1000:
         return ONES[n // 100] + " hundred" + (" " + words(n % 100) if n % 100 else "")
+    if n < 1000000:
+        return words(n // 1000) + " thousand" + (" " + words(n % 1000) if n % 1000 else "")
     raise ValueError(n)
 
 
@@ -75,9 +114,99 @@ def clean(w):
     return re.sub(r"^[-']+|[-']+$", "", re.sub(r"[^a-z0-9'-]", "", w.lower()))
 
 
+def check_steps(ex, problems, n_lines_extra=1):
+    i = ex["id"]
+    n = len(ex["chips"])
+    if not (len(ex["lines"]) == n + n_lines_extra and len(ex["say"]) == n and len(ex["at"]) == n):
+        problems.append(f"{i}: lines/chips/say/at lengths do not match (lines = chips + 1)")
+        return False
+    for c in ex["chips"]:
+        if c not in CHIP_COLOR:
+            problems.append(f"{i}: unknown chip {c!r}")
+    for k, (text, at) in enumerate(zip(ex["say"], ex["at"])):
+        m = re.fullmatch(r"([a-z0-9'-]+)(?:#(\d+))?", at)
+        ws = [clean(w) for w in text.split()]
+        if not m or ws.count(m.group(1)) < int(m.group(2) or 1):
+            problems.append(f"{i}: step {k + 1}: word {at!r} is not in its narration")
+    for k, line in enumerate(ex["lines"]):
+        has_hl = "⟨" in line
+        if k < n and not has_hl:
+            problems.append(f"{i}: line {k} has no ⟨…⟩ to say what the next step computes")
+        if k == n and has_hl:
+            problems.append(f"{i}: the last line must have no ⟨…⟩")
+    return True
+
+
+def validate_expr(ex, problems):
+    """kind "expr": the answer is an expression. Every line must equal the question for every value of
+    the variables; every wrong option must differ from the answer and from the other wrong options."""
+    i = ex["id"]
+    try:
+        if not same(ex["q"], ex["a"]):
+            problems.append(f"{i}: answer {ex['a']!r} is not equal to {ex['q']!r}")
+    except Exception as e:  # noqa: BLE001
+        problems.append(f"{i}: cannot evaluate: {e}")
+        return
+    if not check_steps(ex, problems):
+        return
+    for k, line in enumerate(ex["lines"]):
+        if not same(line, ex["q"]):
+            problems.append(f"{i}: line {k} {line!r} is not equal to the question")
+    if ex["lines"][-1] != ex["a"]:
+        problems.append(f"{i}: the last line must be the answer {ex['a']!r}")
+    if len(ex["wrong"]) != 3:
+        problems.append(f"{i}: needs exactly 3 wrong options")
+    seen = [ex["a"]]
+    for w in ex["wrong"]:
+        if any(same(w["e"], o) for o in seen):
+            problems.append(f"{i}: wrong option {w['e']!r} equals the answer or another option")
+        seen.append(w["e"])
+        for f in ("why", "say", "read"):
+            if not w.get(f):
+                problems.append(f"{i}: wrong option {w['e']!r} has no {f!r}")
+
+
+def validate_name(ex, problems):
+    """kind "name": which property does an identity show? Both sides must really be equal, the stated
+    property must match the identity's shape, and every on-screen step must stay equal too."""
+    i = ex["id"]
+    left, right = ex["q"].split("=")
+    try:
+        if not same(left, right):
+            problems.append(f"{i}: the two sides of {ex['q']!r} are not equal")
+    except Exception as e:  # noqa: BLE001
+        problems.append(f"{i}: cannot evaluate: {e}")
+        return
+    if ex["a"] not in PROPERTIES:
+        problems.append(f"{i}: answer {ex['a']!r} is not one of {list(PROPERTIES)}")
+    elif classify(ex["q"]) != ex["a"]:
+        problems.append(f"{i}: {ex['q']!r} looks {classify(ex['q'])}, not {ex['a']}")
+    if not (len(ex["say"]) == len(ex["show"]) == len(ex["notes"])):
+        problems.append(f"{i}: say/show/notes lengths do not match")
+    for sh in ex["show"]:
+        l2, r2 = sh.split("=")
+        if not same(l2, r2):
+            problems.append(f"{i}: shown identity {sh!r} is not true")
+    if ex["a"].lower() not in [clean(w) for w in ex["say"][-1].split()]:
+        problems.append(f"{i}: the last narration block must say {ex['a'].lower()!r}")
+    others = sorted(set(PROPERTIES) - {ex["a"]})
+    if sorted(w["a"] for w in ex["wrong"]) != others:
+        problems.append(f"{i}: wrong options must be exactly {others}")
+    for w in ex["wrong"]:
+        if not (w.get("why") and w.get("say")):
+            problems.append(f"{i}: wrong option {w['a']!r} needs 'why' and 'say'")
+
+
 def validate(data):
     problems = []
     for ex in data["exercises"]:
+        kind = ex.setdefault("kind", "num")
+        if kind == "expr":
+            validate_expr(ex, problems)
+            continue
+        if kind == "name":
+            validate_name(ex, problems)
+            continue
         i, sub = ex["id"], ex.get("sub")
         try:
             ans = ev(ex["q"], sub)
@@ -164,13 +293,25 @@ def pick_size(lines, sizes, max_h, max_w=1600):
 
 # ---------------------------------------------------------------- videos
 def video_files(data, ex, num, set_id):
+    if ex["kind"] == "name":
+        return name_video(data, ex, num, set_id)
     vid = f"{set_id}-{ex['id']}"
     n, lv = len(ex["chips"]), data["levels"][str(ex["level"])]
-    ans = ex["_answer"]
-    last_word = words(ans).split()[-1]
     wrong = ex["wrong"]
+    if ex["kind"] == "num":
+        ans = ex["_answer"]
+        ans_say, ans_html, ans_plain = words(ans), money(ans), money(ans)
+        trap_say = [words(w["_value"]) for w in wrong]
+        trap_html = [money(w["_value"]) for w in wrong]
+        trap_size = "sm"
+    else:
+        ans_say, ans_html, ans_plain = ex["a_read"], markup(ex["a"]), plain(ex["a"])
+        trap_say = [w["read"] for w in wrong]
+        trap_html = [markup(w["e"]) for w in wrong]
+        trap_size = "xs"
+    last_word = spoken_last(ans_say)
     trap_text = ("Watch out for these traps. "
-                 + " ".join(f"If you {w['say']}, you get {words(w['_value'])}." for w in wrong[:2]))
+                 + " ".join(f"If you {w['say']}, you get {ts}." for w, ts in zip(wrong[:2], trap_say)))
 
     blocks_s2 = []
     for k in range(n):
@@ -186,7 +327,7 @@ def video_files(data, ex, num, set_id):
                  "cue": "show-problem", "pause_after_s": 1.2}]},
             {"id": "s02", "title": "Step by step", "blocks": blocks_s2},
             {"id": "s03", "title": "The answer", "blocks": [
-                {"id": b_ans, "text": f"So the answer is {words(ans)}.", "display": f"= {money(ans)}", "cue": "answer"},
+                {"id": b_ans, "text": f"So the answer is {ans_say}.", "display": f"= {ans_plain}", "cue": "answer"},
                 {"id": b_trap, "text": trap_text, "cue": "traps"}]},
         ],
     }
@@ -216,7 +357,7 @@ def video_files(data, ex, num, set_id):
     for k, w in enumerate(wrong):
         cards.append(
             f'        <div class="card trap fade c-red" data-at="{b_trap}+{0.15 + 0.25 * k:.2f}">'
-            f'<div class="math sm red"><span class="strike" data-at="{b_trap}+{0.9 + 0.25 * k:.2f}" data-dur="0.5">{money(w["_value"])}</span></div>'
+            f'<div class="math {trap_size} red"><span class="strike" data-at="{b_trap}+{0.9 + 0.25 * k:.2f}" data-dur="0.5">{trap_html[k]}</span></div>'
             f'<div class="why">{w["why"]}</div></div>')
     prompt = f'\n    <div class="say fade muted" data-at="b01+0.4" style="font-size: 40px">{ex["prompt"]}</div>' if ex.get("prompt") else ""
     html = f"""<!doctype html>
@@ -265,7 +406,7 @@ def video_files(data, ex, num, set_id):
 
   <!-- s03: the answer and the traps -->
   <section class="scene" data-scene="s03">
-    <div class="math sm fade" data-at="{b_ans}-0.5">{markup(ex["q"])} <span class="green pop" data-at="{b_ans}@{last_word}">= {money(ans)}</span></div>
+    <div class="math sm fade" data-at="{b_ans}-0.5">{markup(ex["q"])} <span class="green pop" data-at="{b_ans}@{last_word}">= {ans_html}</span></div>
     <div class="label red fade" data-at="{b_trap}">Common traps</div>
     <div class="row" style="align-items: stretch; gap: 36px">
 {chr(10).join(cards)}
@@ -284,13 +425,129 @@ def video_files(data, ex, num, set_id):
 """
     return vid, script, html
 
+def page(title, header_unit, num, style, scenes, play_label="Watch the solution"):
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{title}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="../_engine/player.css">
+<style>{style}</style>
+</head>
+<body>
+<div id="stage">
+  <div class="header"><span class="unit">{header_unit}</span><span class="title">Exercise {num}</span></div>
+{scenes}
+  <div class="caption"></div>
+  <div class="progress"></div>
+  <div id="seek" title="Jump to a moment"></div>
+  <button id="play" type="button" aria-label="Play"><span class="play-btn">▶</span><span class="play-label">{play_label}</span></button>
+</div>
+<script src="../_engine/player.js"></script>
+</body>
+</html>
+"""
+
+
+def name_video(data, ex, num, set_id):
+    """Video for "which property is this?": the identity, what changed (highlighted), the name, the traps."""
+    vid = f"{set_id}-{ex['id']}"
+    lv = data["levels"][str(ex["level"])]
+    color = PROPERTIES[ex["a"]]
+    nb = len(ex["say"])
+    b_ans, b_trap = f"b{nb + 2:02d}", f"b{nb + 3:02d}"
+    wrong = ex["wrong"]
+    trap_text = ("Watch out for these traps. "
+                 + " ".join(f"It isn't the {w['a'].lower()} property, because {w['say']}." for w in wrong))
+    script = {
+        "format": "algebra-video-script", "version": 1, "video": vid,
+        "title": f"Exercise {num}", "voice": "narrator",
+        "scenes": [
+            {"id": "s01", "title": "The problem", "blocks": [
+                {"id": "b01", "text": "Let's look at this one. " + ex["read"] + " Which property does it show?",
+                 "display": plain(ex["q"]), "cue": "show-problem", "pause_after_s": 1.5}]},
+            {"id": "s02", "title": "What changed", "blocks": [
+                {"id": f"b{k + 2:02d}", "text": ex["say"][k], "display": plain(ex["show"][k]), "cue": f"step-{k + 1}"}
+                for k in range(nb)]},
+            {"id": "s03", "title": "The answer", "blocks": [
+                {"id": b_ans, "text": f"So the answer is the {ex['a'].lower()} property.", "display": ex["a"],
+                 "cue": "answer"},
+                {"id": b_trap, "text": trap_text, "cue": "traps"}]},
+        ],
+    }
+    size = pick_size(ex["show"] + [ex["q"]], [(132, ""), (96, "md"), (72, "sm"), (56, "xs")], 400, 1700)
+    shows, notes = [], []
+    for k in range(nb):
+        blk = f"b{k + 2:02d}"
+        out = f' data-out="b{k + 3:02d}"' if k < nb - 1 else ""
+        shows.append(f'      <div class="math {size} fade" data-at="{blk}-0.3"{out}>{markup(ex["show"][k], hl_at=blk, hl_out="", color=color).replace(' data-out=""', "")}</div>')
+        notes.append(f'      <div class="say fade muted" data-at="{blk}+0.2"{out} style="font-size: 40px">{ex["notes"][k]}</div>')
+    last = f"b{nb + 1:02d}"
+    cards = []
+    for k, w in enumerate(wrong):
+        cards.append(
+            f'        <div class="card trap fade c-red" data-at="{b_trap}+{0.15 + 0.25 * k:.2f}">'
+            f'<div class="name red"><span class="strike" data-at="{b_trap}+{0.9 + 0.25 * k:.2f}" data-dur="0.5">{w["a"]}</span></div>'
+            f'<div class="why">{w["why"]}</div></div>')
+    style = """
+  .hl { padding: 0 10px; margin: 0 -10px; }
+  sup { font-size: 0.6em; vertical-align: 0.55em; line-height: 0; }
+  .prop { font: 700 52px Poppins, sans-serif; padding: 0 36px; height: 96px; border-radius: 26px; }
+  .trap { width: 640px; padding: 28px 34px; gap: 14px; }
+  .trap .name { font: 700 44px Poppins, sans-serif; }
+  .trap .why { font: 500 30px/1.3 Inter, sans-serif; color: var(--muted); text-align: center; }
+"""
+    scenes = f"""
+  <!-- s01: the problem -->
+  <section class="scene" data-scene="s01">
+    <div class="label yellow fade" data-at="b01">Exercise {num} · {lv}</div>
+    <div class="math {size} pop" data-at="b01">{markup(ex["q"])}</div>
+    <div class="say fade muted" data-at="b01@which" style="font-size: 40px">Which property is shown?</div>
+  </section>
+
+  <!-- s02: what changed -->
+  <section class="scene" data-scene="s02">
+    <div class="stack">
+{chr(10).join(shows)}
+    </div>
+    <div class="stack">
+{chr(10).join(notes)}
+    </div>
+    <span class="chip prop c-{color} pop" data-at="{last}@{ex["a"].lower()}">{ex["a"]}</span>
+  </section>
+
+  <!-- s03: the answer and the traps -->
+  <section class="scene" data-scene="s03">
+    <div class="math sm fade" data-at="{b_ans}-0.5">{markup(ex["q"])}</div>
+    <span class="chip prop c-{color} pop" data-at="{b_ans}@{ex["a"].lower()}">✓ {ex["a"]}</span>
+    <div class="label red fade" data-at="{b_trap}">Common traps</div>
+    <div class="row" style="align-items: stretch; gap: 36px">
+{chr(10).join(cards)}
+    </div>
+    <div class="label muted fade" data-at="{b_trap}+1.5" style="font-size: 22px; font-weight: 500">This video uses an AI-generated voice.</div>
+  </section>
+"""
+    unit_label = f"Unit {data['unit'].split('.')[0]} · Practice {data['unit']}"
+    return vid, script, page(f"Exercise {num} — step by step", unit_label, num, style, scenes)
+
 
 # ---------------------------------------------------------------- quiz page
 def quiz_data(data):
     out = []
     for k, ex in enumerate(data["exercises"], 1):
-        opts = [{"v": money(ex["_answer"]), "ok": True, "why": ""}]
-        opts += [{"v": money(w["_value"]), "ok": False, "why": w["why"]} for w in ex["wrong"]]
+        if ex["kind"] == "num":
+            opts = [{"v": money(ex["_answer"]), "ok": True, "why": ""}]
+            opts += [{"v": money(w["_value"]), "ok": False, "why": w["why"]} for w in ex["wrong"]]
+        elif ex["kind"] == "expr":
+            opts = [{"v": markup(ex["a"]), "ok": True, "why": ""}]
+            opts += [{"v": markup(w["e"]), "ok": False, "why": w["why"]} for w in ex["wrong"]]
+        else:
+            opts = [{"v": ex["a"], "ok": True, "why": ""}]
+            opts += [{"v": w["a"], "ok": False, "why": w["why"]} for w in ex["wrong"]]
         out.append({"id": ex["id"], "n": k, "level": ex["level"], "prompt": ex.get("prompt", ""),
                     "q": markup(ex["q"]), "aria": plain(ex["q"]).replace("^", " to the power of "),
                     "options": opts})
@@ -305,8 +562,13 @@ def build(set_dir, check_only):
         sys.exit(f"{len(problems)} problem(s) found")
     print(f"✓ {len(data['exercises'])} exercises: every answer, every step line and every wrong option checked")
     for ex in data["exercises"]:
-        print(f"  {ex['id']}  {ex['q']:<46} = {ex['_answer']:>5}   wrong: "
-              + ", ".join(str(w["_value"]) for w in ex["wrong"]))
+        if ex["kind"] == "num":
+            ans, wr = ex["_answer"], [w["_value"] for w in ex["wrong"]]
+        elif ex["kind"] == "expr":
+            ans, wr = ex["a"], [w["e"] for w in ex["wrong"]]
+        else:
+            ans, wr = ex["a"], [w["a"] for w in ex["wrong"]]
+        print(f"  {ex['id']}  {ex['q']:<34} → {str(ans):<16} wrong: " + ", ".join(str(w) for w in wr))
     if check_only:
         return
     set_id = set_dir.name                                    # e.g. u00-l01
@@ -319,9 +581,10 @@ def build(set_dir, check_only):
     tpl = (ROOT / "tools" / "quiz_template.html").read_text(encoding="utf-8")
     payload = {"unit": data["unit"], "title": data["title"], "setId": set_id, "levels": data["levels"],
                "exercises": quiz_data(data)}
-    page = tpl.replace("__DATA__", json.dumps(payload, ensure_ascii=False, separators=(",", ":")))
-    page = page.replace("__TITLE__", f"Practice {data['unit']} · {data['title']}")
-    (set_dir / "index.html").write_text(page, encoding="utf-8")
+    out = tpl.replace("__DATA__", json.dumps(payload, ensure_ascii=False, separators=(",", ":")))
+    out = out.replace("__TITLE__", f"Practice {data['unit']} · {data['title']}")
+    out = out.replace("__H1__", data.get("h1", 'Order of operations, <span class="y">with signs</span>'))
+    (set_dir / "index.html").write_text(out, encoding="utf-8")
     print(f"✓ wrote {len(data['exercises'])} videos under videos/{set_id}-ex*/ and {set_dir / 'index.html'}")
 
 

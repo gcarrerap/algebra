@@ -103,7 +103,7 @@
 <main>
   <a class="back" href="../../">← All lessons</a>
   <div class="eyebrow" id="eyebrow"></div>
-  <h1>Order of operations, <span class="y">with signs</span></h1>
+  <h1>__H1__</h1>
   <ol class="dots" id="dots" aria-label="Exercises"></ol>
   <div id="app"></div>
   <footer>Pick the answer you think is right. A wrong answer shows you the mistake and plays a step-by-step video. Solution videos use an AI-generated voice.</footer>
@@ -181,7 +181,7 @@ function show() {
   order.forEach((oi, pos) => {
     const o = ex.options[oi];
     opts.append(el("button", { type: "button", class: "opt", "data-oi": oi, onclick: () => pick(oi) },
-      el("span", { class: "k", "aria-hidden": "true" }, "ABCD"[pos]), el("span", {}, o.v)));
+      el("span", { class: "k", "aria-hidden": "true" }, "ABCD"[pos]), el("span", { html: o.v })));
   });
   card.append(opts);
   card.append(el("div", { class: "fb", id: "fb", "aria-live": "polite" }));

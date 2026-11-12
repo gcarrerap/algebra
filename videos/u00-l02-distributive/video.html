@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Distributive Property</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="../_engine/player.css">
+<style>
+  /* Lesson 0.2 colors: distributive (sharing) yellow · results green · mistakes red. */
+  /* .dx: an expression whose .src term is shared with every .tgt term by arrows drawn above it */
+  .dx { position: relative; display: inline-block; }
+  .dx svg { position: absolute; left: 0; top: -0.72em; width: 100%; height: 0.7em; overflow: visible; pointer-events: none; }
+  .dx path.arrow { fill: none; stroke-width: 7; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: calc(1 - var(--p)); opacity: min(1, calc(var(--p) * 4)); }
+  .dx path.arrow.y { stroke: var(--yellow); } .dx path.arrow.r { stroke: var(--red); }
+  .dx-pad { padding-top: 0.5em; }
+
+  /* area model: unit squares of 64px */
+  .area { position: relative; display: flex; margin: 70px 0 70px 70px; }
+  .part {
+    position: relative; height: 192px; border: 4px solid var(--yellow);
+    background:
+      linear-gradient(rgba(255,204,77,.22) 2px, transparent 2px) 0 0 / 64px 64px,
+      linear-gradient(90deg, rgba(255,204,77,.22) 2px, transparent 2px) 0 0 / 64px 64px,
+      rgba(255, 204, 77, 0.10);
+  }
+  .part + .part { border-left-width: 2px; }
+  .part.unknown { background: repeating-linear-gradient(135deg, rgba(255,204,77,.16) 0 14px, rgba(255,204,77,.05) 14px 28px); }
+  .gap { margin-left: calc(var(--p) * 30px); }
+  .gap.part { border-left-width: calc(2px + var(--p) * 2px); }
+  .top, .side, .bottom, .inside { position: absolute; font: 600 52px Poppins, sans-serif; white-space: nowrap; }
+  .top { left: 50%; top: -76px; translate: -50% 0; }
+  .side { left: -62px; top: 50%; translate: 0 -50%; }
+  .bottom { left: 50%; bottom: -78px; translate: -50% 0; color: var(--muted); }
+  .inside { left: 50%; top: 50%; translate: -50% -50%; font-size: 60px; }
+  .eqs { display: grid; grid-template-columns: auto auto; gap: 18px 24px; align-items: center; }
+  .eqs .label { justify-self: end; font-size: 22px; }
+  .eqs .math { font-size: 64px; }
+  .rule { padding: 26px 56px; }
+  .rule .math { font-size: 72px; }
+  .trap { width: 760px; padding: 26px 40px; gap: 10px; }
+  .recap .card { width: 1100px; padding: 40px 56px; gap: 16px; }
+  .recap .name { font: 700 48px Poppins, sans-serif; }
+  .recap .what { font: 500 32px Inter, sans-serif; color: var(--muted); }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="header"><span class="unit">Unit 0 · Lesson 2</span><span class="title">The Distributive Property</span></div>
+
+  <!-- s01: mental math -->
+  <section class="scene" data-scene="s01">
+    <div class="stack dx-pad">
+      <div class="math fade" data-at="b01" data-out="b02@hundred">6 × 98<span class="fade yellow" data-at="b01.end-0.3"> = ?</span></div>
+      <div class="math fade" data-at="b02@hundred"><span class="dx"><span class="src">6</span> × (<span class="tgt" data-arrow-at="b03">100</span> − <span class="tgt" data-arrow-at="b03@six#3">2</span>)</span></div>
+    </div>
+    <div class="math md fade" data-at="b03@hundred#2">= <span class="hl c-yellow" data-at="b04" data-out="b04@eighty-eight">600 <span class="fade" data-at="b03@twelve">− 12</span></span></div>
+    <div class="math md pop green" data-at="b04@eighty-eight">= 588</div>
+    <div class="say fade" data-at="b04@distributive">That's the <span class="yellow">distributive property</span>.</div>
+  </section>
+
+  <!-- s02: why it works (area model) -->
+  <section class="scene" data-scene="s02">
+    <div class="row" style="gap: 110px">
+      <div class="area fade" data-at="b05@picture">
+        <div class="part" style="width: 256px">
+          <span class="side">3</span>
+          <span class="top fade" data-at="b05@four">4</span>
+          <span class="inside fade" data-at="b07@twelve">12</span>
+        </div>
+        <div class="part gap" data-at="b07@split" data-dur="0.8" style="width: 128px">
+          <span class="top fade" data-at="b05@two">2</span>
+          <span class="inside fade" data-at="b07@six">6</span>
+        </div>
+        <span class="inside green pop" data-at="b06@eighteen" data-out="b07@split" style="font-size: 72px">18</span>
+        <span class="bottom fade" data-at="b06@six" data-out="b07@split">◂ 6 ▸</span>
+      </div>
+      <div class="eqs">
+        <span></span>
+        <div class="math fade" data-at="b05@plus">3 × (4 + 2)</div>
+        <span class="label muted fade" data-at="b06">add first</span>
+        <div class="math fade" data-at="b06@six">= 3 × 6 <span class="fade green" data-at="b06@eighteen">= 18</span></div>
+        <span class="label yellow fade" data-at="b07@split">split</span>
+        <div class="math fade" data-at="b07@twelve">= 3 × 4 + 3 × 2</div>
+        <span></span>
+        <div class="math fade" data-at="b07@six">= 12 + 6 <span class="fade green" data-at="b07@eighteen">= 18</span></div>
+      </div>
+    </div>
+    <div class="say fade" data-at="b08">Same rectangle, <span class="green">same area</span>.</div>
+  </section>
+
+  <!-- s03: with a variable -->
+  <section class="scene" data-scene="s03">
+    <div class="row" style="gap: 110px">
+      <div class="area fade" data-at="b09@three">
+        <div class="part unknown" style="width: 320px">
+          <span class="side">3</span>
+          <span class="top">x</span>
+          <span class="inside fade" data-at="b11@three#2">3x</span>
+        </div>
+        <div class="part gap" data-at="b10@split" data-dur="0.8" style="width: 256px">
+          <span class="top">4</span>
+          <span class="inside fade" data-at="b11@twelve">12</span>
+        </div>
+        <span class="bottom red fade" data-at="b10@can't" data-out="b10@split">x + 4 = ?</span>
+      </div>
+      <div class="col dx-pad" style="gap: 20px; align-items: flex-start">
+        <div class="math md fade" data-at="b09@three"><span class="dx"><span class="src">3</span>(<span class="tgt" data-arrow-at="b11">x</span> + <span class="tgt" data-arrow-at="b11@three#3">4</span>)</span></div>
+        <div class="math md fade" data-at="b11@three#2">= 3x <span class="fade" data-at="b11@twelve">+ 12</span></div>
+      </div>
+    </div>
+    <div class="stack">
+      <div class="say fade" data-at="b12@outside" data-out="b13">The number outside multiplies <span class="yellow">every term inside</span>.</div>
+      <div class="card rule fade c-yellow glow" data-at="b13"><div class="math">a(b + c) = ab + ac</div></div>
+    </div>
+  </section>
+
+  <!-- s04: watch the signs -->
+  <section class="scene" data-scene="s04">
+    <div class="math md pop dx-pad" data-at="b14"><span class="dx"><span class="src">−2</span>(<span class="tgt" data-arrow-at="b15">x</span> <span class="tgt" data-arrow-at="b16">− 5</span>)</span></div>
+    <div class="col" style="gap: 10px">
+      <div class="math sm fade" data-at="b15">(−2) · x = <span class="fade" data-at="b15@x#2">−2x</span></div>
+      <div class="math sm fade" data-at="b16">(−2) · (−5) = <span class="fade green" data-at="b16@ten">+10</span></div>
+    </div>
+    <div class="stack">
+      <div class="math md pop green" data-at="b16@ten#2" data-out="b17">= −2x + 10</div>
+      <div class="card trap fade c-red" data-at="b17">
+        <div class="label red">Common mistake</div>
+        <div class="math sm"><span class="strike" data-at="b17@five" data-dur="0.6">−2x − 5</span></div>
+        <div class="say" style="font-size: 32px; color: var(--muted)">Only the first term got multiplied.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- s05: your turn + recap -->
+  <section class="scene" data-scene="s05">
+    <div class="layer fade" data-at="b18-0.5" data-out="b20">
+      <div class="label yellow pop" data-at="b18" style="font-size: 34px">★ Your turn</div>
+      <div class="row dx-pad" style="gap: 48px">
+        <div class="math md pop" data-at="b18"><span class="dx"><span class="src">4</span>(<span class="tgt" data-arrow-at="b19">2x</span> + <span class="tgt" data-arrow-at="b19@four#2">3</span>)</span><span class="fade yellow" data-at="b18.end" data-out="b19"> = ?</span></div>
+        <div class="timer" data-at="b18.end" data-out="b19"></div>
+      </div>
+      <div class="say fade muted" data-at="b18@pause" data-out="b19">⏸ Pause the video and try it</div>
+      <div class="col" style="gap: 8px">
+        <div class="math sm fade" data-at="b19@eight">= 8x <span class="fade" data-at="b19@twelve">+ 12</span></div>
+      </div>
+    </div>
+    <div class="layer fade recap" data-at="b20">
+      <div class="card pop c-yellow glow" data-at="b20">
+        <div class="name yellow">Distributive</div>
+        <div class="math md">a(b + c) = ab + ac</div>
+        <div class="what">Share the outside number with <b>every</b> term inside, and its sign goes along.</div>
+      </div>
+      <div class="say fade muted" data-at="b21" style="font-size: 38px">Next: <span style="color: var(--ink)">Parts of an Expression</span></div>
+      <div class="label fade muted" data-at="b22" style="font-size: 22px; font-weight: 500">This video uses an AI-generated voice.</div>
+    </div>
+  </section>
+
+  <div class="caption"></div>
+  <div class="progress"></div>
+  <div id="seek" title="Jump to a moment"></div>
+  <button id="play" type="button" aria-label="Play"><span class="play-btn">▶</span><span class="play-label">Watch the lesson</span></button>
+</div>
+<script>
+// Distribution arrows: one arc from each .dx's .src term to every .tgt term. The paths are created
+// now (so player.js animates them through data-at) and shaped once the fonts have loaded.
+addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const all = [];
+  document.querySelectorAll(".dx").forEach((dx) => {
+    const svg = document.createElementNS(NS, "svg");
+    dx.prepend(svg);
+    dx.querySelectorAll(".tgt").forEach((tgt) => {
+      const p = document.createElementNS(NS, "path");
+      p.setAttribute("class", "arrow " + (tgt.dataset.arrowColor || "y"));
+      p.setAttribute("pathLength", "1");
+      p.dataset.at = tgt.dataset.arrowAt;
+      svg.append(p);
+      all.push({ dx, svg, src: dx.querySelector(".src"), tgt, p });
+    });
+  });
+  const shape = () => all.forEach(({ svg, src, tgt, p }) => {
+    const h = parseFloat(getComputedStyle(svg).height);
+    const x1 = src.offsetLeft + src.offsetWidth / 2, x2 = tgt.offsetLeft + tgt.offsetWidth / 2;
+    const y = h * 0.82, lift = -h * 0.5, a = 16;
+    p.setAttribute("d", `M ${x1} ${y} Q ${(x1 + x2) / 2} ${lift} ${x2} ${y} M ${x2 - a} ${y - a * 1.1} L ${x2} ${y} L ${x2 + a * 0.9} ${y - a * 1.2}`);
+  });
+  shape();
+  document.fonts.ready.then(shape);
+});
+</script>
+<script src="../_engine/player.js"></script>
+</body>
+</html>
