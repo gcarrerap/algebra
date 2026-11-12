@@ -111,6 +111,14 @@ Chapters only group units for navigation; locking stays per unit. Unit numbers d
 - Every bank question has a level, using the same four levels as the practice sets
   (1 Warm-up, 2 Tricky, 3 Challenging, 4 Boss level).
 - **Level 4 (Boss level)** questions have a narrated **solution video**.
+- The bank has **exactly 2 Boss-level questions per learning block** (each topic, or each
+  subtopic when the topic has them).
+- **Every exam includes at least one Boss-level question from every learning block** of the
+  unit, chosen at random from its two. These questions will repeat often across attempts; that
+  is accepted. The rest of the exam is drawn from levels 1–3.
+- A unit can therefore have at most 20 learning blocks (the exam maximum). If an exam has fewer
+  than 10 learning blocks, the remaining questions up to the exam size come from the bank at
+  random.
 - Questions of levels 1–3 have a **written step-by-step solution** instead, shown in the review.
 - This only applies to exams. Every practice exercise keeps its solution video.
 
