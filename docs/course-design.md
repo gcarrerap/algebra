@@ -106,9 +106,13 @@ Chapters only group units for navigation; locking stays per unit. Unit numbers d
   no videos. The student answers every question and submits the exam.
 - **After submitting**, the exam shows the **score** and a review of every question: the
   student's answer, the correct one, what was wrong (the mistake, when it is a known one) and,
-  for each wrong answer, its **solution video**.
+  for each wrong answer, its **solution** (see below).
 - Submitted answers are final; to improve the score the student takes a new attempt.
-- Every question in the bank therefore has a solution video, as practice exercises do.
+- Every bank question has a level, using the same four levels as the practice sets
+  (1 Warm-up, 2 Tricky, 3 Challenging, 4 Boss level).
+- **Level 4 (Boss level)** questions have a narrated **solution video**.
+- Questions of levels 1–3 have a **written step-by-step solution** instead, shown in the review.
+- This only applies to exams. Every practice exercise keeps its solution video.
 
 ## Where progress is stored
 
