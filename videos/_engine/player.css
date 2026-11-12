@@ -124,8 +124,46 @@ body { position: relative; }
 }
 #play .play-label { font: 600 40px Poppins, sans-serif; color: var(--yellow); }
 #play:focus-visible .play-btn { outline: 6px solid var(--ink); outline-offset: 8px; }
-#seek { position: absolute; left: 0; right: 0; bottom: 0; height: 44px; z-index: 6; cursor: pointer; }
-.render #play, .render #seek { display: none; }
+/* the stage's thin progress line is for the MP4; live, the control bar below shows progress.
+   #seek is the old invisible seek strip, still in older video.html files: unused now. */
+body:not(.render) #stage .progress, #seek { display: none; }
+.render #play, .render .controls { display: none; }
+
+/* control bar (built by player.js): sits under the stage, in screen pixels, so it stays usable
+   when the 1920×1080 stage is scaled down to a phone or a small embed */
+.controls {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 44px; z-index: 30;
+  display: flex; align-items: center; gap: 12px; padding: 0 10px;
+  background: #0b1222; border-top: 1px solid #22304d;
+  font: 600 14px/1 Inter, "DejaVu Sans", sans-serif; color: #f5f1e8;
+  user-select: none; -webkit-user-select: none; touch-action: none;
+}
+.controls button {
+  flex: none; width: 36px; height: 36px; border: 0; border-radius: 8px; cursor: pointer;
+  background: transparent; color: inherit; font: 700 16px/1 Inter, "DejaVu Sans", sans-serif;
+}
+.controls button:hover { background: rgba(255, 255, 255, 0.08); }
+.controls button:focus-visible, .ctl-track:focus-visible { outline: 2px solid #ffcc4d; outline-offset: 2px; }
+.controls .ctl-fs { font-size: 20px; }
+.ctl-time { flex: none; font-variant-numeric: tabular-nums; color: #9aa6bd; white-space: nowrap; }
+.ctl-now { color: #f5f1e8; }
+.ctl-track {
+  position: relative; flex: 1; height: 32px; cursor: pointer; min-width: 40px;
+  background: linear-gradient(rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.18)) center / 100% 6px no-repeat;
+  border-radius: 3px;
+}
+.ctl-fill { position: absolute; left: 0; top: 13px; height: 6px; border-radius: 3px; background: #ffcc4d; }
+.ctl-thumb {
+  position: absolute; top: 8px; width: 16px; height: 16px; margin-left: -8px; border-radius: 50%;
+  background: #ffcc4d; box-shadow: 0 0 0 3px rgba(255, 204, 77, 0.25);
+}
+.ctl-lock { display: none; flex: none; font-size: 14px; }
+/* first viewing of a lesson: the bar only shows progress */
+.controls.locked .ctl-track { cursor: default; pointer-events: none; }
+.controls.locked .ctl-thumb { display: none; }
+.controls.locked .ctl-lock { display: inline; }
+@media (max-width: 360px) { .controls { gap: 6px; padding: 0 4px; } .ctl-time { font-size: 12px; } }
+@media (max-height: 300px) { .controls { height: 34px; } .controls button { width: 30px; height: 30px; } }
 
 /* ---------- number line (numberline.js) ---------- */
 .nl { overflow: visible; display: block; }

@@ -20,13 +20,14 @@ video-scripts/uNN.md ─► script.json ─► narration.mp3 + timeline.json ─
 | `tools/render_video.py` | Takes stills or films the full MP4. |
 
 The same `video.html` plays live in a browser with its narration: no MP4 needed. Tap the
-screen to pause, tap the bar at the bottom to jump, or use Space and the arrow keys. It loads
+screen or Space to pause, and use the control bar under the video (see
+[Player controls](#player-controls)). It loads
 `timeline.json` and `narration.mp3` next to it, so it must be served over http (any static
 server on `videos/`); opening the file directly from disk or from GitHub's file view won't run it.
 
 ## Player controls
 
-Rules from [course-design.md](course-design.md#videos); **not built yet** (see its "Gaps" table):
+Rules from [course-design.md](course-design.md#videos), built into `player.js` / `player.css`:
 
 - A visible control bar shows the **current time and the total duration** (`timeline.json`'s
   `duration`) and a **full-screen** button (the stage scales to the screen).
@@ -39,6 +40,26 @@ Rules from [course-design.md](course-design.md#videos); **not built yet** (see i
 - **Solution videos** (`videos/<set>-exNN/`) are always seekable, from the first viewing, and
   never record "watched". They still show the duration and the full-screen button.
 - Pausing, and resuming, are always allowed.
+
+How it is built:
+
+- `player.js` adds the bar itself (`.controls`, appended to `<body>`), so no `video.html` needs
+  changes. It sits **below** the stage in screen pixels (44 px, 34 px in small embeds), and the
+  stage is scaled into the space above it, so the bar never covers a caption and stays usable on
+  a phone. Live, the stage's thin `.progress` line is hidden (the bar shows progress); in
+  `?render` mode the bar is never built and `.render .controls` hides it, so MP4s and stills look
+  as before. The old invisible `#seek` strip is ignored and can stay in existing pages.
+- **Which kind of video:** the id is `timeline.json`'s `video` (falling back to the folder name).
+  An id ending in `-exNN` (`u00-l02-s2-ex03`) is a solution video; anything else is a lesson.
+  Nothing to mark in `video.html`.
+- **Watched:** when a lesson's narration ends, the player writes
+  `localStorage["algebra.videos.v1"] = { "<video id>": { "watched": "<ISO date>" } }` and unlocks
+  the bar right away. The `algebra.` prefix means Export/Import progress on the home page carries
+  it. While locked, the bar shows a 🔒 and ignores taps, drags and arrows.
+- Keys: Space play/pause, ← → ±5 s (when seekable), F full screen. Full screen uses the page's
+  Fullscreen API; where a browser has none (iPhone Safari) the button is hidden.
+- Testing seeking locally needs a server that answers HTTP Range requests (GitHub Pages does;
+  `python3 -m http.server` does not, so the audio can't jump there).
 
 ## Web version (no MP4)
 

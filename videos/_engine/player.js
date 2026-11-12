@@ -77,11 +77,106 @@
     }
   }
 
+  // ---------- live playback: control bar, seeking rules, "watched" ----------
+  // Solution videos (videos/<set>-exNN/) are told apart by their id: timeline.json's "video"
+  // ending in -exNN. They are always seekable and never record "watched". Lesson videos can't be
+  // sought until they have played to the end once; that is remembered in localStorage under
+  // WATCHED_KEY as { "<video id>": { "watched": "<ISO date>" } }.
+  const WATCHED_KEY = "algebra.videos.v1";
+  const isSolution = (id) => /-ex\d+$/.test(id);
+  const readWatched = () => { try { return JSON.parse(localStorage.getItem(WATCHED_KEY)) || {}; } catch (e) { return {}; } };
+  const markWatched = (id) => {
+    try { const w = readWatched(); w[id] = { watched: new Date().toISOString() }; localStorage.setItem(WATCHED_KEY, JSON.stringify(w)); } catch (e) {}
+  };
+  const fmt = (s) => { s = Math.max(0, Math.floor(s)); return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`; };
+
+  let bar;
   function fit() {
     const stage = document.getElementById("stage");
     const box = stage.parentElement.getBoundingClientRect();
-    const k = Math.min(box.width / 1920, box.height / 1080);
-    stage.style.transform = `translate(${(box.width - 1920 * k) / 2}px, ${(box.height - 1080 * k) / 2}px) scale(${k})`;
+    const h = box.height - (bar ? bar.offsetHeight : 0);   // the control bar sits below the stage, never over it
+    const k = Math.min(box.width / 1920, h / 1080);
+    stage.style.transform = `translate(${(box.width - 1920 * k) / 2}px, ${(h - 1080 * k) / 2}px) scale(${k})`;
+  }
+
+  function controls(audio, id, toggle) {
+    const solution = isSolution(id);
+    let seekable = solution || !!readWatched()[id];
+    bar = document.createElement("div");
+    bar.className = "controls";
+    bar.innerHTML =
+      '<button type="button" class="ctl-play" aria-label="Play">▶</button>' +
+      '<span class="ctl-time"><span class="ctl-now">0:00</span> / <span class="ctl-dur"></span></span>' +
+      '<div class="ctl-track" role="slider" aria-label="Video position" aria-valuemin="0">' +
+      '<div class="ctl-fill"></div><div class="ctl-thumb"></div></div>' +
+      '<span class="ctl-lock" title="Watch to the end once to skip around">🔒</span>' +
+      '<button type="button" class="ctl-fs" aria-label="Full screen" title="Full screen">⛶</button>';
+    document.body.appendChild(bar);
+    const $ = (c) => bar.querySelector(c);
+    const track = $(".ctl-track"), fill = $(".ctl-fill"), thumb = $(".ctl-thumb"), now = $(".ctl-now"), pb = $(".ctl-play");
+    $(".ctl-dur").textContent = fmt(TL.duration);
+    track.setAttribute("aria-valuemax", Math.round(TL.duration));
+
+    const setSeekable = (v) => {
+      seekable = v;
+      bar.classList.toggle("locked", !v);
+      track.title = v ? "Jump to a moment" : "Watch to the end once to skip around";
+      if (v) track.tabIndex = 0; else { track.removeAttribute("tabindex"); track.blur(); }
+      track.setAttribute("aria-disabled", String(!v));
+    };
+    setSeekable(seekable);
+    window.videoPlayer = { id, solution, get seekable() { return seekable; } };   // for tests
+
+    const jump = (t) => { if (seekable) audio.currentTime = Math.min(Math.max(t, 0), TL.duration); };
+    const at = (e) => { const r = track.getBoundingClientRect(); return clamp((e.clientX - r.left) / r.width) * TL.duration; };
+    track.addEventListener("pointerdown", (e) => {
+      if (!seekable) return;
+      e.preventDefault();
+      track.setPointerCapture(e.pointerId);
+      bar.classList.add("dragging");
+      jump(at(e));
+    });
+    track.addEventListener("pointermove", (e) => { if (bar.classList.contains("dragging")) jump(at(e)); });
+    const drop = () => bar.classList.remove("dragging");
+    track.addEventListener("pointerup", drop);
+    track.addEventListener("pointercancel", drop);
+
+    pb.onclick = toggle;
+    const fsEl = document.documentElement;
+    const canFs = document.fullscreenEnabled || document.webkitFullscreenEnabled;
+    const fsOn = () => document.fullscreenElement || document.webkitFullscreenElement;
+    const fs = () => {
+      if (fsOn()) (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+      else (fsEl.requestFullscreen || fsEl.webkitRequestFullscreen).call(fsEl);
+    };
+    if (canFs) $(".ctl-fs").onclick = fs; else $(".ctl-fs").hidden = true;   // e.g. iPhone Safari has no page full screen
+    const onFs = () => { bar.classList.toggle("fs", !!fsOn()); fit(); };
+    document.addEventListener("fullscreenchange", onFs);
+    document.addEventListener("webkitfullscreenchange", onFs);
+
+    addEventListener("keydown", (e) => {
+      if (e.code === "Space") { e.preventDefault(); toggle(); }
+      else if (e.code === "KeyF" && canFs) fs();
+      else if (e.code === "ArrowRight" || e.code === "ArrowLeft") {
+        e.preventDefault();
+        jump(audio.currentTime + (e.code === "ArrowRight" ? 5 : -5));
+      }
+    });
+    audio.addEventListener("ended", () => {
+      if (solution) return;
+      markWatched(id);
+      setSeekable(true);
+    });
+    return (t) => {
+      const f = (100 * clamp(t / TL.duration)).toFixed(3) + "%";
+      fill.style.width = f;
+      thumb.style.left = f;
+      now.textContent = fmt(Math.min(t, TL.duration));
+      track.setAttribute("aria-valuenow", Math.round(t));
+      const playing = !audio.paused;
+      pb.textContent = playing ? "❚❚" : "▶";
+      pb.setAttribute("aria-label", playing ? "Pause" : "Play");
+    };
   }
 
   async function start() {
@@ -94,34 +189,29 @@
     if (errors.length) console.error("video errors:\n" + errors.join("\n"));
     render(0);
     if (rendering) { window.videoReady = true; return; }
-    fit(); addEventListener("resize", fit);
+    // the video's id: timeline.json's "video", else its folder name
+    const id = TL.video || location.pathname.split("/").filter(Boolean).slice(-2, -1)[0] || "video";
     const audio = new Audio("narration.mp3");
     audio.preload = "auto";
+    window.videoAudio = audio;   // for tests
     const play = document.getElementById("play");
     const label = play.querySelector(".play-label") || play;
-    const seek = document.getElementById("seek");
     const toggle = () => {
       if (audio.paused) { audio.play(); play.hidden = true; }
       else { audio.pause(); label.textContent = "❚❚ Paused · tap to continue"; play.hidden = false; }
     };
     play.onclick = toggle;
     document.getElementById("stage").addEventListener("click", (e) => {
-      if (!e.target.closest("#play, #seek")) toggle();
+      if (!e.target.closest("#play")) toggle();
     });
-    if (seek) seek.addEventListener("click", (e) => {
-      const r = seek.getBoundingClientRect();
-      audio.currentTime = clamp((e.clientX - r.left) / r.width) * TL.duration;
-    });
-    addEventListener("keydown", (e) => {
-      if (e.code === "Space") { e.preventDefault(); toggle(); }
-      if (e.code === "ArrowRight") audio.currentTime = Math.min(TL.duration, audio.currentTime + 5);
-      if (e.code === "ArrowLeft") audio.currentTime = Math.max(0, audio.currentTime - 5);
-    });
-    audio.onended = () => { label.textContent = "↻ Watch again"; play.hidden = false; };
+    const draw = controls(audio, id, toggle);
+    fit(); addEventListener("resize", fit);
+    audio.addEventListener("ended", () => { label.textContent = "↻ Watch again"; play.hidden = false; });
     // ?autoplay=1 (used when a page embeds the video): start right away; if the browser refuses
     // sound without a tap, the big play button stays.
     if (location.search.includes("autoplay")) audio.play().then(() => { play.hidden = true; }).catch(() => {});
-    (function loop() { render(audio.currentTime); requestAnimationFrame(loop); })();
+    window.videoReady = true;
+    (function loop() { render(audio.currentTime); draw(audio.currentTime); requestAnimationFrame(loop); })();
   }
 
   addEventListener("DOMContentLoaded", start);

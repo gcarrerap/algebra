@@ -153,6 +153,9 @@ Chapters only group units for navigation; locking stays per unit. Unit numbers d
 - Exam pages append each attempt to the key `algebra.exams.v1`, which the home page reads:
   `{ "<unit>": [{ "date": "...", "score": 18, "total": 20, "questions": [...], "answers": [...] }] }`.
   `score` and `total` are required; the rest is for the review screen.
+- Video players record lesson videos watched to the end in `algebra.videos.v1`:
+  `{ "<video id>": { "watched": "<ISO date>" } }` (see
+  [video-production.md](video-production.md#player-controls)).
 - Every progress key starts with `algebra.`; that prefix is what Export/Import carries. Interface
   state that should not travel (which sections are open) uses `algebra-ui.`.
 
@@ -164,5 +167,4 @@ What already exists and does not follow these rules yet:
 |---|---|
 | Unit exam with question bank, ≥90% to unlock | No exam pages or question banks yet. The home page already locks units and reads exam results (`algebra.exams.v1`). |
 | Own exercise set per learning block | 0.1's two subtopics share one practice set. |
-| Player controls: visible total duration, full screen, no seeking on the first viewing of a lesson video, free seeking afterwards; solution videos always seekable | The player shows no duration and no full-screen button. Seeking is an invisible strip at the bottom of the stage (tap or arrow keys) that works from the first viewing, and nothing remembers that a video was watched. |
 | Reflection pauses (2 × 10–15 s, 1 × 15–30 s) | The produced lesson videos (0.1.1, 0.2.1, 0.2.2) pause 1.5–4 s and lack the reflection lines marked *(new)* in their scripts; solution videos pause 1.2–1.5 s. |
