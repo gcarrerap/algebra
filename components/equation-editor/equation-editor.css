@@ -1,0 +1,68 @@
+/* Theme the equation editor from the page with these variables (all optional). */
+equation-editor, equation-notebook {
+  --eq-bg: #0b1325;
+  --eq-fg: #f5f1e8;
+  --eq-panel: #18243d;
+  --eq-line: #2a3a5c;
+  --eq-accent: #ffcc4d;
+  --eq-muted: #9aa6bd;
+  --eq-size: 28px;          /* math size */
+  --eq-key: 40px;           /* ribbon button size */
+  display: block;
+  color: var(--eq-fg);
+  font: 500 16px/1.4 Inter, system-ui, sans-serif;
+}
+
+@media (pointer: coarse) { equation-editor, equation-notebook { --eq-key: 44px; } }
+
+/* ribbon */
+.eq-ribbon {
+  display: flex; flex-wrap: wrap; gap: 8px 14px; padding: 8px; margin-bottom: 10px;
+  background: var(--eq-panel); border: 1px solid var(--eq-line); border-radius: 12px;
+}
+.eq-group { display: flex; flex-wrap: wrap; gap: 6px; }
+.eq-key {
+  min-width: var(--eq-key); height: var(--eq-key); padding: 0 8px; border-radius: 10px; cursor: pointer;
+  background: var(--eq-bg); color: var(--eq-fg); border: 1px solid var(--eq-line);
+  font: 600 20px/1 Inter, system-ui, sans-serif; display: inline-flex; align-items: center; justify-content: center;
+  touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+}
+.eq-key:hover { border-color: var(--eq-accent); }
+.eq-key:active { background: var(--eq-line); }
+.eq-key:focus-visible { outline: 2px solid var(--eq-accent); outline-offset: 2px; }
+.eq-key sup { font-size: .6em; line-height: 0; }
+.eq-ic-frac { display: inline-flex; flex-direction: column; gap: 3px; align-items: center; }
+.eq-ic-frac i { display: block; width: 12px; height: 7px; border: 1.5px dashed currentColor; border-radius: 2px; }
+.eq-ic-frac i:first-child { margin-bottom: 1px; border-bottom: 0; height: 6px; }
+.eq-ic-frac i:last-child { border-top: 2px solid currentColor; border-radius: 0 0 2px 2px; }
+
+/* the editable math */
+math-field {
+  display: block; width: 100%; box-sizing: border-box;
+  font-size: var(--eq-size);
+  color: var(--eq-fg); background: var(--eq-bg);
+  border: 2px solid var(--eq-line); border-radius: 12px; padding: 6px 12px; min-height: 1.9em;
+  --caret-color: var(--eq-accent);
+  --selection-background-color: rgba(255, 204, 77, .35);
+  --selection-color: var(--eq-fg);
+  --placeholder-color: var(--eq-accent);
+  --placeholder-opacity: .75;
+  --contains-highlight-background-color: rgba(255, 204, 77, .12);
+  --smart-fence-color: var(--eq-fg);
+  outline: none;
+}
+math-field:focus-within { border-color: var(--eq-accent); }
+math-field::part(virtual-keyboard-toggle), math-field::part(menu-toggle) { display: none; }
+math-field::part(content) { overflow-x: auto; }
+
+/* notebook */
+.eq-lines { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.eq-line { display: grid; grid-template-columns: 26px 1fr 40px; gap: 8px; align-items: center; }
+.eq-num { color: var(--eq-muted); font: 600 14px Inter, sans-serif; text-align: right; }
+.eq-del, .eq-add {
+  background: transparent; color: var(--eq-muted); border: 1px solid var(--eq-line); border-radius: 10px; cursor: pointer;
+  font: 600 15px Inter, system-ui, sans-serif;
+}
+.eq-del { width: 40px; height: 40px; font-size: 22px; line-height: 1; }
+.eq-add { margin-top: 10px; padding: 10px 14px; color: var(--eq-accent); border-style: dashed; }
+.eq-del:hover, .eq-add:hover, .eq-del:focus-visible, .eq-add:focus-visible { border-color: var(--eq-accent); color: var(--eq-accent); outline: none; }
