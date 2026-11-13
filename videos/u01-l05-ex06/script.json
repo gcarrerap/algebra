@@ -1,0 +1,69 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l05-ex06",
+  "title": "Exercise 6",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's look at this one. Starting from negative four is less than two x minus two, which is less than or equal to six, which of these could be the next line? Choose all that apply.",
+          "display": "Starting from −4 < 2x − 2 ≤ 6, which of these could be the next line? Select all that apply.",
+          "cue": "show-problem",
+          "pause_after_s": 1.5
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "One by one",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Negative two is less than two x, which is less than or equal to eight. Yes: two was added to all three parts.",
+          "display": "−2 < 2x ≤ 8",
+          "cue": "option-1"
+        },
+        {
+          "id": "b03",
+          "text": "Negative two is less than x minus one, which is less than or equal to three. Yes: all three parts were divided by two.",
+          "display": "−2 < x − 1 ≤ 3",
+          "cue": "option-2"
+        },
+        {
+          "id": "b04",
+          "text": "Negative one is less than x, which is less than or equal to four. Yes: that is two steps in one, add two and then divide by two.",
+          "display": "−1 < x ≤ 4",
+          "cue": "option-3"
+        },
+        {
+          "id": "b05",
+          "text": "Negative six is less than two x, which is less than or equal to four. No: two was subtracted, but the work has minus two, so two must be added.",
+          "display": "−6 < 2x ≤ 4",
+          "cue": "option-4"
+        },
+        {
+          "id": "b06",
+          "text": "Negative two is less than two x, which is less than eight. No: the right symbol changed, but each end keeps its own symbol.",
+          "display": "−2 < 2x < 8",
+          "cue": "option-5"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b07",
+          "text": "Three lines follow: negative two is less than two x, which is less than or equal to eight; negative two is less than x minus one, which is less than or equal to three; and negative one is less than x, which is less than or equal to four. Each one keeps the same solutions.",
+          "cue": "answer"
+        }
+      ]
+    }
+  ]
+}

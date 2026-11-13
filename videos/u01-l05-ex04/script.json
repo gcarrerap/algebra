@@ -1,0 +1,69 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l05-ex04",
+  "title": "Exercise 4",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's look at this one. Select all the numbers that are solutions of x less than negative one, or x greater than or equal to three.",
+          "display": "Select all the numbers that are solutions of x < −1 or x ≥ 3.",
+          "cue": "show-problem",
+          "pause_after_s": 1.5
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "One by one",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Negative one. No: negative one is not less than negative one, and it is not three or more.",
+          "display": "−1",
+          "cue": "option-1"
+        },
+        {
+          "id": "b03",
+          "text": "Negative two. Yes: negative two is less than negative one.",
+          "display": "−2",
+          "cue": "option-2"
+        },
+        {
+          "id": "b04",
+          "text": "Zero. No: zero is in the gap, neither less than negative one nor three or more.",
+          "display": "0",
+          "cue": "option-3"
+        },
+        {
+          "id": "b05",
+          "text": "Three. Yes: three is greater than or equal to three, so the circle at three is closed.",
+          "display": "3",
+          "cue": "option-4"
+        },
+        {
+          "id": "b06",
+          "text": "Ten. Yes: ten is three or more.",
+          "display": "10",
+          "cue": "option-5"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b07",
+          "text": "Negative two, three and ten are solutions. Negative one and zero are in the gap between the two rays.",
+          "cue": "answer"
+        }
+      ]
+    }
+  ]
+}

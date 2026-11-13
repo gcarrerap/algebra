@@ -1,0 +1,51 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l05-ex11",
+  "title": "Exercise 11",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. How many whole numbers are not solutions of x less than negative two, or x greater than three?",
+          "display": "x < −2 or x > 3",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "The solutions are two rays, and the whole numbers in the gap between them are left out. Both circles are open, so negative two and three are in the gap too: negative two, negative one, zero, one, two and three. That is six numbers.",
+          "display": "−2, −1, 0, 1, 2, 3",
+          "cue": "step-1"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b03",
+          "text": "So the answer is six.",
+          "display": "6",
+          "cue": "answer"
+        },
+        {
+          "id": "b04",
+          "text": "Watch out for these traps. If you treat the open circles as closed, you get four. If you subtract the boundaries, you get five.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

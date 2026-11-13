@@ -1,0 +1,96 @@
+{
+ "format": "algebra-video-script",
+ "version": 1,
+ "video": "u01-l05-compound-inequalities",
+ "title": "Compound inequalities",
+ "voice": "narrator",
+ "source": "video-scripts/u01.md#1.5",
+ "scenes": [
+  {
+   "id": "s01",
+   "title": "A safe range",
+   "blocks": [
+    {
+     "id": "b01",
+     "text": "A medicine must be kept warmer than two degrees and colder than eight degrees. Which temperatures are safe?"
+    },
+    {
+     "id": "b02",
+     "text": "Both conditions must hold at the same time. We write it as two is less than t, which is less than eight. On the number line, it's the overlap of the two graphs.",
+     "display": "t > 2 and t < 8"
+    }
+   ]
+  },
+  {
+   "id": "s02",
+   "title": "Solving three parts at once",
+   "blocks": [
+    {
+     "id": "b03",
+     "text": "In negative one is less than or equal to two x plus three, which is less than nine, the variable sits in the middle. Whatever you do, do it to all three parts.",
+     "display": "−1 ≤ 2x + 3 < 9"
+    },
+    {
+     "id": "b04",
+     "text": "Subtract three from all three parts: negative four, two x, six. Divide all three by two: negative two is less than or equal to x, which is less than three.",
+     "display": "−4 ≤ 2x < 6"
+    },
+    {
+     "id": "b05",
+     "text": "Why does one end have a closed circle and the other an open one?",
+     "pause_after_s": 10.0
+    },
+    {
+     "id": "b06",
+     "text": "Because the left symbol includes equality and the right one doesn't. Each end keeps its own symbol."
+    }
+   ]
+  },
+  {
+   "id": "s03",
+   "title": "Or",
+   "blocks": [
+    {
+     "id": "b07",
+     "text": "Now the word or. A discount for children under twelve or adults sixty-five and over. A person qualifies if either condition is true. The graph is both pieces together, pointing away from each other.",
+     "display": "a < 12 or a ≥ 65"
+    },
+    {
+     "id": "b08",
+     "text": "Here are two puzzles. What numbers satisfy x less than three or x greater than one? And what numbers satisfy x greater than five and x less than two?",
+     "display": "x < 3 or x > 1",
+     "pause_after_s": 12.0
+    },
+    {
+     "id": "b09",
+     "text": "Every number satisfies the first: each number is either less than three or greater than one. No number satisfies the second: nothing is both greater than five and less than two."
+    }
+   ]
+  },
+  {
+   "id": "s04",
+   "title": "Your turn",
+   "blocks": [
+    {
+     "id": "b10",
+     "text": "Your turn. Solve and graph three x minus one is less than negative seven, or two x plus five is greater than or equal to eleven. Pause the video and try it.",
+     "display": "3x − 1 < −7 or 2x + 5 ≥ 11",
+     "pause_after_s": 20.0
+    },
+    {
+     "id": "b11",
+     "text": "The first part gives x less than negative two. The second gives x greater than or equal to three. The solution is both rays.",
+     "display": "x < −2 or x ≥ 3"
+    },
+    {
+     "id": "b12",
+     "text": "Remember: and means both, the overlap. Or means either, everything in both graphs."
+    },
+    {
+     "id": "b13",
+     "text": "This video uses an AI-generated voice."
+    }
+   ]
+  }
+ ]
+}

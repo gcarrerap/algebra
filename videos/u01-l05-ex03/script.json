@@ -1,0 +1,69 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l05-ex03",
+  "title": "Exercise 3",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's look at this one. Select all the numbers that are solutions of two is less than x, which is less than or equal to eight.",
+          "display": "Select all the numbers that are solutions of 2 < x ≤ 8.",
+          "cue": "show-problem",
+          "pause_after_s": 1.5
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "One by one",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Two. No: two is not greater than two, so the circle at two is open.",
+          "display": "2",
+          "cue": "option-1"
+        },
+        {
+          "id": "b03",
+          "text": "Five. Yes: five is between two and eight.",
+          "display": "5",
+          "cue": "option-2"
+        },
+        {
+          "id": "b04",
+          "text": "Eight. Yes: eight is less than or equal to eight, so the circle at eight is closed.",
+          "display": "8",
+          "cue": "option-3"
+        },
+        {
+          "id": "b05",
+          "text": "Nine. No: nine is more than eight, outside the graph.",
+          "display": "9",
+          "cue": "option-4"
+        },
+        {
+          "id": "b06",
+          "text": "Zero. No: zero is less than two, outside the graph.",
+          "display": "0",
+          "cue": "option-5"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b07",
+          "text": "Five and eight are solutions. Two is not, because its circle is open, eight is, because its circle is closed, and nine and zero are outside the graph.",
+          "cue": "answer"
+        }
+      ]
+    }
+  ]
+}

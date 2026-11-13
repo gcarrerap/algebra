@@ -1,0 +1,57 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l05-ex13",
+  "title": "Exercise 13",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. How many whole numbers are not solutions of x plus four is less than three, or two x minus three is greater than three?",
+          "display": "x + 4 < 3 or 2x − 3 > 3",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Solve each part on its own. X plus four is less than three, so x is less than negative one. Two x minus three is greater than three, so two x is greater than six, and x is greater than three.",
+          "display": "x < −1 or x > 3",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "The whole numbers in the gap are left out, and both circles are open: negative one, zero, one, two and three. That is five numbers.",
+          "display": "−1, 0, 1, 2, 3",
+          "cue": "step-2"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b04",
+          "text": "So the answer is five.",
+          "display": "5",
+          "cue": "answer"
+        },
+        {
+          "id": "b05",
+          "text": "Watch out for these traps. If you treat the open circles as closed, you get three. If you subtract the boundaries, you get four.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

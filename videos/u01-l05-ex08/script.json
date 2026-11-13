@@ -1,0 +1,57 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l05-ex08",
+  "title": "Exercise 8",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. What is the largest whole number that solves three is less than or equal to two x minus one, which is less than eleven?",
+          "display": "3 ≤ 2x − 1 < 11",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Add one to all three parts, by the addition property. Four is less than or equal to two x, which is less than twelve.",
+          "display": "4 ≤ 2x < 12",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Divide all three parts by two, by the division property. Two is less than or equal to x, which is less than six. Six is not included, so the largest whole number is five.",
+          "display": "2 ≤ x < 6",
+          "cue": "step-2"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b04",
+          "text": "So the answer is five.",
+          "display": "5",
+          "cue": "answer"
+        },
+        {
+          "id": "b05",
+          "text": "Watch out for these traps. If you include the open end, you get six. If you read the wrong end of the graph, you get two.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

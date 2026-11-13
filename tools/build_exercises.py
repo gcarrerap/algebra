@@ -39,7 +39,9 @@ CHIP_COLOR = {"P": "blue", "E": "purple", "MD": "yellow", "AS": "green", "SUB": 
               "ADD": "blue", "SUBTRACT": "purple", "MULTIPLY": "yellow", "DIVIDE": "green",
               "OK": "green", "ERROR": "red", "CARRY": "ink",
               # lesson 1.4: multiplying or dividing both sides of an inequality by a negative number
-              "FLIP": "red"}
+              "FLIP": "red",
+              # lesson 1.5: solving each part of an and / or, and listing the whole numbers that fit
+              "SOLVE": "blue", "LIST": "green"}
 CHIP_NAME = {"P": "parentheses and groups", "E": "exponents", "MD": "multiply and divide",
              "AS": "add and subtract", "SUB": "substitute", "COMM": "commutative property",
              "ASSOC": "associative property", "DIST": "distributive property", "CALC": "calculate",
@@ -49,7 +51,8 @@ CHIP_NAME = {"P": "parentheses and groups", "E": "exponents", "MD": "multiply an
              "COLLECT": "collect the variable terms", "ISOLATE": "undo the operations",
              "ADD": "addition property", "SUBTRACT": "subtraction property", "MULTIPLY": "multiplication property",
              "DIVIDE": "division property", "OK": "step is allowed", "ERROR": "first wrong step",
-             "CARRY": "carries the error", "FLIP": "flip the symbol"}
+             "CARRY": "carries the error", "FLIP": "flip the symbol",
+             "SOLVE": "solve each part", "LIST": "list the whole numbers"}
 # lesson 0.5: the words each operation goes by (check "operation" on multi / match)
 OPERATION_WORDS = {"addition": ["sum", "more than", "increased by", "plus", "total of", "added to"],
                    "subtraction": ["difference", "less than", "decreased by", "minus", "subtract", "fewer than", "take away"],
@@ -438,9 +441,11 @@ def var_part(t):
 # ---------------------------------------------------------------- equations and their steps (topic 1.3)
 XS = [F(0), F(1), F(2), F(-3), F(5, 7), F(11)]           # values of x an equation step is tested at
 EQ_DERIVE = ("operand", "solve", "first-error")           # derive kinds that read an equation or a step
-INEQ_DERIVE = ("boundary", "smallest-int", "largest-int") # derive kinds that read an inequality (1.4)
+INEQ_DERIVE = ("boundary", "smallest-int", "largest-int",  # derive kinds that read an inequality (1.4)
+                "count-int", "count-out")                    # … and a compound one (1.5)
 STEP_OF_CHIP = {"ADD": "Addition", "SUBTRACT": "Subtraction", "MULTIPLY": "Multiplication",
-                "DIVIDE": "Division", "DIST": "Distributive", "COMBINE": "Combine", "FLIP": "Flip"}
+                "DIVIDE": "Division", "DIST": "Distributive", "COMBINE": "Combine", "FLIP": "Flip",
+                "SOLVE": "Solve"}
 
 
 def fx(expr, v):
@@ -494,7 +499,9 @@ def split_rel(s):
 
 
 def holds(s, v):
-    """Is the inequality "L op R" true at x = v?"""
+    """Is the inequality "L op R" (or a compound one) true at x = v?"""
+    if is_compound(s):
+        return _in(_ivs(s), v)
     left, op, right = split_rel(s)
     a, b = fx(left, v), fx(right, v)
     return {"<": a < b, ">": a > b, "≤": a <= b, "≥": a >= b, "=": a == b}[op]
@@ -513,7 +520,7 @@ def ineq_set(s):
 
 def sig(s):
     """What a line of a solution says, to compare lines: the solution of an equation, or of an inequality."""
-    return ineq_set(s) if is_ineq(s) else solve_linear(s)
+    return comp_set(s) if is_ineq(s) else solve_linear(s)
 
 
 def near_int(b, op):
@@ -533,6 +540,144 @@ def symbol_of(phrase):
     return max(hits)[1]
 
 
+# ---------------------------------------------------------------- compound inequalities (lesson 1.5)
+WINDOW = 100                                                 # whole numbers are listed between −100 and 100
+
+
+def is_compound(s):
+    """"A or B", "A and B" or the three-part form "a < x < b"."""
+    return " or " in s or " and " in s or len(re.findall(r"[<>≤≥]", s)) >= 2
+
+
+def is_chain(s):
+    return " or " not in s and " and " not in s and len(re.findall(r"[<>≤≥]", s)) == 2
+
+
+def chain_conds(s):
+    """The two inequalities a three-part inequality "e1 r1 m r2 e2" says: "e1 r1 m" and "m r2 e2"."""
+    e1, r1, m, r2, e2 = (t.strip() for t in re.split(r"(≤|≥|<|>)", s))
+    return [f"{e1} {r1} {m}", f"{m} {r2} {e2}"]
+
+
+def _iv(res):
+    """The solution set of ineq_set as a list of intervals (lo, lo closed, hi, hi closed); None = no end."""
+    if res == "all":
+        return [(None, False, None, False)]
+    if res == "none":
+        return []
+    b, op = res
+    return [{">": (b, False, None, False), "≥": (b, True, None, False),
+             "<": (None, False, b, False), "≤": (None, False, b, True)}[op]]
+
+
+def _meet(I, J):
+    """Intersection of two interval lists (the overlap: "and")."""
+    out = []
+    for l1, lc1, h1, hc1 in I:
+        for l2, lc2, h2, hc2 in J:
+            if l1 is None or (l2 is not None and l2 > l1):
+                lo, lc = l2, lc2
+            elif l2 is None or l1 > l2:
+                lo, lc = l1, lc1
+            else:
+                lo, lc = l1, lc1 and lc2
+            if h1 is None or (h2 is not None and h2 < h1):
+                hi, hc = h2, hc2
+            elif h2 is None or h1 < h2:
+                hi, hc = h1, hc1
+            else:
+                hi, hc = h1, hc1 and hc2
+            if lo is not None and hi is not None and (lo > hi or (lo == hi and not (lc and hc))):
+                continue
+            out.append((lo, lc, hi, hc))
+    return out
+
+
+def _join(I, J):
+    """Union of two interval lists (everything in either one: "or"), merged and sorted."""
+    merged = []
+    for t in sorted(I + J, key=lambda t: (t[0] is not None, t[0] if t[0] is not None else 0, not t[1])):
+        if merged:
+            l, lc, h, hc = merged[-1]
+            if h is None or (t[0] is not None and (t[0] < h or (t[0] == h and (hc or t[1])))):
+                if h is None or t[2] is None:
+                    nh, nhc = None, False
+                elif t[2] > h:
+                    nh, nhc = t[2], t[3]
+                elif t[2] < h:
+                    nh, nhc = h, hc
+                else:
+                    nh, nhc = h, hc or t[3]
+                merged[-1] = (l, lc, nh, nhc)
+                continue
+        merged.append(t)
+    return merged
+
+
+def _ivs(s):
+    """The solution set of any inequality in x (single, three-part, "and", "or") as intervals."""
+    if " or " in s:
+        out = []
+        for part in s.split(" or "):
+            out = _join(out, _ivs(part))
+        return out
+    if " and " in s or is_chain(s):
+        out = [(None, False, None, False)]
+        for part in (s.split(" and ") if " and " in s else chain_conds(s)):
+            out = _meet(out, _ivs(part))
+        return out
+    return _iv(ineq_set(s))
+
+
+def _canon(I):
+    """"all", "none", (b, op) for one ray (as ineq_set), else the tuple of intervals."""
+    if not I:
+        return "none"
+    if I == [(None, False, None, False)]:
+        return "all"
+    if len(I) == 1:
+        l, lc, h, hc = I[0]
+        if h is None:
+            return (l, "≥" if lc else ">")
+        if l is None:
+            return (h, "≤" if hc else "<")
+    return tuple(I)
+
+
+def comp_set(s):
+    return _canon(_ivs(s))
+
+
+def _in(I, v):
+    return any((l is None or v > l or (lc and v == l)) and (h is None or v < h or (hc and v == h))
+               for l, lc, h, hc in I)
+
+
+def members(I):
+    """The whole numbers (−100 … 100) in a set."""
+    return [n for n in range(-WINDOW, WINDOW + 1) if _in(I, F(n))]
+
+
+def fmt_num(b):
+    return str(b).replace("-", "−")
+
+
+def set_text(res):
+    """How a number-line graph is described in words, for any solution set."""
+    if res == "all":
+        return "Whole line shaded"
+    if res == "none":
+        return "Nothing shaded"
+    if len(res) == 2 and isinstance(res[1], str):
+        return graph_text(*res)
+    circ = lambda b, closed: f"{'closed' if closed else 'open'} at {fmt_num(b)}"      # short: it must fit one line
+    if len(res) == 1:
+        l, lc, h, hc = res[0]
+        return f"{circ(l, lc).capitalize()}, {circ(h, hc)}, shaded between"
+    (_, _, h1, hc1), (l2, lc2, _, _) = res
+    return f"{circ(h1, hc1).capitalize()}, shaded left; {circ(l2, lc2)}, shaded right"
+
+
 def graph_text(b, op):
     """How a number-line graph is described in words: "Open circle at 2, shaded right"."""
     return (f"{'Open' if op in '<>' else 'Closed'} circle at {str(b).replace('-', '−')}, "
@@ -545,7 +690,10 @@ def step_kind(a, b):
     like terms are collected), Addition / Subtraction (the same expression is added to or taken from
     both sides) or Multiplication / Division (both sides times a number, or over one). On an inequality
     the symbol must stay the same, except when the number is negative: then it must flip. None when the
-    step is none of these (so a wrong step is never given a name)."""
+    step is none of these (so a wrong step is never given a name). A three-part inequality is a step on
+    both of its halves (the same property and number); an "and" / "or" line solved part by part is "Solve"."""
+    if is_compound(a) or is_compound(b):
+        return compound_step(a, b)
     la, opa, ra = split_rel(a)
     lb, opb, rb = split_rel(b)
     if all(fx(la, v) == fx(lb, v) and fx(ra, v) == fx(rb, v) for v in XS):
@@ -581,6 +729,24 @@ def step_kind(a, b):
     return None
 
 
+def compound_step(a, b):
+    if any(w in t for t in (a, b) for w in (" or ", " and ")):
+        return "Solve" if a != b and sig(a) == sig(b) else None
+    if not (is_chain(a) and is_chain(b)):
+        return None
+    (a1, a2), (b1, b2) = chain_conds(a), chain_conds(b)
+    k1, k2 = step_kind(a1, b1), step_kind(a2, b2)
+    if k1 is None or k1 != k2:
+        return None
+    if k1 in ("Addition", "Subtraction", "Multiplication", "Division"):
+        try:
+            if step_number(a1, b1) != step_number(a2, b2):
+                return None                                  # not the same number on both halves
+        except ValueError:
+            return None
+    return k1
+
+
 def step_number(a, b):
     """(property, n): the number a step adds, subtracts, multiplies by or divides by (n keeps its
     sign for multiplication and division, so ÷ −5 gives −5). Only for a step by a plain number."""
@@ -602,7 +768,7 @@ def step_number(a, b):
 def chip_kind(a, b):
     """step_kind, but a step by a negative number on an inequality is a "Flip" (chip FLIP)."""
     kind = step_kind(a, b)
-    if kind in ("Multiplication", "Division") and split_rel(a)[1] != "=" and step_number(a, b)[1] < 0:
+    if kind in ("Multiplication", "Division") and not is_compound(a) and split_rel(a)[1] != "=" and step_number(a, b)[1] < 0:
         return "Flip"
     return kind
 
@@ -678,33 +844,95 @@ def eq_mistake(code, q, spec, ans):
 
 
 def ineq_derive(q, spec):
-    """derive kinds for inequalities (1.4): boundary — the number x is compared with; smallest-int /
-    largest-int — the smallest (largest) whole number that solves it, so open and closed circles matter."""
+    """derive kinds for inequalities (1.4, 1.5): boundary — the number x is compared with; smallest-int /
+    largest-int — the smallest (largest) whole number that solves it, so open and closed circles matter;
+    count-int — how many whole numbers solve it (a bounded graph); count-out — how many whole numbers do
+    NOT solve it (the gap between the two rays of an "or")."""
     kind = spec.partition(":")[0]
-    res = ineq_set(q)
-    if not isinstance(res, tuple):
-        raise ValueError(f"{q!r} is true for {res} x")
-    b, op = res
     if kind == "boundary":
-        value = b
-    elif kind == "smallest-int":
-        if op not in ">≥":
-            raise ValueError(f"{q!r} has no smallest solution (x {op} {b})")
-        value = F(near_int(b, op))
-    else:
-        if op not in "<≤":
-            raise ValueError(f"{q!r} has no largest solution (x {op} {b})")
-        value = F(near_int(b, op))
-    if value.denominator != 1:
-        raise ValueError(f"the answer {value} is not an integer")
-    return int(value)
+        res = ineq_set(q)
+        if not isinstance(res, tuple):
+            raise ValueError(f"{q!r} is true for {res} x")
+        value = res[0]
+        if value.denominator != 1:
+            raise ValueError(f"the answer {value} is not an integer")
+        return int(value)
+    I = _ivs(q)
+    ins = members(I)
+    if kind == "count-out":
+        out = [n for n in range(-WINDOW, WINDOW + 1) if n not in ins]
+        if not out or out[0] == -WINDOW or out[-1] == WINDOW:
+            raise ValueError(f"{q!r} does not leave a finite set of whole numbers out")
+        return len(out)
+    if kind == "count-int":
+        if not ins or ins[0] == -WINDOW or ins[-1] == WINDOW:
+            raise ValueError(f"{q!r} has no finite count (the set of solutions is {comp_set(q)})")
+        return len(ins)
+    if kind == "smallest-int":
+        if not ins or ins[0] == -WINDOW:
+            raise ValueError(f"{q!r} has no smallest solution (the set of solutions is {comp_set(q)})")
+        return ins[0]
+    if not ins or ins[-1] == WINDOW:
+        raise ValueError(f"{q!r} has no largest solution (the set of solutions is {comp_set(q)})")
+    return ins[-1]
+
+
+def _closure(I, closed):
+    return [(l, closed if l is not None else False, h, closed if h is not None else False) for l, lc, h, hc in I]
+
+
+def comp_mistake(code, q, spec, ans):
+    """The number a named mistake gives on a compound-inequality exercise (1.5). smallest-int / largest-int:
+    edge — the closed and open circles swapped; other — the other end of the graph; sign — the boundaries
+    with the wrong sign. count-int: closed — both circles filled in; open — both left out; gap — the
+    distance between the boundaries; inner — that distance less 2. count-out: edge — circles swapped;
+    gap — the distance between the two inner boundaries; neighbors — the nearest solutions counted too."""
+    kind = spec.partition(":")[0]
+    I = _ivs(q)
+    flipped = [(l, (not lc) if l is not None else False, h, (not hc) if h is not None else False) for l, lc, h, hc in I]
+    if kind in ("smallest-int", "largest-int"):
+        small = kind == "smallest-int"
+        ins = members(I)
+        if code == "edge":
+            m = members(flipped)
+            return m[0] if small else m[-1]
+        if code == "other":
+            return ins[-1] if small else ins[0]
+        if code == "sign":
+            return -ins[-1] if small else -ins[0]
+    elif kind == "count-int":
+        if len(I) != 1:
+            raise ValueError("count-int mistakes need one bounded interval")
+        lo, _, hi, _ = I[0]
+        if code == "closed":
+            return len(members(_closure(I, True)))
+        if code == "open":
+            return len(members(_closure(I, False)))
+        if code == "gap":
+            return int(hi - lo)
+        if code == "inner":
+            return int(hi - lo - 2)
+    elif kind == "count-out":
+        if len(I) != 2:
+            raise ValueError("count-out mistakes need two rays")
+        if code == "edge":
+            kept = members(flipped)
+            return len([n for n in range(-WINDOW, WINDOW + 1) if n not in kept])
+        if code == "gap":
+            return int(I[1][0] - I[0][2])
+        if code == "neighbors":
+            return ans + 2
+    raise ValueError(f"unknown mistake {code!r} for derive {spec!r}")
 
 
 def ineq_mistake(code, q, spec, ans):
     """The number a named mistake gives on an inequality exercise (1.4). boundary: the solve mistakes of
     the equation with = (sign-k, no-divide, …). Whole-number answers: edge — open and closed circle
     swapped; noflip — the symbol was not flipped after dividing by a negative; sign — the boundary has
-    the wrong sign; wrongway — the set was drawn on the other side of the boundary."""
+    the wrong sign; wrongway — the set was drawn on the other side of the boundary. Compound inequalities
+    (1.5): see comp_mistake."""
+    if is_compound(q):
+        return comp_mistake(code, q, spec, ans)
     kind = spec.partition(":")[0]
     left, op0, right = split_rel(q)
     if kind == "boundary":
@@ -741,6 +969,29 @@ def validate_equation_lines(ex, problems):
                 if want == "CARRY" and sig(lines[j + 1]) != sig(lines[j]):
                     problems.append(f"{i}: step {j + 1} is a second mistake; a CARRY step must be fine on its own")
             return
+        if kind in ("count-int", "count-out"):
+            body, listed = lines[:-1], lines[-1]
+            if ex["chips"][-1:] != ["LIST"]:
+                problems.append(f"{i}: the last chip of a count exercise must be LIST")
+            if _norm(lines[0]) != _norm(ex["q"]):
+                problems.append(f"{i}: the first line must be the question")
+            for j, chip in enumerate(ex["chips"][:-1]):
+                if chip not in STEP_OF_CHIP:
+                    problems.append(f"{i}: chip {chip!r} is not a property of equality or a rewrite")
+                elif (got := chip_kind(body[j], body[j + 1])) != STEP_OF_CHIP[chip]:
+                    problems.append(f"{i}: step {j + 1} ({body[j]!r} → {body[j + 1]!r}) is {got}, not {STEP_OF_CHIP[chip]}")
+            for ln in body:
+                if sig(ln) != sig(ex["q"]):
+                    problems.append(f"{i}: line {ln!r} does not have the same solutions as {ex['q']!r}")
+            I = _ivs(ex["q"])
+            ins = members(I)
+            want = ins if kind == "count-int" else [n for n in range(-WINDOW, WINDOW + 1) if n not in ins]
+            got = [int(t.replace("−", "-")) for t in re.split(r",\s*", listed)]
+            if got != want:
+                problems.append(f"{i}: the list {listed!r} must be exactly the whole numbers {want}")
+            if len(want) != ans:
+                problems.append(f"{i}: the list has {len(want)} numbers, not {ans}")
+            return
         for j, chip in enumerate(ex["chips"]):
             if chip not in STEP_OF_CHIP:
                 problems.append(f"{i}: chip {chip!r} is not a property of equality or a rewrite")
@@ -750,7 +1001,7 @@ def validate_equation_lines(ex, problems):
             if _norm(lines[0]) != _norm(ex["q"]):
                 problems.append(f"{i}: the first line must be the question")
             for ln in lines:
-                if ineq_set(ln) != ineq_set(ex["q"]):
+                if sig(ln) != sig(ex["q"]):
                     problems.append(f"{i}: line {ln!r} does not have the same solutions as {ex['q']!r}")
         elif kind == "solve":
             if _norm(lines[0]) != _norm(ex["q"]):
@@ -804,6 +1055,24 @@ def check_equation_tools():
                                     "no more than")] == ["≥", "≤", ">", "<", "≥", "≤"]
     assert graph_text(F(2), ">") == "Open circle at 2, shaded right" and graph_text(F(-1), "≤") == "Closed circle at −1, shaded left"
     assert holds("x ≥ 5", F(5)) and not holds("x > 5", F(5)) and holds("−3x + 4 ≤ 13", F(-3))
+    # compound inequalities (1.5)
+    assert comp_set("−1 ≤ 2x + 3 < 9") == ((F(-2), True, F(3), False),) and comp_set("x > 5 and x < 2") == "none"
+    assert comp_set("x < 3 or x > 1") == "all" and comp_set("x > 2 and x < 8") == comp_set("2 < x < 8")
+    assert comp_set("3x − 1 < −7 or 2x + 5 ≥ 11") == ((None, False, F(-2), False), (F(3), True, None, False))
+    assert comp_set("x ≥ 1 and x ≥ 4") == (F(4), "≥") and comp_set("x ≤ 2 or x ≥ 2") == "all"
+    assert comp_set("x < 2 or x > 2") == ((None, False, F(2), False), (F(2), False, None, False))
+    assert comp_set("−7 < 1 − 2x ≤ 5") == ((F(-2), True, F(4), False),)
+    assert holds("2 < x < 8", F(7)) and not holds("2 < x < 8", F(2)) and holds("x < −1 or x ≥ 3", F(3))
+    assert set_text(comp_set("−2 ≤ x < 3")) == "Closed at −2, open at 3, shaded between"
+    assert set_text(comp_set("x < −2 or x ≥ 3")) == "Open at −2, shaded left; closed at 3, shaded right"
+    assert set_text(comp_set("x > 2")) == "Open circle at 2, shaded right"
+    assert ineq_derive("3 ≤ 2x − 1 < 11", "largest-int") == 5 and ineq_derive("−3 < x ≤ 4", "count-int") == 7
+    assert ineq_derive("x < −2 or x > 3", "count-out") == 6 and ineq_derive("2 < x", "smallest-int") == 3
+    assert step_kind("3 ≤ 2x − 1 < 11", "4 ≤ 2x < 12") == "Addition" and step_kind("4 ≤ 2x < 12", "2 ≤ x < 6") == "Division"
+    assert step_kind("3 ≤ 2x − 1 < 11", "4 ≤ 2x < 13") is None and step_kind("−6 < 2(x − 1) < 8", "−6 < 2x − 2 < 8") == "Distributive"
+    assert step_kind("x + 4 < 3 or 2x − 3 > 3", "x < −1 or x > 3") == "Solve"
+    assert comp_mistake("edge", "3 ≤ 2x − 1 < 11", "largest-int", 5) == 6 and comp_mistake("other", "3 ≤ 2x − 1 < 11", "largest-int", 5) == 2
+    assert comp_mistake("closed", "−2 < x < 5", "count-int", 6) == 8 and comp_mistake("gap", "x < −2 or x > 3", "count-out", 6) == 5
 
 
 def derive(q, spec):
@@ -1019,7 +1288,9 @@ def check_claim(ex, item_text, claim, problems, what):
     claim "flip"            → item is a move on both sides ("Divide both sides by −4") that makes an
                               inequality's symbol flip: multiplying or dividing by a negative number (1.4);
     claim "symbol:<sym>"    → item is a phrase ("at most") that stands for that symbol (SYMBOL_WORDS, 1.4);
-    claim "graph:<text>"    → item is an inequality whose graph is described by <text> (graph_text, 1.4);
+    claim "graph:<text>"    → item is an inequality (single or compound) whose graph is described by <text> (set_text, 1.4, 1.5);
+    claim "join:<text>"     → item is a compound inequality joined by the word that <text> starts with, "and" (three-part
+                              form included) or "or" (1.5);
     claim "solution:<inequality>" → item ("x = 5" or "5") is a number that makes the inequality true (1.4)."""
     i = ex["id"]
     kind, _, arg = claim.partition(":")
@@ -1046,11 +1317,16 @@ def check_claim(ex, item_text, claim, problems, what):
         if kind == "symbol":
             return symbol_of(item_text) == arg
         if kind == "graph":
-            res = ineq_set(item_text)
-            if not isinstance(res, tuple):
-                problems.append(f"{i}: {what} {item_text!r} has no graph with one circle")
+            return set_text(comp_set(item_text)) == arg
+        if kind == "join":
+            res = comp_set(item_text)
+            word = "or" if " or " in item_text else "and"
+            ray = isinstance(res, tuple) and len(res) == 2 and isinstance(res[1], str)      # one ray: (b, op)
+            shape_ok = (res in ("all", "none") or ray or len(res) == 1) if word == "and" else (res == "all" or (not ray and len(res) == 2))
+            if not shape_ok:
+                problems.append(f"{i}: {what} {item_text!r} does not read like a real {word} graph")
                 return None
-            return graph_text(*res) == arg
+            return arg.split(":")[0].strip().lower() == word
         if kind == "property":
             left, right = item_text.split("=")
             if not same(left, right):
@@ -1160,6 +1436,7 @@ def validate_match(ex, problems):
                 else f"solution:{p['l']}" if chk == "solves" \
                 else f"symbol:{p['r']}" if chk == "symbol" \
                 else f"graph:{p['r']}" if chk == "graph" \
+                else f"join:{p['r']}" if chk == "join" \
                 else f"valid-from:{p['l']}" if chk == "same-solution" else chk
             item = p["r"] if chk in ("solves", "same-solution") else p["l"]   # "solves": left = equation, right = its solution
             if check_claim(ex, item, claim, problems, "pair") is False:

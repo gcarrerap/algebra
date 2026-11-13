@@ -1,0 +1,63 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l05-ex02",
+  "title": "Exercise 2",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's look at this one. Match each compound inequality with its graph.",
+          "display": "Match each compound inequality with its graph.",
+          "cue": "show-problem",
+          "pause_after_s": 1.5
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Pair by pair",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Negative two is less than or equal to x, which is less than three: a closed circle at negative two, an open circle at three, shaded between.",
+          "display": "−2 ≤ x < 3 → Closed at −2, open at 3, shaded between",
+          "cue": "pair-1"
+        },
+        {
+          "id": "b03",
+          "text": "One is less than x, which is less than or equal to five: an open circle at one, a closed circle at five, shaded between.",
+          "display": "1 < x ≤ 5 → Open at 1, closed at 5, shaded between",
+          "cue": "pair-2"
+        },
+        {
+          "id": "b04",
+          "text": "X less than negative one, or x greater than or equal to two: an open circle at negative one shaded left, a closed circle at two shaded right.",
+          "display": "x < −1 or x ≥ 2 → Open at −1, shaded left; closed at 2, shaded right",
+          "cue": "pair-3"
+        },
+        {
+          "id": "b05",
+          "text": "X less than or equal to zero, or x greater than four: a closed circle at zero shaded left, an open circle at four shaded right.",
+          "display": "x ≤ 0 or x > 4 → Closed at 0, shaded left; open at 4, shaded right",
+          "cue": "pair-4"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b06",
+          "text": "A three-part inequality is shaded between its two circles. An or inequality is two rays that point away from each other. Each circle is closed when its symbol includes equality and open when it does not.",
+          "cue": "answer"
+        }
+      ]
+    }
+  ]
+}

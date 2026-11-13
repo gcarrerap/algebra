@@ -1,0 +1,69 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l05-ex10",
+  "title": "Exercise 10",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's look at this one. Select all the numbers that are solutions of negative seven is less than one minus two x, which is less than or equal to five.",
+          "display": "Select all the numbers that are solutions of −7 < 1 − 2x ≤ 5.",
+          "cue": "show-problem",
+          "pause_after_s": 1.5
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "One by one",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Negative two. Yes: one minus two times negative two is five, and negative seven is less than five, which is less than or equal to five.",
+          "display": "−2",
+          "cue": "option-1"
+        },
+        {
+          "id": "b03",
+          "text": "Zero. Yes: one minus two times zero is one, which is between negative seven and five.",
+          "display": "0",
+          "cue": "option-2"
+        },
+        {
+          "id": "b04",
+          "text": "Three. Yes: one minus two times three is negative five, which is between negative seven and five.",
+          "display": "3",
+          "cue": "option-3"
+        },
+        {
+          "id": "b05",
+          "text": "Four. No: one minus two times four is negative seven, which is not greater than negative seven.",
+          "display": "4",
+          "cue": "option-4"
+        },
+        {
+          "id": "b06",
+          "text": "Negative three. No: one minus two times negative three is seven, which is more than five.",
+          "display": "−3",
+          "cue": "option-5"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b07",
+          "text": "Negative two, zero and three are solutions: the solutions are negative two less than or equal to x, less than four. Dividing by negative two flips both symbols.",
+          "cue": "answer"
+        }
+      ]
+    }
+  ]
+}

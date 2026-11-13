@@ -120,7 +120,9 @@ animates with the usual `data-at` / `data-out` / `data-dur`, and its color comes
 ```
 
 `dot` is a point (`data-open` for an open circle), `hop` an arrow drawn over `data-dur` seconds,
-`span` a bracket under the labels, `ray` a shaded ray for inequality graphs. Width is
+`span` a bracket under the labels, `ray` a shaded ray for inequality graphs, `seg` a shaded segment
+between `data-a` and `data-b` for `a < x < b` (`data-open-a` / `data-open-b` make an end an open circle; first
+used in `u01-l05-compound-inequalities`). Width is
 `(to − from) × unit + 120` px: keep it under ~1750. First used in `u00-l01-signed-numbers`.
 
 **Balance scale** (CSS only, in `player.css`; first used in `u01-l01-solving-equations`). Two pans

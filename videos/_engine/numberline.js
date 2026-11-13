@@ -14,6 +14,7 @@
 //        hop  — an arrow from a to b, drawn as the mark appears (data-dur sets how long);
 //               data-lift = arc height in px (default 50).
 //        span — a bracket under the labels from a to b (a distance, an interval).
+//        seg  — a shaded segment from a to b for a between-inequality; data-open-a / data-open-b give an open end.
 //        ray  — a thick shaded ray from n to the end of the line, data-dir = left | right,
 //               with an open (data-open) or closed circle at n: inequality graphs.
 // The color comes from the mark's c-<color> class. See docs/video-production.md.
@@ -44,10 +45,10 @@
         el("text", { x: x(n), y: Y + 55, class: "num" + (n === 0 ? " z" : "") }, svg).textContent = num(n);
     }
     [...box.children].forEach((m) => {
-      const kind = ["dot", "hop", "span", "ray"].find((k) => m.classList.contains(k));
+      const kind = ["dot", "hop", "span", "ray", "seg"].find((k) => m.classList.contains(k));
       if (!kind) return;
       const color = [...m.classList].find((c) => c.startsWith("c-")) || "c-yellow";
-      const g = el("g", { class: `mark mark-${kind} ${color} ${kind === "dot" || kind === "ray" ? "pop" : kind === "span" ? "fade" : ""}` }, svg);
+      const g = el("g", { class: `mark mark-${kind} ${color} ${kind === "dot" || kind === "ray" || kind === "seg" ? "pop" : kind === "span" ? "fade" : ""}` }, svg);
       KEEP.forEach((k) => m.hasAttribute(k) && g.setAttribute(k, m.getAttribute(k)));
       const d = m.dataset;
       if (kind === "dot") {
@@ -61,6 +62,11 @@
       } else if (kind === "span") {
         const a = x(+d.a), b = x(+d.b);
         el("path", { d: `M${a},${Y + 68} v12 H${b} v-12`, class: "brace" }, g);
+      } else if (kind === "seg") {
+        const a = x(+d.a), b = x(+d.b);
+        el("line", { x1: a, y1: Y, x2: b, y2: Y, class: "ray-line" }, g);
+        el("circle", { cx: a, cy: Y, r: 16, class: "dot" + ("openA" in d ? " open" : "") }, g);
+        el("circle", { cx: b, cy: Y, r: 16, class: "dot" + ("openB" in d ? " open" : "") }, g);
       } else if (kind === "ray") {
         const n = x(+d.n), end = d.dir === "left" ? 24 : W - 24;
         el("line", { x1: n, y1: Y, x2: end, y2: Y, class: "ray-line" }, g);

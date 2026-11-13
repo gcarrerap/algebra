@@ -1,0 +1,69 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l05-ex12",
+  "title": "Exercise 12",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. How many whole numbers solve negative six is less than two times the quantity x minus one, which is less than eight?",
+          "display": "−6 < 2(x − 1) < 8",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Distribute the two: two times x is two x, and two times negative one is negative two. Negative six is less than two x minus two, which is less than eight.",
+          "display": "−6 < 2x − 2 < 8",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Add two to all three parts, by the addition property. Negative four is less than two x, which is less than ten.",
+          "display": "−4 < 2x < 10",
+          "cue": "step-2"
+        },
+        {
+          "id": "b04",
+          "text": "Divide all three parts by two, by the division property. Negative two is less than x, which is less than five.",
+          "display": "−2 < x < 5",
+          "cue": "step-3"
+        },
+        {
+          "id": "b05",
+          "text": "Both circles are open, so negative two and five are left out. The whole numbers are negative one, zero, one, two, three and four: six numbers.",
+          "display": "−1, 0, 1, 2, 3, 4",
+          "cue": "step-4"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b06",
+          "text": "So the answer is six.",
+          "display": "6",
+          "cue": "answer"
+        },
+        {
+          "id": "b07",
+          "text": "Watch out for these traps. If you count both circles as filled in, you get eight. If you subtract the boundaries, you get seven.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}
