@@ -1,0 +1,63 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l02-ex10",
+  "title": "Exercise 10",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Seven minus three x equals two x minus eight. Solve for x.",
+          "display": "7 − 3x = 2x − 8",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Add three x to both sides, so the x term ends up positive. Seven equals five x minus eight.",
+          "display": "7 = 5x − 8",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Add eight to both sides. Fifteen equals five x.",
+          "display": "15 = 5x",
+          "cue": "step-2"
+        },
+        {
+          "id": "b04",
+          "text": "Divide both sides by five. x equals three.",
+          "display": "x = 3",
+          "cue": "step-3"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b05",
+          "text": "So x equals three.",
+          "display": "x = 3",
+          "cue": "answer"
+        },
+        {
+          "id": "b06",
+          "text": "Watch out for these traps. If you subtract eight instead of adding it, you get negative one over five. If you combine the x terms as two x minus three x, you get negative fifteen.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

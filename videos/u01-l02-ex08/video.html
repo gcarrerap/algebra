@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Exercise 8 — step by step</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="../_engine/player.css">
+<style>
+  .c-ink { --c: var(--ink); }
+  .frac { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; margin: 0 0.12em; }
+  .frac .top { padding: 0.04em 0.25em 0.2em; border-bottom: 0.07em solid currentColor; }
+  .frac .bot { padding: 0.2em 0.25em 0.04em; }
+  /* highlight boxes reach past the text but take no room, so lines never shift when they appear */
+  .hl { padding: 0 10px; margin: 0 -10px; }
+  sup { font-size: 0.6em; vertical-align: 0.55em; line-height: 0; }
+  .deriv { display: grid; grid-template-columns: auto auto; align-items: center; justify-content: center; gap: 10px 28px; }
+  .deriv .chip { justify-self: end; }
+  .deriv:has(.md) .chip { min-width: 84px; height: 72px; font-size: 38px; }
+  .deriv:has(.sm) .chip { min-width: 70px; height: 60px; font-size: 32px; border-radius: 18px; }
+  .deriv:has(.xs) .chip { min-width: 58px; height: 48px; font-size: 26px; border-radius: 14px; }
+  .trap { width: 520px; padding: 28px 34px; gap: 14px; }
+  .trap .why { font: 500 30px/1.3 Inter, sans-serif; color: var(--muted); text-align: center; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="header"><span class="unit">Unit 1 · Practice 1.2</span><span class="title">Exercise 8</span></div>
+
+  <!-- s01: the problem -->
+  <section class="scene" data-scene="s01">
+    <div class="label yellow fade" data-at="b01">Exercise 8 · Tricky</div>
+    <div class="math  pop" data-at="b01">18 + 4h = 7h</div>
+    <div class="say fade muted" data-at="b01+0.4" style="font-size: 40px">Shop A charges $18 plus $4 per hour to rent a bike. Shop B charges $7 per hour. Solve for h, the number of hours after which they cost the same.</div>
+  </section>
+
+  <!-- s02: step by step -->
+  <section class="scene" data-scene="s02">
+    <div class="deriv">
+      <span></span>
+      <div class="math md fade" data-at="b02-0.7">18 + <span class="hl c-yellow" data-at="b02" data-out="b02.end">4h</span> = 7h</div>
+      <span class="chip c-yellow pop" data-at="b02@eighteen">COLLECT</span>
+      <div class="math md fade" data-at="b02@eighteen">18 = <span class="hl c-blue" data-at="b03" data-out="b03.end">3</span>h</div>
+      <span class="chip c-blue pop" data-at="b03@equals">ISOLATE</span>
+      <div class="math md pop green" data-at="b03@equals">h = 6</div>
+    </div>
+  </section>
+
+  <!-- s03: the answer and the traps -->
+  <section class="scene" data-scene="s03">
+    <div class="col" style="gap: 18px"><div class="math xs fade muted" data-at="b04-0.5">18 + 4h = 7h</div><div class="math md green pop" data-at="b04@six">h = 6</div></div>
+    <div class="label red fade" data-at="b05">Common traps</div>
+    <div class="row" style="align-items: stretch; gap: 36px">
+        <div class="card trap fade c-red" data-at="b05+0.15"><div class="math sm red"><span class="strike" data-at="b05+0.90" data-dur="0.5">18/11</span></div><div class="why">The h terms are on opposite sides: 7h − 4h = 3h. Adding gives 11h.</div></div>
+        <div class="card trap fade c-red" data-at="b05+0.40"><div class="math sm red"><span class="strike" data-at="b05+1.15" data-dur="0.5">15</span></div><div class="why">To undo 3h you divide by 3; subtracting 3 from 18 doesn't undo it.</div></div>
+        <div class="card trap fade c-red" data-at="b05+0.65"><div class="math sm red"><span class="strike" data-at="b05+1.40" data-dur="0.5">1/6</span></div><div class="why">18 = 3h means h = 18 ÷ 3, not 3 ÷ 18.</div></div>
+    </div>
+    <div class="label muted fade" data-at="b05+1.5" style="font-size: 22px; font-weight: 500; position: absolute; right: 0; top: -72px">This video uses an AI-generated voice.</div>
+  </section>
+
+  <div class="caption"></div>
+  <div class="progress"></div>
+  <div id="seek" title="Jump to a moment"></div>
+  <button id="play" type="button" aria-label="Play"><span class="play-btn">▶</span><span class="play-label">Watch the solution</span></button>
+</div>
+<script src="../_engine/player.js"></script>
+</body>
+</html>

@@ -15,7 +15,7 @@ import sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 LEVELS = {1: "Warm-up", 2: "Tricky", 3: "Challenging", 4: "Boss level"}
-KIND = {"num": "find the value", "expr": "expand the expression", "name": "name the property",
+KIND = {"num": "find the value", "solve": "solve the equation", "linear": "solve the equation", "expr": "expand the expression", "name": "name the property",
         "multi": "select all that apply", "match": "matching"}
 
 

@@ -1,0 +1,69 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l02-ex05",
+  "title": "Exercise 5",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Three times the quantity x plus four equals x plus twenty. Solve for x.",
+          "display": "3(x + 4) = x + 20",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Distribute first: three times x is three x, and three times four is twelve. Three x plus twelve equals x plus twenty.",
+          "display": "3x + 12 = x + 20",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Subtract x from both sides. Two x plus twelve equals twenty.",
+          "display": "2x + 12 = 20",
+          "cue": "step-2"
+        },
+        {
+          "id": "b04",
+          "text": "Subtract twelve from both sides: two x equals eight.",
+          "display": "2x = 8",
+          "cue": "step-3"
+        },
+        {
+          "id": "b05",
+          "text": "Divide both sides by two. x equals four.",
+          "display": "x = 4",
+          "cue": "step-4"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b06",
+          "text": "So x equals four.",
+          "display": "x = 4",
+          "cue": "answer"
+        },
+        {
+          "id": "b07",
+          "text": "Watch out for these traps. If you forget to multiply the four by three, you get eight. If you add x to both sides instead of subtracting it, you get two.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,748 @@
+{
+ "_notes": "Source of truth for the 1.2 practice set. \"linear\" exercises: q is a linear equation (var: letter, default x; param: letter k asks for the value that makes it true for every x); the answer is computed by solving it, every line must have the same solution, and each wrong e is the arithmetic of one named mistake. \"match\" uses check count (One solution / No solution / Infinitely many solutions) and \"multi\" uses check count:none|one|all. Chips: DIST and COLLECT yellow, COMBINE green, ISOLATE blue. See docs/exercises.md.",
+ "unit": "1.2",
+ "title": "Variables on Both Sides",
+ "h1": "Variables on <span class=\"y\">both sides</span>",
+ "levels": {
+  "1": "Warm-up",
+  "2": "Tricky",
+  "3": "Challenging",
+  "4": "Boss level"
+ },
+ "exercises": [
+  {
+   "id": "ex01",
+   "level": 1,
+   "kind": "linear",
+   "prompt": "Solve for x.",
+   "q": "5x + 3 = 2x + 15",
+   "read": "Five x plus three equals two x plus fifteen. Solve for x.",
+   "lines": [
+    "5x + 3 = ⟨2x⟩ + 15",
+    "3x ⟨+ 3⟩ = 15",
+    "⟨3⟩x = 12",
+    "x = 4"
+   ],
+   "chips": [
+    "COLLECT",
+    "ISOLATE",
+    "ISOLATE"
+   ],
+   "say": [
+    "Both sides have x, so collect the x terms on one side. Subtract two x from both sides. Three x plus three equals fifteen.",
+    "Now undo the plus three. Subtract three from both sides: three x equals twelve.",
+    "Divide both sides by three. x equals four."
+   ],
+   "at": [
+    "three",
+    "three#3",
+    "equals"
+   ],
+   "wrong": [
+    {
+     "e": "12/7",
+     "why": "Adding 2x makes 7x + 3 = 15 and x = 12/7, but the 2x on the right has to cancel: subtract it from both sides.",
+     "say": "add two x to both sides instead of subtracting it"
+    },
+    {
+     "e": "(15+3)/3",
+     "why": "To undo +3 you subtract 3 from both sides; adding it gives 18 instead of 12.",
+     "say": "add three instead of subtracting it"
+    },
+    {
+     "e": "12",
+     "why": "3x = 12 is not finished: divide both sides by 3 to get x = 4.",
+     "say": "forget to divide by three"
+    }
+   ]
+  },
+  {
+   "id": "ex02",
+   "level": 1,
+   "kind": "linear",
+   "prompt": "Solve for x.",
+   "q": "9x − 7 = 4x + 8",
+   "read": "Nine x minus seven equals four x plus eight. Solve for x.",
+   "lines": [
+    "9x − 7 = ⟨4x⟩ + 8",
+    "5x ⟨− 7⟩ = 8",
+    "⟨5⟩x = 15",
+    "x = 3"
+   ],
+   "chips": [
+    "COLLECT",
+    "ISOLATE",
+    "ISOLATE"
+   ],
+   "say": [
+    "Subtract four x from both sides. Five x minus seven equals eight.",
+    "Undo the minus seven by adding seven to both sides: five x equals fifteen.",
+    "Divide both sides by five. x equals three."
+   ],
+   "at": [
+    "five",
+    "five",
+    "equals"
+   ],
+   "wrong": [
+    {
+     "e": "(8+7)/(9+4)",
+     "why": "Adding 4x gives 13x − 7 = 8. The 4x on the right has to cancel, so subtract it: 9x − 4x = 5x.",
+     "say": "add four x instead of subtracting it"
+    },
+    {
+     "e": "(8-7)/5",
+     "why": "To undo −7 you add 7: 8 + 7 = 15, not 8 − 7.",
+     "say": "subtract seven instead of adding it"
+    },
+    {
+     "e": "(8+7)/9",
+     "why": "After collecting, the coefficient is 5, not 9: you divide by what is left after subtracting 4x.",
+     "say": "divide by the original nine instead of five"
+    }
+   ]
+  },
+  {
+   "id": "ex03",
+   "level": 1,
+   "kind": "linear",
+   "prompt": "Plan A costs $15 plus $4 per visit. Plan B costs $7 per visit. Solve for v, the number of visits after which they cost the same.",
+   "q": "15 + 4v = 7v",
+   "read": "Plan A costs fifteen dollars plus four dollars a visit. Plan B costs seven dollars a visit. After how many visits do they cost the same? Let v be the number of visits, so fifteen plus four v equals seven v.",
+   "lines": [
+    "15 + ⟨4v⟩ = 7v",
+    "15 = ⟨3⟩v",
+    "v = 5"
+   ],
+   "chips": [
+    "COLLECT",
+    "ISOLATE"
+   ],
+   "say": [
+    "Gather the v terms. Subtract four v from both sides. Fifteen equals three v.",
+    "Divide both sides by three. v equals five. At five visits, both plans cost thirty-five dollars."
+   ],
+   "at": [
+    "fifteen",
+    "equals"
+   ],
+   "wrong": [
+    {
+     "e": "15/(7+4)",
+     "why": "The v terms are on opposite sides, so you subtract: 7v − 4v = 3v. Adding gives 11v.",
+     "say": "add four v instead of subtracting it"
+    },
+    {
+     "e": "15*3",
+     "why": "To undo 3v you divide by 3. Multiplying turns 15 into 45.",
+     "say": "multiply by three instead of dividing"
+    },
+    {
+     "e": "3/15",
+     "why": "15 = 3v means v = 15 ÷ 3. Dividing 3 by 15 flips it.",
+     "say": "divide three by fifteen"
+    }
+   ],
+   "var": "v"
+  },
+  {
+   "id": "ex04",
+   "level": 1,
+   "kind": "linear",
+   "prompt": "Solve for x.",
+   "q": "3x + 20 = 7x",
+   "read": "Three x plus twenty equals seven x. Solve for x.",
+   "lines": [
+    "⟨3x⟩ + 20 = 7x",
+    "20 = ⟨4⟩x",
+    "x = 5"
+   ],
+   "chips": [
+    "COLLECT",
+    "ISOLATE"
+   ],
+   "say": [
+    "The right side has more x, so subtract three x from both sides. Twenty equals four x.",
+    "Divide both sides by four. x equals five."
+   ],
+   "at": [
+    "twenty",
+    "equals"
+   ],
+   "wrong": [
+    {
+     "e": "20/(7+3)",
+     "why": "3x and 7x are on opposite sides: moving 3x over gives 7x − 3x = 4x, not 7x + 3x = 10x.",
+     "say": "add the x terms instead of subtracting"
+    },
+    {
+     "e": "20/7",
+     "why": "The 3x on the left has to go too: 7x − 3x = 4x, so you divide by 4.",
+     "say": "ignore the three x and divide by seven"
+    },
+    {
+     "e": "20*4",
+     "why": "To undo 4x you divide by 4. Multiplying gives 80.",
+     "say": "multiply by four instead of dividing"
+    }
+   ]
+  },
+  {
+   "id": "ex05",
+   "level": 2,
+   "kind": "linear",
+   "prompt": "Solve for x.",
+   "q": "3(x + 4) = x + 20",
+   "read": "Three times the quantity x plus four equals x plus twenty. Solve for x.",
+   "lines": [
+    "⟨3(x + 4)⟩ = x + 20",
+    "3x + 12 = ⟨x⟩ + 20",
+    "2x ⟨+ 12⟩ = 20",
+    "⟨2⟩x = 8",
+    "x = 4"
+   ],
+   "chips": [
+    "DIST",
+    "COLLECT",
+    "ISOLATE",
+    "ISOLATE"
+   ],
+   "say": [
+    "Distribute first: three times x is three x, and three times four is twelve. Three x plus twelve equals x plus twenty.",
+    "Subtract x from both sides. Two x plus twelve equals twenty.",
+    "Subtract twelve from both sides: two x equals eight.",
+    "Divide both sides by two. x equals four."
+   ],
+   "at": [
+    "twelve",
+    "two",
+    "two",
+    "equals"
+   ],
+   "wrong": [
+    {
+     "e": "16/2",
+     "why": "3(x + 4) is 3x + 12: the 3 multiplies the 4 as well.",
+     "say": "forget to multiply the four by three"
+    },
+    {
+     "e": "8/4",
+     "why": "x is on the right, so subtract it: 3x − x = 2x. Adding gives 4x.",
+     "say": "add x to both sides instead of subtracting it"
+    },
+    {
+     "e": "32/2",
+     "why": "To undo +12 you subtract 12: 20 − 12 = 8, not 20 + 12.",
+     "say": "add twelve instead of subtracting it"
+    }
+   ]
+  },
+  {
+   "id": "ex06",
+   "level": 2,
+   "kind": "linear",
+   "prompt": "Solve for x.",
+   "q": "2x + 9 = 6x + 21",
+   "read": "Two x plus nine equals six x plus twenty-one. Solve for x.",
+   "lines": [
+    "⟨2x⟩ + 9 = 6x + 21",
+    "9 = 4x ⟨+ 21⟩",
+    "−12 = ⟨4⟩x",
+    "x = −3"
+   ],
+   "chips": [
+    "COLLECT",
+    "ISOLATE",
+    "ISOLATE"
+   ],
+   "say": [
+    "Subtract two x from both sides, so the larger x term stays positive. Nine equals four x plus twenty-one.",
+    "Subtract twenty-one from both sides. Nine minus twenty-one is negative twelve.",
+    "Divide both sides by four. x equals negative three."
+   ],
+   "at": [
+    "nine",
+    "negative",
+    "equals"
+   ],
+   "wrong": [
+    {
+     "e": "12/4",
+     "why": "9 − 21 is negative, so −12 ÷ 4 = −3. Keep the sign.",
+     "say": "lose the negative sign"
+    },
+    {
+     "e": "(9+21)/4",
+     "why": "To undo +21 you subtract it from 9: 9 − 21, not 9 + 21.",
+     "say": "add twenty-one instead of subtracting it"
+    },
+    {
+     "e": "(9-21)/(6+2)",
+     "why": "Moving 2x gives 6x − 2x = 4x, not 6x + 2x = 8x.",
+     "say": "add the x terms instead of subtracting"
+    }
+   ]
+  },
+  {
+   "id": "ex07",
+   "level": 2,
+   "kind": "linear",
+   "prompt": "Solve for x.",
+   "q": "4x + 5 = x + 12",
+   "read": "Four x plus five equals x plus twelve. Solve for x.",
+   "lines": [
+    "4x + 5 = ⟨x⟩ + 12",
+    "3x ⟨+ 5⟩ = 12",
+    "⟨3⟩x = 7",
+    "x = [[7 | 3]]"
+   ],
+   "chips": [
+    "COLLECT",
+    "ISOLATE",
+    "ISOLATE"
+   ],
+   "say": [
+    "Subtract x from both sides. Three x plus five equals twelve.",
+    "Subtract five from both sides. Three x equals seven.",
+    "Divide both sides by three. x equals seven over three. It is not a whole number, and that is fine."
+   ],
+   "at": [
+    "three",
+    "three",
+    "equals"
+   ],
+   "wrong": [
+    {
+     "e": "(12+5)/3",
+     "why": "To undo +5 you subtract it: 12 − 5 = 7, not 12 + 5.",
+     "say": "add five instead of subtracting it"
+    },
+    {
+     "e": "(12-5)/5",
+     "why": "Moving x to the left gives 4x − x = 3x, not 4x + x = 5x.",
+     "say": "combine four x and x into five x"
+    },
+    {
+     "e": "7*3",
+     "why": "To undo 3x you divide by 3. Multiplying gives 21.",
+     "say": "multiply by three instead of dividing"
+    }
+   ]
+  },
+  {
+   "id": "ex08",
+   "level": 2,
+   "kind": "linear",
+   "prompt": "Shop A charges $18 plus $4 per hour to rent a bike. Shop B charges $7 per hour. Solve for h, the number of hours after which they cost the same.",
+   "q": "18 + 4h = 7h",
+   "read": "Shop A charges eighteen dollars plus four dollars an hour. Shop B charges seven dollars an hour. After how many hours do they cost the same? Let h be the number of hours, so eighteen plus four h equals seven h.",
+   "lines": [
+    "18 + ⟨4h⟩ = 7h",
+    "18 = ⟨3⟩h",
+    "h = 6"
+   ],
+   "chips": [
+    "COLLECT",
+    "ISOLATE"
+   ],
+   "say": [
+    "Subtract four h from both sides. Eighteen equals three h.",
+    "Divide both sides by three. h equals six. At six hours, both shops charge forty-two dollars."
+   ],
+   "at": [
+    "eighteen",
+    "equals"
+   ],
+   "wrong": [
+    {
+     "e": "18/(7+4)",
+     "why": "The h terms are on opposite sides: 7h − 4h = 3h. Adding gives 11h.",
+     "say": "add four h instead of subtracting it"
+    },
+    {
+     "e": "18-3",
+     "why": "To undo 3h you divide by 3; subtracting 3 from 18 doesn't undo it.",
+     "say": "subtract three instead of dividing"
+    },
+    {
+     "e": "3/18",
+     "why": "18 = 3h means h = 18 ÷ 3, not 3 ÷ 18.",
+     "say": "divide three by eighteen"
+    }
+   ],
+   "var": "h"
+  },
+  {
+   "id": "ex09",
+   "level": 3,
+   "kind": "linear",
+   "prompt": "Solve for x.",
+   "q": "4(x − 3) = 2(x + 5)",
+   "read": "Four times the quantity x minus three equals two times the quantity x plus five. Solve for x.",
+   "lines": [
+    "⟨4(x − 3)⟩ = ⟨2(x + 5)⟩",
+    "4x − 12 = ⟨2x⟩ + 10",
+    "2x ⟨− 12⟩ = 10",
+    "⟨2⟩x = 22",
+    "x = 11"
+   ],
+   "chips": [
+    "DIST",
+    "COLLECT",
+    "ISOLATE",
+    "ISOLATE"
+   ],
+   "say": [
+    "Distribute on both sides. Four x minus twelve equals two x plus ten.",
+    "Subtract two x from both sides. Two x minus twelve equals ten.",
+    "Add twelve to both sides. Two x equals twenty-two.",
+    "Divide both sides by two. x equals eleven."
+   ],
+   "at": [
+    "four",
+    "two#2",
+    "two",
+    "equals"
+   ],
+   "wrong": [
+    {
+     "e": "(10+3)/2",
+     "why": "4(x − 3) is 4x − 12: the 4 multiplies the 3 as well.",
+     "say": "multiply only the x by four and leave the three alone"
+    },
+    {
+     "e": "(5+12)/2",
+     "why": "2(x + 5) is 2x + 10: the 2 multiplies the 5 as well.",
+     "say": "multiply only the x by two and leave the five alone"
+    },
+    {
+     "e": "(10-12)/2",
+     "why": "To undo −12 you add 12: 10 + 12 = 22, not 10 − 12.",
+     "say": "subtract twelve instead of adding it"
+    }
+   ]
+  },
+  {
+   "id": "ex10",
+   "level": 3,
+   "kind": "linear",
+   "prompt": "Solve for x.",
+   "q": "7 − 3x = 2x − 8",
+   "read": "Seven minus three x equals two x minus eight. Solve for x.",
+   "lines": [
+    "7 ⟨− 3x⟩ = 2x − 8",
+    "7 = 5x ⟨− 8⟩",
+    "15 = ⟨5⟩x",
+    "x = 3"
+   ],
+   "chips": [
+    "COLLECT",
+    "ISOLATE",
+    "ISOLATE"
+   ],
+   "say": [
+    "Add three x to both sides, so the x term ends up positive. Seven equals five x minus eight.",
+    "Add eight to both sides. Fifteen equals five x.",
+    "Divide both sides by five. x equals three."
+   ],
+   "at": [
+    "seven",
+    "fifteen",
+    "equals"
+   ],
+   "wrong": [
+    {
+     "e": "(7-8)/5",
+     "why": "To undo −8 you add 8: 7 + 8 = 15, not 7 − 8.",
+     "say": "subtract eight instead of adding it"
+    },
+    {
+     "e": "(7+8)/(2-3)",
+     "why": "Adding 3x to both sides gives 2x + 3x = 5x, not 2x − 3x.",
+     "say": "combine the x terms as two x minus three x"
+    },
+    {
+     "e": "7+8",
+     "why": "15 = 5x is not finished: divide both sides by 5.",
+     "say": "forget to divide by five"
+    }
+   ]
+  },
+  {
+   "id": "ex11",
+   "level": 3,
+   "kind": "linear",
+   "prompt": "Solve for x.",
+   "q": "5x + 2 = 9x + 11",
+   "read": "Five x plus two equals nine x plus eleven. Solve for x.",
+   "lines": [
+    "⟨5x⟩ + 2 = 9x + 11",
+    "2 = 4x ⟨+ 11⟩",
+    "−9 = ⟨4⟩x",
+    "x = −[[9 | 4]]"
+   ],
+   "chips": [
+    "COLLECT",
+    "ISOLATE",
+    "ISOLATE"
+   ],
+   "say": [
+    "Subtract five x from both sides, so the x term stays positive. Two equals four x plus eleven.",
+    "Subtract eleven from both sides. Two minus eleven is negative nine.",
+    "Divide both sides by four. x equals negative nine over four."
+   ],
+   "at": [
+    "two",
+    "negative",
+    "equals"
+   ],
+   "wrong": [
+    {
+     "e": "9/4",
+     "why": "2 − 11 is negative, so the answer is negative too.",
+     "say": "lose the negative sign"
+    },
+    {
+     "e": "(11+2)/4",
+     "why": "To undo +11 you subtract it from 2: 2 − 11, not 11 + 2.",
+     "say": "add eleven and two instead of subtracting"
+    },
+    {
+     "e": "(2-11)/(9+5)",
+     "why": "Moving 5x gives 9x − 5x = 4x, not 9x + 5x = 14x.",
+     "say": "add the x terms instead of subtracting"
+    }
+   ]
+  },
+  {
+   "id": "ex12",
+   "level": 3,
+   "kind": "linear",
+   "prompt": "Solve for x.",
+   "q": "3(x + 2) + x = 2x + 20",
+   "read": "Three times the quantity x plus two, plus x, equals two x plus twenty. Solve for x.",
+   "lines": [
+    "⟨3(x + 2)⟩ + x = 2x + 20",
+    "⟨3x⟩ + 6 + ⟨x⟩ = 2x + 20",
+    "4x + 6 = ⟨2x⟩ + 20",
+    "2x ⟨+ 6⟩ = 20",
+    "⟨2⟩x = 14",
+    "x = 7"
+   ],
+   "chips": [
+    "DIST",
+    "COMBINE",
+    "COLLECT",
+    "ISOLATE",
+    "ISOLATE"
+   ],
+   "say": [
+    "Distribute the three. Three x plus six, plus x, equals two x plus twenty.",
+    "Combine like terms on the left: three x plus x is four x. Four x plus six equals two x plus twenty.",
+    "Subtract two x from both sides. Two x plus six equals twenty.",
+    "Subtract six from both sides. Two x equals fourteen.",
+    "Divide both sides by two. x equals seven."
+   ],
+   "at": [
+    "six",
+    "four",
+    "two#2",
+    "two",
+    "equals"
+   ],
+   "wrong": [
+    {
+     "e": "(20-2)/2",
+     "why": "3(x + 2) is 3x + 6: the 3 multiplies the 2 as well.",
+     "say": "multiply the three by x but not by two"
+    },
+    {
+     "e": "14/6",
+     "why": "Moving 2x gives 4x − 2x = 2x, not 4x + 2x = 6x.",
+     "say": "add two x instead of subtracting it"
+    },
+    {
+     "e": "14",
+     "why": "2x = 14 is not finished: divide both sides by 2.",
+     "say": "forget to divide by two"
+    }
+   ]
+  },
+  {
+   "id": "ex13",
+   "level": 4,
+   "kind": "match",
+   "check": "count",
+   "prompt": "Match each equation with the number of solutions it has.",
+   "read": "Match each equation with the number of solutions it has. Think about what is left when the x terms cancel.",
+   "say_answer": "Two have one solution, two have none, and two have infinitely many. When the x terms cancel, a false statement means no solution and a true one means every number works.",
+   "pairs": [
+    {
+     "l": "2x − 7 = 6x + 5",
+     "r": "One solution",
+     "why": "The x terms don't cancel: collecting leaves 4x, so x has one value.",
+     "say": "Two x minus seven equals six x plus five. Collecting the x terms leaves four x, so x has exactly one value, negative three. One solution."
+    },
+    {
+     "l": "9x − 4 = 5x + 8",
+     "r": "One solution",
+     "why": "The coefficients are different (9 and 5), so the x terms don't cancel.",
+     "say": "Nine x minus four equals five x plus eight. Subtract five x: four x minus four equals eight, so four x equals twelve and x equals three. One solution."
+    },
+    {
+     "l": "5x + 8 = 5x − 3",
+     "r": "No solution",
+     "why": "Same coefficients, different constants: 8 = −3 is false.",
+     "say": "Five x plus eight equals five x minus three. Subtract five x and you get eight equals negative three, which is false. No solution."
+    },
+    {
+     "l": "6x + 1 = 2(3x − 4)",
+     "r": "No solution",
+     "why": "The right side is 6x − 8, so 1 = −8 is false.",
+     "say": "Six x plus one equals two times the quantity three x minus four. Distribute: six x minus eight. Subtract six x: one equals negative eight, which is false. No solution."
+    },
+    {
+     "l": "3(x + 4) = 3x + 12",
+     "r": "Infinitely many solutions",
+     "why": "The left side is 3x + 12, the same as the right: 12 = 12 is always true.",
+     "say": "Three times the quantity x plus four is three x plus twelve, the same as the right side. Subtract three x: twelve equals twelve, always true. Infinitely many solutions."
+    },
+    {
+     "l": "4x − 2(x − 3) = 2x + 6",
+     "r": "Infinitely many solutions",
+     "why": "The left side simplifies to 2x + 6, the same as the right.",
+     "say": "Distribute the negative two: four x minus two x plus six. Combine: two x plus six equals two x plus six. Both sides are the same, so infinitely many solutions."
+    }
+   ]
+  },
+  {
+   "id": "ex14",
+   "level": 4,
+   "kind": "multi",
+   "check": "count:none",
+   "prompt": "Select all the equations that have no solution.",
+   "read": "Which of these equations have no solution? Choose all that apply.",
+   "say_answer": "Three equations have no solution: three x plus seven equals three x minus two, four times the quantity x minus one equals four x plus three, and eight x minus three times the quantity x plus one equals five x plus one. In each one the x terms cancel and a false statement is left.",
+   "options": [
+    {
+     "t": "3x + 7 = 3x − 2",
+     "ok": true,
+     "why": "Subtracting 3x leaves 7 = −2, which is false.",
+     "say": "Three x plus seven equals three x minus two. Subtract three x: seven equals negative two. False, so no solution."
+    },
+    {
+     "t": "2(x + 5) = 2x + 10",
+     "ok": false,
+     "why": "It simplifies to 2x + 10 = 2x + 10, which is always true: infinitely many solutions.",
+     "say": "Two times the quantity x plus five is two x plus ten, exactly the right side. Always true, so infinitely many solutions, not none."
+    },
+    {
+     "t": "5x − 1 = 4x − 1",
+     "ok": false,
+     "why": "The coefficients differ (5 and 4), so there is exactly one solution: x = 0.",
+     "say": "Five x minus one equals four x minus one. The x coefficients are different, five and four, so there is one solution, x equals zero."
+    },
+    {
+     "t": "4(x − 1) = 4x + 3",
+     "ok": true,
+     "why": "4(x − 1) = 4x − 4, and −4 is not 3: same coefficients, different constants.",
+     "say": "Distribute: four x minus four equals four x plus three. Subtract four x: negative four equals three. False, so no solution."
+    },
+    {
+     "t": "x + 6 = 2x + 6",
+     "ok": false,
+     "why": "The coefficients differ (1 and 2), so there is one solution: x = 0.",
+     "say": "x plus six equals two x plus six. The coefficients are different, one and two, so there is one solution, x equals zero. Matching constants don't change that."
+    },
+    {
+     "t": "8x − 3(x + 1) = 5x + 1",
+     "ok": true,
+     "why": "The left side is 5x − 3, so 5x − 3 = 5x + 1: same coefficients, different constants.",
+     "say": "Distribute and combine on the left: eight x minus three x minus three is five x minus three. So five x minus three equals five x plus one. The x terms cancel and negative three equals one is false. No solution."
+    }
+   ]
+  },
+  {
+   "id": "ex15",
+   "level": 4,
+   "kind": "linear",
+   "prompt": "For what value of k does this equation have infinitely many solutions?",
+   "q": "3x + 9 = 3x + k",
+   "read": "Three x plus nine equals three x plus k. For what value of k does this equation have infinitely many solutions?",
+   "lines": [
+    "3x + 9 = ⟨3x⟩ + k",
+    "9 = k"
+   ],
+   "chips": [
+    "COLLECT"
+   ],
+   "say": [
+    "For infinitely many solutions, both sides must end up identical. Subtract three x from both sides: nine equals k. So k must be nine, and then both sides are three x plus nine."
+   ],
+   "at": [
+    "nine"
+   ],
+   "wrong": [
+    {
+     "e": "-9",
+     "why": "Both sides need the same constant: +9 on the left means k = +9, not −9.",
+     "say": "flip the sign of nine"
+    },
+    {
+     "e": "9/3",
+     "why": "The x terms already match (3x on both sides). Only the constants must match: k = 9.",
+     "say": "divide the nine by the coefficient three"
+    },
+    {
+     "e": "9+3",
+     "why": "The 3x terms cancel and are not added to the constant: k = 9.",
+     "say": "add the three to the nine"
+    }
+   ],
+   "param": "k"
+  },
+  {
+   "id": "ex16",
+   "level": 4,
+   "kind": "linear",
+   "prompt": "Gym A charges $50 to join plus $6 per visit. Gym B charges $10 per visit. Solve for v, the number of visits after which they cost the same.",
+   "q": "50 + 6v = 10v",
+   "read": "Gym A charges fifty dollars to join plus six dollars a visit. Gym B charges ten dollars a visit. After how many visits do they cost the same? Let v be the number of visits, so fifty plus six v equals ten v.",
+   "lines": [
+    "50 + ⟨6v⟩ = 10v",
+    "50 = ⟨4⟩v",
+    "v = [[25 | 2]]"
+   ],
+   "chips": [
+    "COLLECT",
+    "ISOLATE"
+   ],
+   "say": [
+    "Subtract six v from both sides. Fifty equals four v.",
+    "Divide both sides by four. v equals twenty-five over two, which is twelve and a half. Visits come in whole numbers, so the costs cross between visit twelve and visit thirteen."
+   ],
+   "at": [
+    "fifty",
+    "equals"
+   ],
+   "wrong": [
+    {
+     "e": "50/(10+6)",
+     "why": "The v terms are on opposite sides: 10v − 6v = 4v. Adding gives 16v.",
+     "say": "add six v instead of subtracting it"
+    },
+    {
+     "e": "50-4",
+     "why": "To undo 4v you divide by 4; subtracting 4 from 50 doesn't undo it.",
+     "say": "subtract four instead of dividing"
+    },
+    {
+     "e": "4/50",
+     "why": "50 = 4v means v = 50 ÷ 4, not 4 ÷ 50.",
+     "say": "divide four by fifty"
+    }
+   ],
+   "var": "v"
+  }
+ ]
+}

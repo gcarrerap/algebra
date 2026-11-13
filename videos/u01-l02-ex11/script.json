@@ -1,0 +1,63 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l02-ex11",
+  "title": "Exercise 11",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Five x plus two equals nine x plus eleven. Solve for x.",
+          "display": "5x + 2 = 9x + 11",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Subtract five x from both sides, so the x term stays positive. Two equals four x plus eleven.",
+          "display": "2 = 4x + 11",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Subtract eleven from both sides. Two minus eleven is negative nine.",
+          "display": "−9 = 4x",
+          "cue": "step-2"
+        },
+        {
+          "id": "b04",
+          "text": "Divide both sides by four. x equals negative nine over four.",
+          "display": "x = −(9) over (4)",
+          "cue": "step-3"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b05",
+          "text": "So x equals negative nine over four.",
+          "display": "x = −9/4",
+          "cue": "answer"
+        },
+        {
+          "id": "b06",
+          "text": "Watch out for these traps. If you lose the negative sign, you get nine over four. If you add eleven and two instead of subtracting, you get thirteen over four.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

@@ -32,6 +32,8 @@ CHIP_COLOR = {"P": "blue", "E": "purple", "MD": "yellow", "AS": "green", "SUB": 
               "COMBINE": "green",
               # lesson 0.5: words into algebra
               "VAR": "blue", "WORDS": "yellow", "ORDER": "purple", "GROUP": "green", "TEST": "ink",
+              # lesson 1.2: equations with the variable on both sides (DIST yellow, COMBINE green as before)
+              "COLLECT": "yellow", "ISOLATE": "blue",
               # lesson 1.3: the properties of equality (DIST yellow and COMBINE green as before) and the
               # verdict on each step of a student's work
               "ADD": "blue", "SUBTRACT": "purple", "MULTIPLY": "yellow", "DIVIDE": "green",
@@ -42,6 +44,7 @@ CHIP_NAME = {"P": "parentheses and groups", "E": "exponents", "MD": "multiply an
              "REWRITE": "rewrite", "TERM": "terms", "FACTOR": "factors", "COEF": "coefficient",
              "CONST": "constant", "COMBINE": "combine like terms", "VAR": "define the variable",
              "WORDS": "match the words", "ORDER": "order", "GROUP": "grouping", "TEST": "test it",
+             "COLLECT": "collect the variable terms", "ISOLATE": "undo the operations",
              "ADD": "addition property", "SUBTRACT": "subtraction property", "MULTIPLY": "multiplication property",
              "DIVIDE": "division property", "OK": "step is allowed", "ERROR": "first wrong step",
              "CARRY": "carries the error"}
@@ -739,6 +742,99 @@ def validate_derive(ex, problems):
         seen[w["_value"]] = w["m"]
 
 
+# ---------------------------------------------------------------- linear equations with fraction answers (lesson 1.2)
+SOLUTION_KINDS = {"One solution": "one", "No solution": "none", "Infinitely many solutions": "all"}
+
+
+def solve_in(eq, var, sub=None):
+    """Solve the linear equation "L = R" for the letter var with exact fractions (other letters take the
+    numbers in sub). Returns ("one", value), ("none", None) or ("all", None); refuses equations that are
+    not linear in var."""
+    left, right = eq.replace("⟨", "").replace("⟩", "").split("=")
+    f = lambda v: ev(left, {**(sub or {}), var: f"({v})"}) - ev(right, {**(sub or {}), var: f"({v})"})
+    f0, f1 = f(0), f(1)
+    if f(2) - f0 != 2 * (f1 - f0) or f(5) - f0 != 5 * (f1 - f0):
+        raise ValueError("not a linear equation")
+    a, b = f1 - f0, f0
+    if a != 0:
+        return "one", -b / a
+    return ("none", None) if b != 0 else ("all", None)
+
+
+def linear_answer(ex, eq):
+    """The one solution of eq: for ex["var"] (default x), or, with ex["param"] = "k", the one value of k
+    that makes the equation true for every x."""
+    if ex.get("param"):
+        found = set()
+        for xv in (0, 1, -3, 7, F(1, 2)):
+            kind, val = solve_in(eq, ex["param"], {"x": f"({xv})"})
+            if kind != "one":
+                raise ValueError("k is not pinned down")
+            found.add(val)
+        if len(found) != 1:
+            raise ValueError("the equation is not true for every x with one k")
+        return found.pop()
+    kind, val = solve_in(eq, ex.get("var", "x"))
+    if kind != "one":
+        raise ValueError(f"has {kind} solution(s), not exactly one")
+    return val
+
+
+def frac_forms(v):
+    """A number as (spoken, html markup, typed plain text); fractions read "twenty over three"."""
+    v = F(v)
+    neg = v < 0
+    n, d = abs(v.numerator), v.denominator
+    sign_say, sign = ("negative ", "−") if neg else ("", "")
+    if d == 1:
+        return sign_say + words(n), sign + str(n), sign + str(n)
+    return (f"{sign_say}{words(n)} over {words(d)}", f"{sign}[[{n} | {d}]]", f"{sign}{n}/{d}")
+
+
+def typed_form(v):
+    """What the learner may type for v on the practice page: 7, -3, 20/3."""
+    v = F(v)
+    return str(v.numerator) if v.denominator == 1 else f"{v.numerator}/{v.denominator}"
+
+
+def validate_linear(ex, problems):
+    """kind "linear" (lesson 1.2): q is a linear equation; the learner types its solution (a whole number or a
+    fraction). The answer is computed by solving q; every line must have that same solution; every wrong option
+    (an arithmetic expression for a named mistake) must give a different, distinct value."""
+    i = ex["id"]
+    try:
+        ans = linear_answer(ex, ex["q"])
+    except Exception as e:  # noqa: BLE001
+        problems.append(f"{i}: cannot solve q: {e}")
+        return
+    ex["_answer"] = ans
+    if not check_steps(ex, problems):
+        return
+    for k, line in enumerate(ex["lines"]):
+        try:
+            v = linear_answer(ex, line)
+        except Exception as e:  # noqa: BLE001
+            problems.append(f"{i}: line {k} {line!r} cannot be solved: {e}")
+            continue
+        if v != ans:
+            problems.append(f"{i}: line {k} {line!r} has solution {v}, but the answer is {ans}")
+    if len(ex.get("wrong", [])) != 3:
+        problems.append(f"{i}: needs exactly 3 wrong options")
+    seen = {}
+    for w in ex.get("wrong", []):
+        try:
+            v = ev(w["e"])
+        except Exception as e:  # noqa: BLE001
+            problems.append(f"{i}: wrong option {w['e']!r} cannot be evaluated: {e}")
+            continue
+        w["_value"] = v
+        if v == ans:
+            problems.append(f"{i}: wrong option {w['e']!r} equals the right answer")
+        if v in seen:
+            problems.append(f"{i}: two wrong options give {v}")
+        seen[v] = w["e"]
+
+
 def check_claim(ex, item_text, claim, problems, what):
     """kind multi/match with "check": verify one statement with code.
     claim "true"            → item is an identity "L = R" that holds for every value of the letters
@@ -774,6 +870,13 @@ def check_claim(ex, item_text, claim, problems, what):
                 problems.append(f"{i}: {what} {item_text!r} is not a true identity")
                 return None
             return classify(item_text) == arg
+        if kind == "count":              # item is an equation in x; arg: one | none | all (or its display name)
+            want = SOLUTION_KINDS.get(arg, arg)
+            if want not in ("one", "none", "all"):
+                problems.append(f"{i}: unknown solution count {arg!r}")
+                return None
+            got = solve_linear(item_text)
+            return (got if got in ("all", "none") else "one") == want
         if kind == "equals":
             return same(item_text, arg)
         if kind == "true":
@@ -863,6 +966,7 @@ def validate_match(ex, problems):
                 else f"operation:{p['r']}" if chk == "operation" \
                 else f"step:{p['r']}" if chk == "step" \
                 else f"terms:{p['r']}" if chk == "terms" \
+                else f"count:{p['r']}" if chk == "count" \
                 else f"solution:{p['l']}" if chk == "solves" else chk
             item = p["r"] if chk == "solves" else p["l"]      # "solves": left = equation, right = its solution
             if check_claim(ex, item, claim, problems, "pair") is False:
@@ -905,6 +1009,9 @@ def validate(data):
             continue
         if kind == "solve":
             validate_solve(ex, problems)
+            continue
+        if kind == "linear":
+            validate_linear(ex, problems)
             continue
         if ex.get("derive"):
             validate_derive(ex, problems)
@@ -1018,6 +1125,7 @@ def video_files(data, ex, num, set_id):
     wrong = ex["wrong"]
     isw = ex["kind"] == "words"
     iss = ex["kind"] == "solve"
+    isl = ex["kind"] == "linear"
     q_plain = plain(ex["prompt"]) if isw else plain(ex["q"])
     if iss:      # lesson 1.1: the answer reads "x = 5"; each trap is a wrong value of x
         ans, var = ex["_answer"], ex["_var"]
@@ -1025,6 +1133,14 @@ def video_files(data, ex, num, set_id):
         trap_say = [words(w["_value"]) for w in wrong]
         trap_html = [markup(f"{var} = {w['_value']}".replace("-", "−")) for w in wrong]
         trap_size = "sm"
+    elif isl:    # lesson 1.2: the answer may be a fraction (said "twenty over three"); traps are typed inline (7/5)
+        ans = ex["_answer"]
+        ans_say, ans_html, ans_plain = frac_forms(ans)
+        ans_html = markup(ans_html)
+        trap_say = [frac_forms(w["_value"])[0] for w in wrong]
+        trap_html = [frac_forms(w["_value"])[2] for w in wrong]      # stacked fractions would make the cards too tall
+        trap_size = "sm"
+        unknown = ex.get("param") or ex.get("var", "x")
     elif ex["kind"] == "num":
         ans = ex["_answer"]
         # "a_read" / "a_show": how the answer is spoken and shown when it is not just the number
@@ -1071,7 +1187,8 @@ def video_files(data, ex, num, set_id):
                  "cue": "show-problem", "pause_after_s": 1.2}]},
             {"id": "s02", "title": "Step by step", "blocks": blocks_s2},
             {"id": "s03", "title": "The answer", "blocks": [
-                {"id": b_ans, "text": f"So the answer is {ans_say}.{test_say}", "display": ans_plain if ex.get("derive") or iss else f"= {ans_plain}", "cue": "answer"},
+                {"id": b_ans, "text": (f"So {unknown} equals {ans_say}." if isl else f"So the answer is {ans_say}.") + test_say,
+                 "display": f"{unknown} = {ans_plain}" if isl else ans_plain if ex.get("derive") or iss else f"= {ans_plain}", "cue": "answer"},
                 {"id": b_trap, "text": trap_text, "cue": "traps"}]},
         ],
     }
@@ -1108,6 +1225,9 @@ def video_files(data, ex, num, set_id):
     if isw or iss:
         answer_line = (f'<div class="math sm green pop" data-at="{b_ans}@{last_word}">{ans_html}</div>'
                        f'<div class="math xs fade" data-at="{b_ans}@{test_word}">{test_html}</div>')
+    elif isl:    # the equation, then the solution on its own line
+        answer_line = (f'<div class="col" style="gap: 18px"><div class="math xs fade muted" data-at="{b_ans}-0.5">{markup(ex["q"])}</div>'
+                       f'<div class="math {"sm" if F(ans).denominator != 1 else "md"} green pop" data-at="{b_ans}@{last_word}">{unknown} = {ans_html}</div></div>')
     elif ex.get("derive"):    # a question about the parts, not an equation: show the question, then the answer
         # a student's work (several lines) is not repeated here: it would not leave room for the traps
         q_again = "" if "\n" in ex["q"] else f'<div class="math sm fade" data-at="{b_ans}-0.5">{markup(ex["q"])}</div>'
@@ -1447,10 +1567,17 @@ def match_video(data, ex, num, set_id):
     <div class="pairs fade" data-at="{b_ans}+0.2">
 {chr(10).join(f'      <div class="side l">{choice_text(p["l"])}</div><div class="arrow">→</div><div class="side r glow c-green">{choice_text(p["r"])}</div>' for p in pairs)}
     </div>
-    <div class="label muted fade" data-at="{b_ans}+1.5" style="font-size: 22px; font-weight: 500">This video uses an AI-generated voice.</div>
+    <div class="label muted fade" data-at="{b_ans}+1.5" style="font-size: 22px; font-weight: 500{"; position: absolute; right: 0; top: -72px" if nb >= 6 else ""}">This video uses an AI-generated voice.</div>
   </section>
 """
-    return vid, script, page(f"{item} — step by step", unit_label(data), item, CHOICE_STYLE, scenes)
+    style = CHOICE_STYLE
+    if nb >= 6:      # six rows would run into the caption: compact rows, label at the top
+        style += """
+  .pairs { gap: 8px 10px; }
+  .side { padding: 4px 24px; font-size: 36px; border-radius: 18px; }
+  .pairs .arrow { font-size: 44px; }
+"""
+    return vid, script, page(f"{item} — step by step", unit_label(data), item, style, scenes)
 
 
 # ---------------------------------------------------------------- quiz page
@@ -1475,6 +1602,10 @@ def quiz_data(data):
         if ex["kind"] == "solve":
             out.append({**base, "input": "num", "answer": str(ex["_answer"]), "aHtml": markup(ex["lines"][-1]),
                         "mistakes": [{"v": str(w["_value"]), "why": w["why"]} for w in ex["wrong"]]})
+            continue
+        if ex["kind"] == "linear":
+            out.append({**base, "input": "num", "answer": typed_form(ex["_answer"]), "aHtml": markup(frac_forms(ex["_answer"])[1]),
+                        "mistakes": [{"v": typed_form(w["_value"]), "why": w["why"]} for w in ex["wrong"]]})
             continue
         if ex["kind"] == "words":
             out.append({**base, "q": "", "input": "expr", "anyForm": True, "answer": plain_math(ex["a"]), "aHtml": markup(ex["a"]),
@@ -1521,7 +1652,7 @@ def build(set_dir, check_only):
                 desc = "match: " + "; ".join(f"{p['l']} → {p['r']}" for p in ex["pairs"])
             print(f"  {ex['id']}  {ex['prompt'][:34]:<34} → {desc}")
             continue
-        if ex["kind"] in ("num", "solve"):
+        if ex["kind"] in ("num", "solve", "linear"):
             ans, wr = ex["_answer"], [w["_value"] for w in ex["wrong"]]
         elif ex["kind"] in ("expr", "words"):
             ans, wr = ex["a"], [w["e"] for w in ex["wrong"]]

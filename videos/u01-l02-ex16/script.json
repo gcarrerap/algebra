@@ -1,0 +1,57 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l02-ex16",
+  "title": "Exercise 16",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Gym A charges fifty dollars to join plus six dollars a visit. Gym B charges ten dollars a visit. After how many visits do they cost the same? Let v be the number of visits, so fifty plus six v equals ten v.",
+          "display": "50 + 6v = 10v",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Subtract six v from both sides. Fifty equals four v.",
+          "display": "50 = 4v",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Divide both sides by four. v equals twenty-five over two, which is twelve and a half. Visits come in whole numbers, so the costs cross between visit twelve and visit thirteen.",
+          "display": "v = (25) over (2)",
+          "cue": "step-2"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b04",
+          "text": "So v equals twenty-five over two.",
+          "display": "v = 25/2",
+          "cue": "answer"
+        },
+        {
+          "id": "b05",
+          "text": "Watch out for these traps. If you add six v instead of subtracting it, you get twenty-five over eight. If you subtract four instead of dividing, you get forty-six.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

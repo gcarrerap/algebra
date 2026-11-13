@@ -1,0 +1,69 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l02-ex09",
+  "title": "Exercise 9",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Four times the quantity x minus three equals two times the quantity x plus five. Solve for x.",
+          "display": "4(x − 3) = 2(x + 5)",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Distribute on both sides. Four x minus twelve equals two x plus ten.",
+          "display": "4x − 12 = 2x + 10",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Subtract two x from both sides. Two x minus twelve equals ten.",
+          "display": "2x − 12 = 10",
+          "cue": "step-2"
+        },
+        {
+          "id": "b04",
+          "text": "Add twelve to both sides. Two x equals twenty-two.",
+          "display": "2x = 22",
+          "cue": "step-3"
+        },
+        {
+          "id": "b05",
+          "text": "Divide both sides by two. x equals eleven.",
+          "display": "x = 11",
+          "cue": "step-4"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b06",
+          "text": "So x equals eleven.",
+          "display": "x = 11",
+          "cue": "answer"
+        },
+        {
+          "id": "b07",
+          "text": "Watch out for these traps. If you multiply only the x by four and leave the three alone, you get thirteen over two. If you multiply only the x by two and leave the five alone, you get seventeen over two.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

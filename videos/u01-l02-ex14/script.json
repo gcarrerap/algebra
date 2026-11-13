@@ -1,0 +1,75 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l02-ex14",
+  "title": "Exercise 14",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's look at this one. Which of these equations have no solution? Choose all that apply.",
+          "display": "Select all the equations that have no solution.",
+          "cue": "show-problem",
+          "pause_after_s": 1.5
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "One by one",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Three x plus seven equals three x minus two. Subtract three x: seven equals negative two. False, so no solution.",
+          "display": "3x + 7 = 3x − 2",
+          "cue": "option-1"
+        },
+        {
+          "id": "b03",
+          "text": "Two times the quantity x plus five is two x plus ten, exactly the right side. Always true, so infinitely many solutions, not none.",
+          "display": "2(x + 5) = 2x + 10",
+          "cue": "option-2"
+        },
+        {
+          "id": "b04",
+          "text": "Five x minus one equals four x minus one. The x coefficients are different, five and four, so there is one solution, x equals zero.",
+          "display": "5x − 1 = 4x − 1",
+          "cue": "option-3"
+        },
+        {
+          "id": "b05",
+          "text": "Distribute: four x minus four equals four x plus three. Subtract four x: negative four equals three. False, so no solution.",
+          "display": "4(x − 1) = 4x + 3",
+          "cue": "option-4"
+        },
+        {
+          "id": "b06",
+          "text": "x plus six equals two x plus six. The coefficients are different, one and two, so there is one solution, x equals zero. Matching constants don't change that.",
+          "display": "x + 6 = 2x + 6",
+          "cue": "option-5"
+        },
+        {
+          "id": "b07",
+          "text": "Distribute and combine on the left: eight x minus three x minus three is five x minus three. So five x minus three equals five x plus one. The x terms cancel and negative three equals one is false. No solution.",
+          "display": "8x − 3(x + 1) = 5x + 1",
+          "cue": "option-6"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b08",
+          "text": "Three equations have no solution: three x plus seven equals three x minus two, four times the quantity x minus one equals four x plus three, and eight x minus three times the quantity x plus one equals five x plus one. In each one the x terms cancel and a false statement is left.",
+          "cue": "answer"
+        }
+      ]
+    }
+  ]
+}

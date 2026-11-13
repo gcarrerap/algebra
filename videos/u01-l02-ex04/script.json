@@ -1,0 +1,57 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l02-ex04",
+  "title": "Exercise 4",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Three x plus twenty equals seven x. Solve for x.",
+          "display": "3x + 20 = 7x",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "The right side has more x, so subtract three x from both sides. Twenty equals four x.",
+          "display": "20 = 4x",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Divide both sides by four. x equals five.",
+          "display": "x = 5",
+          "cue": "step-2"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b04",
+          "text": "So x equals five.",
+          "display": "x = 5",
+          "cue": "answer"
+        },
+        {
+          "id": "b05",
+          "text": "Watch out for these traps. If you add the x terms instead of subtracting, you get two. If you ignore the three x and divide by seven, you get twenty over seven.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

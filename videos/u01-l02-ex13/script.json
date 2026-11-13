@@ -1,0 +1,75 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l02-ex13",
+  "title": "Exercise 13",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's look at this one. Match each equation with the number of solutions it has. Think about what is left when the x terms cancel.",
+          "display": "Match each equation with the number of solutions it has.",
+          "cue": "show-problem",
+          "pause_after_s": 1.5
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Pair by pair",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Two x minus seven equals six x plus five. Collecting the x terms leaves four x, so x has exactly one value, negative three. One solution.",
+          "display": "2x − 7 = 6x + 5 → One solution",
+          "cue": "pair-1"
+        },
+        {
+          "id": "b03",
+          "text": "Nine x minus four equals five x plus eight. Subtract five x: four x minus four equals eight, so four x equals twelve and x equals three. One solution.",
+          "display": "9x − 4 = 5x + 8 → One solution",
+          "cue": "pair-2"
+        },
+        {
+          "id": "b04",
+          "text": "Five x plus eight equals five x minus three. Subtract five x and you get eight equals negative three, which is false. No solution.",
+          "display": "5x + 8 = 5x − 3 → No solution",
+          "cue": "pair-3"
+        },
+        {
+          "id": "b05",
+          "text": "Six x plus one equals two times the quantity three x minus four. Distribute: six x minus eight. Subtract six x: one equals negative eight, which is false. No solution.",
+          "display": "6x + 1 = 2(3x − 4) → No solution",
+          "cue": "pair-4"
+        },
+        {
+          "id": "b06",
+          "text": "Three times the quantity x plus four is three x plus twelve, the same as the right side. Subtract three x: twelve equals twelve, always true. Infinitely many solutions.",
+          "display": "3(x + 4) = 3x + 12 → Infinitely many solutions",
+          "cue": "pair-5"
+        },
+        {
+          "id": "b07",
+          "text": "Distribute the negative two: four x minus two x plus six. Combine: two x plus six equals two x plus six. Both sides are the same, so infinitely many solutions.",
+          "display": "4x − 2(x − 3) = 2x + 6 → Infinitely many solutions",
+          "cue": "pair-6"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b08",
+          "text": "Two have one solution, two have none, and two have infinitely many. When the x terms cancel, a false statement means no solution and a true one means every number works.",
+          "cue": "answer"
+        }
+      ]
+    }
+  ]
+}

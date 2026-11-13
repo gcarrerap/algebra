@@ -1,0 +1,57 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l02-ex03",
+  "title": "Exercise 3",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Plan A costs fifteen dollars plus four dollars a visit. Plan B costs seven dollars a visit. After how many visits do they cost the same? Let v be the number of visits, so fifteen plus four v equals seven v.",
+          "display": "15 + 4v = 7v",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Gather the v terms. Subtract four v from both sides. Fifteen equals three v.",
+          "display": "15 = 3v",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Divide both sides by three. v equals five. At five visits, both plans cost thirty-five dollars.",
+          "display": "v = 5",
+          "cue": "step-2"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b04",
+          "text": "So v equals five.",
+          "display": "v = 5",
+          "cue": "answer"
+        },
+        {
+          "id": "b05",
+          "text": "Watch out for these traps. If you add four v instead of subtracting it, you get fifteen over eleven. If you multiply by three instead of dividing, you get forty-five.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l02-ex12",
+  "title": "Exercise 12",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Three times the quantity x plus two, plus x, equals two x plus twenty. Solve for x.",
+          "display": "3(x + 2) + x = 2x + 20",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Distribute the three. Three x plus six, plus x, equals two x plus twenty.",
+          "display": "3x + 6 + x = 2x + 20",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Combine like terms on the left: three x plus x is four x. Four x plus six equals two x plus twenty.",
+          "display": "4x + 6 = 2x + 20",
+          "cue": "step-2"
+        },
+        {
+          "id": "b04",
+          "text": "Subtract two x from both sides. Two x plus six equals twenty.",
+          "display": "2x + 6 = 20",
+          "cue": "step-3"
+        },
+        {
+          "id": "b05",
+          "text": "Subtract six from both sides. Two x equals fourteen.",
+          "display": "2x = 14",
+          "cue": "step-4"
+        },
+        {
+          "id": "b06",
+          "text": "Divide both sides by two. x equals seven.",
+          "display": "x = 7",
+          "cue": "step-5"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b07",
+          "text": "So x equals seven.",
+          "display": "x = 7",
+          "cue": "answer"
+        },
+        {
+          "id": "b08",
+          "text": "Watch out for these traps. If you multiply the three by x but not by two, you get nine. If you add two x instead of subtracting it, you get seven over three.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

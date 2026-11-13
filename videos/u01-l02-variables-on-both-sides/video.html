@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Variables on Both Sides</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="../_engine/player.css">
+<style>
+  /* Lesson 1.2 colors: variable terms blue · constants green · the move you make yellow ·
+     "false / no solution" red · "true / identity" green. Gym A yellow, Gym B purple. */
+  .tag { font: 700 30px Inter, sans-serif; letter-spacing: 0.1em; text-transform: uppercase; }
+  .frac { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; margin: 0 0.12em; }
+  .frac .top { padding: 0.04em 0.25em 0.2em; border-bottom: 0.07em solid currentColor; }
+  .frac .bot { padding: 0.2em 0.25em 0.04em; }
+  .istack { display: inline-grid; }
+  .istack > * { grid-area: 1 / 1; }
+  .steps { display: flex; flex-direction: column; align-items: flex-start; gap: 22px; }
+  .stepline { display: flex; align-items: center; gap: 28px; min-height: 84px; }
+  .stepline .chip { min-width: 150px; font-size: 40px; }
+
+  /* s01 · two gyms */
+  .gym { width: 620px; padding: 30px 44px; gap: 10px; align-items: flex-start; }
+  .gym .name { font: 700 52px Poppins, sans-serif; }
+  .gym .line { font: 500 46px/1.25 Inter, sans-serif; }
+
+  /* s02 · cost table */
+  .cost { display: grid; grid-template-columns: 140px 190px 190px; gap: 16px 12px; padding: 30px 36px; text-align: center; font: 600 52px/1.1 Poppins, sans-serif; }
+  .cost .th { font: 700 28px Inter, sans-serif; letter-spacing: 0.12em; text-transform: uppercase; align-self: end; }
+  .cost.vals { grid-template-columns: 110px 270px 250px; font-size: 46px; }
+  .cost.vals .th { font-size: 34px; letter-spacing: 0.02em; text-transform: none; font-family: Poppins, sans-serif; }
+
+  /* s07 · the three cases */
+  .rules { display: flex; flex-direction: column; gap: 22px; }
+  .rrow { display: grid; grid-template-columns: 560px 560px 440px; gap: 40px; align-items: center; padding: 14px 34px; border: 2px solid var(--line); border-radius: 24px; background: var(--card); }
+  .rrow .cond { font: 600 34px/1.25 Inter, sans-serif; color: var(--ink); }
+  .rrow .res { font: 700 42px Poppins, sans-serif; }
+  .kcard { min-width: 520px; padding: 28px 40px; gap: 12px; }
+
+  /* s08 · your turn */
+  .qa { padding: 30px 40px; gap: 18px; align-items: flex-start; min-width: 800px; }
+  .qa .math { font-size: 52px; }
+  .recap .card { width: 1300px; padding: 36px 56px; gap: 22px; align-items: stretch; }
+  .recap .line { display: grid; grid-template-columns: 420px 1fr; gap: 28px; align-items: baseline; }
+  .recap .name { font: 700 56px Poppins, sans-serif; }
+  .recap .what { font: 500 38px Inter, sans-serif; color: var(--ink); }
+  .recap { gap: 34px; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="header"><span class="unit">Unit 1 · Lesson 2</span><span class="title">Variables on Both Sides</span></div>
+
+  <!-- s01: two gyms -->
+  <section class="scene" data-scene="s01" style="gap: 28px">
+    <div class="row" style="gap: 90px">
+      <div class="card gym fade" data-at="b01@gym" style="border-color: color-mix(in srgb, var(--yellow) 60%, transparent)">
+        <div class="name yellow">Gym A</div>
+        <div class="line fade" data-at="b01@twenty"><span class="green">$20</span> to join</div>
+        <div class="line fade" data-at="b01@five"><span class="blue">+ $5</span> per visit</div>
+      </div>
+      <div class="card gym fade" data-at="b01@gym#2" style="border-color: color-mix(in srgb, var(--purple) 60%, transparent)">
+        <div class="name purple">Gym B</div>
+        <div class="line fade" data-at="b01@no">no fee</div>
+        <div class="line fade" data-at="b01@eight"><span class="blue">$8</span> per visit</div>
+      </div>
+    </div>
+    <div class="row" style="gap: 40px">
+      <div class="stack">
+        <div class="say fade yellow" data-at="b01@after" data-out="b03">After how many visits do they cost the same?</div>
+        <div class="say fade yellow" data-at="b03">Cheaper after 2 visits? After 20?</div>
+      </div>
+      <div class="timer" data-at="b03.end" data-out="b04-0.9"></div>
+    </div>
+    <div class="label muted fade" data-at="b02" style="font-size: 28px; letter-spacing: 0.08em; text-transform: none">v = number of visits</div>
+    <div class="math md">
+      <span class="green fade" data-at="b02@twenty">20</span>
+      <span class="fade" data-at="b02@plus">+</span>
+      <span class="fade" data-at="b02@five"><span class="hl c-blue" data-at="b02@both"><span class="blue">5v</span></span></span>
+      <span class="fade" data-at="b02@equals">=</span>
+      <span class="fade" data-at="b02@eight"><span class="hl c-blue" data-at="b02@both"><span class="blue">8v</span></span></span>
+    </div>
+  </section>
+
+  <!-- s02: collect the variable -->
+  <section class="scene" data-scene="s02">
+    <div class="row" style="gap: 90px; align-items: center">
+      <div class="steps">
+        <div class="math sm">
+          <span class="green">20</span> + <span class="hl c-blue" data-at="b04@gather" data-out="b04@subtract"><span class="blue">5v</span></span>
+          = <span class="hl c-blue" data-at="b04@gather" data-out="b04@subtract"><span class="blue">8v</span></span>
+        </div>
+        <div class="math sm fade" data-at="b04@subtract">
+          <span class="green">20</span> + <span class="blue">5v</span> <span class="yellow">− 5v</span>
+          = <span class="blue">8v</span> <span class="yellow">− 5v</span>
+        </div>
+        <div class="stepline fade" data-at="b04@twenty">
+          <div class="math sm"><span class="green">20</span> = <span class="blue">3v</span></div>
+          <span class="chip c-yellow fade" data-at="b05@divide">÷ 3</span>
+        </div>
+        <div class="math sm fade" data-at="b05@equals">
+          v = <span class="frac"><span class="top">20</span><span class="bot">3</span></span>
+          <span class="fade" data-at="b05@about">≈ <span class="hl c-yellow" data-at="b06@equation"><span class="yellow">6.67</span></span></span>
+        </div>
+      </div>
+      <div class="col" style="gap: 26px">
+        <div class="card cost fade" data-at="b06@look">
+          <div class="th muted">visits</div><div class="th yellow">Gym A</div><div class="th purple">Gym B</div>
+          <div class="fade" data-at="b06@six">6</div><div class="fade" data-at="b06@six">$50</div>
+          <div class="fade" data-at="b06@six"><span class="hl c-green" data-at="b06@b">$48</span></div>
+          <div class="fade" data-at="b06@seven">7</div>
+          <div class="fade" data-at="b06@seven"><span class="hl c-green" data-at="b06@a">$55</span></div>
+          <div class="fade" data-at="b06@seven">$56</div>
+        </div>
+        <div class="tag yellow fade" data-at="b06@exactly">they switch between 6 and 7</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- s03: choosing a side -->
+  <section class="scene" data-scene="s03" style="gap: 26px">
+    <div class="math md">
+      <span class="blue">7x</span> <span class="green">− 4</span> = <span class="blue">3x</span> <span class="green">+ 12</span>
+    </div>
+    <div class="row" style="gap: 40px">
+      <div class="stack">
+        <div class="say fade yellow" data-at="b07@which" data-out="b08">Which x term is easier to move?</div>
+        <div class="say fade yellow" data-at="b10" data-out="b11">Why must both routes agree?</div>
+        <div class="say fade" data-at="b11">The solution belongs to the equation, not to the route.</div>
+      </div>
+      <div class="stack">
+        <div class="timer" data-at="b07.end" data-out="b08"></div>
+        <div class="timer" data-at="b10.end" data-out="b11"></div>
+      </div>
+    </div>
+    <div class="row" style="gap: 130px; align-items: flex-start">
+      <div class="steps">
+        <div class="stepline fade" data-at="b08@subtracting">
+          <span class="chip c-yellow">− 3x</span>
+          <div class="math sm">
+            <span class="fade" data-at="b08@four">4x</span> <span class="fade" data-at="b08@minus">− 4</span> <span class="fade" data-at="b08@equals">= 12</span>
+          </div>
+        </div>
+        <div class="stepline fade" data-at="b08@add">
+          <span class="chip c-yellow">+ 4</span>
+          <div class="math sm">4x = 16</div>
+        </div>
+        <div class="stepline fade" data-at="b08@equals#2">
+          <span class="chip c-yellow">÷ 4</span>
+          <div class="math sm"><span class="hl c-green" data-at="b10@both"><span class="green">x = 4</span></span></div>
+        </div>
+      </div>
+      <div class="steps">
+        <div class="stepline fade" data-at="b09@seven">
+          <span class="chip c-yellow">− 7x</span>
+          <div class="math sm"><span class="fade" data-at="b09@works">−4 = <span class="tint c-red" data-at="b09@negative">−4x</span> + 12</span></div>
+        </div>
+        <div class="stepline fade" data-at="b09@works+1">
+          <span class="chip c-yellow">− 12</span>
+          <div class="math sm"><span class="tint c-red" data-at="b09@negative">−16</span> = <span class="tint c-red" data-at="b09@negative">−4x</span></div>
+        </div>
+        <div class="stepline fade" data-at="b09@answer">
+          <span class="chip c-yellow">÷ −4</span>
+          <div class="math sm"><span class="hl c-green" data-at="b10@both"><span class="green">x = 4</span></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- s04: your turn -->
+  <section class="scene" data-scene="s04" style="gap: 36px">
+    <div class="label yellow pop" data-at="b12" style="font-size: 34px">★ Your turn · solve</div>
+    <div class="math md pop" data-at="b12">2(3x − 1) = 4x + 10</div>
+    <div class="stack">
+      <div class="row fade" data-at="b12@pause" data-out="b13" style="gap: 36px">
+        <div class="say muted" style="font-size: 44px">⏸ Pause the video and try it</div>
+        <div class="timer" data-at="b12.end" data-out="b13"></div>
+      </div>
+      <div class="row" style="gap: 90px; align-items: flex-start">
+        <div class="steps" style="gap: 16px; min-width: 760px">
+          <div class="stepline fade" data-at="b13@six">
+            <span class="chip c-yellow">DIST</span>
+            <div class="math sm"><span class="blue">6x</span> <span class="green">− 2</span> <span class="fade" data-at="b13@equals">= <span class="blue">4x</span> <span class="green">+ 10</span></span></div>
+          </div>
+          <div class="stepline fade" data-at="b13@subtract">
+            <span class="chip c-blue">− 4x</span>
+            <div class="math sm"><span class="fade" data-at="b13@ten#2">2x − 2 = 10</span></div>
+          </div>
+          <div class="stepline fade" data-at="b13@add">
+            <span class="chip c-green">+ 2</span>
+            <div class="math sm"><span class="fade" data-at="b13@add+0.6">2x = 12</span></div>
+          </div>
+          <div class="stepline fade" data-at="b13@divide">
+            <span class="chip c-purple">÷ 2</span>
+            <div class="math sm"><span class="fade" data-at="b13@six#2"><span class="green">x = 6</span></span></div>
+          </div>
+        </div>
+        <div class="card fade c-blue glow" data-at="b14" style="width: 820px; padding: 34px 44px; gap: 20px; align-items: stretch">
+          <div style="display: grid; grid-template-columns: 210px 1fr; gap: 24px; align-items: baseline">
+            <div class="yellow" style="font: 700 42px Poppins, sans-serif">Simplify</div><div style="font: 500 34px Inter, sans-serif">each side first</div>
+            <div class="blue" style="font: 700 42px Poppins, sans-serif">Collect</div><div style="font: 500 34px Inter, sans-serif">variable terms on one side, numbers on the other</div>
+            <div class="green" style="font: 700 42px Poppins, sans-serif">Finish</div><div style="font: 500 34px Inter, sans-serif">undo the operations as usual</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- s05: the variable vanishes -->
+  <section class="scene" data-scene="s05" style="gap: 26px">
+    <div class="math md">
+      <span class="hl c-yellow" data-at="b16@subtract"><span class="blue">3x</span></span> <span class="green">+ 5</span>
+      = <span class="hl c-yellow" data-at="b16@subtract"><span class="blue">3x</span></span> <span class="green">+ 2</span>
+    </div>
+    <div class="stepline fade" data-at="b16@subtract" style="gap: 40px">
+      <span class="chip c-yellow">− 3x</span>
+      <div class="math md red fade" data-at="b16@five">5 = 2</div>
+      <span class="tag red fade" data-at="b16@false">false</span>
+    </div>
+    <div class="stack">
+      <div class="row fade" data-at="b17" data-out="b18" style="gap: 40px">
+        <div class="say yellow">What does that tell you about x?</div>
+        <div class="timer" data-at="b17.end" data-out="b18"></div>
+      </div>
+      <div class="col fade" data-at="b18@whatever" style="gap: 14px">
+        <div class="label muted">left side − right side</div>
+        <div class="math sm">(3x + 5) − (3x + 2) = <span class="yellow">3</span></div>
+      </div>
+    </div>
+    <div class="math md red fade" data-at="b18@no#2">no solution</div>
+  </section>
+
+  <!-- s06: always true -->
+  <section class="scene" data-scene="s06">
+    <div class="row" style="gap: 80px; align-items: flex-start">
+      <div class="steps">
+        <div class="math sm">2(x + 3) = 2x + 6</div>
+        <div class="stepline fade" data-at="b20@six">
+          <span class="chip c-yellow">DIST</span>
+          <div class="math sm"><span class="blue">2x</span> <span class="green">+ 6</span> <span class="fade" data-at="b20@six#2">= <span class="blue">2x</span> <span class="green">+ 6</span></span></div>
+        </div>
+        <div class="stepline fade" data-at="b20@subtract">
+          <span class="chip c-blue">− 2x</span>
+          <div class="math sm"><span class="green fade" data-at="b20@six#3">6</span> <span class="green fade" data-at="b20@six#4">= 6</span></div>
+          <span class="tag green"><span class="fade" data-at="b20@true">true</span> <span class="fade" data-at="b20@always">always</span></span>
+        </div>
+        <div class="stepline" style="gap: 36px; margin-top: 10px">
+          <div class="say green fade" data-at="b21@infinitely" style="font-size: 44px">infinitely many solutions</div>
+          <span class="chip c-green fade" data-at="b21@identity" style="min-width: 0; font-size: 42px; text-transform: uppercase; letter-spacing: 0.06em">identity</span>
+        </div>
+      </div>
+      <div class="card cost vals fade" data-at="b21@every">
+        <div class="th muted">x</div><div class="th">2(x + 3)</div><div class="th">2x + 6</div>
+        <div class="fade" data-at="b21@try">−3</div><div class="fade" data-at="b21@try"><span class="tint c-green" data-at="b21@match">0</span></div><div class="fade" data-at="b21@try"><span class="tint c-green" data-at="b21@match">0</span></div>
+        <div class="fade" data-at="b21@any">0</div><div class="fade" data-at="b21@any"><span class="tint c-green" data-at="b21@match">6</span></div><div class="fade" data-at="b21@any"><span class="tint c-green" data-at="b21@match">6</span></div>
+        <div class="fade" data-at="b21@value">4</div><div class="fade" data-at="b21@value"><span class="tint c-green" data-at="b21@match">14</span></div><div class="fade" data-at="b21@value"><span class="tint c-green" data-at="b21@match">14</span></div>
+        <div class="fade" data-at="b21@both">10</div><div class="fade" data-at="b21@both"><span class="tint c-green" data-at="b21@match">26</span></div><div class="fade" data-at="b21@both"><span class="tint c-green" data-at="b21@match">26</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- s07: seeing it coming -->
+  <section class="scene" data-scene="s07">
+    <div class="stack">
+      <div class="col fade" data-at="b22" data-out="b24" style="gap: 28px">
+        <div class="math md fade" data-at="b22@simplify">
+          <span class="tint c-blue" data-at="b22@number">a</span>x + <span class="tint c-green" data-at="b22@constant">b</span>
+          = <span class="tint c-blue" data-at="b22@number">c</span>x + <span class="tint c-green" data-at="b22@constant">d</span>
+        </div>
+        <div class="rules">
+          <div class="rrow fade" data-at="b23@different">
+            <div class="cond">different coefficients</div>
+            <div class="math xs">2x + 1 = 5x − 8</div>
+            <div class="res blue fade" data-at="b23@exactly">one solution</div>
+          </div>
+          <div class="rrow fade" data-at="b23@same">
+            <div class="cond">same coefficients, different constants</div>
+            <div class="math xs">3x + 5 = 3x + 2</div>
+            <div class="res red fade" data-at="b23@none">no solution</div>
+          </div>
+          <div class="rrow fade" data-at="b23@both">
+            <div class="cond">same coefficients, same constants</div>
+            <div class="math xs">2x + 6 = 2x + 6</div>
+            <div class="res green fade" data-at="b23@infinitely">infinitely many</div>
+          </div>
+        </div>
+      </div>
+      <div class="col fade" data-at="b24" style="gap: 56px">
+        <div class="math md">
+          <span class="blue">4x</span> <span class="green">− 1</span> = <span class="blue">4x</span> +
+          <span class="hl c-yellow" data-at="b24@k"><span class="yellow">k</span></span>
+        </div>
+        <div class="row" style="gap: 50px; align-items: stretch">
+          <div class="card kcard c-green fade" data-at="b24@infinitely">
+            <div class="label green">infinitely many</div>
+            <div class="math sm">
+              <span class="istack">
+                <span class="fade yellow" data-at="b24@infinitely" data-out="b25@negative">k = ?</span>
+                <span class="fade green" data-at="b25@negative">k = −1</span>
+              </span>
+            </div>
+            <div class="say fade muted" data-at="b25@identical" style="font-size: 32px">both sides identical</div>
+          </div>
+          <div class="card kcard c-red fade" data-at="b24@none">
+            <div class="label red">none</div>
+            <div class="math sm">
+              <span class="istack">
+                <span class="fade yellow" data-at="b24@none" data-out="b25@other">k = ?</span>
+                <span class="fade red" data-at="b25@other">k ≠ −1</span>
+              </span>
+            </div>
+            <div class="say fade muted" data-at="b25@impossible" style="font-size: 32px">impossible</div>
+          </div>
+          <div class="timer" data-at="b24.end" data-out="b25" style="align-self: center"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- s08: your turn + recap -->
+  <section class="scene" data-scene="s08">
+    <div class="layer fade" data-at="b26-0.5" data-out="b28" style="gap: 34px">
+      <div class="label yellow pop" data-at="b26" style="font-size: 34px">★ Your turn · how many solutions?</div>
+      <div class="row" style="gap: 60px; align-items: stretch">
+        <div class="card qa c-blue pop" data-at="b26">
+          <div class="row" style="gap: 24px"><span class="chip c-blue" style="min-width: 0">a</span><div class="math">5x − 2(x + 1) = 3x − 2</div></div>
+          <div class="math fade" data-at="b27@first">3x − 2 = 3x − 2</div>
+          <div class="say green fade" data-at="b27@infinitely" style="font-size: 42px">infinitely many solutions</div>
+        </div>
+        <div class="card qa c-purple pop" data-at="b26">
+          <div class="row" style="gap: 24px"><span class="chip c-purple" style="min-width: 0">b</span><div class="math">6x + 4 = 2(3x + 1)</div></div>
+          <div class="math fade" data-at="b27@second">6x + 4 = 6x + 2</div>
+          <div class="say red fade" data-at="b27@no" style="font-size: 42px">no solution</div>
+        </div>
+      </div>
+      <div class="row fade" data-at="b26@pause" data-out="b27" style="gap: 36px">
+        <div class="say muted" style="font-size: 44px">⏸ Pause the video and try it</div>
+        <div class="timer" data-at="b26.end" data-out="b27"></div>
+      </div>
+    </div>
+    <div class="layer fade recap" data-at="b28">
+      <div class="card pop c-blue glow" data-at="b28">
+        <div class="line"><div class="name">x vanishes</div><div class="what">read what's left</div></div>
+        <div class="line fade" data-at="b28@false"><div class="name red">5 = 2</div><div class="what"><span class="red">false</span> → no solution</div></div>
+        <div class="line fade" data-at="b28@true"><div class="name green">6 = 6</div><div class="what"><span class="green">true</span> → every number is a solution</div></div>
+      </div>
+      <div class="label fade muted" data-at="b29" style="font-size: 22px; font-weight: 500">This video uses an AI-generated voice.</div>
+    </div>
+  </section>
+
+  <div class="caption"></div>
+  <div class="progress"></div>
+  <div id="seek" title="Jump to a moment"></div>
+  <button id="play" type="button" aria-label="Play"><span class="play-btn">▶</span><span class="play-label">Watch the lesson</span></button>
+</div>
+<script src="../_engine/player.js"></script>
+</body>
+</html>

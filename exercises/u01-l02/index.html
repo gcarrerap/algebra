@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Practice 1.2 · Variables on Both Sides</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap">
+<style>
+  /* Same world as the videos and the home page: navy graph paper, one yellow accent. */
+  :root {
+    --bg: #101a2e; --card: #18243d; --line: #2a3a5c; --ink: #f5f1e8; --muted: #9aa6bd;
+    --yellow: #ffcc4d; --green: #4ade80; --red: #f87171; --blue: #60a5fa; --purple: #c084fc;
+    --display: Poppins, "DejaVu Sans", sans-serif; --text: Inter, "DejaVu Sans", sans-serif;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; color: var(--ink); font: 400 17px/1.55 var(--text); min-height: 100vh;
+    background:
+      linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px) 0 0 / 32px 32px,
+      linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px) 0 0 / 32px 32px,
+      var(--bg);
+  }
+  main { max-width: 820px; margin: 0 auto; padding: 28px max(16px, env(safe-area-inset-right, 0px)) 80px max(16px, env(safe-area-inset-left, 0px)); }
+  a { color: var(--yellow); }
+  .back { font-size: 14px; text-decoration: none; color: var(--muted); }
+  .back:hover, .back:focus-visible { color: var(--yellow); }
+  .eyebrow { margin-top: 22px; font: 600 13px var(--text); letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+  h1 { font: 700 clamp(28px, 6vw, 42px)/1.15 var(--display); margin: 8px 0 18px; text-wrap: balance; }
+  h1 .y { color: var(--yellow); }
+
+  /* progress dots */
+  .dots { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 18px; padding: 0; list-style: none; }
+  .dots button {
+    width: 28px; height: 28px; border-radius: 9px; border: 1px solid var(--line); background: var(--card);
+    color: var(--muted); font: 600 12px var(--display); cursor: pointer; padding: 0;
+  }
+  .dots button[data-s="first"] { background: var(--green); border-color: var(--green); color: var(--bg); }
+  .dots button[data-s="retry"] { background: var(--yellow); border-color: var(--yellow); color: var(--bg); }
+  .dots button[aria-current="step"] { outline: 2px solid var(--ink); outline-offset: 2px; }
+  .dots button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 22px clamp(16px, 4vw, 28px); }
+  .meta { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline; color: var(--muted); font-size: 14px; }
+  .meta b { color: var(--ink); font-weight: 600; }
+  .level { font: 600 12px var(--text); letter-spacing: .1em; text-transform: uppercase; padding: 5px 10px; border-radius: 999px; border: 1px solid var(--line); }
+  .level[data-l="1"] { color: var(--green); } .level[data-l="2"] { color: var(--blue); }
+  .level[data-l="3"] { color: var(--purple); } .level[data-l="4"] { color: var(--yellow); border-color: var(--yellow); }
+  .prompt { margin: 18px 0 0; color: var(--muted); }
+  .q {
+    font: 600 clamp(26px, 6.2vw, 44px)/1.3 var(--display); margin: 14px 0 22px; text-align: center;
+    overflow-x: auto; padding: 4px 0; letter-spacing: .02em; white-space: nowrap;
+  }
+  .q:focus { outline: none; }
+  sup { font-size: .6em; vertical-align: .55em; line-height: 0; }
+  .frac { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; margin: 0 .12em; }
+  .frac .top { padding: .04em .25em .2em; border-bottom: .07em solid currentColor; }
+  .frac .bot { padding: .2em .25em .04em; }
+
+
+  /* work area (equation editor) */
+  .pad { margin: 0 0 18px; }
+  .padbtn { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 14px; cursor: pointer;
+    background: transparent; color: var(--yellow); border: 2px dashed var(--line); font: 600 16px var(--text); text-align: left; }
+  .padbtn:hover, .padbtn:focus-visible { border-color: var(--yellow); outline: none; }
+  .padbtn .chev { transition: transform .15s; } .padbtn[aria-expanded="true"] .chev { transform: rotate(180deg); }
+  .padbody { margin-top: 10px; }
+  equation-notebook { --eq-panel: #101a2e; --eq-bg: #0b1325; --eq-size: clamp(22px, 5.5vw, 30px); }
+
+  .options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 520px) { .options { grid-template-columns: 1fr; } }
+  .opt {
+    display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 14px; cursor: pointer; text-align: left;
+    background: #101a2e; border: 2px solid var(--line); color: var(--ink); font: 600 24px var(--display);
+    font-variant-numeric: tabular-nums; min-height: 64px;
+  }
+  .opt .k { font: 600 13px var(--text); width: 28px; height: 28px; border-radius: 8px; display: grid; place-items: center; background: var(--line); color: var(--ink); flex: none; }
+  .opt:hover:not(:disabled), .opt:focus-visible { border-color: var(--yellow); outline: none; }
+  .opt[data-r="wrong"] { border-color: var(--red); background: rgba(248,113,113,.12); color: var(--red); cursor: default; }
+  .opt[data-r="wrong"] .k { background: var(--red); color: var(--bg); }
+  .opt[data-r="right"] { border-color: var(--green); background: rgba(74,222,128,.14); color: var(--green); cursor: default; }
+  .opt[data-r="right"] .k { background: var(--green); color: var(--bg); }
+  .opt:disabled:not([data-r]) { opacity: .45; cursor: default; }
+
+  .answer { display: grid; gap: 10px; }
+  .answer label { font: 600 14px var(--text); color: var(--muted); letter-spacing: .04em; }
+  .answer equation-editor { --eq-panel: #101a2e; --eq-bg: #0b1325; --eq-size: clamp(24px, 6vw, 32px); }
+  .answer .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .answer[data-r="right"] equation-editor { outline: 2px solid var(--green); border-radius: 12px; }
+  .answer[data-r="wrong"] equation-editor { outline: 2px solid var(--red); border-radius: 12px; }
+  /* select all that apply */
+  .opt[aria-pressed="true"] { border-color: var(--yellow); background: rgba(255,204,77,.10); }
+  .opt .box { width: 24px; height: 24px; border-radius: 7px; border: 2px solid var(--muted); flex: none; display: grid; place-items: center; font: 700 15px var(--text); color: var(--bg); }
+  .opt[aria-pressed="true"] .box { background: var(--yellow); border-color: var(--yellow); }
+  .opt[aria-pressed="true"] .box::after { content: "✓"; }
+  .opt.choice { font-size: 20px; }
+  [hidden] { display: none !important; }
+  .opt .why { display: block; font: 400 14px/1.35 var(--text); color: var(--red); margin-top: 4px; }
+  /* matching */
+  .pairs { display: grid; gap: 10px; margin: 0 0 4px; }
+  .pair { display: grid; grid-template-columns: 1fr minmax(0, 1fr); gap: 12px; align-items: center; padding: 10px 12px; border-radius: 14px; border: 2px solid var(--line); background: #101a2e; }
+  @media (max-width: 520px) { .pair { grid-template-columns: 1fr; } }
+  .pair .l { font: 600 20px var(--display); }
+  .pair select { width: 100%; font: 600 16px var(--text); color: var(--ink); background: var(--card); border: 2px solid var(--line); border-radius: 10px; padding: 10px; }
+  .pair select:focus-visible { outline: none; border-color: var(--yellow); }
+  .pair[data-r="wrong"] { border-color: var(--red); } .pair[data-r="right"] { border-color: var(--green); }
+  .pair .why { grid-column: 1 / -1; color: var(--red); font-size: 14px; }
+  .note.warn { border-color: var(--yellow); } .note.warn strong { color: var(--yellow); }
+  .fb { margin-top: 18px; }
+  .note { border-radius: 14px; padding: 14px 16px; margin: 0 0 14px; border: 1px solid var(--line); background: #101a2e; }
+  .note.bad { border-color: var(--red); } .note.good { border-color: var(--green); }
+  .note strong { display: block; margin-bottom: 2px; }
+  .note.bad strong { color: var(--red); } .note.good strong { color: var(--green); }
+  .vid { position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 16px; overflow: hidden; background: #000; border: 1px solid var(--line); }
+  .vid iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .hint { color: var(--muted); font-size: 14px; margin: 10px 0 0; }
+  .btn {
+    font: 600 16px var(--text); border-radius: 12px; padding: 12px 18px; cursor: pointer; border: 2px solid var(--yellow);
+    background: var(--yellow); color: var(--bg);
+  }
+  .btn.ghost { background: transparent; color: var(--yellow); }
+  .btn:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+  .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+  .link { background: none; border: 0; color: var(--yellow); font: 500 15px var(--text); cursor: pointer; padding: 6px 0; text-decoration: underline; }
+
+  .score { font: 700 clamp(44px, 12vw, 76px)/1 var(--display); color: var(--yellow); margin: 10px 0 4px; }
+  .score small { font-size: .4em; color: var(--muted); font-weight: 600; }
+  .bylevel { list-style: none; padding: 0; margin: 18px 0; display: grid; gap: 8px; }
+  .bylevel li { display: flex; justify-content: space-between; gap: 12px; padding: 10px 14px; border-radius: 12px; background: #101a2e; border: 1px solid var(--line); }
+  footer { margin-top: 28px; color: var(--muted); font-size: 14px; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+</style>
+</head>
+<body>
+<script type="module" src="../../components/equation-editor/equation-editor.js"></script>
+<script src="../../components/answer-check/answer-check.js"></script>
+<main>
+  <a class="back" href="../../">← All lessons</a>
+  <div class="eyebrow" id="eyebrow"></div>
+  <h1>Variables on <span class="y">both sides</span></h1>
+  <ol class="dots" id="dots" aria-label="Exercises"></ol>
+  <div id="app"></div>
+  <footer>Open the work area to write your steps with fractions, powers and roots. When you are asked for a value or an expression, type it in the answer box; otherwise pick the answer you think is right. A wrong answer shows you the mistake and plays a step-by-step video. Solution videos use an AI-generated voice.</footer>
+</main>
+
+<script>
+const DATA = {"unit":"1.2","title":"Variables on Both Sides","setId":"u01-l02","levels":{"1":"Warm-up","2":"Tricky","3":"Challenging","4":"Boss level"},"exercises":[{"id":"ex01","n":1,"level":1,"prompt":"Solve for x.","q":"5x + 3 = 2x + 15","aria":"5x + 3 = 2x + 15","input":"num","answer":"4","aHtml":"4","mistakes":[{"v":"12/7","why":"Adding 2x makes 7x + 3 = 15 and x = 12/7, but the 2x on the right has to cancel: subtract it from both sides."},{"v":"6","why":"To undo +3 you subtract 3 from both sides; adding it gives 18 instead of 12."},{"v":"12","why":"3x = 12 is not finished: divide both sides by 3 to get x = 4."}]},{"id":"ex02","n":2,"level":1,"prompt":"Solve for x.","q":"9x − 7 = 4x + 8","aria":"9x − 7 = 4x + 8","input":"num","answer":"3","aHtml":"3","mistakes":[{"v":"15/13","why":"Adding 4x gives 13x − 7 = 8. The 4x on the right has to cancel, so subtract it: 9x − 4x = 5x."},{"v":"1/5","why":"To undo −7 you add 7: 8 + 7 = 15, not 8 − 7."},{"v":"5/3","why":"After collecting, the coefficient is 5, not 9: you divide by what is left after subtracting 4x."}]},{"id":"ex03","n":3,"level":1,"prompt":"Plan A costs $15 plus $4 per visit. Plan B costs $7 per visit. Solve for v, the number of visits after which they cost the same.","q":"15 + 4v = 7v","aria":"15 + 4v = 7v","input":"num","answer":"5","aHtml":"5","mistakes":[{"v":"15/11","why":"The v terms are on opposite sides, so you subtract: 7v − 4v = 3v. Adding gives 11v."},{"v":"45","why":"To undo 3v you divide by 3. Multiplying turns 15 into 45."},{"v":"1/5","why":"15 = 3v means v = 15 ÷ 3. Dividing 3 by 15 flips it."}]},{"id":"ex04","n":4,"level":1,"prompt":"Solve for x.","q":"3x + 20 = 7x","aria":"3x + 20 = 7x","input":"num","answer":"5","aHtml":"5","mistakes":[{"v":"2","why":"3x and 7x are on opposite sides: moving 3x over gives 7x − 3x = 4x, not 7x + 3x = 10x."},{"v":"20/7","why":"The 3x on the left has to go too: 7x − 3x = 4x, so you divide by 4."},{"v":"80","why":"To undo 4x you divide by 4. Multiplying gives 80."}]},{"id":"ex05","n":5,"level":2,"prompt":"Solve for x.","q":"3(x + 4) = x + 20","aria":"3(x + 4) = x + 20","input":"num","answer":"4","aHtml":"4","mistakes":[{"v":"8","why":"3(x + 4) is 3x + 12: the 3 multiplies the 4 as well."},{"v":"2","why":"x is on the right, so subtract it: 3x − x = 2x. Adding gives 4x."},{"v":"16","why":"To undo +12 you subtract 12: 20 − 12 = 8, not 20 + 12."}]},{"id":"ex06","n":6,"level":2,"prompt":"Solve for x.","q":"2x + 9 = 6x + 21","aria":"2x + 9 = 6x + 21","input":"num","answer":"-3","aHtml":"−3","mistakes":[{"v":"3","why":"9 − 21 is negative, so −12 ÷ 4 = −3. Keep the sign."},{"v":"15/2","why":"To undo +21 you subtract it from 9: 9 − 21, not 9 + 21."},{"v":"-3/2","why":"Moving 2x gives 6x − 2x = 4x, not 6x + 2x = 8x."}]},{"id":"ex07","n":7,"level":2,"prompt":"Solve for x.","q":"4x + 5 = x + 12","aria":"4x + 5 = x + 12","input":"num","answer":"7/3","aHtml":"<span class=\"frac\"><span class=\"top\">7</span><span class=\"bot\">3</span></span>","mistakes":[{"v":"17/3","why":"To undo +5 you subtract it: 12 − 5 = 7, not 12 + 5."},{"v":"7/5","why":"Moving x to the left gives 4x − x = 3x, not 4x + x = 5x."},{"v":"21","why":"To undo 3x you divide by 3. Multiplying gives 21."}]},{"id":"ex08","n":8,"level":2,"prompt":"Shop A charges $18 plus $4 per hour to rent a bike. Shop B charges $7 per hour. Solve for h, the number of hours after which they cost the same.","q":"18 + 4h = 7h","aria":"18 + 4h = 7h","input":"num","answer":"6","aHtml":"6","mistakes":[{"v":"18/11","why":"The h terms are on opposite sides: 7h − 4h = 3h. Adding gives 11h."},{"v":"15","why":"To undo 3h you divide by 3; subtracting 3 from 18 doesn't undo it."},{"v":"1/6","why":"18 = 3h means h = 18 ÷ 3, not 3 ÷ 18."}]},{"id":"ex09","n":9,"level":3,"prompt":"Solve for x.","q":"4(x − 3) = 2(x + 5)","aria":"4(x − 3) = 2(x + 5)","input":"num","answer":"11","aHtml":"11","mistakes":[{"v":"13/2","why":"4(x − 3) is 4x − 12: the 4 multiplies the 3 as well."},{"v":"17/2","why":"2(x + 5) is 2x + 10: the 2 multiplies the 5 as well."},{"v":"-1","why":"To undo −12 you add 12: 10 + 12 = 22, not 10 − 12."}]},{"id":"ex10","n":10,"level":3,"prompt":"Solve for x.","q":"7 − 3x = 2x − 8","aria":"7 − 3x = 2x − 8","input":"num","answer":"3","aHtml":"3","mistakes":[{"v":"-1/5","why":"To undo −8 you add 8: 7 + 8 = 15, not 7 − 8."},{"v":"-15","why":"Adding 3x to both sides gives 2x + 3x = 5x, not 2x − 3x."},{"v":"15","why":"15 = 5x is not finished: divide both sides by 5."}]},{"id":"ex11","n":11,"level":3,"prompt":"Solve for x.","q":"5x + 2 = 9x + 11","aria":"5x + 2 = 9x + 11","input":"num","answer":"-9/4","aHtml":"−<span class=\"frac\"><span class=\"top\">9</span><span class=\"bot\">4</span></span>","mistakes":[{"v":"9/4","why":"2 − 11 is negative, so the answer is negative too."},{"v":"13/4","why":"To undo +11 you subtract it from 2: 2 − 11, not 11 + 2."},{"v":"-9/14","why":"Moving 5x gives 9x − 5x = 4x, not 9x + 5x = 14x."}]},{"id":"ex12","n":12,"level":3,"prompt":"Solve for x.","q":"3(x + 2) + x = 2x + 20","aria":"3(x + 2) + x = 2x + 20","input":"num","answer":"7","aHtml":"7","mistakes":[{"v":"9","why":"3(x + 2) is 3x + 6: the 3 multiplies the 2 as well."},{"v":"7/3","why":"Moving 2x gives 4x − 2x = 2x, not 4x + 2x = 6x."},{"v":"14","why":"2x = 14 is not finished: divide both sides by 2."}]},{"id":"ex13","n":13,"level":4,"prompt":"Match each equation with the number of solutions it has.","q":"","aria":"","pick":"match","rights":["One solution","No solution","Infinitely many solutions"],"pairs":[{"l":"2x − 7 = 6x + 5","r":0,"why":"The x terms don't cancel: collecting leaves 4x, so x has one value."},{"l":"9x − 4 = 5x + 8","r":0,"why":"The coefficients are different (9 and 5), so the x terms don't cancel."},{"l":"5x + 8 = 5x − 3","r":1,"why":"Same coefficients, different constants: 8 = −3 is false."},{"l":"6x + 1 = 2(3x − 4)","r":1,"why":"The right side is 6x − 8, so 1 = −8 is false."},{"l":"3(x + 4) = 3x + 12","r":2,"why":"The left side is 3x + 12, the same as the right: 12 = 12 is always true."},{"l":"4x − 2(x − 3) = 2x + 6","r":2,"why":"The left side simplifies to 2x + 6, the same as the right."}]},{"id":"ex14","n":14,"level":4,"prompt":"Select all the equations that have no solution.","q":"","aria":"","pick":"multi","options":[{"v":"3x + 7 = 3x − 2","ok":true,"why":"Subtracting 3x leaves 7 = −2, which is false."},{"v":"2(x + 5) = 2x + 10","ok":false,"why":"It simplifies to 2x + 10 = 2x + 10, which is always true: infinitely many solutions."},{"v":"5x − 1 = 4x − 1","ok":false,"why":"The coefficients differ (5 and 4), so there is exactly one solution: x = 0."},{"v":"4(x − 1) = 4x + 3","ok":true,"why":"4(x − 1) = 4x − 4, and −4 is not 3: same coefficients, different constants."},{"v":"x + 6 = 2x + 6","ok":false,"why":"The coefficients differ (1 and 2), so there is one solution: x = 0."},{"v":"8x − 3(x + 1) = 5x + 1","ok":true,"why":"The left side is 5x − 3, so 5x − 3 = 5x + 1: same coefficients, different constants."}]},{"id":"ex15","n":15,"level":4,"prompt":"For what value of k does this equation have infinitely many solutions?","q":"3x + 9 = 3x + k","aria":"3x + 9 = 3x + k","input":"num","answer":"9","aHtml":"9","mistakes":[{"v":"-9","why":"Both sides need the same constant: +9 on the left means k = +9, not −9."},{"v":"3","why":"The x terms already match (3x on both sides). Only the constants must match: k = 9."},{"v":"12","why":"The 3x terms cancel and are not added to the constant: k = 9."}]},{"id":"ex16","n":16,"level":4,"prompt":"Gym A charges $50 to join plus $6 per visit. Gym B charges $10 per visit. Solve for v, the number of visits after which they cost the same.","q":"50 + 6v = 10v","aria":"50 + 6v = 10v","input":"num","answer":"25/2","aHtml":"<span class=\"frac\"><span class=\"top\">25</span><span class=\"bot\">2</span></span>","mistakes":[{"v":"25/8","why":"The v terms are on opposite sides: 10v − 6v = 4v. Adding gives 16v."},{"v":"46","why":"To undo 4v you divide by 4; subtracting 4 from 50 doesn't undo it."},{"v":"2/25","why":"50 = 4v means v = 50 ÷ 4, not 4 ÷ 50."}]}]};
+const KEY = "algebra." + DATA.setId + ".v1";
+const N = DATA.exercises.length;
+const $ = (s) => document.querySelector(s);
+const el = (tag, attrs = {}, ...kids) => {
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (k === "class") e.className = v; else if (k === "html") e.innerHTML = v;
+    else if (k.startsWith("on")) e.addEventListener(k.slice(2), v); else e.setAttribute(k, v);
+  }
+  kids.flat().forEach((c) => e.append(c));
+  return e;
+};
+
+// ---- state: results[i] = null | "first" | "retry"; order[i] = shuffled option indexes
+let state = { i: 0, results: Array(N).fill(null), done: false };
+let order = [];
+let wrongPicks = [];      // option indexes already tried on the current exercise
+let solved = false;
+let videoOpen = false;
+
+function load() {
+  try {
+    const s = JSON.parse(localStorage.getItem(KEY));
+    if (s && Array.isArray(s.results) && s.results.length === N) state = s;
+  } catch (e) {}
+}
+function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
+
+function shuffled(n) {
+  const a = [...Array(n).keys()];
+  for (let i = n - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+  return a;
+}
+
+
+// ---- work area: the reusable equation editor (components/equation-editor), one notebook per exercise, kept on this device
+let notes = {};
+try { notes = JSON.parse(localStorage.getItem(KEY + ".work")) || {}; } catch (e) {}
+let saveTimer = 0;
+function flushNotes() { clearTimeout(saveTimer); try { localStorage.setItem(KEY + ".work", JSON.stringify(notes)); } catch (e) {} }
+function saveNotes() { clearTimeout(saveTimer); saveTimer = setTimeout(flushNotes, 300); }
+addEventListener("pagehide", flushNotes);
+document.addEventListener("visibilitychange", () => { if (document.hidden) flushNotes(); });
+let padOpen = false;
+
+function makePad(ex) {
+  const n = notes[ex.id] || (notes[ex.id] = { lines: [""] });
+  const toggle = el("button", { type: "button", class: "padbtn", "aria-expanded": String(padOpen), "aria-controls": "padbody" },
+    el("span", {}, "✏️ Work area — write your steps"), el("span", { class: "chev", "aria-hidden": "true" }, "▾"));
+  const body = el("div", { class: "padbody", id: "padbody" });
+  body.hidden = !padOpen;
+  const nb = document.createElement("equation-notebook");
+  nb.setAttribute("placeholder", "Write a step…");
+  customElements.whenDefined("equation-notebook").then(() => { nb.value = n.lines; });
+  nb.addEventListener("input", () => { n.lines = nb.value; saveNotes(); });
+  body.append(nb);
+  toggle.addEventListener("click", () => { padOpen = !padOpen; toggle.setAttribute("aria-expanded", String(padOpen)); body.hidden = !padOpen; });
+  return el("div", { class: "pad" }, toggle, body);
+}
+
+function renderDots() {
+  const ul = $("#dots"); ul.innerHTML = "";
+  DATA.exercises.forEach((ex, i) => {
+    const b = el("button", {
+      type: "button", "data-s": state.results[i] || "", "aria-label": `Exercise ${i + 1}` + (state.results[i] === "first" ? ", right on the first try" : state.results[i] === "retry" ? ", needed another try" : ""),
+      onclick: () => go(i),
+    }, String(i + 1));
+    if (!state.done && i === state.i) b.setAttribute("aria-current", "step");
+    ul.append(el("li", {}, b));
+  });
+}
+
+function go(i) { state.i = i; state.done = false; save(); show(); }
+
+function show() {
+  renderDots();
+  const app = $("#app"); app.innerHTML = "";
+  $("#eyebrow").textContent = `Unit ${DATA.unit.split(".")[0]} · ${DATA.unit.split(".").length > 2 ? "Subtopic" : "Topic"} ${DATA.unit} · Practice`;
+  if (state.done) return showResults(app);
+  const ex = DATA.exercises[state.i];
+  order = ex.options ? shuffled(ex.options.length) : [];
+  wrongPicks = []; solved = false; videoOpen = false;
+
+  const card = el("section", { class: "card", "aria-labelledby": "qtitle" });
+  card.append(el("div", { class: "meta" },
+    el("span", {}, "Exercise ", el("b", {}, String(ex.n)), ` of ${N}`),
+    el("span", { class: "level", "data-l": ex.level }, DATA.levels[ex.level])));
+  if (ex.prompt) card.append(el("p", { class: "prompt" }, ex.prompt));
+  else card.append(el("p", { class: "prompt" }, "What is the value of this expression?"));
+  const q = el("div", { class: "q", id: "qtitle", role: "img", "aria-label": ex.aria, tabindex: "-1", html: ex.q });
+  if (!ex.q) { q.removeAttribute("role"); q.removeAttribute("aria-label"); q.style.display = "none"; }
+  card.append(q);
+  card.append(makePad(ex));
+
+  if (ex.pick === "multi" || ex.pick === "match") {
+    card.append(ex.pick === "multi" ? makeMulti(ex) : makeMatch(ex));
+    card.append(el("div", { class: "actions" }, el("button", { type: "button", class: "btn", id: "check", onclick: ex.pick === "multi" ? checkMulti : checkMatch }, "Check")));
+    card.append(el("div", { class: "fb", id: "fb", "aria-live": "polite" }));
+    app.append(card);
+    q.focus({ preventScroll: true });
+    return;
+  }
+  if (ex.input) {
+    card.append(makeAnswer(ex));
+    card.append(el("div", { class: "fb", id: "fb", "aria-live": "polite" }));
+    app.append(card);
+    q.focus({ preventScroll: true });
+    return;
+  }
+  const opts = el("div", { class: "options", role: "group", "aria-label": "Answer choices" });
+  order.forEach((oi, pos) => {
+    const o = ex.options[oi];
+    opts.append(el("button", { type: "button", class: "opt", "data-oi": oi, onclick: () => pick(oi) },
+      el("span", { class: "k", "aria-hidden": "true" }, "ABCD"[pos]), el("span", { html: o.v })));
+  });
+  card.append(opts);
+  card.append(el("div", { class: "fb", id: "fb", "aria-live": "polite" }));
+  app.append(card);
+  q.focus({ preventScroll: true });
+}
+
+function pick(oi) {
+  if (solved || wrongPicks.includes(oi)) return;
+  const ex = DATA.exercises[state.i];
+  const o = ex.options[oi];
+  const btn = document.querySelector(`.opt[data-oi="${oi}"]`);
+  const fb = $("#fb");
+  if (o.ok) {
+    solved = true;
+    btn.dataset.r = "right";
+    document.querySelectorAll(".opt").forEach((b) => { b.disabled = true; });
+    if (!state.results[state.i]) state.results[state.i] = wrongPicks.length ? "retry" : "first";
+    save(); renderDots();
+    fb.innerHTML = ""; videoOpen = false;
+    fb.append(el("div", { class: "note good" },
+      el("strong", {}, wrongPicks.length ? "Right — and now you know why." : "Right on the first try!"),
+      state.i < N - 1 ? "Ready for the next one?" : "That was the last one."));
+    if (!videoOpen) fb.append(el("button", { type: "button", class: "link", onclick: (e) => { e.target.remove(); showVideo(false); } }, "Watch the step-by-step solution"));
+    fb.append(el("div", { class: "actions" },
+      el("button", { type: "button", class: "btn", id: "next", onclick: next }, state.i < N - 1 ? "Next exercise →" : "See my results")));
+    $("#next").focus({ preventScroll: false });
+  } else {
+    wrongPicks.push(oi);
+    btn.dataset.r = "wrong"; btn.disabled = true;
+    if (!state.results[state.i]) { state.results[state.i] = "retry"; save(); renderDots(); }
+    fb.innerHTML = ""; videoOpen = false;
+    fb.append(el("div", { class: "note bad", role: "status" }, el("strong", {}, "Not quite."), o.why));
+    showVideo(true);
+    fb.append(el("p", { class: "hint" }, "Watch how it is solved, then pick again."));
+    fb.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }
+}
+
+// ---- typed answers ("find the value" and "expand"): no options, an exact check (components/answer-check)
+let tries = 0, lastWrong = "";
+function makeAnswer(ex) {
+  tries = 0; lastWrong = "";
+  const ed = document.createElement("equation-editor");
+  ed.id = "ans";
+  ed.setAttribute("placeholder", ex.input === "num" ? "Type a number" : "Type the expression");
+  ed.setAttribute("label", "Your answer");
+  ed.addEventListener("equation-enter", check);
+  const hint = ex.input === "num" ? "One number: 17, −5, a fraction like 3/4, or a decimal like 0.75."
+    : ex.anyForm ? "Type the expression, e.g. 3x − 12 or 2(x + 5). Any form that means the same is fine. Use ^ for powers: x^2."
+    : "Write it with no parentheses and like terms combined, e.g. 3x − 12. Use ^ for powers: x^2.";
+  return el("div", { class: "answer", id: "answer" },
+    el("label", { for: "ans" }, "Your answer"), ed,
+    el("p", { class: "hint", style: "margin:0" }, hint),
+    el("div", { class: "row" }, el("button", { type: "button", class: "btn", id: "check", onclick: check }, "Check")));
+}
+
+function check() {
+  if (solved) return;
+  const ex = DATA.exercises[state.i];
+  const ed = $("#ans"), fb = $("#fb"), box = $("#answer");
+  const typed = ed.isEmpty ? "" : ed.getValue("ascii-math");
+  const r = ex.input === "num" ? AnswerCheck.number(typed, ex.answer) : AnswerCheck.expression(typed, ex.answer);
+  fb.innerHTML = ""; videoOpen = false;
+  if (r.error) { fb.append(el("div", { class: "note warn", role: "status" }, el("strong", {}, "I can't check that yet."), r.error)); return; }
+  if (ex.anyForm && r.equal) r.ok = true;     // translating words: any equal form is right (docs/exercises.md)
+  if (ex.input === "expr" && !ex.anyForm && r.equal && !r.expanded) {
+    fb.append(el("div", { class: "note warn", role: "status" }, el("strong", {}, "Equal — but not finished."),
+      "Write it with no parentheses and combine like terms."));
+    return;
+  }
+  if (r.ok) {
+    solved = true; box.dataset.r = "right";
+    $("#check").disabled = true;
+    if (!state.results[state.i]) state.results[state.i] = tries ? "retry" : "first";
+    save(); renderDots();
+    fb.append(el("div", { class: "note good" },
+      el("strong", {}, tries ? "Right — and now you know why." : "Right on the first try!"),
+      el("span", { html: `The answer is <b>${ex.aHtml}</b>. ` }), state.i < N - 1 ? "Ready for the next one?" : "That was the last one."));
+    if (!videoOpen) fb.append(el("button", { type: "button", class: "link", onclick: (e) => { e.target.remove(); showVideo(false); } }, "Watch the step-by-step solution"));
+    fb.append(el("div", { class: "actions" },
+      el("button", { type: "button", class: "btn", id: "next", onclick: next }, state.i < N - 1 ? "Next exercise →" : "See my results")));
+    $("#next").focus({ preventScroll: false });
+    return;
+  }
+  box.dataset.r = "wrong";
+  if (typed !== lastWrong) tries++;
+  lastWrong = typed;
+  if (!state.results[state.i]) { state.results[state.i] = "retry"; save(); renderDots(); }
+  const same = ex.input === "num" ? (m) => AnswerCheck.sameNumber(typed, m.v) : (m) => AnswerCheck.sameExpression(typed, m.e);
+  const known = (ex.mistakes || []).find(same);
+  fb.append(el("div", { class: "note bad", role: "status" }, el("strong", {}, "Not quite."),
+    known ? known.why : (ex.input === "num" ? "That is not the value. Watch the solution to find where it went off." : "That is not equal to the answer. Watch the solution to find where it went off.")));
+  showVideo(true);
+  fb.append(el("p", { class: "hint" }, "Watch how it is solved, then fix your answer and check again."));
+  fb.scrollIntoView({ behavior: "smooth", block: "nearest" });
+}
+
+// ---- select all that apply / matching: answer, Check, feedback per item, video on a wrong check
+function solvedRight(fb) {
+  solved = true;
+  const ex = DATA.exercises[state.i];
+  $("#check").disabled = true;
+  if (!state.results[state.i]) state.results[state.i] = tries ? "retry" : "first";
+  save(); renderDots();
+  fb.append(el("div", { class: "note good" },
+    el("strong", {}, tries ? "Right — and now you know why." : "Right on the first try!"),
+    state.i < N - 1 ? "Ready for the next one?" : "That was the last one."));
+  if (!videoOpen) fb.append(el("button", { type: "button", class: "link", onclick: (e) => { e.target.remove(); showVideo(false); } }, "Watch the step-by-step solution"));
+  fb.append(el("div", { class: "actions" },
+    el("button", { type: "button", class: "btn", id: "next", onclick: next }, state.i < N - 1 ? "Next exercise →" : "See my results")));
+  $("#next").focus({ preventScroll: false });
+}
+function wrongTry(fb, title, text, key) {
+  if (key !== lastWrong) tries++;
+  lastWrong = key;
+  if (!state.results[state.i]) { state.results[state.i] = "retry"; save(); renderDots(); }
+  fb.append(el("div", { class: "note bad", role: "status" }, el("strong", {}, title), text));
+  showVideo(true);
+  fb.append(el("p", { class: "hint" }, "Watch how it is solved, then fix your answer and check again."));
+  fb.scrollIntoView({ behavior: "smooth", block: "nearest" });
+}
+
+function makeMulti(ex) {
+  tries = 0; lastWrong = "";
+  const box = el("div", { class: "options", role: "group", "aria-label": "Choose all that apply", id: "multi" });
+  order.forEach((oi) => {
+    const o = ex.options[oi];
+    const b = el("button", { type: "button", class: "opt choice", "aria-pressed": "false", "data-oi": oi },
+      el("span", { class: "box", "aria-hidden": "true" }), el("span", {}, el("span", { html: o.v }), el("span", { class: "why", hidden: "" }, o.why)));
+    b.addEventListener("click", () => {
+      if (solved) return;
+      b.setAttribute("aria-pressed", String(b.getAttribute("aria-pressed") !== "true"));
+      delete b.dataset.r; b.querySelector(".why").hidden = true;
+    });
+    box.append(b);
+  });
+  return el("div", {}, el("p", { class: "hint", style: "margin:0 0 10px" }, "Choose all that apply, then press Check."), box);
+}
+function checkMulti() {
+  if (solved) return;
+  const ex = DATA.exercises[state.i], fb = $("#fb");
+  const btns = [...document.querySelectorAll("#multi .opt")];
+  const picked = btns.filter((b) => b.getAttribute("aria-pressed") === "true").map((b) => +b.dataset.oi);
+  fb.innerHTML = ""; videoOpen = false;
+  if (!picked.length) { fb.append(el("div", { class: "note warn", role: "status" }, el("strong", {}, "Nothing chosen yet."), "Choose every answer that applies.")); return; }
+  const wrongPicked = picked.filter((oi) => !ex.options[oi].ok);
+  const missed = ex.options.map((o, oi) => (o.ok && !picked.includes(oi) ? oi : -1)).filter((oi) => oi >= 0);
+  btns.forEach((b) => { delete b.dataset.r; b.querySelector(".why").hidden = true; });
+  if (!wrongPicked.length && !missed.length) {
+    btns.forEach((b) => { if (b.getAttribute("aria-pressed") === "true") b.dataset.r = "right"; b.disabled = true; });
+    return solvedRight(fb);
+  }
+  wrongPicked.forEach((oi) => { const b = btns.find((x) => +x.dataset.oi === oi); b.dataset.r = "wrong"; b.querySelector(".why").hidden = false; });
+  const parts = [];
+  if (wrongPicked.length) parts.push(`${wrongPicked.length} of your choices ${wrongPicked.length === 1 ? "does" : "do"} not apply (marked in red).`);
+  if (missed.length) parts.push(`${missed.length === 1 ? "One more answer applies" : missed.length + " more answers apply"} that you did not choose.`);
+  wrongTry(fb, "Not quite.", parts.join(" "), picked.sort().join(","));
+}
+
+const SUPS = "⁰¹²³⁴⁵⁶⁷⁸⁹";
+const asText = (html) => html.replace(/<sup>(\d+)<\/sup>/g, (m, d) => [...d].map((c) => SUPS[c]).join("")).replace(/<[^>]+>/g, "");
+function makeMatch(ex) {
+  tries = 0; lastWrong = "";
+  const rows = el("div", { class: "pairs", id: "match" });
+  const rorder = shuffled(ex.rights.length);
+  shuffled(ex.pairs.length).forEach((pi) => {
+    const p = ex.pairs[pi];
+    const sel = el("select", { "aria-label": "Match for item", "data-pi": pi },
+      el("option", { value: "" }, "Choose…"), ...rorder.map((ri) => el("option", { value: ri }, asText(ex.rights[ri]))));
+    sel.addEventListener("change", () => { const row = sel.closest(".pair"); delete row.dataset.r; row.querySelector(".why").hidden = true; });
+    rows.append(el("div", { class: "pair", "data-pi": pi }, el("span", { class: "l", html: p.l }), sel, el("span", { class: "why", hidden: "" }, p.why)));
+  });
+  return el("div", {}, el("p", { class: "hint", style: "margin:0 0 10px" }, "Choose the match for every item, then press Check."), rows);
+}
+function checkMatch() {
+  if (solved) return;
+  const ex = DATA.exercises[state.i], fb = $("#fb");
+  const rows = [...document.querySelectorAll("#match .pair")];
+  fb.innerHTML = ""; videoOpen = false;
+  const chosen = rows.map((r) => r.querySelector("select").value);
+  if (chosen.some((v) => v === "")) { fb.append(el("div", { class: "note warn", role: "status" }, el("strong", {}, "Not finished."), "Choose a match for every item.")); return; }
+  let bad = 0;
+  rows.forEach((r, k) => {
+    const ok = +chosen[k] === ex.pairs[+r.dataset.pi].r;
+    r.dataset.r = ok ? "right" : "wrong"; r.querySelector(".why").hidden = ok;
+    if (!ok) bad++;
+  });
+  if (!bad) { rows.forEach((r) => { r.querySelector("select").disabled = true; }); return solvedRight(fb); }
+  wrongTry(fb, "Not quite.", `${rows.length - bad} of ${rows.length} are matched right. Look at the ones in red.`, chosen.join(","));
+}
+
+function showVideo(autoplay) {
+  if (videoOpen) return;
+  videoOpen = true;
+  const ex = DATA.exercises[state.i];
+  const src = `../../videos/${DATA.setId}-${ex.id}/video.html` + (autoplay ? "?autoplay=1" : "");
+  const box = el("div", { class: "vid" }, el("iframe", { src, title: `Step-by-step solution to exercise ${ex.n}`, allow: "autoplay; fullscreen", allowfullscreen: "", referrerpolicy: "no-referrer" }));
+  const fb = $("#fb");
+  const note = fb.querySelector(".note");
+  note ? note.after(box) : fb.prepend(box);
+}
+
+function next() {
+  if (state.i < N - 1) { state.i++; save(); show(); window.scrollTo({ top: 0, behavior: "smooth" }); }
+  else { state.done = true; save(); show(); window.scrollTo({ top: 0 }); }
+}
+
+function showResults(app) {
+  const first = state.results.filter((r) => r === "first").length;
+  const answered = state.results.filter(Boolean).length;
+  const card = el("section", { class: "card" });
+  card.append(el("div", { class: "meta" }, el("span", {}, "Results")));
+  card.append(el("div", { class: "score" }, String(first), el("small", {}, ` / ${N} on the first try`)));
+  if (answered < N) card.append(el("p", {}, `${N - answered} exercise${N - answered === 1 ? "" : "s"} not tried yet.`));
+  const ul = el("ul", { class: "bylevel" });
+  Object.entries(DATA.levels).forEach(([l, name]) => {
+    const idx = DATA.exercises.map((e, i) => (String(e.level) === l ? i : -1)).filter((i) => i >= 0);
+    const ok = idx.filter((i) => state.results[i] === "first").length;
+    ul.append(el("li", {}, el("span", {}, name), el("b", {}, `${ok} / ${idx.length}`)));
+  });
+  card.append(ul);
+  const missed = state.results.map((r, i) => (r !== "first" ? i : -1)).filter((i) => i >= 0);
+  const actions = el("div", { class: "actions" });
+  if (missed.length) actions.append(el("button", { type: "button", class: "btn", onclick: () => { state.results = state.results.map((r) => (r === "first" ? r : null)); go(missed[0]); } },
+    `Try the ${missed.length} I missed again`));
+  actions.append(el("button", { type: "button", class: missed.length ? "btn ghost" : "btn", onclick: () => { state = { i: 0, results: Array(N).fill(null), done: false }; save(); show(); } }, "Start over"));
+  card.append(actions);
+  app.append(card);
+}
+
+document.addEventListener("keydown", (e) => {
+  if (state.done || solved || DATA.exercises[state.i].input || DATA.exercises[state.i].pick || e.ctrlKey || e.metaKey || e.altKey) return;
+  const k = "abcd1234".indexOf(e.key.toLowerCase());
+  if (k < 0 || (e.target.closest && e.target.closest("textarea, input, math-field, equation-notebook, iframe"))) return;
+  const oi = order[k % 4];
+  if (oi !== undefined) pick(oi);
+});
+
+load();
+if (state.results.every(Boolean) && !state.done) { state.done = true; }
+show();
+</script>
+</body>
+</html>

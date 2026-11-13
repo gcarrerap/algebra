@@ -1,0 +1,197 @@
+{
+ "format": "algebra-video-script",
+ "version": 1,
+ "video": "u01-l02-variables-on-both-sides",
+ "title": "Variables on both sides; no solution and infinitely many",
+ "voice": "narrator",
+ "source": "video-scripts/u01.md#1.2",
+ "scenes": [
+  {
+   "id": "s01",
+   "title": "Two gyms",
+   "blocks": [
+    {
+     "id": "b01",
+     "text": "Gym A charges twenty dollars to join, plus five dollars a visit. Gym B has no fee, but charges eight dollars a visit. After how many visits do they cost the same?"
+    },
+    {
+     "id": "b02",
+     "text": "Let v be the number of visits. The costs are equal when twenty plus five v equals eight v. Now v is on both sides.",
+     "display": "20 + 5v = 8v"
+    },
+    {
+     "id": "b03",
+     "text": "Which gym would you guess is cheaper for someone who goes only twice? And for someone who goes twenty times?",
+     "pause_after_s": 10.0
+    }
+   ]
+  },
+  {
+   "id": "s02",
+   "title": "Collect the variable",
+   "blocks": [
+    {
+     "id": "b04",
+     "text": "To solve it, gather all the v terms on one side. Subtract five v from both sides. Twenty equals three v.",
+     "display": "20 + 5v = 8v"
+    },
+    {
+     "id": "b05",
+     "text": "Divide by three. V equals twenty over three, about six point six seven.",
+     "display": "v = 20/3 ≈ 6.67"
+    },
+    {
+     "id": "b06",
+     "text": "Visits come in whole numbers, so look at six and seven. At six visits, Gym B is cheaper. At seven, Gym A is cheaper. The equation tells us exactly where they switch."
+    }
+   ]
+  },
+  {
+   "id": "s03",
+   "title": "Choosing a side",
+   "blocks": [
+    {
+     "id": "b07",
+     "text": "Here's another. Seven x minus four equals three x plus twelve. You could move either x term. Which choice makes the arithmetic easier?",
+     "display": "7x − 4 = 3x + 12",
+     "pause_after_s": 5.0
+    },
+    {
+     "id": "b08",
+     "text": "Subtracting three x keeps a positive coefficient: four x minus four equals twelve. Add four, divide by four, and x equals four.",
+     "display": "4x − 4 = 12"
+    },
+    {
+     "id": "b09",
+     "text": "Moving seven x instead also works, and gives the same answer. It's just more negative signs to handle.",
+     "display": "−4 = −4x + 12"
+    },
+    {
+     "id": "b10",
+     "text": "Why must both routes give the same answer?",
+     "pause_after_s": 10.0
+    },
+    {
+     "id": "b11",
+     "text": "Because every step kept the equation true. The solution belongs to the equation, not to the route you took."
+    }
+   ]
+  },
+  {
+   "id": "s04",
+   "title": "Your turn",
+   "blocks": [
+    {
+     "id": "b12",
+     "text": "Your turn. Solve two times the quantity three x minus one, equals four x plus ten. Pause the video and try it.",
+     "display": "2(3x − 1) = 4x + 10",
+     "pause_after_s": 20.0
+    },
+    {
+     "id": "b13",
+     "text": "Distribute: six x minus two equals four x plus ten. Subtract four x: two x minus two equals ten. Add two, divide by two. X equals six.",
+     "display": "6x − 2 = 4x + 10"
+    },
+    {
+     "id": "b14",
+     "text": "Remember: simplify each side, collect the variable terms on one side and the numbers on the other, then finish as usual."
+    }
+   ]
+  },
+  {
+   "id": "s05",
+   "title": "The variable vanishes",
+   "blocks": [
+    {
+     "id": "b15",
+     "text": "Try to solve three x plus five equals three x plus two.",
+     "display": "3x + 5 = 3x + 2"
+    },
+    {
+     "id": "b16",
+     "text": "Subtract three x from both sides, and you get five equals two. The x is gone, and what's left is false.",
+     "display": "5 = 2"
+    },
+    {
+     "id": "b17",
+     "text": "What does that tell you about x?",
+     "pause_after_s": 10.0
+    },
+    {
+     "id": "b18",
+     "text": "No value of x can make this equation true. Whatever x is, the left side is always three more than the right side. The equation has no solution."
+    }
+   ]
+  },
+  {
+   "id": "s06",
+   "title": "Always true",
+   "blocks": [
+    {
+     "id": "b19",
+     "text": "Now try two times the quantity x plus three, equals two x plus six.",
+     "display": "2(x + 3) = 2x + 6"
+    },
+    {
+     "id": "b20",
+     "text": "Distribute: two x plus six equals two x plus six. Subtract two x: six equals six. That's true, always.",
+     "display": "2x + 6 = 2x + 6"
+    },
+    {
+     "id": "b21",
+     "text": "Every number works. Try any value of x and both sides match. This equation has infinitely many solutions. An equation like this is called an identity."
+    }
+   ]
+  },
+  {
+   "id": "s07",
+   "title": "Seeing it coming",
+   "blocks": [
+    {
+     "id": "b22",
+     "text": "You can predict the outcome before solving. Simplify each side to some number times x, plus a constant.",
+     "display": "ax + b = cx + d"
+    },
+    {
+     "id": "b23",
+     "text": "If the x coefficients are different, there's exactly one solution. If they're the same but the constants differ, there's none. If both match, there are infinitely many."
+    },
+    {
+     "id": "b24",
+     "text": "Here's a thinking question. In four x minus one equals four x plus k, what value of k gives infinitely many solutions? And which values give none?",
+     "display": "4x − 1 = 4x + k",
+     "pause_after_s": 12.0
+    },
+    {
+     "id": "b25",
+     "text": "K equal to negative one makes both sides identical. Any other k makes it impossible."
+    }
+   ]
+  },
+  {
+   "id": "s08",
+   "title": "Your turn",
+   "blocks": [
+    {
+     "id": "b26",
+     "text": "Your turn. Decide how many solutions each equation has. Pause the video and try it.",
+     "display": "5x − 2(x + 1) = 3x − 2",
+     "pause_after_s": 20.0
+    },
+    {
+     "id": "b27",
+     "text": "The first simplifies to three x minus two on both sides, so infinitely many solutions. The second becomes six x plus four equals six x plus two, which is impossible. No solution.",
+     "display": "3x − 2 = 3x − 2"
+    },
+    {
+     "id": "b28",
+     "text": "Remember: when the variable disappears, read what's left. False means no solution. True means every number is a solution."
+    },
+    {
+     "id": "b29",
+     "text": "This video uses an AI-generated voice."
+    }
+   ]
+  }
+ ]
+}
