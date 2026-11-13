@@ -110,7 +110,7 @@ def equation_var(eq):
     return letters[0]
 
 
-def solve_linear(eq):
+def solve_one_var(eq):
     """Solve a linear equation "L = R" exactly: returns (variable, value). The difference L − R is
     evaluated at three values of the variable, so an equation that is not linear (or is true for
     every value, or never) is refused."""
@@ -239,7 +239,7 @@ def validate_solve(ex, problems):
     number that does NOT solve the equation (substituting it is how the page names the mistake)."""
     i = ex["id"]
     try:
-        var, sol = solve_linear(ex["q"])
+        var, sol = solve_one_var(ex["q"])
     except Exception as e:  # noqa: BLE001
         problems.append(f"{i}: cannot solve: {e}")
         return
@@ -251,7 +251,7 @@ def validate_solve(ex, problems):
         return
     for k, line in enumerate(ex["lines"]):
         try:
-            v2, s2 = solve_linear(line)
+            v2, s2 = solve_one_var(line)
             if v2 != var or s2 != sol:
                 problems.append(f"{i}: line {k} {line!r} has solution {s2}, not {sol}")
         except Exception as e:  # noqa: BLE001
@@ -749,17 +749,13 @@ def check_claim(ex, item_text, claim, problems, what):
     claim "terms:<n>"       → item has exactly <n> terms;
     claim "coefficient:<n>" → item is one term whose coefficient is <n>;
     claim "like:<term>"     → item is one term with the same variable part as <term> (a like term);
-<<<<<<< Updated upstream
+    claim "solution:<eq>"   → item ("x = 5" or "5") is a solution of the equation <eq> (1.1: checked by substituting);
     claim "operation:<name>"→ the phrase contains a key word of exactly that operation (OPERATION_WORDS);
     claim "step:<Property>" → item is a step "A → B" between two equations that is justified by that
                               property (Addition, Subtraction, Multiplication, Division, Distributive,
                               Combine; only the first word counts), read from the equations (1.3);
     claim "valid-from:<equation>" → item is an equation with the same solution as <equation>, so it could
                               be the next line of its solution (1.3)."""
-=======
-    claim "solution:<eq>"   → item ("x = 5" or "5") is a solution of the equation <eq> (1.1: checked by substituting);
-    claim "operation:<name>"→ the phrase contains a key word of exactly that operation (OPERATION_WORDS)."""
->>>>>>> Stashed changes
     i = ex["id"]
     kind, _, arg = claim.partition(":")
     try:
@@ -865,16 +861,11 @@ def validate_match(ex, problems):
             claim = f"property:{p['r']}" if chk == "property" else f"equals:{p['r']}" if chk == "equal" \
                 else f"coefficient:{p['r']}" if chk == "coefficient" \
                 else f"operation:{p['r']}" if chk == "operation" \
-<<<<<<< Updated upstream
                 else f"step:{p['r']}" if chk == "step" \
-                else f"terms:{p['r']}" if chk == "terms" else chk
-            if check_claim(ex, p["l"], claim, problems, "pair") is False:
-=======
                 else f"terms:{p['r']}" if chk == "terms" \
                 else f"solution:{p['l']}" if chk == "solves" else chk
             item = p["r"] if chk == "solves" else p["l"]      # "solves": left = equation, right = its solution
             if check_claim(ex, item, claim, problems, "pair") is False:
->>>>>>> Stashed changes
                 problems.append(f"{i}: pair {p['l']!r} → {p['r']!r} is not right")
     if chk := ex.get("check"):
         if chk == "solves":   # no right value may also solve another pair's equation
