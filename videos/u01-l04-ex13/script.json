@@ -1,0 +1,69 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l04-ex13",
+  "title": "Exercise 13",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. What is the largest whole number that solves three minus two times the quantity x plus one, is greater than nine?",
+          "display": "3 − 2(x + 1) > 9",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Distribute the negative two: negative two times x is negative two x, and negative two times one is negative two. Three minus two x minus two is greater than nine.",
+          "display": "3 − 2x − 2 > 9",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Combine three and negative two: that is one. One minus two x is greater than nine.",
+          "display": "1 − 2x > 9",
+          "cue": "step-2"
+        },
+        {
+          "id": "b04",
+          "text": "Subtract one from both sides, by the subtraction property. Negative two x is greater than eight.",
+          "display": "−2x > 8",
+          "cue": "step-3"
+        },
+        {
+          "id": "b05",
+          "text": "Divide both sides by negative two, and flip the symbol. X is less than negative four. Negative four is not included, so the largest whole number is negative five.",
+          "display": "x < −4",
+          "cue": "step-4"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b06",
+          "text": "So the answer is negative five.",
+          "display": "−5",
+          "cue": "answer"
+        },
+        {
+          "id": "b07",
+          "text": "Watch out for these traps. If you include the boundary, you get negative four. If you forget to flip the symbol, you get negative three.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

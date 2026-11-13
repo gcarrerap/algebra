@@ -29,7 +29,7 @@ Mathematics. Each unit lists the standards it covers.
 1. One-step and multi-step equations — *video 5:55* (produced)
 2. Variables on both sides; no solution and infinitely many solutions — *video 5:33* (produced)
 3. Justifying each step (properties of equality) — *video 2:30* (produced)
-4. Linear inequalities and graphing them on a number line — *video ≈ 5:34*
+4. Linear inequalities and graphing them on a number line — *video 5:15 (produced)*
 5. Compound inequalities (*and / or*) — *video ≈ 3:00*
 6. Literal equations: solving formulas for a variable (e.g. `A = ½bh` for `h`) — *video ≈ 2:52*
 7. Problems with units and dimensional analysis — *video ≈ 3:08*

@@ -422,7 +422,7 @@ function checkMulti() {
 }
 
 const SUPS = "⁰¹²³⁴⁵⁶⁷⁸⁹";
-const asText = (html) => html.replace(/<sup>(\d+)<\/sup>/g, (m, d) => [...d].map((c) => SUPS[c]).join("")).replace(/<[^>]+>/g, "");
+const asText = (html) => html.replace(/<sup>(\d+)<\/sup>/g, (m, d) => [...d].map((c) => SUPS[c]).join("")).replace(/<[^>]+>/g, "").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&");
 function makeMatch(ex) {
   tries = 0; lastWrong = "";
   const rows = el("div", { class: "pairs", id: "match" });

@@ -1,0 +1,183 @@
+{
+ "format": "algebra-video-script",
+ "version": 1,
+ "video": "u01-l04-inequalities",
+ "title": "Linear inequalities and their graphs",
+ "voice": "narrator",
+ "source": "video-scripts/u01.md#1.4",
+ "scenes": [
+  {
+   "id": "s01",
+   "title": "More than one answer",
+   "blocks": [
+    {
+     "id": "b01",
+     "text": "A ride says you must be at least forty-eight inches tall. Who can ride?"
+    },
+    {
+     "id": "b02",
+     "text": "Is there one answer, or many?",
+     "pause_after_s": 10.0
+    },
+    {
+     "id": "b03",
+     "text": "Many. Anyone forty-eight inches or taller. We write h is greater than or equal to forty-eight. An inequality has a whole set of solutions.",
+     "display": "h ≥ 48"
+    }
+   ]
+  },
+  {
+   "id": "s02",
+   "title": "The symbols",
+   "blocks": [
+    {
+     "id": "b04",
+     "text": "There are four symbols: less than, greater than, less than or equal to, and greater than or equal to. The small end points to the smaller number.",
+     "display": "<"
+    },
+    {
+     "id": "b05",
+     "text": "In words, at least means greater than or equal to. At most means less than or equal to.",
+     "display": "≥"
+    }
+   ]
+  },
+  {
+   "id": "s03",
+   "title": "Drawing the set",
+   "blocks": [
+    {
+     "id": "b06",
+     "text": "To graph x is greater than two, put a circle at two and shade everything to the right. The circle is open, because two itself is not greater than two.",
+     "display": "x > 2"
+    },
+    {
+     "id": "b07",
+     "text": "For x is less than or equal to negative one, the circle is filled in, because negative one is included. Then shade to the left.",
+     "display": "x ≤ −1"
+    },
+    {
+     "id": "b08",
+     "text": "Is two point zero zero one a solution of x greater than two? What's the smallest solution?",
+     "pause_after_s": 12.0
+    },
+    {
+     "id": "b09",
+     "text": "Two point zero zero one is a solution. But there's no smallest one: whatever number you pick above two, there's another one closer. That's why the open circle shows a boundary that isn't reached."
+    }
+   ]
+  },
+  {
+   "id": "s04",
+   "title": "Your turn",
+   "blocks": [
+    {
+     "id": "b10",
+     "text": "Your turn. Write an inequality for the first sentence, and the inequality shown by the graph. Pause the video and try it.",
+     "pause_after_s": 15.0
+    },
+    {
+     "id": "b11",
+     "text": "At most twelve players is p less than or equal to twelve. The graph shows x greater than or equal to negative three.",
+     "display": "p ≤ 12"
+    },
+    {
+     "id": "b12",
+     "text": "Remember: an inequality describes a set of numbers, open circles leave the boundary out, closed circles keep it in."
+    }
+   ]
+  },
+  {
+   "id": "s05",
+   "title": "Like an equation",
+   "blocks": [
+    {
+     "id": "b13",
+     "text": "Solving an inequality is almost like solving an equation. In x plus four is less than ten, subtract four from both sides. X is less than six.",
+     "display": "x + 4 < 10"
+    },
+    {
+     "id": "b14",
+     "text": "And in three x is greater than or equal to twelve, divide by three. X is greater than or equal to four.",
+     "display": "3x ≥ 12"
+    }
+   ]
+  },
+  {
+   "id": "s06",
+   "title": "The flip",
+   "blocks": [
+    {
+     "id": "b15",
+     "text": "But there's one exception. Two is less than five. Multiply both sides by negative one. Is negative two less than negative five?",
+     "display": "2 < 5",
+     "pause_after_s": 10.0
+    },
+    {
+     "id": "b16",
+     "text": "No. Negative two is greater than negative five. Multiplying by a negative number reflects the numbers across zero, so their order reverses.",
+     "display": "−2 > −5"
+    },
+    {
+     "id": "b17",
+     "text": "So whenever you multiply or divide both sides by a negative number, you must flip the inequality symbol."
+    }
+   ]
+  },
+  {
+   "id": "s07",
+   "title": "A multi-step example",
+   "blocks": [
+    {
+     "id": "b18",
+     "text": "Let's solve five minus three x is greater than seventeen.",
+     "display": "5 − 3x > 17"
+    },
+    {
+     "id": "b19",
+     "text": "Subtract five: negative three x is greater than twelve. Divide by negative three, and flip the symbol: x is less than negative four.",
+     "display": "−3x > 12"
+    },
+    {
+     "id": "b20",
+     "text": "Check with a test point. Negative five is in the shaded part: five plus fifteen is twenty, which is greater than seventeen. Zero is not shaded, and five isn't greater than seventeen. The graph is right.",
+     "display": "5 + 15 = 20 > 17"
+    },
+    {
+     "id": "b21",
+     "text": "Could you avoid the flip by moving the x term to the other side instead? Try it in your head.",
+     "pause_after_s": 12.0
+    },
+    {
+     "id": "b22",
+     "text": "Yes. Adding three x and subtracting seventeen gives negative twelve is greater than three x, so x is less than negative four. Same answer, no flip needed."
+    }
+   ]
+  },
+  {
+   "id": "s08",
+   "title": "Your turn",
+   "blocks": [
+    {
+     "id": "b23",
+     "text": "Your turn. Solve and graph negative two times the quantity x minus one, is less than or equal to eight. Pause the video and try it.",
+     "display": "−2(x − 1) ≤ 8",
+     "pause_after_s": 20.0
+    },
+    {
+     "id": "b24",
+     "text": "Distribute: negative two x plus two. Subtract two: negative two x is less than or equal to six. Divide by negative two and flip: x is greater than or equal to negative three.",
+     "display": "−2x + 2 ≤ 8"
+    },
+    {
+     "id": "b25",
+     "text": "Remember: solve as usual, flip the symbol when you multiply or divide by a negative, and check with a test point."
+    },
+    {
+     "id": "b26",
+     "text": "This video uses an AI-generated voice."
+    }
+   ]
+  }
+ ]
+}

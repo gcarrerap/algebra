@@ -1,0 +1,63 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l04-ex12",
+  "title": "Exercise 12",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. What is the smallest whole number that solves four minus x is less than two x plus thirteen?",
+          "display": "4 − x < 2x + 13",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Add x to both sides, by the addition property of equality. Four is less than three x plus thirteen.",
+          "display": "4 < 3x + 13",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Subtract thirteen from both sides, by the subtraction property. Negative nine is less than three x.",
+          "display": "−9 < 3x",
+          "cue": "step-2"
+        },
+        {
+          "id": "b04",
+          "text": "Divide both sides by three, by the division property. Negative three is less than x, so x is greater than negative three. Negative three is not included, so the smallest whole number is negative two.",
+          "display": "−3 < x",
+          "cue": "step-3"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b05",
+          "text": "So the answer is negative two.",
+          "display": "−2",
+          "cue": "answer"
+        },
+        {
+          "id": "b06",
+          "text": "Watch out for these traps. If you include the boundary, you get negative three. If you forget to flip the symbol, you get negative four.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

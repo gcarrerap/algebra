@@ -1,0 +1,63 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l04-ex02",
+  "title": "Exercise 2",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's look at this one. Match each inequality with its graph.",
+          "display": "Match each inequality with its graph.",
+          "cue": "show-problem",
+          "pause_after_s": 1.5
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Pair by pair",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "X is greater than two: an open circle at two, shaded to the right.",
+          "display": "x > 2 → Open circle at 2, shaded right",
+          "cue": "pair-1"
+        },
+        {
+          "id": "b03",
+          "text": "X is less than or equal to negative one: a closed circle at negative one, shaded to the left.",
+          "display": "x ≤ −1 → Closed circle at −1, shaded left",
+          "cue": "pair-2"
+        },
+        {
+          "id": "b04",
+          "text": "X is greater than or equal to three: a closed circle at three, shaded to the right.",
+          "display": "x ≥ 3 → Closed circle at 3, shaded right",
+          "cue": "pair-3"
+        },
+        {
+          "id": "b05",
+          "text": "X is less than negative two: an open circle at negative two, shaded to the left.",
+          "display": "x < −2 → Open circle at −2, shaded left",
+          "cue": "pair-4"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b06",
+          "text": "Greater than shades to the right and less than shades to the left. A circle that is open leaves the number out, and a circle that is filled in keeps it.",
+          "cue": "answer"
+        }
+      ]
+    }
+  ]
+}

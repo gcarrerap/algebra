@@ -1,0 +1,63 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l04-ex01",
+  "title": "Exercise 1",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's look at this one. Match each phrase with its symbol.",
+          "display": "Match each phrase with its symbol.",
+          "cue": "show-problem",
+          "pause_after_s": 1.5
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Pair by pair",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "At least is greater than or equal to: the number itself counts.",
+          "display": "at least → ≥",
+          "cue": "pair-1"
+        },
+        {
+          "id": "b03",
+          "text": "At most is less than or equal to: the number itself counts.",
+          "display": "at most → ≤",
+          "cue": "pair-2"
+        },
+        {
+          "id": "b04",
+          "text": "More than is greater than: the number itself does not count.",
+          "display": "more than → >",
+          "cue": "pair-3"
+        },
+        {
+          "id": "b05",
+          "text": "Fewer than is less than: the number itself does not count.",
+          "display": "fewer than → <",
+          "cue": "pair-4"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b06",
+          "text": "At least is greater than or equal to, at most is less than or equal to, more than is greater than, and fewer than is less than.",
+          "cue": "answer"
+        }
+      ]
+    }
+  ]
+}

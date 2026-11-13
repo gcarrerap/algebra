@@ -1,0 +1,629 @@
+{
+ "unit": "1.4",
+ "title": "Linear Inequalities and Their Graphs",
+ "h1": "Inequalities <span class=\"y\">and their graphs</span>",
+ "levels": {
+  "1": "Warm-up",
+  "2": "Tricky",
+  "3": "Challenging",
+  "4": "Boss level"
+ },
+ "_notes": "Source of truth for the 1.4 practice set. Every inequality is read by tools/build_exercises.py (ineq_set: the solution set \"x op b\", with the symbol flipped when the x coefficient is negative), so a flip, a boundary or an open/closed circle can never be wrong. Typed answers (kind \"num\") carry \"derive\": smallest-int / largest-int (the smallest / largest whole number that solves q; the circle at the boundary matters), boundary (the number x is compared with), operand:<Property> (q = \"A → B\"; the number a step divides or multiplies by, sign included) or first-error (q = a student's work, one line per row; the first line whose solutions differ from line 1's). Whole-number mistakes \"m\": edge (open and closed circle swapped), noflip (the symbol was not flipped), sign (the boundary has the wrong sign), wrongway (the wrong side of the boundary); boundary uses the solve mistakes of 1.3; first-error: last, before, after, first. \"match\" checks: symbol (phrase → ≥ ≤ > <), graph (inequality → \"Open circle at 2, shaded right\"), same-solution (inequality → its solution); \"multi\" checks: flip (moves that flip the symbol), solution:<inequality> (numbers that make it true), valid-from:<inequality> (inequalities with the same solutions). Chips: ADD blue, SUBTRACT purple, MULTIPLY yellow, DIVIDE green, FLIP red (multiplying or dividing by a negative number), DIST yellow, COMBINE green; for a student's work OK green, ERROR red, CARRY ink. See docs/exercises.md.",
+ "exercises": [
+  {
+   "id": "ex01",
+   "level": 1,
+   "kind": "match",
+   "check": "symbol",
+   "prompt": "Match each phrase with its symbol.",
+   "read": "Match each phrase with its symbol.",
+   "say_answer": "At least is greater than or equal to, at most is less than or equal to, more than is greater than, and fewer than is less than.",
+   "pairs": [
+    {
+     "l": "at least",
+     "r": "≥",
+     "why": "At least means this number or more, so the number itself is included.",
+     "say": "At least is greater than or equal to: the number itself counts."
+    },
+    {
+     "l": "at most",
+     "r": "≤",
+     "why": "At most means this number or less, so the number itself is included.",
+     "say": "At most is less than or equal to: the number itself counts."
+    },
+    {
+     "l": "more than",
+     "r": ">",
+     "why": "More than leaves the number itself out.",
+     "say": "More than is greater than: the number itself does not count."
+    },
+    {
+     "l": "fewer than",
+     "r": "<",
+     "why": "Fewer than leaves the number itself out.",
+     "say": "Fewer than is less than: the number itself does not count."
+    }
+   ]
+  },
+  {
+   "id": "ex02",
+   "level": 1,
+   "kind": "match",
+   "check": "graph",
+   "prompt": "Match each inequality with its graph.",
+   "read": "Match each inequality with its graph.",
+   "say_answer": "Greater than shades to the right and less than shades to the left. A circle that is open leaves the number out, and a circle that is filled in keeps it.",
+   "pairs": [
+    {
+     "l": "x > 2",
+     "r": "Open circle at 2, shaded right",
+     "why": "Greater than leaves two out, so the circle is open, and it shades to the right.",
+     "say": "X is greater than two: an open circle at two, shaded to the right."
+    },
+    {
+     "l": "x ≤ −1",
+     "r": "Closed circle at −1, shaded left",
+     "why": "Less than or equal to keeps negative one, so the circle is filled in, and it shades to the left.",
+     "say": "X is less than or equal to negative one: a closed circle at negative one, shaded to the left."
+    },
+    {
+     "l": "x ≥ 3",
+     "r": "Closed circle at 3, shaded right",
+     "why": "Greater than or equal to keeps three, so the circle is filled in, and it shades to the right.",
+     "say": "X is greater than or equal to three: a closed circle at three, shaded to the right."
+    },
+    {
+     "l": "x < −2",
+     "r": "Open circle at −2, shaded left",
+     "why": "Less than leaves negative two out, so the circle is open, and it shades to the left.",
+     "say": "X is less than negative two: an open circle at negative two, shaded to the left."
+    }
+   ]
+  },
+  {
+   "id": "ex03",
+   "level": 1,
+   "kind": "multi",
+   "check": "solution:x > 3",
+   "prompt": "Select all the numbers that are solutions of x > 3.",
+   "read": "Select all the numbers that are solutions of x is greater than three.",
+   "say_answer": "Four, ten, and one hundred are solutions. Three is not, because the circle at three is open, and negative four is on the wrong side.",
+   "options": [
+    {
+     "t": "3",
+     "ok": false,
+     "why": "Three is the boundary, and x > 3 leaves it out.",
+     "say": "Three. No: three is not greater than three, so the circle at three is open."
+    },
+    {
+     "t": "4",
+     "ok": true,
+     "why": "Four is greater than three.",
+     "say": "Four. Yes: four is greater than three."
+    },
+    {
+     "t": "10",
+     "ok": true,
+     "why": "Ten is greater than three.",
+     "say": "Ten. Yes: ten is greater than three."
+    },
+    {
+     "t": "−4",
+     "ok": false,
+     "why": "Negative four is less than three, so it is on the wrong side.",
+     "say": "Negative four. No: negative four is less than three, on the wrong side of the circle."
+    },
+    {
+     "t": "100",
+     "ok": true,
+     "why": "One hundred is greater than three.",
+     "say": "One hundred. Yes: one hundred is greater than three."
+    }
+   ]
+  },
+  {
+   "id": "ex04",
+   "level": 2,
+   "kind": "multi",
+   "check": "flip",
+   "prompt": "Select all the moves that make you flip the symbol.",
+   "read": "Select all the moves that make you flip the symbol.",
+   "say_answer": "Dividing by negative four and multiplying by negative one flip the symbol. Adding, subtracting, or dividing by a positive number never does.",
+   "options": [
+    {
+     "t": "Divide both sides by −4",
+     "ok": true,
+     "why": "Dividing by a negative number flips the symbol.",
+     "say": "Divide both sides by negative four. Yes: dividing by a negative number flips the symbol."
+    },
+    {
+     "t": "Multiply both sides by −1",
+     "ok": true,
+     "why": "Multiplying by a negative number flips the symbol.",
+     "say": "Multiply both sides by negative one. Yes: multiplying by a negative number flips the symbol."
+    },
+    {
+     "t": "Add −3 to both sides",
+     "ok": false,
+     "why": "Adding a negative number does not flip anything: only multiplying or dividing does.",
+     "say": "Add negative three to both sides. No: adding never flips the symbol, even when the number is negative."
+    },
+    {
+     "t": "Divide both sides by 5",
+     "ok": false,
+     "why": "Five is positive, so the symbol stays.",
+     "say": "Divide both sides by five. No: five is positive, so the symbol stays."
+    },
+    {
+     "t": "Subtract 6 from both sides",
+     "ok": false,
+     "why": "Subtracting never flips the symbol.",
+     "say": "Subtract six from both sides. No: subtracting never flips the symbol."
+    }
+   ]
+  },
+  {
+   "id": "ex05",
+   "level": 2,
+   "kind": "num",
+   "derive": "smallest-int",
+   "prompt": "What is the smallest whole number that solves it? Type it.",
+   "q": "2x − 1 > 7",
+   "read": "What is the smallest whole number that solves two x minus one is greater than seven?",
+   "lines": [
+    "2x ⟨− 1⟩ > 7",
+    "⟨2⟩x > 8",
+    "x > 4"
+   ],
+   "chips": [
+    "ADD",
+    "DIVIDE"
+   ],
+   "say": [
+    "Add one to both sides, by the addition property. Two x is greater than eight.",
+    "Divide both sides by two, by the division property. X is greater than four. Four itself is not included, so the smallest whole number is five."
+   ],
+   "at": [
+    "eight",
+    "four"
+   ],
+   "wrong": [
+    {
+     "v": 4,
+     "m": "edge",
+     "why": "Four is not a solution: x > 4 leaves four out, because the circle is open.",
+     "say": "include the boundary"
+    },
+    {
+     "v": -3,
+     "m": "sign",
+     "why": "The boundary is four, not negative four.",
+     "say": "give the boundary the wrong sign"
+    },
+    {
+     "v": 3,
+     "m": "wrongway",
+     "why": "Three is on the wrong side: x > 4 means the numbers to the right of four.",
+     "say": "shade the wrong side"
+    }
+   ]
+  },
+  {
+   "id": "ex06",
+   "level": 2,
+   "kind": "multi",
+   "check": "valid-from:−2x < 10",
+   "prompt": "Starting from −2x < 10, which of these could be the next line? Select all that apply.",
+   "read": "Starting from negative two x is less than ten, which of these could be the next line? Choose all that apply.",
+   "say_answer": "Three lines follow: x is greater than negative five, two x is greater than negative ten, and negative x is less than five. Each one keeps the same solutions.",
+   "options": [
+    {
+     "t": "x > −5",
+     "ok": true,
+     "why": "Both sides were divided by −2, and the symbol was flipped.",
+     "say": "X is greater than negative five. Yes: both sides were divided by negative two, and the symbol was flipped."
+    },
+    {
+     "t": "x < −5",
+     "ok": false,
+     "why": "Dividing by −2 flips the symbol, and this line did not flip it.",
+     "say": "X is less than negative five. No: dividing by negative two flips the symbol, and this line did not."
+    },
+    {
+     "t": "2x > −10",
+     "ok": true,
+     "why": "Both sides were multiplied by −1, and the symbol was flipped.",
+     "say": "Two x is greater than negative ten. Yes: both sides were multiplied by negative one, and the symbol was flipped."
+    },
+    {
+     "t": "−x < 5",
+     "ok": true,
+     "why": "Both sides were divided by 2: the number is positive, so the symbol stays.",
+     "say": "Negative x is less than five. Yes: both sides were divided by two, which is positive, so the symbol stays."
+    },
+    {
+     "t": "x > 5",
+     "ok": false,
+     "why": "The boundary has the wrong sign.",
+     "say": "X is greater than five. No: the boundary should be negative five, not five."
+    }
+   ]
+  },
+  {
+   "id": "ex07",
+   "level": 2,
+   "kind": "num",
+   "derive": "operand:Division",
+   "prompt": "What number were both sides divided by? Type it, with its sign.",
+   "q": "−4x ≥ 20 → x ≤ −5",
+   "read": "In this step, negative four x is greater than or equal to twenty becomes x is less than or equal to negative five. What number were both sides divided by?",
+   "lines": [
+    "⟨−4⟩x ≥ 20",
+    "x ≤ −5"
+   ],
+   "chips": [
+    "FLIP"
+   ],
+   "say": [
+    "X is multiplied by negative four, so divide both sides by negative four, and flip the symbol. X is less than or equal to negative five."
+   ],
+   "at": [
+    "five"
+   ],
+   "wrong": [
+    {
+     "v": 4,
+     "m": "sign",
+     "why": "Dividing by four would keep the symbol. The step divides by negative four, which is why the symbol flips.",
+     "say": "ignore the minus sign"
+    },
+    {
+     "v": -5,
+     "m": "result",
+     "why": "Negative five is the new right side. The number taken away from x is negative four.",
+     "say": "copy the result of the step"
+    },
+    {
+     "v": 20,
+     "m": "start",
+     "why": "Twenty is the old right side. The number both sides are divided by is negative four.",
+     "say": "copy the number on the other side"
+    }
+   ]
+  },
+  {
+   "id": "ex08",
+   "level": 3,
+   "kind": "num",
+   "derive": "largest-int",
+   "prompt": "What is the largest whole number that solves it? Type it.",
+   "q": "5 − 2x > −3",
+   "read": "What is the largest whole number that solves five minus two x is greater than negative three?",
+   "lines": [
+    "⟨5⟩ − 2x > −3",
+    "⟨−2⟩x > −8",
+    "x < 4"
+   ],
+   "chips": [
+    "SUBTRACT",
+    "FLIP"
+   ],
+   "say": [
+    "Subtract five from both sides, by the subtraction property. Negative two x is greater than negative eight.",
+    "Divide both sides by negative two, and flip the symbol. X is less than four. Four is not included, so the largest whole number is three."
+   ],
+   "at": [
+    "eight",
+    "four"
+   ],
+   "wrong": [
+    {
+     "v": 4,
+     "m": "edge",
+     "why": "Four is not a solution: x < 4 leaves four out, because the circle is open.",
+     "say": "include the boundary"
+    },
+    {
+     "v": 5,
+     "m": "noflip",
+     "why": "Without the flip you get x > 4, which has no largest number. Dividing by a negative number flips the symbol.",
+     "say": "forget to flip the symbol"
+    },
+    {
+     "v": -5,
+     "m": "sign",
+     "why": "The boundary is four, not negative four.",
+     "say": "give the boundary the wrong sign"
+    }
+   ]
+  },
+  {
+   "id": "ex09",
+   "level": 3,
+   "kind": "num",
+   "derive": "first-error",
+   "prompt": "Which line of the student's work is the first one that is wrong? Type its number: the first line is line 1.",
+   "q": "−3(x − 2) < 12\n−3x − 6 < 12\n−3x < 18\nx > −6",
+   "a_read": "line two",
+   "a_show": "line 2",
+   "read": "A student's work is on the screen, line one at the top. Which line is the first one that is wrong?",
+   "lines": [
+    "⟨−3(x − 2)⟩ < 12",
+    "−3x ⟨− 6⟩ < 12",
+    "⟨−3⟩x < 18",
+    "x > −6"
+   ],
+   "chips": [
+    "ERROR",
+    "CARRY",
+    "CARRY"
+   ],
+   "say": [
+    "The student distributed negative three, but negative three times negative two is positive six, not negative six. So line two is wrong.",
+    "The next step adds six to both sides. That is fine on its own, but it carries the error.",
+    "Dividing by negative three flips the symbol, so this step is fine on its own too, but it carries the error."
+   ],
+   "at": [
+    "distributed",
+    "adds",
+    "dividing"
+   ],
+   "wrong": [
+    {
+     "v": 4,
+     "m": "last",
+     "why": "Line four is only where the wrong answer shows up. The mistake happened earlier.",
+     "say": "point at the final answer"
+    },
+    {
+     "v": 3,
+     "m": "after",
+     "why": "Line three is fine on its own: adding six to both sides is allowed.",
+     "say": "blame the line after the mistake"
+    },
+    {
+     "v": 1,
+     "m": "first",
+     "why": "Line one is the inequality the student was given.",
+     "say": "blame the given inequality"
+    }
+   ]
+  },
+  {
+   "id": "ex10",
+   "level": 3,
+   "kind": "multi",
+   "check": "solution:−3x + 4 ≤ 13",
+   "prompt": "Select all the numbers that are solutions of −3x + 4 ≤ 13.",
+   "read": "Select all the numbers that are solutions of negative three x plus four is less than or equal to thirteen.",
+   "say_answer": "Negative three, zero, and two are solutions: the solutions are x greater than or equal to negative three. Negative four and negative five give more than thirteen.",
+   "options": [
+    {
+     "t": "−4",
+     "ok": false,
+     "why": "−3(−4) + 4 = 16, which is more than 13.",
+     "say": "Negative four. No: negative three times negative four is twelve, plus four is sixteen, which is more than thirteen."
+    },
+    {
+     "t": "−3",
+     "ok": true,
+     "why": "−3(−3) + 4 = 13, and 13 ≤ 13.",
+     "say": "Negative three. Yes: negative three times negative three is nine, plus four is thirteen, and thirteen is less than or equal to thirteen."
+    },
+    {
+     "t": "0",
+     "ok": true,
+     "why": "−3(0) + 4 = 4, which is less than 13.",
+     "say": "Zero. Yes: negative three times zero is zero, plus four is four, which is less than thirteen."
+    },
+    {
+     "t": "2",
+     "ok": true,
+     "why": "−3(2) + 4 = −2, which is less than 13.",
+     "say": "Two. Yes: negative three times two is negative six, plus four is negative two, which is less than thirteen."
+    },
+    {
+     "t": "−5",
+     "ok": false,
+     "why": "−3(−5) + 4 = 19, which is more than 13.",
+     "say": "Negative five. No: negative three times negative five is fifteen, plus four is nineteen, which is more than thirteen."
+    }
+   ]
+  },
+  {
+   "id": "ex11",
+   "level": 3,
+   "kind": "match",
+   "check": "same-solution",
+   "prompt": "Match each inequality with its solution.",
+   "read": "Match each inequality with its solution.",
+   "say_answer": "Each solution comes from undoing the operations. Dividing or multiplying by a negative number flips the symbol, so negative three x is greater than or equal to twelve becomes x is less than or equal to negative four.",
+   "pairs": [
+    {
+     "l": "x + 4 < 10",
+     "r": "x < 6",
+     "why": "Subtract 4 from both sides: the symbol stays.",
+     "say": "X plus four is less than ten. Subtract four from both sides: x is less than six."
+    },
+    {
+     "l": "3x ≥ 12",
+     "r": "x ≥ 4",
+     "why": "Divide both sides by 3: the symbol stays.",
+     "say": "Three x is greater than or equal to twelve. Divide by three: x is greater than or equal to four."
+    },
+    {
+     "l": "−3x ≥ 12",
+     "r": "x ≤ −4",
+     "why": "Divide both sides by −3, and flip the symbol.",
+     "say": "Negative three x is greater than or equal to twelve. Divide by negative three, and flip the symbol: x is less than or equal to negative four."
+    },
+    {
+     "l": "−x < 2",
+     "r": "x > −2",
+     "why": "Multiply both sides by −1, and flip the symbol.",
+     "say": "Negative x is less than two. Multiply by negative one, and flip the symbol: x is greater than negative two."
+    }
+   ]
+  },
+  {
+   "id": "ex12",
+   "level": 4,
+   "kind": "num",
+   "derive": "smallest-int",
+   "prompt": "What is the smallest whole number that solves it? Type it.",
+   "q": "4 − x < 2x + 13",
+   "read": "What is the smallest whole number that solves four minus x is less than two x plus thirteen?",
+   "lines": [
+    "4 ⟨− x⟩ < 2x + 13",
+    "4 < 3x ⟨+ 13⟩",
+    "−9 < ⟨3⟩x",
+    "−3 < x"
+   ],
+   "chips": [
+    "ADD",
+    "SUBTRACT",
+    "DIVIDE"
+   ],
+   "say": [
+    "Add x to both sides, by the addition property of equality. Four is less than three x plus thirteen.",
+    "Subtract thirteen from both sides, by the subtraction property. Negative nine is less than three x.",
+    "Divide both sides by three, by the division property. Negative three is less than x, so x is greater than negative three. Negative three is not included, so the smallest whole number is negative two."
+   ],
+   "at": [
+    "four",
+    "negative",
+    "less"
+   ],
+   "wrong": [
+    {
+     "v": -3,
+     "m": "edge",
+     "why": "Negative three is not a solution: the circle at negative three is open.",
+     "say": "include the boundary"
+    },
+    {
+     "v": -4,
+     "m": "noflip",
+     "why": "Moving the x terms to the left gives negative three x is less than nine. Dividing by negative three flips the symbol, so x is greater than negative three, not less.",
+     "say": "forget to flip the symbol"
+    },
+    {
+     "v": 4,
+     "m": "sign",
+     "why": "The boundary is negative three, not three.",
+     "say": "give the boundary the wrong sign"
+    }
+   ]
+  },
+  {
+   "id": "ex13",
+   "level": 4,
+   "kind": "num",
+   "derive": "largest-int",
+   "prompt": "What is the largest whole number that solves it? Type it.",
+   "q": "3 − 2(x + 1) > 9",
+   "read": "What is the largest whole number that solves three minus two times the quantity x plus one, is greater than nine?",
+   "lines": [
+    "3 − ⟨2(x + 1)⟩ > 9",
+    "⟨3 − 2x − 2⟩ > 9",
+    "⟨1⟩ − 2x > 9",
+    "⟨−2⟩x > 8",
+    "x < −4"
+   ],
+   "chips": [
+    "DIST",
+    "COMBINE",
+    "SUBTRACT",
+    "FLIP"
+   ],
+   "say": [
+    "Distribute the negative two: negative two times x is negative two x, and negative two times one is negative two. Three minus two x minus two is greater than nine.",
+    "Combine three and negative two: that is one. One minus two x is greater than nine.",
+    "Subtract one from both sides, by the subtraction property. Negative two x is greater than eight.",
+    "Divide both sides by negative two, and flip the symbol. X is less than negative four. Negative four is not included, so the largest whole number is negative five."
+   ],
+   "at": [
+    "greater",
+    "one#2",
+    "eight",
+    "four"
+   ],
+   "wrong": [
+    {
+     "v": -4,
+     "m": "edge",
+     "why": "Negative four is not a solution: x < −4 leaves it out, because the circle is open.",
+     "say": "include the boundary"
+    },
+    {
+     "v": -3,
+     "m": "noflip",
+     "why": "Without the flip you get x > −4, which has no largest number. Dividing by a negative number flips the symbol.",
+     "say": "forget to flip the symbol"
+    },
+    {
+     "v": 3,
+     "m": "sign",
+     "why": "The boundary is negative four, not four.",
+     "say": "give the boundary the wrong sign"
+    }
+   ]
+  },
+  {
+   "id": "ex14",
+   "level": 4,
+   "kind": "num",
+   "derive": "first-error",
+   "prompt": "Which line of the student's work is the first one that is wrong? Type its number: the first line is line 1.",
+   "q": "10 − 2x ≥ 4x − 8\n10 ≥ 6x − 8\n18 ≥ 6x\nx ≥ 3\n3 ≤ x",
+   "a_read": "line four",
+   "a_show": "line 4",
+   "read": "A student's work is on the screen, line one at the top. Which line is the first one that is wrong?",
+   "lines": [
+    "10 ⟨− 2x⟩ ≥ 4x − 8",
+    "10 ≥ 6x ⟨− 8⟩",
+    "18 ≥ ⟨6⟩x",
+    "⟨x ≥ 3⟩",
+    "3 ≤ x"
+   ],
+   "chips": [
+    "OK",
+    "OK",
+    "ERROR",
+    "CARRY"
+   ],
+   "say": [
+    "The first step adds two x to both sides, by the addition property. That is allowed, so line two is fine.",
+    "The second step adds eight to both sides. That is allowed too, so line three is fine.",
+    "The third step divides both sides by six. Six is positive, so the symbol stays: eighteen is greater than or equal to six x becomes three is greater than or equal to x. The student wrote x is greater than or equal to three instead, so line four is wrong.",
+    "The last step swaps the sides, which is fine on its own, but it carries the error."
+   ],
+   "at": [
+    "adds",
+    "adds",
+    "instead",
+    "swaps"
+   ],
+   "wrong": [
+    {
+     "v": 5,
+     "m": "last",
+     "why": "Line five is only where the wrong answer shows up. The mistake happened earlier.",
+     "say": "point at the final answer"
+    },
+    {
+     "v": 3,
+     "m": "before",
+     "why": "Line three is fine: adding eight to both sides is allowed.",
+     "say": "blame the line before the mistake"
+    },
+    {
+     "v": 1,
+     "m": "first",
+     "why": "Line one is the inequality the student was given.",
+     "say": "blame the given inequality"
+    }
+   ]
+  }
+ ]
+}

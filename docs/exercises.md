@@ -10,6 +10,7 @@ Topic 0.5 (translating words into expressions) has [`exercises/u00-l05/`](../exe
 Topic 1.1 (one-step and multi-step equations) has [`exercises/u01-l01/`](../exercises/u01-l01/) (17 exercises).
 Topic 1.2 (variables on both sides) has [`exercises/u01-l02/`](../exercises/u01-l02/) (16 exercises).
 Topic 1.3 (justifying each step) has [`exercises/u01-l03/`](../exercises/u01-l03/) (14 exercises).
+Topic 1.4 (linear inequalities and their graphs) has [`exercises/u01-l04/`](../exercises/u01-l04/) (14 exercises).
 
 Topic 0.2 (properties of operations) has [`exercises/u00-l02/`](../exercises/u00-l02/) (24 exercises),
 shared by its two subtopics 0.2.1 (commutative and associative) and 0.2.2 (distributive): within each
@@ -32,6 +33,8 @@ subtopics has one set for all of them. Kinds of exercise:
 `match` (`"check": "count"`: left = a linear equation in `x`, right = `One solution`, `No solution` or `Infinitely many solutions`) and `multi` (`"check": "count:one|none|all"`: each option is an equation with exactly one / no / infinitely many solutions), both verified by `solve_linear` (1.2), and `match` (`"check": "solves"`: left = an equation, right = its solution `x = 4`) and `multi` (`"check": "solution:<equation>"`: each option is a value, right when it solves the equation) are verified by substituting; with `solves`, no right value may solve another pair's equation.
 
 `match` and `multi` also take `"check": "step"` / `"step:<Property>"` (left or option = `A → B`; the step's property is computed: Addition, Subtraction, Multiplication, Division, Distributive or Combine; `match` right items are `<Property> property` / `Combine like terms`) and `"valid-from:<equation>"` (`multi`: the option is an equation with the same solution as `<equation>`; 1.3) besides `"check": "operation"` (`match` only: left = phrase such as “less than”, right = `addition`, `subtraction`, `multiplication` or `division`; the key words are `OPERATION_WORDS` in `tools/build_exercises.py`, and each phrase must match exactly one operation).
+
+Inequalities (1.4): the checker reads an inequality as its solution set (`ineq_set`: `x op b`, with the symbol flipped when the coefficient of `x` is negative), so a flip, a boundary or an open/closed circle cannot be wrong. `num` + `derive`: `smallest-int` / `largest-int` (the smallest / largest whole number that solves `q`; the boundary itself counts only for ≤ and ≥), `boundary`, `operand:<Property>` and `first-error` as in 1.3 but flip-aware. Mistakes `m`: `edge` (open/closed circle swapped), `noflip`, `sign`, `wrongway`; the other kinds as in 1.3. `match` checks `"symbol"` (phrase → ≥ ≤ > <; words in `SYMBOL_WORDS`), `"graph"` (inequality → “Open circle at 2, shaded right”) and `"same-solution"` (inequality → its solution); `multi` checks `"flip"` (moves that flip the symbol), `"solution:<inequality>"` (numbers that make it true) and `"valid-from:<inequality>"` (also for inequalities). Chip **FLIP red** (multiplying or dividing by a negative number); `<` and `>` are escaped by `markup()`.
 
 Property chips: **COMM blue · ASSOC purple · DIST yellow · CALC green · REWRITE white**.
 Like-terms chip (0.4): **COMBINE green**, next to DIST yellow.

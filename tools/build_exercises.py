@@ -37,7 +37,9 @@ CHIP_COLOR = {"P": "blue", "E": "purple", "MD": "yellow", "AS": "green", "SUB": 
               # lesson 1.3: the properties of equality (DIST yellow and COMBINE green as before) and the
               # verdict on each step of a student's work
               "ADD": "blue", "SUBTRACT": "purple", "MULTIPLY": "yellow", "DIVIDE": "green",
-              "OK": "green", "ERROR": "red", "CARRY": "ink"}
+              "OK": "green", "ERROR": "red", "CARRY": "ink",
+              # lesson 1.4: multiplying or dividing both sides of an inequality by a negative number
+              "FLIP": "red"}
 CHIP_NAME = {"P": "parentheses and groups", "E": "exponents", "MD": "multiply and divide",
              "AS": "add and subtract", "SUB": "substitute", "COMM": "commutative property",
              "ASSOC": "associative property", "DIST": "distributive property", "CALC": "calculate",
@@ -47,7 +49,7 @@ CHIP_NAME = {"P": "parentheses and groups", "E": "exponents", "MD": "multiply an
              "COLLECT": "collect the variable terms", "ISOLATE": "undo the operations",
              "ADD": "addition property", "SUBTRACT": "subtraction property", "MULTIPLY": "multiplication property",
              "DIVIDE": "division property", "OK": "step is allowed", "ERROR": "first wrong step",
-             "CARRY": "carries the error"}
+             "CARRY": "carries the error", "FLIP": "flip the symbol"}
 # lesson 0.5: the words each operation goes by (check "operation" on multi / match)
 OPERATION_WORDS = {"addition": ["sum", "more than", "increased by", "plus", "total of", "added to"],
                    "subtraction": ["difference", "less than", "decreased by", "minus", "subtract", "fewer than", "take away"],
@@ -436,8 +438,9 @@ def var_part(t):
 # ---------------------------------------------------------------- equations and their steps (topic 1.3)
 XS = [F(0), F(1), F(2), F(-3), F(5, 7), F(11)]           # values of x an equation step is tested at
 EQ_DERIVE = ("operand", "solve", "first-error")           # derive kinds that read an equation or a step
+INEQ_DERIVE = ("boundary", "smallest-int", "largest-int") # derive kinds that read an inequality (1.4)
 STEP_OF_CHIP = {"ADD": "Addition", "SUBTRACT": "Subtraction", "MULTIPLY": "Multiplication",
-                "DIVIDE": "Division", "DIST": "Distributive", "COMBINE": "Combine"}
+                "DIVIDE": "Division", "DIST": "Distributive", "COMBINE": "Combine", "FLIP": "Flip"}
 
 
 def fx(expr, v):
@@ -470,15 +473,84 @@ def solve_linear(eq):
     return k / m
 
 
+# ---------------------------------------------------------------- inequalities (lesson 1.4)
+REL_FLIP = {"<": ">", ">": "<", "≤": "≥", "≥": "≤"}
+SYMBOL_WORDS = {"≥": ["at least", "no less than", "greater than or equal to"],
+                "≤": ["at most", "no more than", "less than or equal to"],
+                ">": ["more than", "greater than", "exceeds", "above"],
+                "<": ["fewer than", "less than", "below", "under"]}
+
+
+def is_ineq(s):
+    return any(c in s for c in "<>≤≥")
+
+
+def split_rel(s):
+    """(left, relation, right) of "L = R" or an inequality "L < R" (exactly one of = < > ≤ ≥)."""
+    parts = re.split(r"(≤|≥|<|>|=)", s)
+    if len(parts) != 3:
+        raise ValueError(f"{s!r} is not one equation or inequality")
+    return parts[0].strip(), parts[1], parts[2].strip()
+
+
+def holds(s, v):
+    """Is the inequality "L op R" true at x = v?"""
+    left, op, right = split_rel(s)
+    a, b = fx(left, v), fx(right, v)
+    return {"<": a < b, ">": a > b, "≤": a <= b, "≥": a >= b, "=": a == b}[op]
+
+
+def ineq_set(s):
+    """The solution set of a linear inequality in x: (b, op) meaning "x op b" (op is < > ≤ ≥, x on the
+    left; dividing by a negative coefficient flips op), or "all" / "none" when the x terms cancel."""
+    left, op, right = split_rel(s)
+    (m1, k1), (m2, k2) = lin(left), lin(right)
+    m, k = m1 - m2, k2 - k1                                  # m·x  op  k
+    if m == 0:
+        return "all" if holds(s, F(0)) else "none"
+    return k / m, (op if m > 0 else REL_FLIP[op])
+
+
+def sig(s):
+    """What a line of a solution says, to compare lines: the solution of an equation, or of an inequality."""
+    return ineq_set(s) if is_ineq(s) else solve_linear(s)
+
+
+def near_int(b, op):
+    """The integer inside the set "x op b" that lies closest to b."""
+    fl, ce = b.numerator // b.denominator, -((-b.numerator) // b.denominator)
+    return {">": fl + 1, "≥": ce, "<": ce - 1, "≤": fl}[op]
+
+
+def symbol_of(phrase):
+    """The inequality symbol a phrase such as "at most" or "greater than or equal to" stands for (the
+    longest matching phrase wins, so "greater than or equal to" is not read as "greater than")."""
+    low = phrase.lower()
+    hits = [(len(w), sym) for sym, ws in SYMBOL_WORDS.items() for w in ws
+            if re.search(rf"(?<![a-z]){re.escape(w)}(?![a-z])", low)]
+    if not hits:
+        raise ValueError(f"{phrase!r} has no inequality words")
+    return max(hits)[1]
+
+
+def graph_text(b, op):
+    """How a number-line graph is described in words: "Open circle at 2, shaded right"."""
+    return (f"{'Open' if op in '<>' else 'Closed'} circle at {str(b).replace('-', '−')}, "
+            f"shaded {'right' if op in '>≥' else 'left'}")
+
+
 def step_kind(a, b):
-    """Which property takes equation a to equation b, read from the two equations themselves:
+    """Which property takes equation (or inequality) a to b, read from the two lines themselves:
     Distributive / Combine (each side keeps its value, only its form changes: a group is opened, or
     like terms are collected), Addition / Subtraction (the same expression is added to or taken from
-    both sides) or Multiplication / Division (both sides times a number, or over one). None when
-    the step is none of these (so a wrong step is never given a name)."""
-    la, ra = split_eq(a)
-    lb, rb = split_eq(b)
+    both sides) or Multiplication / Division (both sides times a number, or over one). On an inequality
+    the symbol must stay the same, except when the number is negative: then it must flip. None when the
+    step is none of these (so a wrong step is never given a name)."""
+    la, opa, ra = split_rel(a)
+    lb, opb, rb = split_rel(b)
     if all(fx(la, v) == fx(lb, v) and fx(ra, v) == fx(rb, v) for v in XS):
+        if opa != opb:
+            return None
         changed = [(p, q) for p, q in ((la, lb), (ra, rb)) if _norm(p) != _norm(q)]
         if not changed:
             return None
@@ -486,7 +558,7 @@ def step_kind(a, b):
     add = [fx(lb, v) - fx(la, v) for v in XS]
     if add == [fx(rb, v) - fx(ra, v) for v in XS]:           # c(x) added to both sides
         c0, c1 = add[0], add[1] - add[0]
-        if all(add[k] == c1 * XS[k] + c0 for k in range(len(XS))):
+        if opa == opb and all(add[k] == c1 * XS[k] + c0 for k in range(len(XS))):
             lead = c1 if c1 != 0 else c0
             if lead != 0:
                 return "Addition" if lead > 0 else "Subtraction"
@@ -498,7 +570,11 @@ def step_kind(a, b):
     else:
         return None
     if c != 0 and all(fx(lb, v) == fx(la, v) * c and fx(rb, v) == fx(ra, v) * c for v in XS):
-        if c.denominator == 1 and abs(c) > 1:
+        if opa != "=" and opb != (opa if c > 0 else REL_FLIP[opa]):
+            return None                                      # the symbol was not flipped by a negative number
+        if opa == "=" and opb != "=":
+            return None
+        if c.denominator == 1 and abs(c) > 1 or c == -1:
             return "Multiplication"
         if abs(c.numerator) == 1 and abs(c.denominator) > 1:
             return "Division"
@@ -509,8 +585,8 @@ def step_number(a, b):
     """(property, n): the number a step adds, subtracts, multiplies by or divides by (n keeps its
     sign for multiplication and division, so ÷ −5 gives −5). Only for a step by a plain number."""
     prop = step_kind(a, b)
-    la, ra = split_eq(a)
-    lb, rb = split_eq(b)
+    la, _, ra = split_rel(a)
+    lb, _, rb = split_rel(b)
     if prop in ("Addition", "Subtraction"):
         cs = {fx(lb, v) - fx(la, v) for v in XS}
         if len(cs) != 1:
@@ -523,9 +599,18 @@ def step_number(a, b):
     raise ValueError(f"{a!r} → {b!r} is not a step by a plain number")
 
 
+def chip_kind(a, b):
+    """step_kind, but a step by a negative number on an inequality is a "Flip" (chip FLIP)."""
+    kind = step_kind(a, b)
+    if kind in ("Multiplication", "Division") and split_rel(a)[1] != "=" and step_number(a, b)[1] < 0:
+        return "Flip"
+    return kind
+
+
 def side_without_x(eq):
     """The number on the side of an equation that has no x (the other side holds x)."""
-    for side in split_eq(eq):
+    left, _, right = split_rel(eq)
+    for side in (left, right):
         m, k = lin(side)
         if m == 0:
             return k
@@ -550,8 +635,8 @@ def eq_derive(q, spec):
             raise ValueError(f"{q!r} has {value!r} solutions")
     else:
         lines = q.split("\n")
-        base = solve_linear(lines[0])
-        bad = [k + 1 for k, line in enumerate(lines) if k and solve_linear(line) != base]
+        base = sig(lines[0])
+        bad = [k + 1 for k, line in enumerate(lines) if k and sig(line) != base]
         if not bad:
             raise ValueError("every line is equivalent to the first one")
         value = F(bad[0])
@@ -592,6 +677,53 @@ def eq_mistake(code, q, spec, ans):
     raise ValueError(f"unknown mistake {code!r} for derive {spec!r}")
 
 
+def ineq_derive(q, spec):
+    """derive kinds for inequalities (1.4): boundary — the number x is compared with; smallest-int /
+    largest-int — the smallest (largest) whole number that solves it, so open and closed circles matter."""
+    kind = spec.partition(":")[0]
+    res = ineq_set(q)
+    if not isinstance(res, tuple):
+        raise ValueError(f"{q!r} is true for {res} x")
+    b, op = res
+    if kind == "boundary":
+        value = b
+    elif kind == "smallest-int":
+        if op not in ">≥":
+            raise ValueError(f"{q!r} has no smallest solution (x {op} {b})")
+        value = F(near_int(b, op))
+    else:
+        if op not in "<≤":
+            raise ValueError(f"{q!r} has no largest solution (x {op} {b})")
+        value = F(near_int(b, op))
+    if value.denominator != 1:
+        raise ValueError(f"the answer {value} is not an integer")
+    return int(value)
+
+
+def ineq_mistake(code, q, spec, ans):
+    """The number a named mistake gives on an inequality exercise (1.4). boundary: the solve mistakes of
+    the equation with = (sign-k, no-divide, …). Whole-number answers: edge — open and closed circle
+    swapped; noflip — the symbol was not flipped after dividing by a negative; sign — the boundary has
+    the wrong sign; wrongway — the set was drawn on the other side of the boundary."""
+    kind = spec.partition(":")[0]
+    left, op0, right = split_rel(q)
+    if kind == "boundary":
+        return eq_mistake(code, f"{left} = {right}", "solve", ans)
+    b, op = ineq_set(q)
+    swap = {"<": "≤", "≤": "<", ">": "≥", "≥": ">"}
+    if code == "edge":
+        return near_int(b, swap[op])
+    if code == "wrongway":
+        return near_int(b, REL_FLIP[op])
+    if code == "sign":
+        return near_int(-b, op)
+    if code == "noflip":
+        if op == op0:
+            raise ValueError("this inequality never needs a flip")
+        return near_int(b, op0)
+    raise ValueError(f"unknown mistake {code!r} for derive {spec!r}")
+
+
 def validate_equation_lines(ex, problems):
     """The lines of a 1.3 solution video must be true: every step of an operand/solve exercise is the
     property its chip says, every line of a solve has the solution, and a student's work gets the
@@ -606,15 +738,21 @@ def validate_equation_lines(ex, problems):
                 want = "OK" if j + 2 < ans else "ERROR" if j + 2 == ans else "CARRY"
                 if chip != want:
                     problems.append(f"{i}: step {j + 1} ({lines[j]!r} → {lines[j + 1]!r}) should be {want}, not {chip}")
-                if want == "CARRY" and solve_linear(lines[j + 1]) != solve_linear(lines[j]):
+                if want == "CARRY" and sig(lines[j + 1]) != sig(lines[j]):
                     problems.append(f"{i}: step {j + 1} is a second mistake; a CARRY step must be fine on its own")
             return
         for j, chip in enumerate(ex["chips"]):
             if chip not in STEP_OF_CHIP:
                 problems.append(f"{i}: chip {chip!r} is not a property of equality or a rewrite")
-            elif (got := step_kind(lines[j], lines[j + 1])) != STEP_OF_CHIP[chip]:
+            elif (got := chip_kind(lines[j], lines[j + 1])) != STEP_OF_CHIP[chip]:
                 problems.append(f"{i}: step {j + 1} ({lines[j]!r} → {lines[j + 1]!r}) is {got}, not {STEP_OF_CHIP[chip]}")
-        if kind == "solve":
+        if kind in INEQ_DERIVE:
+            if _norm(lines[0]) != _norm(ex["q"]):
+                problems.append(f"{i}: the first line must be the question")
+            for ln in lines:
+                if ineq_set(ln) != ineq_set(ex["q"]):
+                    problems.append(f"{i}: line {ln!r} does not have the same solutions as {ex['q']!r}")
+        elif kind == "solve":
             if _norm(lines[0]) != _norm(ex["q"]):
                 problems.append(f"{i}: the first line must be the question")
             for ln in lines:
@@ -644,6 +782,28 @@ def check_equation_tools():
     assert solve_linear("x + 1 = x + 2") == "none" and solve_linear("2x = 3") == F(3, 2)
     assert step_number("−5x = 30", "x = −6") == ("Division", -5)
     assert step_number("x + 8 = 15", "x = 7") == ("Subtraction", 8)
+    # inequalities (1.4): the symbol flips with a negative number, and only then
+    ine = [("x + 4 < 10", "x < 6", "Subtraction"), ("3x ≥ 12", "x ≥ 4", "Division"),
+           ("−3x > 12", "x < −4", "Division"), ("−3x > 12", "x > −4", None), ("2x ≤ 6", "x ≥ 3", None),
+           ("[[x | −2]] < 3", "x > −6", "Multiplication"), ("5 − 3x > 17", "−3x > 12", "Subtraction"),
+           ("2(x − 1) ≥ 8", "2x − 2 ≥ 8", "Distributive"), ("x > 2", "x < 2", None)]
+    for a, b, want in ine:
+        got = step_kind(a, b)
+        assert got == want, f"step_kind({a!r}, {b!r}) = {got}, expected {want}"
+    assert chip_kind("−3x > 12", "x < −4") == "Flip" and chip_kind("3x ≥ 12", "x ≥ 4") == "Division"
+    assert chip_kind("−3x = 12", "x = −4") == "Division"            # an equation never flips
+    assert ineq_set("5 − 3x > 17") == (F(-4), "<") and ineq_set("2x ≤ 6") == (F(3), "≤")
+    assert ineq_set("3 ≤ x") == (F(3), "≥") and ineq_set("x + 1 < x + 2") == "all" and ineq_set("x > x + 1") == "none"
+    assert [near_int(F(4), o) for o in "><≥≤"] == [5, 3, 4, 4] and [near_int(F(9, 2), o) for o in "><≥≤"] == [5, 4, 5, 4]
+    assert ineq_derive("5 − 2x > −3", "largest-int") == 3 and ineq_derive("2x − 1 > 7", "smallest-int") == 5
+    assert ineq_derive("4 − x < 2x + 13", "smallest-int") == -2 and ineq_derive("x + 7 ≥ 3", "boundary") == -4
+    assert ineq_mistake("noflip", "5 − 2x > −3", "largest-int", 3) == 5
+    assert ineq_mistake("edge", "5 − 2x > −3", "largest-int", 3) == 4
+    assert eq_derive("−3(x − 2) < 12\n−3x − 6 < 12\n−3x < 18\nx > −6", "first-error") == 2
+    assert [symbol_of(w) for w in ("at least", "At most", "more than", "fewer than", "greater than or equal to",
+                                    "no more than")] == ["≥", "≤", ">", "<", "≥", "≤"]
+    assert graph_text(F(2), ">") == "Open circle at 2, shaded right" and graph_text(F(-1), "≤") == "Closed circle at −1, shaded left"
+    assert holds("x ≥ 5", F(5)) and not holds("x > 5", F(5)) and holds("−3x + 4 ≤ 13", F(-3))
 
 
 def derive(q, spec):
@@ -652,6 +812,8 @@ def derive(q, spec):
     kind, _, arg = spec.partition(":")
     if kind in EQ_DERIVE:
         return eq_derive(q, spec)
+    if kind in INEQ_DERIVE:
+        return ineq_derive(q, spec)
     parts = all_parts(q)
     if kind == "terms":
         return len(parts)
@@ -671,6 +833,8 @@ def mistake_value(code, q, spec, ans):
     """The number a named mistake gives, so a wrong option can be checked against its description."""
     if spec.partition(":")[0] in EQ_DERIVE:
         return eq_mistake(code, q, spec, ans)
+    if spec.partition(":")[0] in INEQ_DERIVE:
+        return ineq_mistake(code, q, spec, ans)
     parts = all_parts(q)
     kind, _, arg = code.partition(":")
     flat = re.sub(r"\^\d+", "", _norm(q))
@@ -713,7 +877,7 @@ def validate_derive(ex, problems):
         problems.append(f"{i}: cannot derive {ex['derive']!r}: {e}")
         return
     ex["_answer"] = ans
-    if check_steps(ex, problems) and ex["derive"].partition(":")[0] in EQ_DERIVE:
+    if check_steps(ex, problems) and ex["derive"].partition(":")[0] in EQ_DERIVE + INEQ_DERIVE:
         validate_equation_lines(ex, problems)
     for f in ("prompt", "read"):
         if not ex.get(f):
@@ -850,8 +1014,13 @@ def check_claim(ex, item_text, claim, problems, what):
     claim "step:<Property>" → item is a step "A → B" between two equations that is justified by that
                               property (Addition, Subtraction, Multiplication, Division, Distributive,
                               Combine; only the first word counts), read from the equations (1.3);
-    claim "valid-from:<equation>" → item is an equation with the same solution as <equation>, so it could
-                              be the next line of its solution (1.3)."""
+    claim "valid-from:<equation>" → item is an equation (or inequality) with the same solution as <equation>, so
+                              it could be the next line of its solution (1.3, 1.4);
+    claim "flip"            → item is a move on both sides ("Divide both sides by −4") that makes an
+                              inequality's symbol flip: multiplying or dividing by a negative number (1.4);
+    claim "symbol:<sym>"    → item is a phrase ("at most") that stands for that symbol (SYMBOL_WORDS, 1.4);
+    claim "graph:<text>"    → item is an inequality whose graph is described by <text> (graph_text, 1.4);
+    claim "solution:<inequality>" → item ("x = 5" or "5") is a number that makes the inequality true (1.4)."""
     i = ex["id"]
     kind, _, arg = claim.partition(":")
     try:
@@ -863,7 +1032,25 @@ def check_claim(ex, item_text, claim, problems, what):
                 return None
             return got == arg.split()[0]
         if kind == "valid-from":
-            return solve_linear(item_text) == solve_linear(arg)
+            return sig(item_text) == sig(arg)
+        if kind == "flip":
+            low = item_text.lower()
+            nums = re.findall(r"[−-]?\d+(?:/\d+)?", item_text)
+            if len(nums) != 1:
+                problems.append(f"{i}: {what} {item_text!r} must name exactly one number")
+                return None
+            if not re.search(r"add|subtract|multipl|divid|plus|minus|[×÷+−]", low):
+                problems.append(f"{i}: {what} {item_text!r} names no operation")
+                return None
+            return bool(re.search(r"multipl|divid|×|÷", low)) and nums[0][0] in "−-"
+        if kind == "symbol":
+            return symbol_of(item_text) == arg
+        if kind == "graph":
+            res = ineq_set(item_text)
+            if not isinstance(res, tuple):
+                problems.append(f"{i}: {what} {item_text!r} has no graph with one circle")
+                return None
+            return graph_text(*res) == arg
         if kind == "property":
             left, right = item_text.split("=")
             if not same(left, right):
@@ -882,6 +1069,9 @@ def check_claim(ex, item_text, claim, problems, what):
         if kind == "true":
             left, right = item_text.split("=")
             return same(left, right)
+        if kind == "solution" and is_ineq(arg):
+            m = re.fullmatch(r"\s*x\s*=\s*(.+)", item_text)
+            return holds(arg, ev(m.group(1) if m else item_text))
         if kind == "solution":
             var = equation_var(arg)
             m = re.fullmatch(rf"\s*{var}\s*=\s*(.+)", item_text)
@@ -967,11 +1157,19 @@ def validate_match(ex, problems):
                 else f"step:{p['r']}" if chk == "step" \
                 else f"terms:{p['r']}" if chk == "terms" \
                 else f"count:{p['r']}" if chk == "count" \
-                else f"solution:{p['l']}" if chk == "solves" else chk
-            item = p["r"] if chk == "solves" else p["l"]      # "solves": left = equation, right = its solution
+                else f"solution:{p['l']}" if chk == "solves" \
+                else f"symbol:{p['r']}" if chk == "symbol" \
+                else f"graph:{p['r']}" if chk == "graph" \
+                else f"valid-from:{p['l']}" if chk == "same-solution" else chk
+            item = p["r"] if chk in ("solves", "same-solution") else p["l"]   # "solves": left = equation, right = its solution
             if check_claim(ex, item, claim, problems, "pair") is False:
                 problems.append(f"{i}: pair {p['l']!r} → {p['r']!r} is not right")
     if chk := ex.get("check"):
+        if chk == "same-solution":   # no right inequality may also be the solution of another pair's left
+            for p in pairs:
+                for q in pairs:
+                    if q is not p and q["r"] != p["r"] and check_claim(ex, q["r"], f"valid-from:{p['l']}", problems, "pair") is True:
+                        problems.append(f"{i}: {q['r']!r} is also the solution of {p['l']!r}")
         if chk == "solves":   # no right value may also solve another pair's equation
             for p in pairs:
                 for q in pairs:
@@ -1073,7 +1271,7 @@ def validate(data):
 
 # ---------------------------------------------------------------- markup
 def markup(text, hl_at=None, hl_out=None, color="yellow"):
-    s = text
+    s = text.replace("<", "&lt;").replace(">", "&gt;")       # inequality symbols (1.4) are text, not tags
     tag = f'<span class="hl c-{color}" data-at="{hl_at}" data-out="{hl_out}">' if hl_at else "<span>"
     s = s.replace("⟨", tag).replace("⟩", "</span>")
     s = re.sub(r"\[\[(.+?) \| (.+?)\]\]", r'<span class="frac"><span class="top">\1</span><span class="bot">\2</span></span>', s)

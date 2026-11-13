@@ -1,0 +1,69 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l04-ex06",
+  "title": "Exercise 6",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's look at this one. Starting from negative two x is less than ten, which of these could be the next line? Choose all that apply.",
+          "display": "Starting from −2x < 10, which of these could be the next line? Select all that apply.",
+          "cue": "show-problem",
+          "pause_after_s": 1.5
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "One by one",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "X is greater than negative five. Yes: both sides were divided by negative two, and the symbol was flipped.",
+          "display": "x > −5",
+          "cue": "option-1"
+        },
+        {
+          "id": "b03",
+          "text": "X is less than negative five. No: dividing by negative two flips the symbol, and this line did not.",
+          "display": "x < −5",
+          "cue": "option-2"
+        },
+        {
+          "id": "b04",
+          "text": "Two x is greater than negative ten. Yes: both sides were multiplied by negative one, and the symbol was flipped.",
+          "display": "2x > −10",
+          "cue": "option-3"
+        },
+        {
+          "id": "b05",
+          "text": "Negative x is less than five. Yes: both sides were divided by two, which is positive, so the symbol stays.",
+          "display": "−x < 5",
+          "cue": "option-4"
+        },
+        {
+          "id": "b06",
+          "text": "X is greater than five. No: the boundary should be negative five, not five.",
+          "display": "x > 5",
+          "cue": "option-5"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b07",
+          "text": "Three lines follow: x is greater than negative five, two x is greater than negative ten, and negative x is less than five. Each one keeps the same solutions.",
+          "cue": "answer"
+        }
+      ]
+    }
+  ]
+}

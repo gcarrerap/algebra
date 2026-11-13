@@ -1,0 +1,69 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l04-ex14",
+  "title": "Exercise 14",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. A student's work is on the screen, line one at the top. Which line is the first one that is wrong?",
+          "display": "10 − 2x ≥ 4x − 8\n10 ≥ 6x − 8\n18 ≥ 6x\nx ≥ 3\n3 ≤ x",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "The first step adds two x to both sides, by the addition property. That is allowed, so line two is fine.",
+          "display": "10 ≥ 6x − 8",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "The second step adds eight to both sides. That is allowed too, so line three is fine.",
+          "display": "18 ≥ 6x",
+          "cue": "step-2"
+        },
+        {
+          "id": "b04",
+          "text": "The third step divides both sides by six. Six is positive, so the symbol stays: eighteen is greater than or equal to six x becomes three is greater than or equal to x. The student wrote x is greater than or equal to three instead, so line four is wrong.",
+          "display": "x ≥ 3",
+          "cue": "step-3"
+        },
+        {
+          "id": "b05",
+          "text": "The last step swaps the sides, which is fine on its own, but it carries the error.",
+          "display": "3 ≤ x",
+          "cue": "step-4"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b06",
+          "text": "So the answer is line four.",
+          "display": "4",
+          "cue": "answer"
+        },
+        {
+          "id": "b07",
+          "text": "Watch out for these traps. If you point at the final answer, you get five. If you blame the line before the mistake, you get three.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

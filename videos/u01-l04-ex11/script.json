@@ -1,0 +1,63 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l04-ex11",
+  "title": "Exercise 11",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's look at this one. Match each inequality with its solution.",
+          "display": "Match each inequality with its solution.",
+          "cue": "show-problem",
+          "pause_after_s": 1.5
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Pair by pair",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "X plus four is less than ten. Subtract four from both sides: x is less than six.",
+          "display": "x + 4 < 10 → x < 6",
+          "cue": "pair-1"
+        },
+        {
+          "id": "b03",
+          "text": "Three x is greater than or equal to twelve. Divide by three: x is greater than or equal to four.",
+          "display": "3x ≥ 12 → x ≥ 4",
+          "cue": "pair-2"
+        },
+        {
+          "id": "b04",
+          "text": "Negative three x is greater than or equal to twelve. Divide by negative three, and flip the symbol: x is less than or equal to negative four.",
+          "display": "−3x ≥ 12 → x ≤ −4",
+          "cue": "pair-3"
+        },
+        {
+          "id": "b05",
+          "text": "Negative x is less than two. Multiply by negative one, and flip the symbol: x is greater than negative two.",
+          "display": "−x < 2 → x > −2",
+          "cue": "pair-4"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b06",
+          "text": "Each solution comes from undoing the operations. Dividing or multiplying by a negative number flips the symbol, so negative three x is greater than or equal to twelve becomes x is less than or equal to negative four.",
+          "cue": "answer"
+        }
+      ]
+    }
+  ]
+}

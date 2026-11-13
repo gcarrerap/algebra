@@ -1,0 +1,69 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l04-ex10",
+  "title": "Exercise 10",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's look at this one. Select all the numbers that are solutions of negative three x plus four is less than or equal to thirteen.",
+          "display": "Select all the numbers that are solutions of −3x + 4 ≤ 13.",
+          "cue": "show-problem",
+          "pause_after_s": 1.5
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "One by one",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Negative four. No: negative three times negative four is twelve, plus four is sixteen, which is more than thirteen.",
+          "display": "−4",
+          "cue": "option-1"
+        },
+        {
+          "id": "b03",
+          "text": "Negative three. Yes: negative three times negative three is nine, plus four is thirteen, and thirteen is less than or equal to thirteen.",
+          "display": "−3",
+          "cue": "option-2"
+        },
+        {
+          "id": "b04",
+          "text": "Zero. Yes: negative three times zero is zero, plus four is four, which is less than thirteen.",
+          "display": "0",
+          "cue": "option-3"
+        },
+        {
+          "id": "b05",
+          "text": "Two. Yes: negative three times two is negative six, plus four is negative two, which is less than thirteen.",
+          "display": "2",
+          "cue": "option-4"
+        },
+        {
+          "id": "b06",
+          "text": "Negative five. No: negative three times negative five is fifteen, plus four is nineteen, which is more than thirteen.",
+          "display": "−5",
+          "cue": "option-5"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b07",
+          "text": "Negative three, zero, and two are solutions: the solutions are x greater than or equal to negative three. Negative four and negative five give more than thirteen.",
+          "cue": "answer"
+        }
+      ]
+    }
+  ]
+}

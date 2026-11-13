@@ -1,0 +1,69 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l04-ex04",
+  "title": "Exercise 4",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's look at this one. Select all the moves that make you flip the symbol.",
+          "display": "Select all the moves that make you flip the symbol.",
+          "cue": "show-problem",
+          "pause_after_s": 1.5
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "One by one",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Divide both sides by negative four. Yes: dividing by a negative number flips the symbol.",
+          "display": "Divide both sides by −4",
+          "cue": "option-1"
+        },
+        {
+          "id": "b03",
+          "text": "Multiply both sides by negative one. Yes: multiplying by a negative number flips the symbol.",
+          "display": "Multiply both sides by −1",
+          "cue": "option-2"
+        },
+        {
+          "id": "b04",
+          "text": "Add negative three to both sides. No: adding never flips the symbol, even when the number is negative.",
+          "display": "Add −3 to both sides",
+          "cue": "option-3"
+        },
+        {
+          "id": "b05",
+          "text": "Divide both sides by five. No: five is positive, so the symbol stays.",
+          "display": "Divide both sides by 5",
+          "cue": "option-4"
+        },
+        {
+          "id": "b06",
+          "text": "Subtract six from both sides. No: subtracting never flips the symbol.",
+          "display": "Subtract 6 from both sides",
+          "cue": "option-5"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b07",
+          "text": "Dividing by negative four and multiplying by negative one flip the symbol. Adding, subtracting, or dividing by a positive number never does.",
+          "cue": "answer"
+        }
+      ]
+    }
+  ]
+}
