@@ -1,0 +1,220 @@
+{
+ "format": "algebra-video-script",
+ "version": 1,
+ "video": "u01-l01-solving-equations",
+ "title": "One-step and multi-step equations",
+ "voice": "narrator",
+ "source": "video-scripts/u01.md#1.1",
+ "scenes": [
+  {
+   "id": "s01",
+   "title": "A mystery number",
+   "blocks": [
+    {
+     "id": "b01",
+     "text": "I'm thinking of a number. When I add seven, I get twelve. What's my number?",
+     "display": "x + 7 = 12",
+     "pause_after_s": 5.0
+    },
+    {
+     "id": "b02",
+     "text": "Five. You probably undid the plus seven in your head. Solving an equation means finding the value that makes it true, and that value is called the solution.",
+     "display": "5 + 7 = 12"
+    }
+   ]
+  },
+  {
+   "id": "s02",
+   "title": "The balance",
+   "blocks": [
+    {
+     "id": "b03",
+     "text": "Think of an equation as a balance. Both sides weigh the same."
+    },
+    {
+     "id": "b04",
+     "text": "To get x alone, take seven away from the left. To keep it balanced, take seven away from the right too. What's left is x equals five.",
+     "display": "x = 5"
+    },
+    {
+     "id": "b05",
+     "text": "Why do we have to do the same thing to both sides? What would happen to the balance if we didn't?",
+     "pause_after_s": 10.0
+    },
+    {
+     "id": "b06",
+     "text": "It would tip. The two sides would no longer be equal, and the equation would become false. Doing the same to both sides is the one rule that keeps it true."
+    }
+   ]
+  },
+  {
+   "id": "s03",
+   "title": "Inverse operations",
+   "blocks": [
+    {
+     "id": "b07",
+     "text": "Every operation has an inverse that undoes it. Addition and subtraction undo each other. Multiplication and division undo each other.",
+     "display": "+ 7"
+    },
+    {
+     "id": "b08",
+     "text": "In three x equals twenty-one, x is multiplied by three. Undo it by dividing both sides by three. X equals seven.",
+     "display": "3x = 21"
+    },
+    {
+     "id": "b09",
+     "text": "In x minus four equals negative nine, undo the minus four by adding four to both sides. X equals negative five.",
+     "display": "x − 4 = −9"
+    },
+    {
+     "id": "b10",
+     "text": "And in x over two equals six, multiply both sides by two. X equals twelve.",
+     "display": "x/2 = 6"
+    }
+   ]
+  },
+  {
+   "id": "s04",
+   "title": "Always check",
+   "blocks": [
+    {
+     "id": "b11",
+     "text": "You can always check a solution. Put it back into the original equation. Negative five minus four is negative nine. It works.",
+     "display": "x − 4 = −9"
+    },
+    {
+     "id": "b12",
+     "text": "Here's one to think about. In negative x equals eight, what is x multiplied by?",
+     "pause_after_s": 10.0
+    },
+    {
+     "id": "b13",
+     "text": "By negative one. Divide both sides by negative one, and x equals negative eight.",
+     "display": "−1 · x = 8"
+    }
+   ]
+  },
+  {
+   "id": "s05",
+   "title": "Your turn",
+   "blocks": [
+    {
+     "id": "b14",
+     "text": "Your turn. Solve all three, and check each one. Pause the video and try it.",
+     "display": "y + 15 = 4",
+     "pause_after_s": 20.0
+    },
+    {
+     "id": "b15",
+     "text": "Y equals negative eleven, m equals negative seven, and k equals negative fifteen.",
+     "display": "y = −11"
+    },
+    {
+     "id": "b16",
+     "text": "Remember: find the operation done to the variable, undo it with its inverse, do it to both sides, and check."
+    }
+   ]
+  },
+  {
+   "id": "s06",
+   "title": "Shoes and socks",
+   "blocks": [
+    {
+     "id": "b17",
+     "text": "In the morning you put on socks, then shoes. At night you undo it in reverse: shoes first, then socks."
+    },
+    {
+     "id": "b18",
+     "text": "Equations work the same way. In two x plus three equals eleven, x was multiplied by two and then three was added. So we undo in reverse.",
+     "display": "2x + 3 = 11"
+    },
+    {
+     "id": "b19",
+     "text": "Which operation do we undo first?",
+     "pause_after_s": 5.0
+    },
+    {
+     "id": "b20",
+     "text": "The last one, plus three. Subtract three from both sides: two x equals eight. Then divide by two: x equals four.",
+     "display": "2x = 8"
+    }
+   ]
+  },
+  {
+   "id": "s07",
+   "title": "Clean up first",
+   "blocks": [
+    {
+     "id": "b21",
+     "text": "Some equations need tidying before you undo anything. Three times the quantity x minus two, plus x, equals eighteen.",
+     "display": "3(x − 2) + x = 18"
+    },
+    {
+     "id": "b22",
+     "text": "Distribute: three x minus six plus x. Combine like terms: four x minus six equals eighteen.",
+     "display": "3x − 6 + x = 18"
+    },
+    {
+     "id": "b23",
+     "text": "Now it's a two-step equation. Add six: four x equals twenty-four. Divide by four: x equals six. And the check works: three times four, plus six, is eighteen.",
+     "display": "4x = 24"
+    },
+    {
+     "id": "b24",
+     "text": "Why is it safer to simplify each side before moving anything across the equals sign?",
+     "pause_after_s": 10.0
+    },
+    {
+     "id": "b25",
+     "text": "Because then each side is as short as it can be, and every step you take is a single, clear move."
+    }
+   ]
+  },
+  {
+   "id": "s08",
+   "title": "Fractions",
+   "blocks": [
+    {
+     "id": "b26",
+     "text": "Fractions make equations look harder than they are. Look at x over three, plus one half, equals five sixths.",
+     "display": "x/3 + 1/2 = 5/6"
+    },
+    {
+     "id": "b27",
+     "text": "What number could you multiply everything by, so that every fraction disappears?",
+     "pause_after_s": 10.0
+    },
+    {
+     "id": "b28",
+     "text": "Six, because six is a multiple of three, two, and six. Multiply every term on both sides by six. You get two x plus three equals five. Subtract three, divide by two, and x equals one.",
+     "display": "6 · x/3 + 6 · 1/2 = 6 · 5/6"
+    }
+   ]
+  },
+  {
+   "id": "s09",
+   "title": "Your turn",
+   "blocks": [
+    {
+     "id": "b29",
+     "text": "Your turn. Solve five minus two times the quantity x plus four equals seven. Watch the sign of the two. Pause the video and try it.",
+     "display": "5 − 2(x + 4) = 7",
+     "pause_after_s": 20.0
+    },
+    {
+     "id": "b30",
+     "text": "Distribute negative two: five minus two x minus eight. Combine: negative two x minus three equals seven. Add three: negative two x equals ten. Divide by negative two: x equals negative five.",
+     "display": "5 − 2x − 8 = 7"
+    },
+    {
+     "id": "b31",
+     "text": "Remember: simplify each side, then undo the operations in reverse order, and check your answer in the original equation."
+    },
+    {
+     "id": "b32",
+     "text": "This video uses an AI-generated voice."
+    }
+   ]
+  }
+ ]
+}

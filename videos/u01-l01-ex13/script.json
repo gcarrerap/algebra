@@ -1,0 +1,57 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l01-ex13",
+  "title": "Exercise 13",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Solve for x: x plus three, all over two, equals five.",
+          "display": "(x + 3) over (2) = 5",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Multiply both sides by two to clear the fraction. Five times two is ten, so x plus three equals ten.",
+          "display": "x + 3 = 10",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Subtract three from both sides, and x equals seven.",
+          "display": "x = 7",
+          "cue": "step-2"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b04",
+          "text": "So the answer is x equals seven. Check it. Put seven in for x, and both sides equal five.",
+          "display": "x = 7",
+          "cue": "answer"
+        },
+        {
+          "id": "b05",
+          "text": "Watch out for these traps. If you multiply the left side only, you get two. If you add three instead of subtracting it, you get thirteen.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

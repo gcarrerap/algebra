@@ -1,0 +1,57 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l01-ex10",
+  "title": "Exercise 10",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Solve for x: x over four minus three equals two.",
+          "display": "(x) over (4) − 3 = 2",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Undo the minus three first. Add three to both sides, and x over four equals five.",
+          "display": "(x) over (4) = 5",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Now x is divided by four. Multiply both sides by four, and x equals twenty.",
+          "display": "x = 20",
+          "cue": "step-2"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b04",
+          "text": "So the answer is x equals twenty. Check it. Put twenty in for x, and both sides equal two.",
+          "display": "x = 20",
+          "cue": "answer"
+        },
+        {
+          "id": "b05",
+          "text": "Watch out for these traps. If you subtract three instead of adding it, you get negative one. If you stop after adding three, you get five.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

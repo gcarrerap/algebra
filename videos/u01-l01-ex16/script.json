@@ -1,0 +1,69 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l01-ex16",
+  "title": "Exercise 16",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Solve for x: three times the quantity two x minus four, plus six, equals twenty-four.",
+          "display": "3(2x − 4) + 6 = 24",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Distribute the three: six x minus twelve.",
+          "display": "6x − 12 + 6 = 24",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Combine the plain numbers: negative twelve plus six is negative six.",
+          "display": "6x − 6 = 24",
+          "cue": "step-2"
+        },
+        {
+          "id": "b04",
+          "text": "Add six to both sides, and six x equals thirty.",
+          "display": "6x = 30",
+          "cue": "step-3"
+        },
+        {
+          "id": "b05",
+          "text": "Divide both sides by six, and x equals five.",
+          "display": "x = 5",
+          "cue": "step-4"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b06",
+          "text": "So the answer is x equals five. Check it. Put five in for x, and both sides equal twenty-four.",
+          "display": "x = 5",
+          "cue": "answer"
+        },
+        {
+          "id": "b07",
+          "text": "Watch out for these traps. If you treat negative twelve plus six as negative eighteen, you get seven. If you forget the negative when you distribute, you get one.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

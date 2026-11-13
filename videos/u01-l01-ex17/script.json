@@ -1,0 +1,63 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l01-ex17",
+  "title": "Exercise 17",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Solve for x: negative three times the quantity x minus two equals fifteen.",
+          "display": "−3(x − 2) = 15",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Distribute the negative three. Negative three times negative two is positive six, so negative three x plus six equals fifteen.",
+          "display": "−3x + 6 = 15",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Subtract six from both sides, and negative three x equals nine.",
+          "display": "−3x = 9",
+          "cue": "step-2"
+        },
+        {
+          "id": "b04",
+          "text": "Divide both sides by negative three, and x equals negative three.",
+          "display": "x = −3",
+          "cue": "step-3"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b05",
+          "text": "So the answer is x equals negative three. Check it. Put negative three in for x, and both sides equal fifteen.",
+          "display": "x = −3",
+          "cue": "answer"
+        },
+        {
+          "id": "b06",
+          "text": "Watch out for these traps. If you make the six negative, you get negative seven. If you lose the negative sign when dividing, you get three.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

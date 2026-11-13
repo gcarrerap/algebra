@@ -1,0 +1,57 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l01-ex08",
+  "title": "Exercise 8",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Solve for x: ten minus x equals four.",
+          "display": "10 − x = 4",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Subtract ten from both sides. That leaves negative x equals negative six.",
+          "display": "−x = −6",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Negative x means negative one times x. Divide both sides by negative one, and x equals six.",
+          "display": "x = 6",
+          "cue": "step-2"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b04",
+          "text": "So the answer is x equals six. Check it. Put six in for x, and both sides equal four.",
+          "display": "x = 6",
+          "cue": "answer"
+        },
+        {
+          "id": "b05",
+          "text": "Watch out for these traps. If you add ten to the four, you get fourteen. If you stop at negative x equals negative six, you get negative six.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

@@ -26,7 +26,7 @@ Mathematics. Each unit lists the standards it covers.
 ## Unit 1 — Linear Equations and Inequalities
 *KY.HS.A.12, A.15, A.16, A.18, N.4–N.6* · [scripts](video-scripts/u01.md)
 
-1. One-step and multi-step equations — *video ≈ 6:14*
+1. One-step and multi-step equations — *video 5:55* (produced)
 2. Variables on both sides; no solution and infinitely many solutions — *video ≈ 5:51*
 3. Justifying each step (properties of equality) — *video 2:30* (produced)
 4. Linear inequalities and graphing them on a number line — *video ≈ 5:34*

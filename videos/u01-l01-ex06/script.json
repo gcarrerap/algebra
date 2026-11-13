@@ -1,0 +1,57 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l01-ex06",
+  "title": "Exercise 6",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Solve for x: three x plus six equals twenty-one.",
+          "display": "3x + 6 = 21",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Work backwards. The last thing done to 3x was adding six, so subtract six from both sides. Three x equals fifteen.",
+          "display": "3x = 15",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Now x is multiplied by three. Divide both sides by three, and x equals five.",
+          "display": "x = 5",
+          "cue": "step-2"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b04",
+          "text": "So the answer is x equals five. Check it. Put five in for x, and both sides equal twenty-one.",
+          "display": "x = 5",
+          "cue": "answer"
+        },
+        {
+          "id": "b05",
+          "text": "Watch out for these traps. If you stop after subtracting six, you get fifteen. If you add six instead of subtracting it, you get nine.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

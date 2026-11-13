@@ -1,0 +1,63 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l01-ex09",
+  "title": "Exercise 9",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's look at this one. Match each equation with its solution. Check each one by putting the answer back.",
+          "display": "Match each equation with its solution.",
+          "cue": "show-problem",
+          "pause_after_s": 1.5
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Pair by pair",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Subtract one to get two x equals eight, then divide by two: x is four.",
+          "display": "2x + 1 = 9 → x = 4",
+          "cue": "pair-1"
+        },
+        {
+          "id": "b03",
+          "text": "Add five to get three x equals fifteen, then divide by three: x is five.",
+          "display": "3x − 5 = 10 → x = 5",
+          "cue": "pair-2"
+        },
+        {
+          "id": "b04",
+          "text": "Subtract two to get five x equals negative ten, then divide by five: x is negative two.",
+          "display": "5x + 2 = −8 → x = −2",
+          "cue": "pair-3"
+        },
+        {
+          "id": "b05",
+          "text": "Divide both sides by four to get x minus one equals five, then add one: x is six.",
+          "display": "4(x − 1) = 20 → x = 6",
+          "cue": "pair-4"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b06",
+          "text": "All four are matched. Each answer works when you put it back into its equation.",
+          "cue": "answer"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l01-ex12",
+  "title": "Exercise 12",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Solve for x: four x plus two x minus three equals twenty-one.",
+          "display": "4x + 2x − 3 = 21",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Combine the like terms first: four x plus two x is six x.",
+          "display": "6x − 3 = 21",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Add three to both sides, and six x equals twenty-four.",
+          "display": "6x = 24",
+          "cue": "step-2"
+        },
+        {
+          "id": "b04",
+          "text": "Divide both sides by six, and x equals four.",
+          "display": "x = 4",
+          "cue": "step-3"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b05",
+          "text": "So the answer is x equals four. Check it. Put four in for x, and both sides equal twenty-one.",
+          "display": "x = 4",
+          "cue": "answer"
+        },
+        {
+          "id": "b06",
+          "text": "Watch out for these traps. If you subtract three instead of adding it, you get three. If you stop after adding three, you get twenty-four.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

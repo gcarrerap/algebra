@@ -1,0 +1,69 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l01-ex14",
+  "title": "Exercise 14",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Solve for x: three minus two times the quantity x plus one equals negative five.",
+          "display": "3 − 2(x + 1) = −5",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Distribute the negative two to both terms inside. Three minus two x minus two.",
+          "display": "3 − 2 − 2x = −5",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Combine the plain numbers: three minus two is one.",
+          "display": "1 − 2x = −5",
+          "cue": "step-2"
+        },
+        {
+          "id": "b04",
+          "text": "Subtract one from both sides, and negative two x equals negative six.",
+          "display": "−2x = −6",
+          "cue": "step-3"
+        },
+        {
+          "id": "b05",
+          "text": "Divide both sides by negative two, and x equals three.",
+          "display": "x = 3",
+          "cue": "step-4"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b06",
+          "text": "So the answer is x equals three. Check it. Put three in for x, and both sides equal negative five.",
+          "display": "x = 3",
+          "cue": "answer"
+        },
+        {
+          "id": "b07",
+          "text": "Watch out for these traps. If you forget to apply the negative to the one, you get five. If you lose a negative sign when dividing, you get negative three.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

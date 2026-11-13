@@ -123,6 +123,29 @@ animates with the usual `data-at` / `data-out` / `data-dur`, and its color comes
 `span` a bracket under the labels, `ray` a shaded ray for inequality graphs. Width is
 `(to − from) × unit + 120` px: keep it under ~1750. First used in `u00-l01-signed-numbers`.
 
+**Balance scale** (CSS only, in `player.css`; first used in `u01-l01-solving-equations`). Two pans
+hang from a beam that tilts with the `--p` of the `.bal-tilt` element (so give it `data-at` and
+`data-dur`; its `--p` starts at 0, it does not inherit the scene's). A positive `--deg` (default
+9deg) lowers the right side; set `--arm` (beam half-length, default 400px) on `.bal` to resize.
+
+```html
+<div class="bal">
+  <div class="bal-post"></div><div class="bal-base"></div>
+  <div class="bal-tilt" data-at="b06+0.3" data-dur="1.4">
+    <div class="bal-beam"></div>
+    <div class="bal-pan l"><div class="bal-hang"></div><div class="bal-load"><!-- .bal-bag, .bal-units.u4 > .bal-unit … --></div><div class="bal-tray"></div></div>
+    <div class="bal-pan r">…</div>
+  </div>
+</div>
+```
+
+Units and bags inside a pan are ordinary elements: give them `data-at` / `data-out` to add or
+remove them. An operation label under a pan is a `.chip` (positioned and `nowrap` by the pan).
+Keep the whole scale clear of the bottom 170 px caption zone: captions wrap to 3–4 lines.
+
+**Stacked fraction** (`.frac`, `.top`, `.bot` in `player.css`): `<span class="frac"><span class="top">x</span><span class="bot">3</span></span>`.
+The exercise build writes the same markup from `[[top | bottom]]`.
+
 Still to build, before the units that need them: a coordinate plane (points, lines, parabolas,
 shaded half-planes; units 2–13), a table with difference/ratio arrows (units 4, 8, 13) and an
 area model (units 9–10). Add each one as an `_engine/*.js` component documented here.

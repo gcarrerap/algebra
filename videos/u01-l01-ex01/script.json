@@ -1,0 +1,63 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l01-ex01",
+  "title": "Exercise 1",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's look at this one. Match each equation with its solution. Undo the operation, then check.",
+          "display": "Match each equation with its solution.",
+          "cue": "show-problem",
+          "pause_after_s": 1.5
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Pair by pair",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Subtract four from both sides: eleven minus four is seven.",
+          "display": "x + 4 = 11 → x = 7",
+          "cue": "pair-1"
+        },
+        {
+          "id": "b03",
+          "text": "Add five to both sides: three plus five is eight.",
+          "display": "x − 5 = 3 → x = 8",
+          "cue": "pair-2"
+        },
+        {
+          "id": "b04",
+          "text": "Divide both sides by six: thirty divided by six is five.",
+          "display": "6x = 30 → x = 5",
+          "cue": "pair-3"
+        },
+        {
+          "id": "b05",
+          "text": "Multiply both sides by three: four times three is twelve.",
+          "display": "(x) over (3) = 4 → x = 12",
+          "cue": "pair-4"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b06",
+          "text": "Each equation now has its solution. Undo each operation with its inverse, on both sides, and you can always check by putting the answer back.",
+          "cue": "answer"
+        }
+      ]
+    }
+  ]
+}

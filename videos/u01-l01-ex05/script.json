@@ -1,0 +1,57 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l01-ex05",
+  "title": "Exercise 5",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Solve for k: k over five equals negative three.",
+          "display": "(k) over (5) = −3",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "The k is divided by five. Undo it by multiplying both sides by five.",
+          "display": "(k) over (5) · 5 = −3 · 5",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Negative three times five is negative fifteen, so k equals negative fifteen.",
+          "display": "k = −15",
+          "cue": "step-2"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b04",
+          "text": "So the answer is k equals negative fifteen. Check it. Put negative fifteen in for k, and both sides equal negative three.",
+          "display": "k = −15",
+          "cue": "answer"
+        },
+        {
+          "id": "b05",
+          "text": "Watch out for these traps. If you add five instead of multiplying, you get two. If you subtract five instead of multiplying, you get negative eight.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

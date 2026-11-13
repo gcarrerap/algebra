@@ -50,6 +50,15 @@ OPERATION_WORDS = {"addition": ["sum", "more than", "increased by", "plus", "tot
                    "subtraction": ["difference", "less than", "decreased by", "minus", "subtract", "fewer than", "take away"],
                    "multiplication": ["product", "times", "twice", "triple", "double"],
                    "division": ["quotient", "per", "divided by", "split", "shared equally"]}
+# lesson 1.1: a chip that is an operation written with its number ("−7", "÷3", "×6") takes the
+# color of the operation: + blue, − purple, × yellow, ÷ green. It means "do this to both sides".
+OP_COLOR = {"+": "blue", "−": "purple", "×": "yellow", "÷": "green"}
+
+
+def chip_color(c):
+    return CHIP_COLOR.get(c) or OP_COLOR.get(c[:1])
+
+
 PROPERTIES = {"Commutative": "blue", "Associative": "purple", "Distributive": "yellow"}
 # exact test points for expressions with variables: two expressions are treated as equal when they
 # agree at every point (all exercises are low-degree polynomials, so this cannot be fooled)
@@ -91,6 +100,41 @@ def ev(expr, sub=None, point=None):
 def same(e1, e2):
     """True when two expressions with variables agree at every test point."""
     return all(ev(e1, point=pt) == ev(e2, point=pt) for pt in POINTS)
+
+
+def equation_var(eq):
+    """The one letter of an equation like "3x − 4 = 11"."""
+    letters = sorted(set(re.findall(r"[a-z]", eq.replace("⟨", "").replace("⟩", ""))))
+    if len(letters) != 1:
+        raise ValueError(f"{eq!r} must have exactly one variable, found {letters}")
+    return letters[0]
+
+
+def solve_linear(eq):
+    """Solve a linear equation "L = R" exactly: returns (variable, value). The difference L − R is
+    evaluated at three values of the variable, so an equation that is not linear (or is true for
+    every value, or never) is refused."""
+    var = equation_var(eq)
+    left, right = eq.split("=")
+    f = lambda v: ev(left, {var: f"({v})"}) - ev(right, {var: f"({v})"})
+    a, b = f(1) - f(0), f(0)
+    if f(2) != 2 * a + b or f(5) != 5 * a + b:
+        raise ValueError(f"{eq!r} is not linear")
+    if a == 0:
+        raise ValueError(f"{eq!r} has no single solution")
+    return var, -b / a
+
+
+def substitute_text(eq, var, value):
+    """The equation with the variable replaced by value, for the check line of a solution video:
+    2x + 3 = 11 with 4 → 2(4) + 3 = 11. Negatives and numbers next to a number or ")" get parentheses."""
+    text = eq.replace("⟨", "").replace("⟩", "")
+    v = str(value).replace("-", "−")
+
+    def one(m):
+        before = text[:m.start()].rstrip(" ")[-1:]
+        return f"({v})" if (value < 0 or before.isdigit() or before == ")") else v
+    return re.sub(rf"(?<![A-Za-z]){var}(?![A-Za-z])", one, text)
 
 
 def classify(eq):
@@ -143,7 +187,7 @@ def check_steps(ex, problems, n_lines_extra=1):
         problems.append(f"{i}: lines/chips/say/at lengths do not match (lines = chips + 1)")
         return False
     for c in ex["chips"]:
-        if c not in CHIP_COLOR:
+        if chip_color(c) is None:
             problems.append(f"{i}: unknown chip {c!r}")
     for k, (text, at) in enumerate(zip(ex["say"], ex["at"])):
         m = re.fullmatch(r"([a-z0-9'-]+)(?:#(\d+))?", at)
@@ -184,6 +228,60 @@ def validate_expr(ex, problems):
             problems.append(f"{i}: wrong option {w['e']!r} equals the answer or another option")
         seen.append(w["e"])
         for f in ("why", "say", "read"):
+            if not w.get(f):
+                problems.append(f"{i}: wrong option {w['e']!r} has no {f!r}")
+
+
+def validate_solve(ex, problems):
+    """kind "solve" (lesson 1.1): the learner types the value of the variable. The question is an
+    equation with one integer solution, computed here. Every line of the work must be an equation with
+    that same solution, the last one must read "<var> = <solution>", and every wrong value must be a
+    number that does NOT solve the equation (substituting it is how the page names the mistake)."""
+    i = ex["id"]
+    try:
+        var, sol = solve_linear(ex["q"])
+    except Exception as e:  # noqa: BLE001
+        problems.append(f"{i}: cannot solve: {e}")
+        return
+    if sol.denominator != 1:
+        problems.append(f"{i}: the solution {sol} is not an integer")
+        return
+    ex["_answer"], ex["_var"] = int(sol), var
+    if not check_steps(ex, problems):
+        return
+    for k, line in enumerate(ex["lines"]):
+        try:
+            v2, s2 = solve_linear(line)
+            if v2 != var or s2 != sol:
+                problems.append(f"{i}: line {k} {line!r} has solution {s2}, not {sol}")
+        except Exception as e:  # noqa: BLE001
+            problems.append(f"{i}: line {k} cannot be solved: {e}")
+    want = f"{var} = {ex['_answer']}".replace("-", "−")
+    if ex["lines"][-1] != want:
+        problems.append(f"{i}: the last line must be {want!r}")
+    for f in ("prompt", "read"):
+        if not ex.get(f):
+            problems.append(f"{i}: needs {f!r}")
+    if len(ex["wrong"]) != 3:
+        problems.append(f"{i}: needs exactly 3 wrong options")
+    seen = {ex["_answer"]}
+    for w in ex["wrong"]:
+        try:
+            v = ev(w["e"])
+        except Exception as e:  # noqa: BLE001
+            problems.append(f"{i}: wrong option {w['e']!r} cannot be evaluated: {e}")
+            continue
+        if v.denominator != 1:
+            problems.append(f"{i}: wrong option {w['e']!r} = {v} is not an integer")
+            continue
+        w["_value"] = int(v)
+        if int(v) in seen:
+            problems.append(f"{i}: wrong option {w['e']!r} = {int(v)} equals the answer or another option")
+        seen.add(int(v))
+        left, right = ex["q"].split("=")
+        if ev(left, {var: f"({v})"}) == ev(right, {var: f"({v})"}):
+            problems.append(f"{i}: wrong option {w['e']!r} actually solves the equation")
+        for f in ("why", "say"):
             if not w.get(f):
                 problems.append(f"{i}: wrong option {w['e']!r} has no {f!r}")
 
@@ -651,12 +749,17 @@ def check_claim(ex, item_text, claim, problems, what):
     claim "terms:<n>"       → item has exactly <n> terms;
     claim "coefficient:<n>" → item is one term whose coefficient is <n>;
     claim "like:<term>"     → item is one term with the same variable part as <term> (a like term);
+<<<<<<< Updated upstream
     claim "operation:<name>"→ the phrase contains a key word of exactly that operation (OPERATION_WORDS);
     claim "step:<Property>" → item is a step "A → B" between two equations that is justified by that
                               property (Addition, Subtraction, Multiplication, Division, Distributive,
                               Combine; only the first word counts), read from the equations (1.3);
     claim "valid-from:<equation>" → item is an equation with the same solution as <equation>, so it could
                               be the next line of its solution (1.3)."""
+=======
+    claim "solution:<eq>"   → item ("x = 5" or "5") is a solution of the equation <eq> (1.1: checked by substituting);
+    claim "operation:<name>"→ the phrase contains a key word of exactly that operation (OPERATION_WORDS)."""
+>>>>>>> Stashed changes
     i = ex["id"]
     kind, _, arg = claim.partition(":")
     try:
@@ -680,6 +783,12 @@ def check_claim(ex, item_text, claim, problems, what):
         if kind == "true":
             left, right = item_text.split("=")
             return same(left, right)
+        if kind == "solution":
+            var = equation_var(arg)
+            m = re.fullmatch(rf"\s*{var}\s*=\s*(.+)", item_text)
+            v = ev(m.group(1) if m else item_text)
+            left, right = arg.split("=")
+            return ev(left, {var: f"({v})"}) == ev(right, {var: f"({v})"})
         if kind == "term-of":
             return _norm(item_text).lstrip("+") in [t.lstrip("+") for t in split_terms(arg)]
         if kind == "terms":
@@ -756,11 +865,23 @@ def validate_match(ex, problems):
             claim = f"property:{p['r']}" if chk == "property" else f"equals:{p['r']}" if chk == "equal" \
                 else f"coefficient:{p['r']}" if chk == "coefficient" \
                 else f"operation:{p['r']}" if chk == "operation" \
+<<<<<<< Updated upstream
                 else f"step:{p['r']}" if chk == "step" \
                 else f"terms:{p['r']}" if chk == "terms" else chk
             if check_claim(ex, p["l"], claim, problems, "pair") is False:
+=======
+                else f"terms:{p['r']}" if chk == "terms" \
+                else f"solution:{p['l']}" if chk == "solves" else chk
+            item = p["r"] if chk == "solves" else p["l"]      # "solves": left = equation, right = its solution
+            if check_claim(ex, item, claim, problems, "pair") is False:
+>>>>>>> Stashed changes
                 problems.append(f"{i}: pair {p['l']!r} → {p['r']!r} is not right")
     if chk := ex.get("check"):
+        if chk == "solves":   # no right value may also solve another pair's equation
+            for p in pairs:
+                for q in pairs:
+                    if q is not p and q["r"] != p["r"] and check_claim(ex, q["r"], f"solution:{p['l']}", problems, "pair") is True:
+                        problems.append(f"{i}: {q['r']!r} also solves {p['l']!r}")
         if chk == "equal":   # no left item may also equal another pair's right item
             for p in pairs:
                 for q in pairs:
@@ -790,6 +911,9 @@ def validate(data):
             continue
         if kind == "words":
             validate_words(ex, problems)
+            continue
+        if kind == "solve":
+            validate_solve(ex, problems)
             continue
         if ex.get("derive"):
             validate_derive(ex, problems)
@@ -821,7 +945,7 @@ def validate(data):
             if k == n and has_hl:
                 problems.append(f"{i}: the last line must have no ⟨…⟩")
         for c in ex["chips"]:
-            if c not in CHIP_COLOR:
+            if chip_color(c) is None:
                 problems.append(f"{i}: unknown chip {c!r}")
         for k, (text, at) in enumerate(zip(ex["say"], ex["at"])):
             m = re.fullmatch(r"([a-z0-9'-]+)(?:#(\d+))?", at)
@@ -902,8 +1026,15 @@ def video_files(data, ex, num, set_id):
     n, lv = len(ex["chips"]), data["levels"][str(ex["level"])]
     wrong = ex["wrong"]
     isw = ex["kind"] == "words"
+    iss = ex["kind"] == "solve"
     q_plain = plain(ex["prompt"]) if isw else plain(ex["q"])
-    if ex["kind"] == "num":
+    if iss:      # lesson 1.1: the answer reads "x = 5"; each trap is a wrong value of x
+        ans, var = ex["_answer"], ex["_var"]
+        ans_say, ans_html, ans_plain = f"{var} equals {words(ans)}", markup(ex["lines"][-1]), ex["lines"][-1]
+        trap_say = [words(w["_value"]) for w in wrong]
+        trap_html = [markup(f"{var} = {w['_value']}".replace("-", "−")) for w in wrong]
+        trap_size = "sm"
+    elif ex["kind"] == "num":
         ans = ex["_answer"]
         # "a_read" / "a_show": how the answer is spoken and shown when it is not just the number
         # (1.3: "line three", "x = 6")
@@ -922,8 +1053,16 @@ def video_files(data, ex, num, set_id):
         val = int(ex["_test_value"])
         test_say = f" Test it. If {t['var']} is {words(t['value'])}, the expression gives {words(val)}."
         test_html = f"{t['var']} = {t['value']}: {markup(ex['a'])} → <span class=\"green\">{money(val)}</span>"
+    elif iss:    # the check the lesson teaches: put the answer back in the equation, computed here
+        left, right = ex["q"].split("=")
+        lv, rv = ev(left, {var: f"({ans})"}), ev(right, {var: f"({ans})"})
+        if lv != rv:
+            raise ValueError(f"{ex['id']}: the check does not balance")
+        test_say = f" Check it. Put {words(ans)} in for {var}, and both sides equal {words(int(lv))}."
+        test_html = f"{markup(substitute_text(ex['q'], var, ans))} <span class=\"green\">✓</span>"
     else:
         test_say = test_html = ""
+    test_word = "check" if iss else "test"
     trap_text = ("Watch out for these traps. "
                  + " ".join(f"If you {w['say']}, you get {ts}." for w, ts in zip(wrong[:2], trap_say)))
 
@@ -941,7 +1080,7 @@ def video_files(data, ex, num, set_id):
                  "cue": "show-problem", "pause_after_s": 1.2}]},
             {"id": "s02", "title": "Step by step", "blocks": blocks_s2},
             {"id": "s03", "title": "The answer", "blocks": [
-                {"id": b_ans, "text": f"So the answer is {ans_say}.{test_say}", "display": ans_plain if ex.get("derive") else f"= {ans_plain}", "cue": "answer"},
+                {"id": b_ans, "text": f"So the answer is {ans_say}.{test_say}", "display": ans_plain if ex.get("derive") or iss else f"= {ans_plain}", "cue": "answer"},
                 {"id": b_trap, "text": trap_text, "cue": "traps"}]},
         ],
     }
@@ -954,7 +1093,7 @@ def video_files(data, ex, num, set_id):
     rows = []
     for j, line in enumerate(ex["lines"]):
         if j < n:
-            color = CHIP_COLOR[ex["chips"][j]]
+            color = chip_color(ex["chips"][j])
             blk = f"b{j + 2:02d}"
             html = markup(line, hl_at=blk, hl_out=f"{blk}.end", color=color)
         else:
@@ -966,7 +1105,7 @@ def video_files(data, ex, num, set_id):
             blk = f"b{j + 1:02d}"
             at = f"{blk}@{ex['at'][j - 1]}"
             chip = ex["chips"][j - 1]
-            rows.append(f'      <span class="chip c-{CHIP_COLOR[chip]} pop" data-at="{at}">{chip}</span>')
+            rows.append(f'      <span class="chip c-{chip_color(chip)} pop" data-at="{at}">{chip}</span>')
             cls = "pop green" if j == n else "fade"
             rows.append(f'      <div class="math {row_size} {cls}" data-at="{at}">{html}</div>')
     cards = []
@@ -975,9 +1114,9 @@ def video_files(data, ex, num, set_id):
             f'        <div class="card trap fade c-red" data-at="{b_trap}+{0.15 + 0.25 * k:.2f}">'
             f'<div class="math {trap_size} red"><span class="strike" data-at="{b_trap}+{0.9 + 0.25 * k:.2f}" data-dur="0.5">{trap_html[k]}</span></div>'
             f'<div class="why">{w["why"]}</div></div>')
-    if isw:
+    if isw or iss:
         answer_line = (f'<div class="math sm green pop" data-at="{b_ans}@{last_word}">{ans_html}</div>'
-                       f'<div class="math xs fade" data-at="{b_ans}@test">{test_html}</div>')
+                       f'<div class="math xs fade" data-at="{b_ans}@{test_word}">{test_html}</div>')
     elif ex.get("derive"):    # a question about the parts, not an equation: show the question, then the answer
         # a student's work (several lines) is not repeated here: it would not leave room for the traps
         q_again = "" if "\n" in ex["q"] else f'<div class="math sm fade" data-at="{b_ans}-0.5">{markup(ex["q"])}</div>'
@@ -1342,6 +1481,10 @@ def quiz_data(data):
             out.append({**base, "input": "num", "answer": str(ex["_answer"]), "aHtml": money(ex["_answer"]),
                         "mistakes": [{"v": str(w["_value"]), "why": w["why"]} for w in ex["wrong"]]})
             continue
+        if ex["kind"] == "solve":
+            out.append({**base, "input": "num", "answer": str(ex["_answer"]), "aHtml": markup(ex["lines"][-1]),
+                        "mistakes": [{"v": str(w["_value"]), "why": w["why"]} for w in ex["wrong"]]})
+            continue
         if ex["kind"] == "words":
             out.append({**base, "q": "", "input": "expr", "anyForm": True, "answer": plain_math(ex["a"]), "aHtml": markup(ex["a"]),
                         "mistakes": [{"e": plain_math(w["e"]), "why": w["why"]} for w in ex["wrong"]]})
@@ -1387,7 +1530,7 @@ def build(set_dir, check_only):
                 desc = "match: " + "; ".join(f"{p['l']} → {p['r']}" for p in ex["pairs"])
             print(f"  {ex['id']}  {ex['prompt'][:34]:<34} → {desc}")
             continue
-        if ex["kind"] == "num":
+        if ex["kind"] in ("num", "solve"):
             ans, wr = ex["_answer"], [w["_value"] for w in ex["wrong"]]
         elif ex["kind"] in ("expr", "words"):
             ans, wr = ex["a"], [w["e"] for w in ex["wrong"]]

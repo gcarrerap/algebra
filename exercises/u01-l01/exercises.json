@@ -1,0 +1,746 @@
+{
+ "unit": "1.1",
+ "title": "One-step and Multi-step Equations",
+ "h1": "Solving <span class=\"y\">equations</span>",
+ "levels": {
+  "1": "Warm-up",
+  "2": "Tricky",
+  "3": "Challenging",
+  "4": "Boss level"
+ },
+ "_notes": "Source of truth for the 1.1 practice set. Kind \"solve\": the learner types the value of the variable. The build solves \"q\" exactly (one integer solution), checks that every line of the work is an equation with that same solution, that the last line reads \"<var> = <solution>\", and that every wrong value is a real number that does NOT solve the equation. Chips are operations written with their number (\"−7\", \"÷3\", \"×6\", \"+8\"), colored by operation (+ blue, − purple, × yellow, ÷ green), or DIST yellow / COMBINE green / CALC green. \"match\" uses check \"solves\" (left = equation, right = \"x = value\"): each pair is verified by substituting, and no right value may solve another pair's equation. The video ends with the check: the answer is put back into the equation, computed by the build. See docs/exercises.md.",
+ "exercises": [
+  {
+   "id": "ex01",
+   "level": 1,
+   "kind": "match",
+   "prompt": "Match each equation with its solution.",
+   "read": "Match each equation with its solution. Undo the operation, then check.",
+   "check": "solves",
+   "say_answer": "Each equation now has its solution. Undo each operation with its inverse, on both sides, and you can always check by putting the answer back.",
+   "pairs": [
+    {
+     "l": "x + 4 = 11",
+     "r": "x = 7",
+     "why": "Subtract 4 from both sides: 11 − 4 = 7.",
+     "say": "Subtract four from both sides: eleven minus four is seven."
+    },
+    {
+     "l": "x − 5 = 3",
+     "r": "x = 8",
+     "why": "Add 5 to both sides: 3 + 5 = 8.",
+     "say": "Add five to both sides: three plus five is eight."
+    },
+    {
+     "l": "6x = 30",
+     "r": "x = 5",
+     "why": "Divide both sides by 6: 30 ÷ 6 = 5.",
+     "say": "Divide both sides by six: thirty divided by six is five."
+    },
+    {
+     "l": "[[x | 3]] = 4",
+     "r": "x = 12",
+     "why": "Multiply both sides by 3: 4 × 3 = 12.",
+     "say": "Multiply both sides by three: four times three is twelve."
+    }
+   ]
+  },
+  {
+   "id": "ex02",
+   "level": 1,
+   "kind": "solve",
+   "prompt": "Solve for x. Type the value of x.",
+   "read": "Solve for x: x plus nine equals fifteen.",
+   "q": "x + 9 = 15",
+   "chips": [
+    "−9",
+    "CALC"
+   ],
+   "lines": [
+    "x + ⟨9⟩ = 15",
+    "x + 9 ⟨− 9⟩ = 15 ⟨− 9⟩",
+    "x = 6"
+   ],
+   "say": [
+    "The nine is added to x. Undo it by subtracting nine from both sides.",
+    "Fifteen minus nine is six, so x equals six."
+   ],
+   "at": [
+    "subtracting",
+    "six"
+   ],
+   "wrong": [
+    {
+     "e": "15 + 9",
+     "why": "Adding nine again takes you further away. Undo an addition with subtraction.",
+     "say": "add nine instead of subtracting it"
+    },
+    {
+     "e": "9 − 15",
+     "why": "The right order is fifteen minus nine, not nine minus fifteen.",
+     "say": "subtract in the wrong order"
+    },
+    {
+     "e": "15",
+     "why": "Copying the right side skips the step. You still have to undo the plus nine.",
+     "say": "copy the right side without undoing anything"
+    }
+   ]
+  },
+  {
+   "id": "ex03",
+   "level": 1,
+   "kind": "solve",
+   "prompt": "Solve for y. Type the value of y.",
+   "read": "Solve for y: y minus eight equals three.",
+   "q": "y − 8 = 3",
+   "chips": [
+    "+8",
+    "CALC"
+   ],
+   "lines": [
+    "y ⟨− 8⟩ = 3",
+    "y − 8 ⟨+ 8⟩ = 3 ⟨+ 8⟩",
+    "y = 11"
+   ],
+   "say": [
+    "The eight is subtracted from y. Undo it by adding eight to both sides.",
+    "Three plus eight is eleven, so y equals eleven."
+   ],
+   "at": [
+    "adding",
+    "eleven"
+   ],
+   "wrong": [
+    {
+     "e": "3 − 8",
+     "why": "Subtracting again makes it worse. Undo a subtraction with addition.",
+     "say": "subtract eight again"
+    },
+    {
+     "e": "8 − 3",
+     "why": "Both sides get plus eight, so the answer is three plus eight, not eight minus three.",
+     "say": "subtract in the wrong order"
+    },
+    {
+     "e": "3",
+     "why": "Copying the right side skips the step. Add eight to both sides.",
+     "say": "copy the right side"
+    }
+   ]
+  },
+  {
+   "id": "ex04",
+   "level": 1,
+   "kind": "solve",
+   "prompt": "Solve for m. Type the value of m.",
+   "read": "Solve for m: four m equals twenty-eight.",
+   "q": "4m = 28",
+   "chips": [
+    "÷4",
+    "CALC"
+   ],
+   "lines": [
+    "⟨4⟩m = 28",
+    "4m ⟨÷ 4⟩ = 28 ⟨÷ 4⟩",
+    "m = 7"
+   ],
+   "say": [
+    "The m is multiplied by four. Undo it by dividing both sides by four.",
+    "Twenty-eight divided by four is seven, so m equals seven."
+   ],
+   "at": [
+    "dividing",
+    "seven"
+   ],
+   "wrong": [
+    {
+     "e": "28 − 4",
+     "why": "Four m means four times m, so undo it with division, not subtraction.",
+     "say": "subtract four instead of dividing"
+    },
+    {
+     "e": "28 × 4",
+     "why": "Multiplying makes the number bigger. Four m is already times four, so divide.",
+     "say": "multiply by four again"
+    },
+    {
+     "e": "28 + 4",
+     "why": "Adding does not undo a multiplication. Divide both sides by four.",
+     "say": "add four instead of dividing"
+    }
+   ]
+  },
+  {
+   "id": "ex05",
+   "level": 2,
+   "kind": "solve",
+   "prompt": "Solve for k. Type the value of k.",
+   "read": "Solve for k: k over five equals negative three.",
+   "q": "[[k | 5]] = −3",
+   "chips": [
+    "×5",
+    "CALC"
+   ],
+   "lines": [
+    "⟨[[k | 5]]⟩ = −3",
+    "[[k | 5]] ⟨· 5⟩ = −3 ⟨· 5⟩",
+    "k = −15"
+   ],
+   "say": [
+    "The k is divided by five. Undo it by multiplying both sides by five.",
+    "Negative three times five is negative fifteen, so k equals negative fifteen."
+   ],
+   "at": [
+    "multiplying",
+    "fifteen"
+   ],
+   "wrong": [
+    {
+     "e": "−3 + 5",
+     "why": "Adding does not undo a division. Multiply both sides by five.",
+     "say": "add five instead of multiplying"
+    },
+    {
+     "e": "−3 − 5",
+     "why": "Subtracting does not undo a division. Multiply both sides by five.",
+     "say": "subtract five instead of multiplying"
+    },
+    {
+     "e": "3 × 5",
+     "why": "Negative three times five is negative fifteen. Do not lose the negative sign.",
+     "say": "drop the negative sign"
+    }
+   ]
+  },
+  {
+   "id": "ex06",
+   "level": 2,
+   "kind": "solve",
+   "prompt": "Solve for x. Type the value of x.",
+   "read": "Solve for x: three x plus six equals twenty-one.",
+   "q": "3x + 6 = 21",
+   "chips": [
+    "−6",
+    "÷3"
+   ],
+   "lines": [
+    "3x ⟨+ 6⟩ = 21",
+    "⟨3⟩x = 15",
+    "x = 5"
+   ],
+   "say": [
+    "Work backwards. The last thing done to 3x was adding six, so subtract six from both sides. Three x equals fifteen.",
+    "Now x is multiplied by three. Divide both sides by three, and x equals five."
+   ],
+   "at": [
+    "subtract",
+    "divide"
+   ],
+   "wrong": [
+    {
+     "e": "15",
+     "why": "Subtracting six leaves three x equals fifteen. You still have to divide by three.",
+     "say": "stop after subtracting six"
+    },
+    {
+     "e": "(21 + 6) ÷ 3",
+     "why": "The six is added, so subtract it. Adding six goes the wrong way.",
+     "say": "add six instead of subtracting it"
+    },
+    {
+     "e": "21 ÷ 3 − 6",
+     "why": "Divide the whole side by three, not only the twenty-one.",
+     "say": "divide only the twenty-one by three"
+    }
+   ]
+  },
+  {
+   "id": "ex07",
+   "level": 2,
+   "kind": "solve",
+   "prompt": "Solve for y. Type the value of y.",
+   "read": "Solve for y: two y minus seven equals nine.",
+   "q": "2y − 7 = 9",
+   "chips": [
+    "+7",
+    "÷2"
+   ],
+   "lines": [
+    "2y ⟨− 7⟩ = 9",
+    "⟨2⟩y = 16",
+    "y = 8"
+   ],
+   "say": [
+    "The last thing done to two y was subtracting seven, so add seven to both sides. Two y equals sixteen.",
+    "Divide both sides by two, and y equals eight."
+   ],
+   "at": [
+    "add",
+    "divide"
+   ],
+   "wrong": [
+    {
+     "e": "(9 − 7) ÷ 2",
+     "why": "The seven is subtracted, so undo it by adding seven, not subtracting again.",
+     "say": "subtract seven again"
+    },
+    {
+     "e": "16",
+     "why": "Adding seven leaves two y equals sixteen. You still have to divide by two.",
+     "say": "stop after adding seven"
+    },
+    {
+     "e": "16 × 2",
+     "why": "Two y is two times y, so divide by two. Multiplying goes the wrong way.",
+     "say": "multiply by two instead of dividing"
+    }
+   ]
+  },
+  {
+   "id": "ex08",
+   "level": 2,
+   "kind": "solve",
+   "prompt": "Solve for x. Type the value of x.",
+   "read": "Solve for x: ten minus x equals four.",
+   "q": "10 − x = 4",
+   "chips": [
+    "−10",
+    "×(−1)"
+   ],
+   "lines": [
+    "⟨10⟩ − x = 4",
+    "⟨−x⟩ = −6",
+    "x = 6"
+   ],
+   "say": [
+    "Subtract ten from both sides. That leaves negative x equals negative six.",
+    "Negative x means negative one times x. Divide both sides by negative one, and x equals six."
+   ],
+   "at": [
+    "subtract",
+    "divide"
+   ],
+   "wrong": [
+    {
+     "e": "4 + 10",
+     "why": "The ten is added, so subtract it from both sides. Four minus ten is negative six.",
+     "say": "add ten to the four"
+    },
+    {
+     "e": "−6",
+     "why": "Negative x equals negative six is not finished. You want x, not negative x.",
+     "say": "stop at negative x equals negative six"
+    },
+    {
+     "e": "−4 − 10",
+     "why": "First subtract ten from both sides, then change the sign of both sides.",
+     "say": "change the sign too early"
+    }
+   ]
+  },
+  {
+   "id": "ex09",
+   "level": 3,
+   "kind": "match",
+   "prompt": "Match each equation with its solution.",
+   "read": "Match each equation with its solution. Check each one by putting the answer back.",
+   "check": "solves",
+   "say_answer": "All four are matched. Each answer works when you put it back into its equation.",
+   "pairs": [
+    {
+     "l": "2x + 1 = 9",
+     "r": "x = 4",
+     "why": "Subtract 1, then divide by 2: 8 ÷ 2 = 4.",
+     "say": "Subtract one to get two x equals eight, then divide by two: x is four."
+    },
+    {
+     "l": "3x − 5 = 10",
+     "r": "x = 5",
+     "why": "Add 5, then divide by 3: 15 ÷ 3 = 5.",
+     "say": "Add five to get three x equals fifteen, then divide by three: x is five."
+    },
+    {
+     "l": "5x + 2 = −8",
+     "r": "x = −2",
+     "why": "Subtract 2, then divide by 5: −10 ÷ 5 = −2.",
+     "say": "Subtract two to get five x equals negative ten, then divide by five: x is negative two."
+    },
+    {
+     "l": "4(x − 1) = 20",
+     "r": "x = 6",
+     "why": "Divide by 4 first (x − 1 = 5), then add 1: x = 6.",
+     "say": "Divide both sides by four to get x minus one equals five, then add one: x is six."
+    }
+   ]
+  },
+  {
+   "id": "ex10",
+   "level": 3,
+   "kind": "solve",
+   "prompt": "Solve for x. Type the value of x.",
+   "read": "Solve for x: x over four minus three equals two.",
+   "q": "[[x | 4]] − 3 = 2",
+   "chips": [
+    "+3",
+    "×4"
+   ],
+   "lines": [
+    "[[x | 4]] ⟨− 3⟩ = 2",
+    "⟨[[x | 4]]⟩ = 5",
+    "x = 20"
+   ],
+   "say": [
+    "Undo the minus three first. Add three to both sides, and x over four equals five.",
+    "Now x is divided by four. Multiply both sides by four, and x equals twenty."
+   ],
+   "at": [
+    "add",
+    "multiply"
+   ],
+   "wrong": [
+    {
+     "e": "2 − 3",
+     "why": "The three is subtracted, so add three to both sides. Subtracting goes the wrong way.",
+     "say": "subtract three instead of adding it"
+    },
+    {
+     "e": "5",
+     "why": "Adding three leaves x over four equals five. You still have to multiply by four.",
+     "say": "stop after adding three"
+    },
+    {
+     "e": "2 × 4 + 3",
+     "why": "Multiply the whole side by four, not only the two. Do the plus three first.",
+     "say": "multiply only the two by four"
+    }
+   ]
+  },
+  {
+   "id": "ex11",
+   "level": 3,
+   "kind": "solve",
+   "prompt": "Solve for x. Type the value of x.",
+   "read": "Solve for x: two times the quantity x plus four equals eighteen.",
+   "q": "2(x + 4) = 18",
+   "chips": [
+    "DIST",
+    "−8",
+    "÷2"
+   ],
+   "lines": [
+    "⟨2(x + 4)⟩ = 18",
+    "2x + ⟨8⟩ = 18",
+    "⟨2⟩x = 10",
+    "x = 5"
+   ],
+   "say": [
+    "Distribute the two to both terms inside the parentheses. Two x plus eight equals eighteen.",
+    "Subtract eight from both sides, and two x equals ten.",
+    "Divide both sides by two, and x equals five."
+   ],
+   "at": [
+    "distribute",
+    "subtract",
+    "divide"
+   ],
+   "wrong": [
+    {
+     "e": "(18 − 4) ÷ 2",
+     "why": "The two multiplies the four too: it gives eight, not four.",
+     "say": "multiply the two by x only"
+    },
+    {
+     "e": "(18 + 8) ÷ 2",
+     "why": "The eight is added, so subtract it from both sides. Adding goes the wrong way.",
+     "say": "add eight instead of subtracting it"
+    },
+    {
+     "e": "18 ÷ 2",
+     "why": "Dividing by two leaves x plus four equals nine. You still have to subtract four.",
+     "say": "stop after dividing by two"
+    }
+   ]
+  },
+  {
+   "id": "ex12",
+   "level": 3,
+   "kind": "solve",
+   "prompt": "Solve for x. Type the value of x.",
+   "read": "Solve for x: four x plus two x minus three equals twenty-one.",
+   "q": "4x + 2x − 3 = 21",
+   "chips": [
+    "COMBINE",
+    "+3",
+    "÷6"
+   ],
+   "lines": [
+    "⟨4x + 2x⟩ − 3 = 21",
+    "6x ⟨− 3⟩ = 21",
+    "⟨6⟩x = 24",
+    "x = 4"
+   ],
+   "say": [
+    "Combine the like terms first: four x plus two x is six x.",
+    "Add three to both sides, and six x equals twenty-four.",
+    "Divide both sides by six, and x equals four."
+   ],
+   "at": [
+    "combine",
+    "add",
+    "divide"
+   ],
+   "wrong": [
+    {
+     "e": "(21 − 3) ÷ 6",
+     "why": "The three is subtracted, so add it to both sides. Subtracting goes the wrong way.",
+     "say": "subtract three instead of adding it"
+    },
+    {
+     "e": "24",
+     "why": "Adding three leaves six x equals twenty-four. You still have to divide by six.",
+     "say": "stop after adding three"
+    },
+    {
+     "e": "24 ÷ 4",
+     "why": "After combining, the coefficient is six, not four. Divide by six.",
+     "say": "divide by four, the first coefficient"
+    }
+   ]
+  },
+  {
+   "id": "ex13",
+   "level": 3,
+   "kind": "solve",
+   "prompt": "Solve for x. Type the value of x.",
+   "read": "Solve for x: x plus three, all over two, equals five.",
+   "q": "[[x + 3 | 2]] = 5",
+   "chips": [
+    "×2",
+    "−3"
+   ],
+   "lines": [
+    "⟨[[x + 3 | 2]]⟩ = 5",
+    "x + ⟨3⟩ = 10",
+    "x = 7"
+   ],
+   "say": [
+    "Multiply both sides by two to clear the fraction. Five times two is ten, so x plus three equals ten.",
+    "Subtract three from both sides, and x equals seven."
+   ],
+   "at": [
+    "multiply",
+    "subtract"
+   ],
+   "wrong": [
+    {
+     "e": "5 − 3",
+     "why": "Multiply the right side by two as well: x plus three equals ten, not five.",
+     "say": "multiply the left side only"
+    },
+    {
+     "e": "10 + 3",
+     "why": "The three is added, so subtract it. Adding goes the wrong way.",
+     "say": "add three instead of subtracting it"
+    },
+    {
+     "e": "10",
+     "why": "Clearing the fraction leaves x plus three equals ten. You still have to subtract three.",
+     "say": "stop after clearing the fraction"
+    }
+   ]
+  },
+  {
+   "id": "ex14",
+   "level": 4,
+   "kind": "solve",
+   "prompt": "Solve for x. Type the value of x.",
+   "read": "Solve for x: three minus two times the quantity x plus one equals negative five.",
+   "q": "3 − 2(x + 1) = −5",
+   "chips": [
+    "DIST",
+    "COMBINE",
+    "−1",
+    "÷(−2)"
+   ],
+   "lines": [
+    "3 − ⟨2(x + 1)⟩ = −5",
+    "⟨3 − 2⟩ − 2x = −5",
+    "1 ⟨− 2x⟩ = −5",
+    "⟨−2⟩x = −6",
+    "x = 3"
+   ],
+   "say": [
+    "Distribute the negative two to both terms inside. Three minus two x minus two.",
+    "Combine the plain numbers: three minus two is one.",
+    "Subtract one from both sides, and negative two x equals negative six.",
+    "Divide both sides by negative two, and x equals three."
+   ],
+   "at": [
+    "distribute",
+    "combine",
+    "subtract",
+    "divide"
+   ],
+   "wrong": [
+    {
+     "e": "5",
+     "why": "The minus sign goes with the two, so it also changes the one inside: minus two, not plus two.",
+     "say": "forget to apply the negative to the one"
+    },
+    {
+     "e": "−3",
+     "why": "Negative six divided by negative two is positive three. Both signs are negative.",
+     "say": "lose a negative sign when dividing"
+    },
+    {
+     "e": "−6",
+     "why": "Distribute the negative two first. Do not subtract two from three before distributing.",
+     "say": "subtract two from three before distributing"
+    }
+   ]
+  },
+  {
+   "id": "ex15",
+   "level": 4,
+   "kind": "solve",
+   "prompt": "Solve for x. Type the value of x.",
+   "read": "Solve for x: x over two plus x over three equals ten.",
+   "q": "[[x | 2]] + [[x | 3]] = 10",
+   "chips": [
+    "×6",
+    "COMBINE",
+    "÷5"
+   ],
+   "lines": [
+    "⟨[[x | 2]] + [[x | 3]]⟩ = 10",
+    "⟨3x + 2x⟩ = 60",
+    "⟨5⟩x = 60",
+    "x = 12"
+   ],
+   "say": [
+    "Multiply everything by six, the common denominator. Three x plus two x equals sixty.",
+    "Combine the like terms: five x equals sixty.",
+    "Divide both sides by five, and x equals twelve."
+   ],
+   "at": [
+    "six",
+    "combine",
+    "divide"
+   ],
+   "wrong": [
+    {
+     "e": "10 ÷ 5",
+     "why": "Multiply the right side by six too: it becomes sixty, not ten.",
+     "say": "multiply the left side only"
+    },
+    {
+     "e": "5 × 10 ÷ 2",
+     "why": "You cannot add denominators. The common denominator is six, so multiply by six.",
+     "say": "add the denominators and get two x over five"
+    },
+    {
+     "e": "60",
+     "why": "Five x equals sixty is not finished. Divide both sides by five.",
+     "say": "stop at five x equals sixty"
+    }
+   ]
+  },
+  {
+   "id": "ex16",
+   "level": 4,
+   "kind": "solve",
+   "prompt": "Solve for x. Type the value of x.",
+   "read": "Solve for x: three times the quantity two x minus four, plus six, equals twenty-four.",
+   "q": "3(2x − 4) + 6 = 24",
+   "chips": [
+    "DIST",
+    "COMBINE",
+    "+6",
+    "÷6"
+   ],
+   "lines": [
+    "⟨3(2x − 4)⟩ + 6 = 24",
+    "6x ⟨− 12 + 6⟩ = 24",
+    "6x ⟨− 6⟩ = 24",
+    "⟨6⟩x = 30",
+    "x = 5"
+   ],
+   "say": [
+    "Distribute the three: six x minus twelve.",
+    "Combine the plain numbers: negative twelve plus six is negative six.",
+    "Add six to both sides, and six x equals thirty.",
+    "Divide both sides by six, and x equals five."
+   ],
+   "at": [
+    "distribute",
+    "combine",
+    "add",
+    "divide"
+   ],
+   "wrong": [
+    {
+     "e": "(24 + 18) ÷ 6",
+     "why": "The plain numbers are minus twelve and plus six, which make minus six, not minus eighteen.",
+     "say": "treat negative twelve plus six as negative eighteen"
+    },
+    {
+     "e": "(24 − 6 − 12) ÷ 6",
+     "why": "Distribute the three to the four too: it gives minus twelve, not plus twelve.",
+     "say": "forget the negative when you distribute"
+    },
+    {
+     "e": "30",
+     "why": "Six x equals thirty is not finished. Divide both sides by six.",
+     "say": "stop at six x equals thirty"
+    }
+   ]
+  },
+  {
+   "id": "ex17",
+   "level": 4,
+   "kind": "solve",
+   "prompt": "Solve for x. Type the value of x.",
+   "read": "Solve for x: negative three times the quantity x minus two equals fifteen.",
+   "q": "−3(x − 2) = 15",
+   "chips": [
+    "DIST",
+    "−6",
+    "÷(−3)"
+   ],
+   "lines": [
+    "⟨−3(x − 2)⟩ = 15",
+    "−3x ⟨+ 6⟩ = 15",
+    "⟨−3⟩x = 9",
+    "x = −3"
+   ],
+   "say": [
+    "Distribute the negative three. Negative three times negative two is positive six, so negative three x plus six equals fifteen.",
+    "Subtract six from both sides, and negative three x equals nine.",
+    "Divide both sides by negative three, and x equals negative three."
+   ],
+   "at": [
+    "distribute",
+    "subtract",
+    "divide"
+   ],
+   "wrong": [
+    {
+     "e": "21 ÷ (−3)",
+     "why": "Negative three times negative two is positive six, not negative six.",
+     "say": "make the six negative"
+    },
+    {
+     "e": "3",
+     "why": "Nine divided by negative three is negative three, not positive three.",
+     "say": "lose the negative sign when dividing"
+    },
+    {
+     "e": "9",
+     "why": "Negative three x equals nine is not finished. Divide both sides by negative three.",
+     "say": "stop at negative three x equals nine"
+    }
+   ]
+  }
+ ]
+}
