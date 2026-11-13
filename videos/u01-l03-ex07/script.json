@@ -1,0 +1,69 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l03-ex07",
+  "title": "Exercise 7",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's look at this one. Starting from three x plus two equals eleven, which of these could be the next line? Choose all that apply.",
+          "display": "Starting from 3x + 2 = 11, which of these could be the next line? Select all that apply.",
+          "cue": "show-problem",
+          "pause_after_s": 1.5
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "One by one",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Three x equals nine. Two was subtracted from both sides, so this line follows.",
+          "display": "3x = 9",
+          "cue": "option-1"
+        },
+        {
+          "id": "b03",
+          "text": "Six x plus four equals twenty-two. Both sides were multiplied by two, so this line follows.",
+          "display": "6x + 4 = 22",
+          "cue": "option-2"
+        },
+        {
+          "id": "b04",
+          "text": "Three x equals thirteen. Two was added to the right side instead of subtracted, so this line does not follow.",
+          "display": "3x = 13",
+          "cue": "option-3"
+        },
+        {
+          "id": "b05",
+          "text": "X plus two equals eleven over three. Only the three x was divided by three, so this line does not follow.",
+          "display": "x + 2 = (11) over (3)",
+          "cue": "option-4"
+        },
+        {
+          "id": "b06",
+          "text": "Three x plus two equals nine. Two was subtracted from one side only, so the sides are no longer equal.",
+          "display": "3x + 2 = 9",
+          "cue": "option-5"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b07",
+          "text": "Two lines follow: three x equals nine, and six x plus four equals twenty-two. Each one does the same thing to both sides.",
+          "cue": "answer"
+        }
+      ]
+    }
+  ]
+}

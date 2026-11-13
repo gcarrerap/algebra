@@ -1,0 +1,69 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l03-ex04",
+  "title": "Exercise 4",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's look at this one. Which of these steps use the addition property of equality? Choose all that apply.",
+          "display": "Which of these steps use the addition property of equality? Select all that apply.",
+          "cue": "show-problem",
+          "pause_after_s": 1.5
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "One by one",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "X minus four equals nine becomes x equals thirteen. Four is added to both sides, so this is the addition property.",
+          "display": "x − 4 = 9 → x = 13",
+          "cue": "option-1"
+        },
+        {
+          "id": "b03",
+          "text": "X plus four equals nine becomes x equals five. Four is subtracted from both sides, so this is the subtraction property, not addition.",
+          "display": "x + 4 = 9 → x = 5",
+          "cue": "option-2"
+        },
+        {
+          "id": "b04",
+          "text": "X minus seven equals two becomes x equals nine. Seven is added to both sides: the addition property.",
+          "display": "x − 7 = 2 → x = 9",
+          "cue": "option-3"
+        },
+        {
+          "id": "b05",
+          "text": "Three x equals twelve becomes x equals four. Both sides are divided by three, so this is the division property.",
+          "display": "3x = 12 → x = 4",
+          "cue": "option-4"
+        },
+        {
+          "id": "b06",
+          "text": "X minus one equals six becomes x equals seven. One is added to both sides: the addition property.",
+          "display": "x − 1 = 6 → x = 7",
+          "cue": "option-5"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b07",
+          "text": "Three steps use the addition property. Each one adds the same number to both sides to undo a subtraction.",
+          "cue": "answer"
+        }
+      ]
+    }
+  ]
+}

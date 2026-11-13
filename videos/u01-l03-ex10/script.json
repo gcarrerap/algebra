@@ -1,0 +1,63 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l03-ex10",
+  "title": "Exercise 10",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. A student's work is on the screen, line one at the top. Which line is the first one that is wrong?",
+          "display": "4x − 3 = x + 9\n3x − 3 = 9\n3x = 6\nx = 2",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "The first step subtracts x from both sides. That is the subtraction property, so line two is fine.",
+          "display": "3x − 3 = 9",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "The next step should add three to both sides, by the addition property. The student subtracted three instead, so line three is wrong.",
+          "display": "3x = 6",
+          "cue": "step-2"
+        },
+        {
+          "id": "b04",
+          "text": "The last step divides both sides by three. That step is fine on its own, but it carries the error, so line four is wrong too.",
+          "display": "x = 2",
+          "cue": "step-3"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b05",
+          "text": "So the answer is line three.",
+          "display": "3",
+          "cue": "answer"
+        },
+        {
+          "id": "b06",
+          "text": "Watch out for these traps. If you point at the final answer, you get four. If you blame the line before the mistake, you get two.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

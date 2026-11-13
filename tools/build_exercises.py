@@ -31,13 +31,20 @@ CHIP_COLOR = {"P": "blue", "E": "purple", "MD": "yellow", "AS": "green", "SUB": 
               # lesson 0.4: collecting like terms (DIST stays yellow, as in 0.2)
               "COMBINE": "green",
               # lesson 0.5: words into algebra
-              "VAR": "blue", "WORDS": "yellow", "ORDER": "purple", "GROUP": "green", "TEST": "ink"}
+              "VAR": "blue", "WORDS": "yellow", "ORDER": "purple", "GROUP": "green", "TEST": "ink",
+              # lesson 1.3: the properties of equality (DIST yellow and COMBINE green as before) and the
+              # verdict on each step of a student's work
+              "ADD": "blue", "SUBTRACT": "purple", "MULTIPLY": "yellow", "DIVIDE": "green",
+              "OK": "green", "ERROR": "red", "CARRY": "ink"}
 CHIP_NAME = {"P": "parentheses and groups", "E": "exponents", "MD": "multiply and divide",
              "AS": "add and subtract", "SUB": "substitute", "COMM": "commutative property",
              "ASSOC": "associative property", "DIST": "distributive property", "CALC": "calculate",
              "REWRITE": "rewrite", "TERM": "terms", "FACTOR": "factors", "COEF": "coefficient",
              "CONST": "constant", "COMBINE": "combine like terms", "VAR": "define the variable",
-             "WORDS": "match the words", "ORDER": "order", "GROUP": "grouping", "TEST": "test it"}
+             "WORDS": "match the words", "ORDER": "order", "GROUP": "grouping", "TEST": "test it",
+             "ADD": "addition property", "SUBTRACT": "subtraction property", "MULTIPLY": "multiplication property",
+             "DIVIDE": "division property", "OK": "step is allowed", "ERROR": "first wrong step",
+             "CARRY": "carries the error"}
 # lesson 0.5: the words each operation goes by (check "operation" on multi / match)
 OPERATION_WORDS = {"addition": ["sum", "more than", "increased by", "plus", "total of", "added to"],
                    "subtraction": ["difference", "less than", "decreased by", "minus", "subtract", "fewer than", "take away"],
@@ -325,11 +332,226 @@ def var_part(t):
     return tuple(sorted(powers.items()))
 
 
+# ---------------------------------------------------------------- equations and their steps (topic 1.3)
+XS = [F(0), F(1), F(2), F(-3), F(5, 7), F(11)]           # values of x an equation step is tested at
+EQ_DERIVE = ("operand", "solve", "first-error")           # derive kinds that read an equation or a step
+STEP_OF_CHIP = {"ADD": "Addition", "SUBTRACT": "Subtraction", "MULTIPLY": "Multiplication",
+                "DIVIDE": "Division", "DIST": "Distributive", "COMBINE": "Combine"}
+
+
+def fx(expr, v):
+    """An expression in x at x = v, with exact fractions."""
+    return ev(expr, {"x": f"({v})"})
+
+
+def split_eq(eq):
+    if eq.count("=") != 1:
+        raise ValueError(f"{eq!r} is not one equation")
+    left, right = eq.split("=")
+    return left.strip(), right.strip()
+
+
+def lin(expr):
+    """(m, k) with expr = m·x + k; fails if the expression is not linear in x."""
+    k, m = fx(expr, XS[0]), fx(expr, XS[1]) - fx(expr, XS[0])
+    if any(fx(expr, v) != m * v + k for v in XS):
+        raise ValueError(f"{expr!r} is not linear in x")
+    return m, k
+
+
+def solve_linear(eq):
+    """The solution of a linear equation in x: a Fraction, "all" (every x) or "none" (no x)."""
+    left, right = split_eq(eq)
+    (m1, k1), (m2, k2) = lin(left), lin(right)
+    m, k = m1 - m2, k2 - k1
+    if m == 0:
+        return "all" if k == 0 else "none"
+    return k / m
+
+
+def step_kind(a, b):
+    """Which property takes equation a to equation b, read from the two equations themselves:
+    Distributive / Combine (each side keeps its value, only its form changes: a group is opened, or
+    like terms are collected), Addition / Subtraction (the same expression is added to or taken from
+    both sides) or Multiplication / Division (both sides times a number, or over one). None when
+    the step is none of these (so a wrong step is never given a name)."""
+    la, ra = split_eq(a)
+    lb, rb = split_eq(b)
+    if all(fx(la, v) == fx(lb, v) and fx(ra, v) == fx(rb, v) for v in XS):
+        changed = [(p, q) for p, q in ((la, lb), (ra, rb)) if _norm(p) != _norm(q)]
+        if not changed:
+            return None
+        return "Distributive" if any("(" in p and "(" not in q for p, q in changed) else "Combine"
+    add = [fx(lb, v) - fx(la, v) for v in XS]
+    if add == [fx(rb, v) - fx(ra, v) for v in XS]:           # c(x) added to both sides
+        c0, c1 = add[0], add[1] - add[0]
+        if all(add[k] == c1 * XS[k] + c0 for k in range(len(XS))):
+            lead = c1 if c1 != 0 else c0
+            if lead != 0:
+                return "Addition" if lead > 0 else "Subtraction"
+        return None
+    for v in XS:                                             # both sides times c
+        if fx(ra, v) != 0:
+            c = fx(rb, v) / fx(ra, v)
+            break
+    else:
+        return None
+    if c != 0 and all(fx(lb, v) == fx(la, v) * c and fx(rb, v) == fx(ra, v) * c for v in XS):
+        if c.denominator == 1 and abs(c) > 1:
+            return "Multiplication"
+        if abs(c.numerator) == 1 and abs(c.denominator) > 1:
+            return "Division"
+    return None
+
+
+def step_number(a, b):
+    """(property, n): the number a step adds, subtracts, multiplies by or divides by (n keeps its
+    sign for multiplication and division, so ÷ −5 gives −5). Only for a step by a plain number."""
+    prop = step_kind(a, b)
+    la, ra = split_eq(a)
+    lb, rb = split_eq(b)
+    if prop in ("Addition", "Subtraction"):
+        cs = {fx(lb, v) - fx(la, v) for v in XS}
+        if len(cs) != 1:
+            raise ValueError("the step does not add or subtract a plain number")
+        return prop, abs(cs.pop())
+    if prop in ("Multiplication", "Division"):
+        v = next(v for v in XS if fx(ra, v) != 0)
+        c = fx(rb, v) / fx(ra, v)
+        return prop, c if prop == "Multiplication" else 1 / c
+    raise ValueError(f"{a!r} → {b!r} is not a step by a plain number")
+
+
+def side_without_x(eq):
+    """The number on the side of an equation that has no x (the other side holds x)."""
+    for side in split_eq(eq):
+        m, k = lin(side)
+        if m == 0:
+            return k
+    raise ValueError(f"{eq!r} has x on both sides")
+
+
+def eq_derive(q, spec):
+    """derive kinds for equations (1.3): operand[:<Property>] — the number a step "A → B" adds, subtracts,
+    multiplies by or divides by; solve — the solution of an equation (an integer); first-error — the
+    number of the first line of a student's work (lines separated by newlines) that stops being
+    equivalent to the first one."""
+    kind, _, arg = spec.partition(":")
+    if kind == "operand":
+        a, b = (s.strip() for s in q.split("→"))
+        prop, n = step_number(a, b)
+        if arg and prop != arg:
+            raise ValueError(f"the step is the {prop} property, not {arg}")
+        value = n
+    elif kind == "solve":
+        value = solve_linear(q)
+        if not isinstance(value, F):
+            raise ValueError(f"{q!r} has {value!r} solutions")
+    else:
+        lines = q.split("\n")
+        base = solve_linear(lines[0])
+        bad = [k + 1 for k, line in enumerate(lines) if k and solve_linear(line) != base]
+        if not bad:
+            raise ValueError("every line is equivalent to the first one")
+        value = F(bad[0])
+    if value.denominator != 1:
+        raise ValueError(f"the answer {value} is not an integer")
+    return int(value)
+
+
+def eq_mistake(code, q, spec, ans):
+    """The number a named mistake gives on an equation exercise (1.3)."""
+    kind = spec.partition(":")[0]
+    if kind == "operand":
+        a, b = (s.strip() for s in q.split("→"))
+        if code == "sign":                               # the number given with the property's sign
+            return -ans
+        if code == "result":                             # the number on the right of the new equation
+            return int(side_without_x(b))
+        if code == "start":                              # the number on the right of the old equation
+            return int(side_without_x(a))
+        if code == "coef":                               # the coefficient of x in the old equation
+            return int(next(lin(s)[0] for s in split_eq(a) if lin(s)[0] != 0))
+    elif kind == "solve":
+        (m1, k1), (m2, k2) = (lin(s) for s in split_eq(q))
+        got = {"sign-k": (k2 + k1) / (m1 - m2),          # moved the constant with the wrong sign
+               "sign-x": (k2 - k1) / (m1 + m2) if m1 + m2 else None,   # moved the x term with the wrong sign
+               "no-divide": k2 - k1,                     # stopped before dividing
+               "ignore-k": k2 / (m1 - m2),               # forgot the constant on the x side
+               "order": (k1 - k2) / (m1 - m2)}.get(code)  # subtracted in the wrong order
+        if got is not None:
+            if got.denominator != 1:
+                raise ValueError(f"mistake {code!r} gives {got}, not an integer")
+            return int(got)
+    elif kind == "first-error":
+        n = len(q.split("\n"))
+        got = {"last": n, "before": ans - 1, "after": ans + 1, "first": 1}.get(code)
+        if got is not None:
+            return got
+    raise ValueError(f"unknown mistake {code!r} for derive {spec!r}")
+
+
+def validate_equation_lines(ex, problems):
+    """The lines of a 1.3 solution video must be true: every step of an operand/solve exercise is the
+    property its chip says, every line of a solve has the solution, and a student's work gets the
+    verdict it really deserves (OK before the first wrong line, ERROR at it, CARRY after it)."""
+    i, kind, ans = ex["id"], ex["derive"].partition(":")[0], ex["_answer"]
+    lines = [re.sub("[⟨⟩]", "", ln) for ln in ex["lines"]]
+    try:
+        if kind == "first-error":
+            if "\n".join(lines) != ex["q"]:
+                problems.append(f"{i}: the lines must be the student's work, exactly as in q")
+            for j, chip in enumerate(ex["chips"]):
+                want = "OK" if j + 2 < ans else "ERROR" if j + 2 == ans else "CARRY"
+                if chip != want:
+                    problems.append(f"{i}: step {j + 1} ({lines[j]!r} → {lines[j + 1]!r}) should be {want}, not {chip}")
+                if want == "CARRY" and solve_linear(lines[j + 1]) != solve_linear(lines[j]):
+                    problems.append(f"{i}: step {j + 1} is a second mistake; a CARRY step must be fine on its own")
+            return
+        for j, chip in enumerate(ex["chips"]):
+            if chip not in STEP_OF_CHIP:
+                problems.append(f"{i}: chip {chip!r} is not a property of equality or a rewrite")
+            elif (got := step_kind(lines[j], lines[j + 1])) != STEP_OF_CHIP[chip]:
+                problems.append(f"{i}: step {j + 1} ({lines[j]!r} → {lines[j + 1]!r}) is {got}, not {STEP_OF_CHIP[chip]}")
+        if kind == "solve":
+            if _norm(lines[0]) != _norm(ex["q"]):
+                problems.append(f"{i}: the first line must be the question")
+            for ln in lines:
+                if solve_linear(ln) != ans:
+                    problems.append(f"{i}: line {ln!r} does not have the solution {ans}")
+        else:
+            if ex["q"] != f"{lines[0]} → {lines[1]}":
+                problems.append(f"{i}: q must be the two lines of the step, joined by ' → '")
+    except Exception as e:  # noqa: BLE001
+        problems.append(f"{i}: cannot check the lines: {e}")
+
+
+def check_equation_tools():
+    """Tests of the equation tools themselves; they run before every build."""
+    cases = [("x + 5 = 9", "x = 4", "Subtraction"), ("x − 3 = 7", "x = 10", "Addition"),
+             ("[[x | 2]] = 6", "x = 12", "Multiplication"), ("3x = 12", "x = 4", "Division"),
+             ("−5x = 30", "x = −6", "Division"), ("2(x + 3) = 14", "2x + 6 = 14", "Distributive"),
+             ("3x + 2x = 20", "5x = 20", "Combine"), ("5x = 3x + 8", "2x = 8", "Subtraction"),
+             ("2x + 5 = 3x − 1", "5 = x − 1", "Subtraction"), ("x − 1 = 5", "x = 6", "Addition"),
+             ("2x + 3 = 11", "2x = 14", None),            # 3 was added, not subtracted: a wrong step has no name
+             ("3x + 2 = 11", "x + 2 = [[11 | 3]]", None),  # only one term divided
+             ("x + 5 = 9", "x + 5 = 9", None)]
+    for a, b, want in cases:
+        got = step_kind(a, b)
+        assert got == want, f"step_kind({a!r}, {b!r}) = {got}, expected {want}"
+    assert solve_linear("3(x − 2) = 12") == 6 and solve_linear("x + 1 = x + 1") == "all"
+    assert solve_linear("x + 1 = x + 2") == "none" and solve_linear("2x = 3") == F(3, 2)
+    assert step_number("−5x = 30", "x = −6") == ("Division", -5)
+    assert step_number("x + 8 = 15", "x = 7") == ("Subtraction", 8)
+
+
 def derive(q, spec):
     """The answer of a structural question, computed from the expression: terms · constant ·
-    coef:<term> · factors:<term>."""
-    parts = all_parts(q)
+    coef:<term> · factors:<term>; for equations (1.3) operand · solve · first-error."""
     kind, _, arg = spec.partition(":")
+    if kind in EQ_DERIVE:
+        return eq_derive(q, spec)
+    parts = all_parts(q)
     if kind == "terms":
         return len(parts)
     if kind == "constant":
@@ -346,6 +568,8 @@ def derive(q, spec):
 
 def mistake_value(code, q, spec, ans):
     """The number a named mistake gives, so a wrong option can be checked against its description."""
+    if spec.partition(":")[0] in EQ_DERIVE:
+        return eq_mistake(code, q, spec, ans)
     parts = all_parts(q)
     kind, _, arg = code.partition(":")
     flat = re.sub(r"\^\d+", "", _norm(q))
@@ -388,7 +612,8 @@ def validate_derive(ex, problems):
         problems.append(f"{i}: cannot derive {ex['derive']!r}: {e}")
         return
     ex["_answer"] = ans
-    check_steps(ex, problems)
+    if check_steps(ex, problems) and ex["derive"].partition(":")[0] in EQ_DERIVE:
+        validate_equation_lines(ex, problems)
     for f in ("prompt", "read"):
         if not ex.get(f):
             problems.append(f"{i}: needs {f!r}")
@@ -426,10 +651,24 @@ def check_claim(ex, item_text, claim, problems, what):
     claim "terms:<n>"       → item has exactly <n> terms;
     claim "coefficient:<n>" → item is one term whose coefficient is <n>;
     claim "like:<term>"     → item is one term with the same variable part as <term> (a like term);
-    claim "operation:<name>"→ the phrase contains a key word of exactly that operation (OPERATION_WORDS)."""
+    claim "operation:<name>"→ the phrase contains a key word of exactly that operation (OPERATION_WORDS);
+    claim "step:<Property>" → item is a step "A → B" between two equations that is justified by that
+                              property (Addition, Subtraction, Multiplication, Division, Distributive,
+                              Combine; only the first word counts), read from the equations (1.3);
+    claim "valid-from:<equation>" → item is an equation with the same solution as <equation>, so it could
+                              be the next line of its solution (1.3)."""
     i = ex["id"]
     kind, _, arg = claim.partition(":")
     try:
+        if kind == "step":
+            a, b = (s.strip() for s in item_text.split("→"))
+            got = step_kind(a, b)
+            if got is None:
+                problems.append(f"{i}: {what} {item_text!r} is not a step by any property of equality")
+                return None
+            return got == arg.split()[0]
+        if kind == "valid-from":
+            return solve_linear(item_text) == solve_linear(arg)
         if kind == "property":
             left, right = item_text.split("=")
             if not same(left, right):
@@ -517,6 +756,7 @@ def validate_match(ex, problems):
             claim = f"property:{p['r']}" if chk == "property" else f"equals:{p['r']}" if chk == "equal" \
                 else f"coefficient:{p['r']}" if chk == "coefficient" \
                 else f"operation:{p['r']}" if chk == "operation" \
+                else f"step:{p['r']}" if chk == "step" \
                 else f"terms:{p['r']}" if chk == "terms" else chk
             if check_claim(ex, p["l"], claim, problems, "pair") is False:
                 problems.append(f"{i}: pair {p['l']!r} → {p['r']!r} is not right")
@@ -533,6 +773,7 @@ def validate_match(ex, problems):
 
 def validate(data):
     problems = []
+    check_equation_tools()
     for ex in data["exercises"]:
         kind = ex.setdefault("kind", "num")
         if kind == "multi":
@@ -614,7 +855,7 @@ def markup(text, hl_at=None, hl_out=None, color="yellow"):
     tag = f'<span class="hl c-{color}" data-at="{hl_at}" data-out="{hl_out}">' if hl_at else "<span>"
     s = s.replace("⟨", tag).replace("⟩", "</span>")
     s = re.sub(r"\[\[(.+?) \| (.+?)\]\]", r'<span class="frac"><span class="top">\1</span><span class="bot">\2</span></span>', s)
-    return re.sub(r"\^(\d+)", r"<sup>\1</sup>", s)
+    return re.sub(r"\^(\d+)", r"<sup>\1</sup>", s).replace("\n", "<br>")   # a student's work is several lines
 
 
 def plain(text):
@@ -664,7 +905,9 @@ def video_files(data, ex, num, set_id):
     q_plain = plain(ex["prompt"]) if isw else plain(ex["q"])
     if ex["kind"] == "num":
         ans = ex["_answer"]
-        ans_say, ans_html, ans_plain = words(ans), money(ans), money(ans)
+        # "a_read" / "a_show": how the answer is spoken and shown when it is not just the number
+        # (1.3: "line three", "x = 6")
+        ans_say, ans_html, ans_plain = ex.get("a_read") or words(ans), ex.get("a_show") or money(ans), money(ans)
         trap_say = [words(w["_value"]) for w in wrong]
         trap_html = [money(w["_value"]) for w in wrong]
         trap_size = "sm"
@@ -704,7 +947,7 @@ def video_files(data, ex, num, set_id):
     }
 
     # --- page
-    prob_size = "" if isw else pick_size([ex["q"]], [(132, ""), (96, "md"), (72, "sm"), (56, "xs")], 400, 1700)
+    prob_size = "" if isw else pick_size(ex["q"].split("\n"), [(132, ""), (96, "md"), (72, "sm"), (56, "xs")], 400, 1700)
     problem_div = (f'<div class="say pop" style="font-size: 60px; max-width: 1500px" data-at="b01">{ex["prompt"]}</div>' if isw
                    else f'<div class="math {prob_size} pop" data-at="b01">{markup(ex["q"])}</div>')
     row_size = pick_size(ex["lines"], [(96, "md"), (72, "sm"), (56, "xs")], 730)
@@ -736,7 +979,9 @@ def video_files(data, ex, num, set_id):
         answer_line = (f'<div class="math sm green pop" data-at="{b_ans}@{last_word}">{ans_html}</div>'
                        f'<div class="math xs fade" data-at="{b_ans}@test">{test_html}</div>')
     elif ex.get("derive"):    # a question about the parts, not an equation: show the question, then the answer
-        answer_line = (f'<div class="col" style="gap: 14px"><div class="math sm fade" data-at="{b_ans}-0.5">{markup(ex["q"])}</div>'
+        # a student's work (several lines) is not repeated here: it would not leave room for the traps
+        q_again = "" if "\n" in ex["q"] else f'<div class="math sm fade" data-at="{b_ans}-0.5">{markup(ex["q"])}</div>'
+        answer_line = (f'<div class="col" style="gap: 14px">{q_again}'
                        f'<div class="say fade muted" style="font-size: 40px" data-at="{b_ans}-0.5">{ex["prompt"]}</div>'
                        f'<div class="math sm green pop" data-at="{b_ans}@{last_word}">{ans_html}</div></div>')
     else:

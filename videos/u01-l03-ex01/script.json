@@ -1,0 +1,63 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l03-ex01",
+  "title": "Exercise 1",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's look at this one. Match each step with the property that justifies it.",
+          "display": "Match each step with the property that justifies it.",
+          "cue": "show-problem",
+          "pause_after_s": 1.5
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Pair by pair",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "X plus five equals nine became x equals four. Five was subtracted from both sides: the subtraction property.",
+          "display": "x + 5 = 9 → x = 4 → Subtraction property",
+          "cue": "pair-1"
+        },
+        {
+          "id": "b03",
+          "text": "X minus three equals seven became x equals ten. Three was added to both sides: the addition property.",
+          "display": "x − 3 = 7 → x = 10 → Addition property",
+          "cue": "pair-2"
+        },
+        {
+          "id": "b04",
+          "text": "X over two equals six became x equals twelve. Both sides were multiplied by two: the multiplication property.",
+          "display": "(x) over (2) = 6 → x = 12 → Multiplication property",
+          "cue": "pair-3"
+        },
+        {
+          "id": "b05",
+          "text": "Three x equals twelve became x equals four. Both sides were divided by three: the division property.",
+          "display": "3x = 12 → x = 4 → Division property",
+          "cue": "pair-4"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b06",
+          "text": "Every step has its property: each one undoes its opposite operation.",
+          "cue": "answer"
+        }
+      ]
+    }
+  ]
+}

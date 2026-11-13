@@ -1,0 +1,63 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l03-ex12",
+  "title": "Exercise 12",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. Solve five x plus seven equals three x plus nineteen. Type the value of x.",
+          "display": "5x + 7 = 3x + 19",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Subtract three x from both sides, by the subtraction property of equality. That leaves two x plus seven equals nineteen.",
+          "display": "2x + 7 = 19",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "Subtract seven from both sides, by the subtraction property of equality. Two x equals twelve.",
+          "display": "2x = 12",
+          "cue": "step-2"
+        },
+        {
+          "id": "b04",
+          "text": "Divide both sides by two, by the division property of equality. X equals six.",
+          "display": "x = 6",
+          "cue": "step-3"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b05",
+          "text": "So the answer is six.",
+          "display": "6",
+          "cue": "answer"
+        },
+        {
+          "id": "b06",
+          "text": "Watch out for these traps. If you add seven instead of subtracting it, you get thirteen. If you stop before the last division, you get twelve.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

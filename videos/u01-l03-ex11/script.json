@@ -1,0 +1,69 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l03-ex11",
+  "title": "Exercise 11",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's look at this one. Which of these steps use the subtraction property of equality? Choose all that apply.",
+          "display": "Which of these steps use the subtraction property of equality? Select all that apply.",
+          "cue": "show-problem",
+          "pause_after_s": 1.5
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "One by one",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "X plus nine equals twelve becomes x equals three. Nine is subtracted from both sides: the subtraction property.",
+          "display": "x + 9 = 12 → x = 3",
+          "cue": "option-1"
+        },
+        {
+          "id": "b03",
+          "text": "Five x equals three x plus eight becomes two x equals eight. Three x is subtracted from both sides: the subtraction property.",
+          "display": "5x = 3x + 8 → 2x = 8",
+          "cue": "option-2"
+        },
+        {
+          "id": "b04",
+          "text": "X minus two equals seven becomes x equals nine. Two is added to both sides, so this is the addition property.",
+          "display": "x − 2 = 7 → x = 9",
+          "cue": "option-3"
+        },
+        {
+          "id": "b05",
+          "text": "Four x equals twenty becomes x equals five. Both sides are divided by four, so this is the division property.",
+          "display": "4x = 20 → x = 5",
+          "cue": "option-4"
+        },
+        {
+          "id": "b06",
+          "text": "Three x plus six equals twenty-one becomes three x equals fifteen. Six is subtracted from both sides: the subtraction property.",
+          "display": "3x + 6 = 21 → 3x = 15",
+          "cue": "option-5"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b07",
+          "text": "Three steps use the subtraction property: taking nine away, taking three x away, and taking six away. In each one, the same amount leaves both sides.",
+          "cue": "answer"
+        }
+      ]
+    }
+  ]
+}

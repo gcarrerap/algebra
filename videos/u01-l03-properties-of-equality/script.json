@@ -1,0 +1,85 @@
+{
+ "format": "algebra-video-script",
+ "version": 1,
+ "video": "u01-l03-properties-of-equality",
+ "title": "Justifying each step",
+ "voice": "narrator",
+ "source": "video-scripts/u01.md#1.3",
+ "scenes": [
+  {
+   "id": "s01",
+   "title": "Proving it",
+   "blocks": [
+    {
+     "id": "b01",
+     "text": "Here's a solution. It's correct. But imagine someone asks you, why is each step allowed?",
+     "display": "4x + 3 = 19"
+    },
+    {
+     "id": "b02",
+     "text": "Take a moment. What would you say about the first step?",
+     "pause_after_s": 10.0
+    },
+    {
+     "id": "b03",
+     "text": "In math, each step needs a reason. Solving an equation is really a short argument, and the reasons are called properties."
+    }
+   ]
+  },
+  {
+   "id": "s02",
+   "title": "The properties of equality",
+   "blocks": [
+    {
+     "id": "b04",
+     "text": "The properties of equality say the balance stays level. If two things are equal, you can add the same number to both, subtract the same number, multiply both by the same number, or divide both by the same number, as long as it isn't zero.",
+     "display": "if a = b, then a + c = b + c"
+    },
+    {
+     "id": "b05",
+     "text": "Why do you think dividing by zero has to be excluded?",
+     "pause_after_s": 10.0
+    },
+    {
+     "id": "b06",
+     "text": "Because division by zero has no answer at all. A step that produces no number can't keep anything equal."
+    }
+   ]
+  },
+  {
+   "id": "s03",
+   "title": "A two-column solution",
+   "blocks": [
+    {
+     "id": "b07",
+     "text": "Here is a full solution with its reasons. Three times the quantity x minus two equals twelve is given. Distributing gives three x minus six. Adding six to both sides is the addition property of equality. Dividing both sides by three is the division property. Each line follows from the line before it."
+    }
+   ]
+  },
+  {
+   "id": "s04",
+   "title": "Find the mistake",
+   "blocks": [
+    {
+     "id": "b08",
+     "text": "Here's a student's work on two x plus five equals three x minus one. The answer is wrong. Find the step that breaks, and name the property that should have been used.",
+     "display": "2x + 5 = 3x − 1",
+     "pause_after_s": 20.0
+    },
+    {
+     "id": "b09",
+     "text": "The first step is fine: subtracting two x from both sides. The error is the last step. From five equals x minus one, you must add one to both sides, by the addition property of equality. X equals six, not four.",
+     "display": "5 = x − 1"
+    },
+    {
+     "id": "b10",
+     "text": "Remember: every step is a move with a name. If you can't name it, it probably isn't allowed."
+    },
+    {
+     "id": "b11",
+     "text": "This video uses an AI-generated voice."
+    }
+   ]
+  }
+ ]
+}

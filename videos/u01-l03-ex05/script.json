@@ -1,0 +1,69 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l03-ex05",
+  "title": "Exercise 5",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's look at this one. Match each step with its reason.",
+          "display": "Match each step with its reason.",
+          "cue": "show-problem",
+          "pause_after_s": 1.5
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Pair by pair",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Two times the quantity x plus three became two x plus six. The parentheses are gone, so this is the distributive property.",
+          "display": "2(x + 3) = 14 → 2x + 6 = 14 → Distributive property",
+          "cue": "pair-1"
+        },
+        {
+          "id": "b03",
+          "text": "Three x plus two x became five x. Like terms were collected, so this is combining like terms.",
+          "display": "3x + 2x = 20 → 5x = 20 → Combine like terms",
+          "cue": "pair-2"
+        },
+        {
+          "id": "b04",
+          "text": "Four x equals twenty became x equals five. Both sides were divided by four: the division property.",
+          "display": "4x = 20 → x = 5 → Division property",
+          "cue": "pair-3"
+        },
+        {
+          "id": "b05",
+          "text": "X over three equals four became x equals twelve. Both sides were multiplied by three: the multiplication property.",
+          "display": "(x) over (3) = 4 → x = 12 → Multiplication property",
+          "cue": "pair-4"
+        },
+        {
+          "id": "b06",
+          "text": "X minus six equals one became x equals seven. Six was added to both sides: the addition property.",
+          "display": "x − 6 = 1 → x = 7 → Addition property",
+          "cue": "pair-5"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b07",
+          "text": "Every step has its reason. Opening the parentheses is the distributive property, collecting like terms is combining like terms, and each move on both sides is a property of equality.",
+          "cue": "answer"
+        }
+      ]
+    }
+  ]
+}

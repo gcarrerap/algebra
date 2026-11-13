@@ -1,0 +1,69 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l03-ex03",
+  "title": "Exercise 3",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's look at this one. Select all the moves that are allowed on both sides of an equation.",
+          "display": "Select all the moves that are allowed on both sides of an equation.",
+          "cue": "show-problem",
+          "pause_after_s": 1.5
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "One by one",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Add the same number to both sides. Yes: the two sides stay equal.",
+          "display": "Add the same number to both sides",
+          "cue": "option-1"
+        },
+        {
+          "id": "b03",
+          "text": "Subtract the same number from both sides. Yes: the two sides stay equal.",
+          "display": "Subtract the same number from both sides",
+          "cue": "option-2"
+        },
+        {
+          "id": "b04",
+          "text": "Add a number to one side only. No: the balance tips, so the sides are no longer equal.",
+          "display": "Add a number to one side only",
+          "cue": "option-3"
+        },
+        {
+          "id": "b05",
+          "text": "Divide both sides by zero. No: division by zero has no answer.",
+          "display": "Divide both sides by zero",
+          "cue": "option-4"
+        },
+        {
+          "id": "b06",
+          "text": "Multiply both sides by the same number. Yes: the two sides stay equal.",
+          "display": "Multiply both sides by the same number",
+          "cue": "option-5"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b07",
+          "text": "Adding, subtracting, and multiplying both sides by the same number are allowed. Changing only one side, or dividing by zero, is not.",
+          "cue": "answer"
+        }
+      ]
+    }
+  ]
+}

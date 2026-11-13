@@ -1,0 +1,63 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l03-ex14",
+  "title": "Exercise 14",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's look at this one. These are the four steps of one solution. Match each step with its reason.",
+          "display": "These are the four steps of one solution. Match each step with its reason.",
+          "cue": "show-problem",
+          "pause_after_s": 1.5
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Pair by pair",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "Three times the quantity x minus one became three x minus three. The parentheses are gone: the distributive property.",
+          "display": "3(x − 1) + 2x = 12 → 3x − 3 + 2x = 12 → Distributive property",
+          "cue": "pair-1"
+        },
+        {
+          "id": "b03",
+          "text": "Three x plus two x became five x. Like terms were collected: combining like terms.",
+          "display": "3x − 3 + 2x = 12 → 5x − 3 = 12 → Combine like terms",
+          "cue": "pair-2"
+        },
+        {
+          "id": "b04",
+          "text": "Three was added to both sides to undo the minus three: the addition property.",
+          "display": "5x − 3 = 12 → 5x = 15 → Addition property",
+          "cue": "pair-3"
+        },
+        {
+          "id": "b05",
+          "text": "Both sides were divided by five: the division property.",
+          "display": "5x = 15 → x = 3 → Division property",
+          "cue": "pair-4"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b06",
+          "text": "Opening the parentheses is the distributive property. Collecting three x and two x is combining like terms. Adding three to both sides is the addition property, and dividing by five is the division property.",
+          "cue": "answer"
+        }
+      ]
+    }
+  ]
+}

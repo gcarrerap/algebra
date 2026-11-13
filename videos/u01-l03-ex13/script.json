@@ -1,0 +1,69 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l03-ex13",
+  "title": "Exercise 13",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. A student's work is on the screen, line one at the top. Which line is the first one that is wrong?",
+          "display": "4(x − 1) = 2x + 6\n4x − 4 = 2x + 6\n2x − 4 = 6\n2x = 2\nx = 1",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "The first step distributes the four, by the distributive property, so line two is fine.",
+          "display": "4x − 4 = 2x + 6",
+          "cue": "step-1"
+        },
+        {
+          "id": "b03",
+          "text": "The second step subtracts two x from both sides, by the subtraction property, so line three is fine.",
+          "display": "2x − 4 = 6",
+          "cue": "step-2"
+        },
+        {
+          "id": "b04",
+          "text": "The third step should add four to both sides, by the addition property. The student subtracted four instead, so line four is wrong.",
+          "display": "2x = 2",
+          "cue": "step-3"
+        },
+        {
+          "id": "b05",
+          "text": "The last step divides by two, which is allowed, but it carries the error.",
+          "display": "x = 1",
+          "cue": "step-4"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b06",
+          "text": "So the answer is line four.",
+          "display": "4",
+          "cue": "answer"
+        },
+        {
+          "id": "b07",
+          "text": "Watch out for these traps. If you point at the final answer, you get five. If you blame the line before the mistake, you get three.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "format": "algebra-video-script",
+  "version": 1,
+  "video": "u01-l03-ex06",
+  "title": "Exercise 6",
+  "voice": "narrator",
+  "scenes": [
+    {
+      "id": "s01",
+      "title": "The problem",
+      "blocks": [
+        {
+          "id": "b01",
+          "text": "Let's solve this one step by step. In this step, x over four equals three becomes x equals twelve. What number were both sides multiplied by?",
+          "display": "(x) over (4) = 3 → x = 12",
+          "cue": "show-problem",
+          "pause_after_s": 1.2
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "title": "Step by step",
+      "blocks": [
+        {
+          "id": "b02",
+          "text": "X was divided by four, so the multiplication property multiplies both sides by four. X over four times four is x, and three times four is twelve.",
+          "display": "x = 12",
+          "cue": "step-1"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "title": "The answer",
+      "blocks": [
+        {
+          "id": "b03",
+          "text": "So the answer is four.",
+          "display": "4",
+          "cue": "answer"
+        },
+        {
+          "id": "b04",
+          "text": "Watch out for these traps. If you give the number a minus sign, you get negative four. If you copy the result of the step, you get twelve.",
+          "cue": "traps"
+        }
+      ]
+    }
+  ]
+}
